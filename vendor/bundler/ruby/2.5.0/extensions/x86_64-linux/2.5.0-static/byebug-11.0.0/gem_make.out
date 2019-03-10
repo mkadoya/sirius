@@ -1,0 +1,19 @@
+current directory: /home/ruby/sirius/vendor/bundler/ruby/2.5.0/gems/byebug-11.0.0/ext/byebug
+/home/ruby/.rbenv/versions/2.5.1/bin/ruby -I /home/ruby/.rbenv/versions/2.5.1/lib/ruby/site_ruby/2.5.0 -r ./siteconf20190310-32116-g2qtnu.rb extconf.rb
+creating Makefile
+
+current directory: /home/ruby/sirius/vendor/bundler/ruby/2.5.0/gems/byebug-11.0.0/ext/byebug
+make "DESTDIR=" clean
+
+current directory: /home/ruby/sirius/vendor/bundler/ruby/2.5.0/gems/byebug-11.0.0/ext/byebug
+make "DESTDIR="
+compiling breakpoint.c
+compiling byebug.c
+compiling context.c
+compiling locker.c
+compiling threads.c
+linking shared-object byebug/byebug.so
+
+current directory: /home/ruby/sirius/vendor/bundler/ruby/2.5.0/gems/byebug-11.0.0/ext/byebug
+make "DESTDIR=" install
+/bin/install -c -m 0755 byebug.so ./.gem.20190310-32116-1029t4w/byebug
