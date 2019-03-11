@@ -17,21 +17,21 @@
 }
 
 .top-contents {
-  padding: 150px 0 0px;
+  padding: 150px 0 300px 0;
   background-color: rgba(0,0,0,0.6);
   position: relative;
 
   @media screen and (max-width: 499px) {
     /*　画面サイズ 499pxまで適用　*/
-    padding: 100px 0 0px;
+    padding: 100px 0 100px 0;
 
   }
 
 }
 
 .category {
-  padding: 100px;
-  width: 80%;
+  margin-top: 100px;
+  width: 70%;
   @media screen and (max-width: 499px) {
     /*　画面サイズ 499pxまで適用　*/
     width: 100%;
@@ -45,14 +45,12 @@
 .category p{
   text-align: left;
   text-indent: 1em;
-  margin-left: 20%;
-  margin-right: 20%;
   @media screen and (max-width: 499px) {
-    /*　画面サイズ 499pxまで適用　*/
-    margin-left: 0%;
-    margin-right: 0%;
     margin-bottom: 20px;
   }
+}
+.category-item{
+  padding-bottom: 50px;
 }
 
 .icon-circle {
