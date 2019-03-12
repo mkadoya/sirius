@@ -11,9 +11,7 @@
           </div>
           <h4>パソコンの診断</h4>
           <p>パソコン診断では、あなたの使用用途に合わせて最適なパソコンを提案します。</p>
-          <div class="button">
-            <a class="btn btn-outline-light btn-block" href="/category" role="button">パソコン診断をはじめる</a>
-          </div>
+          <%= link_to "パソコンの診断をはじめる", {:controller => "home", :action => "category"}, :class => "btn btn-outline-light btn-block" %>
         </div>
         <div class="col-sm-12 col-md-6 col-lg-6">
           <div class="icon-circle">
@@ -21,9 +19,7 @@
           </div>
           <h4>スマホの診断</h4>
           <p>スマホ診断では、あなたの使用用途に合わせて最適なスマホを提案します。</p>
-          <div class="button">
-            <a class="btn btn-outline-light btn-block" href="/category" role="button">スマホ診断をはじめる</a>
-          </div>
+          <%= link_to "スマホの診断をはじめる", {:controller => "home", :action => "category"}, :class => "btn btn-outline-light btn-block" %>
         </div>
       </div>
     </div>
