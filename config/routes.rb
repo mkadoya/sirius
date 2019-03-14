@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'questions/index' => "questions#index"
+  get 'questions/result' => "questions#result"
   get 'questions/new'
   get "/" => "home#top"
   get "/category" => "home#category"

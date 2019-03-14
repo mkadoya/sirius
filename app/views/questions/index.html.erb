@@ -1,17 +1,17 @@
-<div class="main posts-index">
-  <div class="container">
-    <% @questions.each do |question| %>
-      <div class="posts-index-item">
-        <h4>カテゴリー</h4>
-        <p><%= question.category %></p>
-        <br>
-        <h4>質問内容</h4>
-        <p><%= question.content %></p>
-        <br>
-        <h4>選択肢</h4>
-        <p><%= question.option %></p>
-        <br>
-      </div>
-    <% end %>
-  </div>
+<div class="question_num">
+  <p>question_num = <%= @question.id %></p>
 </div>
+
+<div class="question">
+  <h4>カテゴリー</h4>
+  <p><%= @question.category %></p>
+  <br>
+  <h4>質問内容</h4>
+  <p><%= @question.content %></p>
+  <br>
+  <h4>選択肢</h4>
+  <p><%= @question.option %></p>
+  <br>
+</div>
+
+<%= link_to "button1", {:controller => "questions", :action => "index", :id => (@question.id + 1)}, :class => "btn btn-outline-dark btn-block" %>
