@@ -8,14 +8,14 @@ class QuestionsController < ApplicationController
       @test = "OLD"
     else
       @answers = ["true"]
-      @hash = {:question_id => 0, :answer => true}
+      # @hash = {:question_id => 0, :answer => true}
       @test = "NEW"
     end
 
-    if params[:hash_answer]
-      @hash = params[:hash]
-      @TEST = "hash"
-    end
+    # if params[:hash_answer]
+    #   @hash = params[:hash]
+    #   @TEST = "hash"
+    # end
 
 
     # レコード数以上の質問になったらリザルト画面を表示する
