@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+  get 'results/index'
   get 'questions/index' => "questions#index"
   get 'questions/result' => "questions#result"
-  get 'questions/new'
   get "/" => "home#top"
   get "/category" => "home#category"
   get 'home/top'

@@ -1,5 +1,8 @@
 <div class="question_num">
   <p>question_num = <%= @question.id %></p>
+  <p>answers = <%= @answers %></p>
+  <p>test = <%= @test %></p>
+  <p>test = <%= @hash %></p>
 </div>
 
 <div class="question">
@@ -14,4 +17,8 @@
   <br>
 </div>
 
-<%= link_to "button1", {:controller => "questions", :action => "index", :id => (@question.id + 1)}, :class => "btn btn-outline-dark btn-block" %>
+<% params[:hash].permit(:question_id, :answer)%>
+<%= link_to "YES", {:controller => "questions", :action => "index", :id => (@question.id + 1), :answer => "true", :answers => @answers}, :class => "btn btn-outline-dark btn-block" %>
+<%= link_to "NO", {:controller => "questions", :action => "index", :id => (@question.id + 1), :answer => "false", :answers => @answers}, :class => "btn btn-outline-dark btn-block" %>
+<%= link_to "TRUE", {:controller => "questions", :action => "index", :id => (@question.id + 1), :hash_answer => "true", :hash => @hash}}, :class => "btn btn-outline-dark btn-block" %>
+<%= link_to "FALSE", {:controller => "questions", :action => "index", :id => (@question.id + 1), :hash_answer => "false", :hash => @hash}, :class => "btn btn-outline-dark btn-block" %>

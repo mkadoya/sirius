@@ -10,13 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_12_121021) do
+ActiveRecord::Schema.define(version: 2019_03_15_123514) do
 
   create_table "questions", force: :cascade do |t|
     t.string "category"
     t.text "content"
     t.boolean "option"
     t.integer "option_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "question_id"
+    t.boolean "answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
