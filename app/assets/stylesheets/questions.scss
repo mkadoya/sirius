@@ -18,7 +18,6 @@
     padding: 100px 0 500px 0;
     background-color: rgba(0,0,0,0.6);
     position: relative;
-    font-weight: bold;
     @media screen and (max-width: 499px) {
     /*　画面サイズ 499pxまで適用　*/
     padding: 100px 0 500pxpx 0;
@@ -42,6 +41,7 @@
     text-indent: 1em;
     padding-top: 5px;
     padding-bottom: 5px;
+    font-weight: bold;
     @media screen and (max-width: 499px) {
     /*　画面サイズ 499pxまで適用　*/
     padding-top: 7px;
