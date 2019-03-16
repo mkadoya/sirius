@@ -1,24 +1,14 @@
-<div class="question_num">
-  <p>question_num = <%= @question.id %></p>
-  <p>answers = <%= @answers %></p>
-  <p>test = <%= @test %></p>
-  <p>test = <%= @hash %></p>
+<div class="top-main">
+  <div class="top-contents">
+    <div class="card border-info rounded-lg question">
+      <div class="card-head text-light bg-info question-head">
+        <h3><%= @question.category %>診断： <%= @question.id %>問目</h3>
+      </div>
+      <div class="card-body text-dark border-light bg-light question-contents">
+        <h4><%= @question.content %></h4>
+        <%= link_to "YES", {:controller => "questions", :action => "index", :id => (@question.id + 1), :answer => "true", :answers => @answers}, :class => "btn btn-outline-primary btn-lg question-button" %>
+        <%= link_to "NO", {:controller => "questions", :action => "index", :id => (@question.id + 1), :answer => "false", :answers => @answers}, :class => "btn btn-outline-danger btn-lg  question-button" %>
+      </div>
+    </div>
+  </div>
 </div>
-
-<div class="question">
-  <h4>カテゴリー</h4>
-  <p><%= @question.category %></p>
-  <br>
-  <h4>質問内容</h4>
-  <p><%= @question.content %></p>
-  <br>
-  <h4>選択肢</h4>
-  <p><%= @question.option %></p>
-  <br>
-</div>
-
-<%# <% params[:hash].permit(:question_id, :answer)%>
-<%= link_to "YES", {:controller => "questions", :action => "index", :id => (@question.id + 1), :answer => "true", :answers => @answers}, :class => "btn btn-outline-dark btn-block" %>
-<%= link_to "NO", {:controller => "questions", :action => "index", :id => (@question.id + 1), :answer => "false", :answers => @answers}, :class => "btn btn-outline-dark btn-block" %>
-<%# <%= link_to "TRUE", {:controller => "questions", :action => "index", :id => (@question.id + 1), :hash_answer => "true", :hash => @hash}}, :class => "btn btn-outline-dark btn-block" %>
-<%# <%= link_to "FALSE", {:controller => "questions", :action => "index", :id => (@question.id + 1), :hash_answer => "false", :hash => @hash}, :class => "btn btn-outline-dark btn-block" %>
