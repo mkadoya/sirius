@@ -39,30 +39,12 @@ class ResultsController < ApplicationController
 			@pattern_pattern_id = Characteristic.first
 		end
 
-		# 質問の答えから、合致するpattern_idの列を取得。今は、質問数12問固定。。そのうち可変に対応できるようにします
+		# 質問の答えから、合致するpattern_idの列を取得。
 		@pattern_pattern_id = @pattern_pattern_id.pattern_id
 
 		# Pattern取得
 		@characteristic = Characteristic.find_by(category: @category, pattern_id: @pattern_pattern_id)
 
-		# Patternから属性情報の取得
-		@charasteristic_title = @characteristic.title
-		@charasteristic_body = @characteristic.body
-		@charasteristic_chara_1_str = @characteristic.chara_1_str
-		@charasteristic_chara_2_str = @characteristic.chara_2_str
-		@charasteristic_chara_3_str = @characteristic.chara_3_str
-		@charasteristic_chara_4_str = @characteristic.chara_4_str
-		@charasteristic_chara_5_str = @characteristic.chara_5_str
-		@charasteristic_chara_1_val = @characteristic.chara_1_val
-		@charasteristic_chara_2_val = @characteristic.chara_2_val
-		@charasteristic_chara_3_val = @characteristic.chara_3_val
-		@charasteristic_chara_4_val = @characteristic.chara_4_val
-		@charasteristic_chara_5_val = @characteristic.chara_5_val
-		@charasteristic_item_1 = @characteristic.item_1
-		@charasteristic_item_2 = @characteristic.item_2
-		@charasteristic_item_3 = @characteristic.item_3
-		@charasteristic_item_4 = @characteristic.item_4
-		@charasteristic_item_5 = @characteristic.item_5
   end
 
   def index2
