@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2019_03_17_050817) do
+ActiveRecord::Schema.define(version: 2019_03_17_053640) do
 
   create_table "characteristics", force: :cascade do |t|
     t.string "category"
@@ -36,9 +35,6 @@ ActiveRecord::Schema.define(version: 2019_03_17_050817) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-=======
-ActiveRecord::Schema.define(version: 2019_03_17_053640) do
->>>>>>> 8cba015799a6009370d6f641f612cc081241aea7
 
   create_table "patterns", force: :cascade do |t|
     t.string "category"
