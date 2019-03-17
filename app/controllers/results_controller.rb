@@ -3,7 +3,7 @@ class ResultsController < ApplicationController
 		@question_count = Question.all.count
 		@user_id = Result.find_by(user_id:3).user_id
 
-		@num = 1
+		@num = Question.all.first.id
 		@arr_question = Array.new
 		@arr_answer = Array.new
 
