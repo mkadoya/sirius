@@ -25,6 +25,4 @@ Things you may want to cover:
 
 
 
-- First commit by Takai
-
-
+- Second Commited by Kyuya Takai 2019/03/17
