@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'results/index'
   get 'results/index2'
+  get 'results/create' => "results/create"
   get 'questions/index' => "questions#index"
   get 'questions/result' => "questions#result"
   get "/" => "home#top"

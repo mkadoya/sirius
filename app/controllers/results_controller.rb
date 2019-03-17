@@ -43,27 +43,35 @@ class ResultsController < ApplicationController
   end
 
   def index2
-		@answers = params[:answers]
+		@result = Result.where(user_id: params[:user_id]).first
   end
 
-#   def create
-# 		@answers = params[:answers]
-# 		@result = Result.order(updated_at: "DESC").first
-# 		if @result.nil?
-# 			@user_id = 1
-# 		else
-# 			@user_id = @result.user_id.to_i + 1
-# 		end
-# 		@question_num = 0
+  def create
+		#answer/question_id結果を格納
+		@answers = params[:answers]
+		@question_ids = params[:question_ids]
 
-# 		@answers.each do |answer|
-# 			if @results.nil?
-# 				@results = {user_id => @user_id, question_id => @question_num, answer => answer }
-# 				@results_array = [@results]
-# 				@question_num += 1
-# 			else
-# 				@results.
-# 			end
-# 		end
-#   end
+		#ResultDBの中でユーザーIDが一番古いものを取得
+		@result = Result.order(updated_at: "DESC").first
+
+		#ユーザーIDが存在しなかったら「1」。存在したらインクリメントしたユーザーIDを指定
+		if @result.nil?
+			@user_id = 1
+		else
+			@user_id = @result.user_id.to_i + 1
+		end
+
+		#データベースへ書き込み
+		@question_num = 0
+
+		@answers.each do |answer|
+			@question_id = @question_ids[@question_num].to_i
+			@result = Result.create(user_id: @user_id, question_id: @question_id, answer:answer)
+			@result.save
+			@question_num += 1
+		end
+
+		#index2へリダイレクト
+		redirect_to :controller => "results", :action => "index2", :user_id => @user_id
+  end
 end
