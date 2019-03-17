@@ -5,20 +5,27 @@ class QuestionsController < ApplicationController
       @answers = params[:answers]
       @answers.push(params[:answer])
     else
-      @answers = ["first"]
+      @answers = ["0"]
     end
 
     # レコード数以上の質問になったらリザルト画面を表示する
-    if params[:id].to_i <= Question.all.count
-      @question = Question.find_by(id: params[:id])
+    @answers_count = @answers.count - 1
+    @questions_num = Question.where(category: "laptop").all.count
+
+    if @answers_count < @questions_num
+      @questions = Question.where(category: "laptop").all
+      @question = @questions.last(@questions_num - @answers_count).first
     else
       @answers.shift(1)
-      redirect_to :controller => "questions", :action => "result", :answers => @answers
+      redirect_to :controller => "results", :action => "index2", :answers => @answers
     end
-  end
 
-  def result
-    @answers = params[:answers]
-  end
+    # if params[:id].to_i <= Question.all.count
+    #   @question = Question.find_by(id: params[:id])
+    # else
+    #   @answers.shift(1)
+    #   redirect_to :controller => "results", :action => "index2", :answers => @answers
+    # end
 
+  end
 end
