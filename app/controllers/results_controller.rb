@@ -1,26 +1,27 @@
 class ResultsController < ApplicationController
   def index
-
-		# 手動で入れているけど、questionから引き継がれるはず。。。
-		@user_id = 8
+		# 手動で入れているけど、questionから引き継がれる
+		@user_id = 7
+		# categoryは今後めっちゃくちゃ増えます！！！！
 		@category = 'laptop'
 
-		@question_count = Question.where(category: @category).count
+		# Question idの数を重複なしで、昇順で取り出します
+		@arr_question_id = Question.pluck(:question_id).uniq.sort
 
-		@num = Question.all.first.id
-		@num_question = 1
+		# 質問と回答一覧取得のために、空の配列を作成
 		@arr_question = Array.new
 		@arr_answer = Array.new
 
-		while @num_question <= @question_count
-			@arr_question << Question.find_by(id:@num).content
-			@arr_answer << Result.order(updated_at: "DESC").find_by(user_id:@user_id, question_id:@num_question).answer
-			@num += 1
-			@num_question += 1
-		end
+		# 配列 Loop
+		@arr_question_id.each{|q_id|
+			@arr_question << Question.find_by(question_id:q_id).content
+			@arr_answer << Result.order(updated_at: "DESC").find_by(user_id:@user_id, question_id:q_id).answer
+		}
 
+		# 質問の答えから、pattern_idを取得。今は、質問数12問固定。。そのうち可変に対応できるようにします
 		@pattern_pattern_id = Pattern.find_by(answer_1: @arr_answer[0], answer_2: @arr_answer[1], answer_3: @arr_answer[2], answer_4: @arr_answer[3], answer_5: @arr_answer[4], answer_6: @arr_answer[5], answer_7: @arr_answer[6], answer_8: @arr_answer[7], answer_9: @arr_answer[8], answer_10: @arr_answer[9], answer_11: @arr_answer[10],  answer_12: @arr_answer[11]).pattern_id
 
+		# Pattern取得
 		@characteristic = Characteristic.find_by(category: @category, pattern_id: @pattern_pattern_id)
 		@charasteristic_title = @characteristic.title
 		@charasteristic_body = @characteristic.body
@@ -39,7 +40,10 @@ class ResultsController < ApplicationController
 		@charasteristic_item_3 = @characteristic.item_3
 		@charasteristic_item_4 = @characteristic.item_4
 		@charasteristic_item_5 = @characteristic.item_5
+<<<<<<< HEAD
 
+=======
+>>>>>>> ea7995ac1453cfd8c964082ee2450a1913f0bdef
   end
 
   def index2
