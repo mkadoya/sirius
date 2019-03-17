@@ -1,14 +1,14 @@
 class ResultsController < ApplicationController
   def index
 		@question_count = Question.all.count
-		@user_id = Result.find_by(user_id:3).user_id
+		@user_id = Result.find_by(user_id:7).user_id
 
 		@num = Question.all.first.id
 		@num_question = 1
 		@arr_question = Array.new
 		@arr_answer = Array.new
 
-		while @num <= @question_count
+		while @num_question <= @question_count
 			@arr_question << Question.find_by(id:@num).content
 			@arr_answer << Result.order(updated_at: "DESC").find_by(user_id:@user_id, question_id:@num_question).answer
 			@num += 1
