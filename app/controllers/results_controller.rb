@@ -20,15 +20,15 @@ class ResultsController < ApplicationController
 			# QUESTIONの中身を取得して配列に入れる
 			@arr_question << Question.find_by(question_id:q_id).content
 			# 該当のquestion idのanswerの行を取得
-			@arr_answer << Result.order(updated_at: "DESC").find_by(user_id:@user_id, question_id:q_id)
+			tmp_answer = Result.order(updated_at: "DESC").find_by(user_id:@user_id, question_id:q_id)
 
 			# 合致しない場合のnil(NULL)対策。。最初の列を強制的に割り当て
-			if @arr_answer.nil?
-				@arr_answer = Result.first
+			if tmp_answer.nil?
+				tmp_answer = Result.first
 			end
 
 			# answeの中身を取得して配列に入れる
-			@arr_answer << @arr_answer.answer
+			@arr_answer << tmp_answer.answer
 		}
 
 		# 質問の答えから、合致するpattern_idの列を取得。今は、質問数12問固定。。そのうち可変に対応できるようにします
