@@ -9,7 +9,7 @@ class ResultsController < ApplicationController
 		@arr_question_id = Question.pluck(:question_id).uniq.sort
 
 		# Pattern DB内で使われているcolumnを取り出します
-		@arr_answer_id = Pattern.column_names.uniq
+		@arr_answer_id = Pattern.column_names
 
 		# 質問と回答一覧取得のために、空の配列を作成
 		@arr_question = Array.new
@@ -17,14 +17,24 @@ class ResultsController < ApplicationController
 
 		# 配列 Loop
 		@arr_question_id.each{|q_id|
+			# QUESTIONの中身を取得して配列に入れる
 			@arr_question << Question.find_by(question_id:q_id).content
-			@arr_answer << Result.order(updated_at: "DESC").find_by(user_id:@user_id, question_id:q_id).answer
+			# 該当のquestion idのanswerの行を取得
+			@arr_answer << Result.order(updated_at: "DESC").find_by(user_id:@user_id, question_id:q_id)
+
+			# 合致しない場合のnil(NULL)対策。。最初の列を強制的に割り当て
+			if @arr_answer.nil?
+				@arr_answer = Result.first
+			end
+
+			# answeの中身を取得して配列に入れる
+			@arr_answer << @arr_answer.answer
 		}
 
 		# 質問の答えから、合致するpattern_idの列を取得。今は、質問数12問固定。。そのうち可変に対応できるようにします
 		@pattern_pattern_id = Pattern.find_by(answer_1: @arr_answer[0], answer_2: @arr_answer[1], answer_3: @arr_answer[2], answer_4: @arr_answer[3], answer_5: @arr_answer[4], answer_6: @arr_answer[5], answer_7: @arr_answer[6], answer_8: @arr_answer[7], answer_9: @arr_answer[8], answer_10: @arr_answer[9], answer_11: @arr_answer[10],  answer_12: @arr_answer[11])
 
-		# 合致しない場合のnil(NULL)対策。。
+		# 合致しない場合のnil(NULL)対策。。最初の列を強制的に割り当て
 		if @pattern_pattern_id.nil?
 			@pattern_pattern_id = Characteristic.first
 		end
