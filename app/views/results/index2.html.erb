@@ -1,14 +1,119 @@
 <div class="top-main">
   <div class="top-contents">
-    <div class="card border-info rounded-lg question">
-      <div class="card-head text-light bg-info question-head">
-        <h3>診断結果</h3>
+    <div class="card bg-info result">
+      <div class="card-header">
+        診断結果
       </div>
-      <div class="card-body text-dark border-light bg-light question-contents">
-        <h3>おつかれさまでした！</h3>
-        <p>user_id = <%= @user_id %></p>
-        <p>category = <%= @category %></p>
+      <div class="card-body bg-light text-dark">
+        <div class="result-contents">
+          <p class="text-center">あなたのタイプは</p>
+          <h2 class="text-info text-center"><%= @charasteristic_title %>タイプ</h1>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-md-6 result-contents">
+
+            <p>[重視1] <%= @charasteristic_chara_1_str %> : <%= @charasteristic_chara_1_val%></p>
+            <div class="result-star-rating position-relative">
+              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_1_val*1.5 %>rem; max-height: 100%;">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+              <div class="result-star-rating-back">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+            </div>
+            <p>[重視2] <%= @charasteristic_chara_2_str %> : <%= @charasteristic_chara_2_val %></p>
+            <div class="result-star-rating position-relative">
+              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_2_val*1.5 %>rem; max-height: 100%;">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+              <div class="result-star-rating-back">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+            </div>
+            <p>[重視3] <%= @charasteristic_chara_3_str %> : <%= @charasteristic_chara_3_val %></p>
+            <div class="result-star-rating position-relative">
+              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_3_val*1.5 %>rem; max-height: 100%;">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+              <div class="result-star-rating-back">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+            </div>
+            <p>[重視4] <%= @charasteristic_chara_4_str %> : <%= @charasteristic_chara_4_val %></p>
+            <div class="result-star-rating position-relative">
+              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_4_val*1.5 %>rem; max-height: 100%;">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+              <div class="result-star-rating-back">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+            </div>
+            <p>[重視5] <%= @charasteristic_chara_5_str %> : <%= @charasteristic_chara_5_val %></p>
+            <div class="result-star-rating position-relative">
+              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_5_val*1.5 %>rem; max-height: 100%;">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+              <div class="result-star-rating-back">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 result-contents">
+            <h4>解説</h4>
+            <p class="card-text"><%= @charasteristic_body %></p>
+          </div>
+        </div>
+        <h4>おすすめ商品</h4>
+        <div class="row">
+          <div class="col-md-12 col-lg-6 result-contents">
+            <div class="card result-item" style="width: 20rem;">
+              <img class="card-img-top" src="/img002.svg" alt="Card image cap">
+              <div class="card-body">
+                <p class="card-text"><%= @charasteristic_item_1 %></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-6 result-contents">
+            <div class="card result-item" style="width: 20rem;">
+              <img class="card-img-top" src="/img002.svg" alt="Card image cap">
+              <div class="card-body">
+                <p class="card-text"><%= @charasteristic_item_2 %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-lg-6 result-contents">
+            <div class="card result-item" style="width: 20rem;">
+              <img class="card-img-top" src="/img002.svg" alt="Card image cap">
+              <div class="card-body">
+                <p class="card-text"><%= @charasteristic_item_3 %></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-6 result-contents">
+            <div class="card result-item" style="width: 20rem;">
+              <img class="card-img-top" src="/img002.svg" alt="Card image cap">
+              <div class="card-body">
+                <p class="card-text"><%= @charasteristic_item_4 %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-lg-6 result-contents">
+            <div class="card result-item" style="width: 20rem;">
+              <img class="card-img-top" src="/img002.svg" alt="Card image cap">
+              <div class="card-body">
+                <p class="card-text"><%= @charasteristic_item_5 %></p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </div>
