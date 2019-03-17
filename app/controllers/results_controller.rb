@@ -2,7 +2,7 @@ class ResultsController < ApplicationController
   def index
 
 		# 手動で入れているけど、questionから引き継がれるはず。。。
-		@user_id = 7
+		@user_id = 8
 		@category = 'laptop'
 
 		@question_count = Question.where(category: @category).count
@@ -39,7 +39,7 @@ class ResultsController < ApplicationController
 		@charasteristic_item_3 = @characteristic.item_3
 		@charasteristic_item_4 = @characteristic.item_4
 		@charasteristic_item_5 = @characteristic.item_5
-		
+
   end
 
   def index2
