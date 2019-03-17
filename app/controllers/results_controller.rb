@@ -1,11 +1,7 @@
 class ResultsController < ApplicationController
   def index
 		# 手動で入れているけど、questionから引き継がれる
-<<<<<<< HEAD
 		@user_id = 5
-=======
-		@user_id = 8
->>>>>>> 94e59258143764eb4d6ff9bffaf366eadd8223f9
 		# categoryは今後めっちゃくちゃ増えます！！！！
 		@category = 'laptop'
 
