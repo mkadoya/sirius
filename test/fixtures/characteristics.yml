@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category: MyString
+  pattern_id: 1
+  title: MyString
+  body: MyText
+  chara_1_str: MyText
+  chara_1_val: 1
+  chara_2_str: MyText
+  chara_2_val: 1
+  chara_3_str: MyText
+  chara_3_val: 1
+  chara_4_str: MyText
+  chara_4_val: 1
+  chara_5_str: MyText
+  chara_5_val: 1
+  item_1: 1
+  item_2: 1
+  item_3: 1
+  item_4: 1
+  item_5: 1
+
+two:
+  category: MyString
+  pattern_id: 1
+  title: MyString
+  body: MyText
+  chara_1_str: MyText
+  chara_1_val: 1
+  chara_2_str: MyText
+  chara_2_val: 1
+  chara_3_str: MyText
+  chara_3_val: 1
+  chara_4_str: MyText
+  chara_4_val: 1
+  chara_5_str: MyText
+  chara_5_val: 1
+  item_1: 1
+  item_2: 1
+  item_3: 1
+  item_4: 1
+  item_5: 1
