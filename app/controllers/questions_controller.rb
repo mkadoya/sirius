@@ -3,9 +3,11 @@ class QuestionsController < ApplicationController
     # 回答結果を配列に保管する
     if params[:answer]
       @answers = params[:answers]
+      @question_ids = params[:question_ids]
       @answers.push(params[:answer])
     else
       @answers = ["0"]
+      @question_ids = ["0"]
     end
 
     # レコード数以上の質問になったらリザルト画面を表示する
@@ -15,17 +17,17 @@ class QuestionsController < ApplicationController
     if @answers_count < @questions_num
       @questions = Question.where(category: "laptop").all
       @question = @questions.last(@questions_num - @answers_count).first
+      @question_ids.push(@question.question_id)
     else
       @answers.shift(1)
-      redirect_to :controller => "results", :action => "index2", :answers => @answers
+      @question_ids.shift(1)
+      redirect_to :controller => "questions", :action => "result", :answers => @answers, :question_ids => @question_ids
     end
-
-    # if params[:id].to_i <= Question.all.count
-    #   @question = Question.find_by(id: params[:id])
-    # else
-    #   @answers.shift(1)
-    #   redirect_to :controller => "results", :action => "index2", :answers => @answers
-    # end
-
   end
+
+  def result
+    @answers = params[:answers]
+    @question_ids = params[:question_ids]
+  end
+
 end
