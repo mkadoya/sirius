@@ -27,7 +27,7 @@ class QuestionsController < ApplicationController
   end
 
   def result
-
+		@answers = params[:answers]
   end
 
 end

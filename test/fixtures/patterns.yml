@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category: MyString
+  pattern_id: 1
+  answer_1: false
+  answer_2: false
+  answer_3: false
+  answer_4: false
+  answer_5: false
+  answer_6: false
+  answer_7: false
+  answer_8: false
+  answer_9: false
+  answer_10: false
+  answer_11: false
+  answer_12: false
+
+two:
+  category: MyString
+  pattern_id: 1
+  answer_1: false
+  answer_2: false
+  answer_3: false
+  answer_4: false
+  answer_5: false
+  answer_6: false
+  answer_7: false
+  answer_8: false
+  answer_9: false
+  answer_10: false
+  answer_11: false
+  answer_12: false
