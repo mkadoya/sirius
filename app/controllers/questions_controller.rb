@@ -18,11 +18,7 @@ class QuestionsController < ApplicationController
   end
 
   def result
-<<<<<<< HEAD
-		@answers = params[:answers]
-=======
     @answers = params[:answers]
->>>>>>> 25b71a698ffef83c517ae73dd0210de2d0745148
   end
 
 end
