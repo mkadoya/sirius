@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'option_results/index'
+  get 'options/get' => "options#get"
   get 'items/show/:item_id' => "items#show"
   get 'results/index'
   get 'results/index2'

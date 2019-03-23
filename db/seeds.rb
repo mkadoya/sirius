@@ -134,3 +134,16 @@ end
 #     :item_5 => row[18],
 # )
 # end
+<<<<<<< HEAD
+=======
+
+#以下はOptionを呼び出すパターン
+CSV.foreach('db/Options.csv', headers: true) do |row|
+Option.create(
+    :option_id => row[0],
+    :category => row[1],
+    :question_id => row[2],
+    :content => row[3],
+)
+end
+>>>>>>> 3e87a30336db1cc26b2486a0a90a0f2f7d82833c
