@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  option_id: 1
+  category: MyString
+  question_id: 1
+  option1: MyText
+  option2: MyText
+  option3: MyText
+  option4: MyText
+  option5: MyText
+  option6: MyText
+
+two:
+  option_id: 1
+  category: MyString
+  question_id: 1
+  option1: MyText
+  option2: MyText
+  option3: MyText
+  option4: MyText
+  option5: MyText
+  option6: MyText

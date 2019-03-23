@@ -111,26 +111,36 @@ require 'csv'
 # end
 
 #以下はPatternsを呼び出すパターン
-CSV.foreach('db/Characteristics.csv', headers: true) do |row|
-Characteristic.create(
-    :category => row[0],
-    :pattern_id => row[1],
-    :title => row[2],
-    :body => row[3],
-    :chara_1_str => row[4],
-    :chara_1_val => row[5],
-    :chara_2_str => row[6],
-    :chara_2_val => row[7],
-    :chara_3_str => row[8],
-    :chara_3_val => row[9],
-    :chara_4_str => row[10],
-    :chara_4_val => row[11],
-    :chara_5_str => row[12],
-    :chara_5_val => row[13],
-    :item_1 => row[14],
-    :item_2 => row[15],
-    :item_3 => row[16],
-    :item_4 => row[17],
-    :item_5 => row[18],
+# CSV.foreach('db/Characteristics.csv', headers: true) do |row|
+# Characteristic.create(
+#     :category => row[0],
+#     :pattern_id => row[1],
+#     :title => row[2],
+#     :body => row[3],
+#     :chara_1_str => row[4],
+#     :chara_1_val => row[5],
+#     :chara_2_str => row[6],
+#     :chara_2_val => row[7],
+#     :chara_3_str => row[8],
+#     :chara_3_val => row[9],
+#     :chara_4_str => row[10],
+#     :chara_4_val => row[11],
+#     :chara_5_str => row[12],
+#     :chara_5_val => row[13],
+#     :item_1 => row[14],
+#     :item_2 => row[15],
+#     :item_3 => row[16],
+#     :item_4 => row[17],
+#     :item_5 => row[18],
+# )
+# end
+
+#以下はOptionを呼び出すパターン
+CSV.foreach('db/Options.csv', headers: true) do |row|
+Option.create(
+    :option_id => row[0],
+    :category => row[1],
+    :question_id => row[2],
+    :content => row[3],
 )
 end

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  category: MyString
+  question_id: 1
+  option_num: 1
+  result: false
+
+two:
+  user_id: 1
+  category: MyString
+  question_id: 1
+  option_num: 1
+  result: false
