@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'items/show/:item_id' => "items#show"
   get 'results/index'
   get 'results/index2'
   get 'results/create' => "results/create"

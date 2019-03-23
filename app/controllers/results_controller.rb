@@ -100,6 +100,12 @@ class ResultsController < ApplicationController
 		@charasteristic_item_4 = @characteristic.item_4
 		@charasteristic_item_5 = @characteristic.item_5
 
+		# Itemからアイテム情報を格納
+		@item_1 = Item.find_by(item_id: @charasteristic_item_1)
+		@item_2 = Item.find_by(item_id: @charasteristic_item_2)
+		@item_3 = Item.find_by(item_id: @charasteristic_item_3)
+		@item_4 = Item.find_by(item_id: @charasteristic_item_4)
+		@item_5 = Item.find_by(item_id: @charasteristic_item_5)
   end
 
   def create

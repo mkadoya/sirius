@@ -1,0 +1,13 @@
+question_id,category,content,option,option_id,next_question_id
+1,laptop,12万円のパソコンがありました。性能もよく、自分の好みのパソコンです。あなたは買いますか？,FALSE,,2
+2,laptop,性能よりも値段が重視。安ければ安いほどよい！,FALSE,,3
+3,laptop,すばりMac派！？,FALSE,,4
+4,laptop,よくパソコンを外に持ち運びますか？,FALSE,,5
+5,laptop,画面にタッチして操作したいですか？,FALSE,,6
+6,laptop,ちょっとした仕事でWordやExcelを使いたいですか？,FALSE,,7
+7,laptop,膝の上でパソコンを操作しちゃう？,FALSE,,8
+8,laptop,私は3Dゲームをしたいんです！,FALSE,,9
+9,laptop,動画などの容量の大きいファイルを大量にパソコンの中に保存しておきたいですか？,FALSE,,10
+10,laptop,充電できない環境で長時間利用しますか？,FALSE,,11
+11,laptop,パソコンにUSBを複数接続させたい！,FALSE,,12
+12,laptop,パソコンでDVDは読み書きしますか？（外付けのDVDドライブは面倒くさい）,FALSE,,

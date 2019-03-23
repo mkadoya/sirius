@@ -25,7 +25,6 @@ class QuestionsController < ApplicationController
       @question_ids.shift(1)
       # カテゴリーの値を入れる
       @category = Question.find_by(question_id:@question_ids[0]).category
-      
       redirect_to :controller => "questions", :action => "result", :answers => @answers, :question_ids => @question_ids, :category => @category
     end
   end
