@@ -116,7 +116,7 @@ class ResultsController < ApplicationController
 
 	def index2
 		# 手動で入れているけど、questionから引き継がれる
-		@user_id = 5
+		@user_id = 7
 		# categoryは今後めっちゃくちゃ増えます！！！！
 		@category = 'laptop'
 		# Seriesの重複を除いたTotalのアイテム数 - 1, -1は配列で使うため
