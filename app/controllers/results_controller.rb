@@ -116,11 +116,16 @@ class ResultsController < ApplicationController
 
 	def index2
 		# 手動で入れているけど、questionから引き継がれる
-		@user_id = 7
+		@user_id = 4
 		# categoryは今後めっちゃくちゃ増えます！！！！
 		@category = 'laptop'
+		# Recommend Number
+		@num_recommend = 5
 		# Seriesの重複を除いたTotalのアイテム数 - 1, -1は配列で使うため
-		@num_all_item = Item.select(:series).distinct.count - 1
+		@num_all_series = Item.select(:series).distinct.count - 1
+		# Totalのアイテム数
+		@num_all_items = Item.all.count
+
 
 		# Userが選択した結果をuser-idとcategoryを指定してDBから抽出
 		@array_record_true = OptionResult.where(user_id: @user_id).where(category: @category).where(result: true)
@@ -130,6 +135,8 @@ class ResultsController < ApplicationController
 		@array_match_condition = Array.new
 		@array_item = Array.new
 		@array_item_series = Array.new
+		@array_effective_column = Array.new
+		@array_difference_avrg = Array.new
 
 		# MatchさせていくためにItem情報を全部入れる
 		@array_recommend_item = Item.all
@@ -144,8 +151,20 @@ class ResultsController < ApplicationController
 			@array_match_condition << Match.where(category: @category).where(option_id: option_id)
 		end
 
-		# おすすめ品が20個なかったら。。Match DBから取得したFilter条件の末尾を削除して再度Item DBをFilter、おすすめ品が5つ以上になるまでloop
-		while @array_item[@num_all_item].nil?
+		# 最もEffectiveが高いもの(match条件にて合致する項目数が少ないもの)を計算
+		@array_match_condition.each do |match_condition|
+			match_condition.each do |record_match|
+				@array_effective_column << [record_match.item_clmn, 1 - Item.where("#{record_match.item_clmn} >= ?", record_match.min).where("#{record_match.item_clmn} <= ?", record_match.max).count.to_f/@num_all_items]
+				@array_difference_avrg  << [record_match.item_clmn, Item.average(:"#{record_match.item_clmn}")]
+#				@array_difference_avrg  << [record_match.item_clmn, Item.average(:record_match.item_clmn), @array_item.first(5).average(:record_match.item_clmn)]
+			end
+		end
+		# 最もEffectiveが高いもの(match条件にて合致する項目数が少ないもの)をSortして昇順で5つ取得
+		@array_effective_column = @array_effective_column.uniq!(&:first).sort { |a, b| b[1] <=> a[1] }.first(5)
+		@array_difference_avrg = @array_difference_avrg.uniq!(&:first)
+
+		# おすすめ品がTotal個数ではなかったら。。Match DBから取得したFilter条件の末尾を削除して再度Item DBをFilter、おすすめ品が5つ以上になるまでloop
+		while @array_item[@num_all_series].nil?
 
 			# 全Itemを格納
 			@array_recommend_item = Item.all
@@ -164,7 +183,7 @@ class ResultsController < ApplicationController
 
 			# おすすめ品が空じゃなかったら処理、おすすめ品がからだったら条件削除に飛ぶ
 			unless @array_recommend_item.empty?
-				# おすすめ品をRack順にsort
+				# おすすめ品をRank順にsort
 				@array_recommend_item = @array_recommend_item.order(:rank)
 				# Series重複(Color重複)を削除したおすすめ品のSeies一覧を取得
 				@array_recommend_item_distinct = @array_recommend_item.select(:series).distinct
@@ -179,6 +198,37 @@ class ResultsController < ApplicationController
 			# Match条件の末尾の条件を一つ削除
 			@array_match_condition.pop
 		end
+
+
+		@array_rec_avrg = Array.new
+		@array_match_condition_test = Array.new
+
+		# Userが答えてtrueがついたoption_idをBaseにItem DBでFilterする条件をMatch DBより配列で取得
+		@array_option_id.each do |option_id_test|
+			@array_match_condition_test << Match.where(category: @category).where(option_id: option_id_test)
+		end
+
+
+		# 最もEffectiveが高いもの(match条件にて合致する項目数が少ないもの)を計算
+		@array_match_condition_test.each do |match_condition_test|
+			match_condition_test.each do |record_match_test|
+				num = 0
+				@array_item.first(@num_recommend).each do |item_test|
+					if item_test[:"#{record_match_test.item_clmn}"] == true
+						num_add = 1
+					elsif item_test[:"#{record_match_test.item_clmn}"] == false
+						num_add = 0
+					else
+						num_add = item_test[:"#{record_match_test.item_clmn}"]
+					end
+					num += num_add
+				end
+			@array_rec_avrg << [record_match_test.item_clmn, num/@num_recommend.to_f]
+			end
+		end
+		@array_rec_avrg = @array_rec_avrg.uniq!(&:first)
+
+
 # ------ 以下、大幅Update必要 ! ----------------------------------------------------------------------------
     # 質問の答えから、合致するpattern_idの列を取得。今は、質問数12問固定。。そのうち可変に対応できるようにします
     @pattern_pattern_id = 1
