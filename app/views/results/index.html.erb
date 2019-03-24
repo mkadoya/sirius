@@ -69,43 +69,21 @@
         <div class="row">
           <div class="col-md-12 col-lg-6 result-contents">
             <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_1.item_id}" do%>
-              <%= image_tag "#{@item_1.image}", class: "card-img-top border", alt: "Card image cap", height: "280px" %>
+            <%= link_to "/items/show/#{@array_item[0].item_id}" do%>
+              <%= image_tag "#{@array_item[0].image}", class: "card-img-top border", alt: "Card image cap", height: "280px" %>
             <% end %>
               <div class="card-body">
-                <p class="card-text"><%= @item_1.series %></p>
+                <p class="card-text"><%= @array_item[0].series %></p>
               </div>
             </div>
           </div>
           <div class="col-md-12 col-lg-6 result-contents">
             <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_2.item_id}" do%>
-              <%= image_tag "#{@item_2.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <%= link_to "/items/show/#{@array_item[1].item_id}" do%>
+              <%= image_tag "#{@array_item[1].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
             <% end %>
               <div class="card-body">
-                <p class="card-text"><%= @item_2.series %></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 col-lg-6 result-contents">
-            <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_3.item_id}" do%>
-              <%= image_tag "#{@item_3.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
-            <% end %>
-              <div class="card-body">
-                <p class="card-text"><%= @item_3.series %></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12 col-lg-6 result-contents">
-            <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_4.item_id}" do%>
-              <%= image_tag "#{@item_4.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
-            <% end %>
-              <div class="card-body">
-                <p class="card-text"><%= @item_4.series %></p>
+                <p class="card-text"><%= @array_item[1].series %></p>
               </div>
             </div>
           </div>
@@ -113,21 +91,43 @@
         <div class="row">
           <div class="col-md-12 col-lg-6 result-contents">
             <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_5.item_id}" do%>
-              <%= image_tag "#{@item_5.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <%= link_to "/items/show/#{@array_item[2].item_id}" do%>
+              <%= image_tag "#{@array_item[2].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
             <% end %>
               <div class="card-body">
-                <p class="card-text"><%= @item_5.series %></p>
+                <p class="card-text"><%= @array_item[2].series %></p>
               </div>
             </div>
           </div>
           <div class="col-md-12 col-lg-6 result-contents">
             <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_6.item_id}" do%>
-              <%= image_tag "#{@item_6.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <%= link_to "/items/show/#{@array_item[3].item_id}" do%>
+              <%= image_tag "#{@array_item[3].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
             <% end %>
               <div class="card-body">
-                <p class="card-text"><%= @item_6.series %></p>
+                <p class="card-text"><%= @array_item[3].series %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-lg-6 result-contents">
+            <div class="card result-item" style="width: 20rem;">
+            <%= link_to "/items/show/#{@array_item[4].item_id}" do%>
+              <%= image_tag "#{@array_item[4].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <% end %>
+              <div class="card-body">
+                <p class="card-text"><%= @array_item[4].series %></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-6 result-contents">
+            <div class="card result-item" style="width: 20rem;">
+            <%= link_to "/items/show/#{@array_item[5].item_id}" do%>
+              <%= image_tag "#{@array_item[5].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <% end %>
+              <div class="card-body">
+                <p class="card-text"><%= @array_item[5].series %></p>
               </div>
             </div>
           </div>
@@ -135,43 +135,21 @@
 				<div class="row">
           <div class="col-md-12 col-lg-6 result-contents">
             <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_7.item_id}" do%>
-              <%= image_tag "#{@item_7.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <%= link_to "/items/show/#{@array_item[6].item_id}" do%>
+              <%= image_tag "#{@array_item[6].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
             <% end %>
               <div class="card-body">
-                <p class="card-text"><%= @item_7.series %></p>
+                <p class="card-text"><%= @array_item[6].series %></p>
               </div>
             </div>
           </div>
           <div class="col-md-12 col-lg-6 result-contents">
             <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_8.item_id}" do%>
-              <%= image_tag "#{@item_8.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <%= link_to "/items/show/#{@array_item[7].item_id}" do%>
+              <%= image_tag "#{@array_item[7].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
             <% end %>
               <div class="card-body">
-                <p class="card-text"><%= @item_8.series %></p>
-              </div>
-            </div>
-          </div>
-        </div>
-				<div class="row">
-          <div class="col-md-12 col-lg-6 result-contents">
-            <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_9.item_id}" do%>
-              <%= image_tag "#{@item_9.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
-            <% end %>
-              <div class="card-body">
-                <p class="card-text"><%= @item_9.series %></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12 col-lg-6 result-contents">
-            <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_10.item_id}" do%>
-              <%= image_tag "#{@item_10.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
-            <% end %>
-              <div class="card-body">
-                <p class="card-text"><%= @item_10.series %></p>
+                <p class="card-text"><%= @array_item[7].series %></p>
               </div>
             </div>
           </div>
@@ -179,43 +157,21 @@
 				<div class="row">
           <div class="col-md-12 col-lg-6 result-contents">
             <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_11.item_id}" do%>
-              <%= image_tag "#{@item_11.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <%= link_to "/items/show/#{@array_item[8].item_id}" do%>
+              <%= image_tag "#{@array_item[8].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
             <% end %>
               <div class="card-body">
-                <p class="card-text"><%= @item_11.series %></p>
+                <p class="card-text"><%= @array_item[8].series %></p>
               </div>
             </div>
           </div>
           <div class="col-md-12 col-lg-6 result-contents">
             <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_12.item_id}" do%>
-              <%= image_tag "#{@item_12.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <%= link_to "/items/show/#{@array_item[9].item_id}" do%>
+              <%= image_tag "#{@array_item[9].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
             <% end %>
               <div class="card-body">
-                <p class="card-text"><%= @item_12.series %></p>
-              </div>
-            </div>
-          </div>
-        </div>
-				<div class="row">
-          <div class="col-md-12 col-lg-6 result-contents">
-            <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_13.item_id}" do%>
-              <%= image_tag "#{@item_13.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
-            <% end %>
-              <div class="card-body">
-                <p class="card-text"><%= @item_13.series %></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12 col-lg-6 result-contents">
-            <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_14.item_id}" do%>
-              <%= image_tag "#{@item_14.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
-            <% end %>
-              <div class="card-body">
-                <p class="card-text"><%= @item_14.series %></p>
+                <p class="card-text"><%= @array_item[9].series %></p>
               </div>
             </div>
           </div>
@@ -223,43 +179,21 @@
 				<div class="row">
           <div class="col-md-12 col-lg-6 result-contents">
             <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_15.item_id}" do%>
-              <%= image_tag "#{@item_15.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <%= link_to "/items/show/#{@array_item[10].item_id}" do%>
+              <%= image_tag "#{@array_item[10].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
             <% end %>
               <div class="card-body">
-                <p class="card-text"><%= @item_15.series %></p>
+                <p class="card-text"><%= @array_item[10].series %></p>
               </div>
             </div>
           </div>
           <div class="col-md-12 col-lg-6 result-contents">
             <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_16.item_id}" do%>
-              <%= image_tag "#{@item_16.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <%= link_to "/items/show/#{@array_item[11].item_id}" do%>
+              <%= image_tag "#{@array_item[11].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
             <% end %>
               <div class="card-body">
-                <p class="card-text"><%= @item_16.series %></p>
-              </div>
-            </div>
-          </div>
-        </div>
-				<div class="row">
-          <div class="col-md-12 col-lg-6 result-contents">
-            <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_17.item_id}" do%>
-              <%= image_tag "#{@item_17.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
-            <% end %>
-              <div class="card-body">
-                <p class="card-text"><%= @item_17.series %></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12 col-lg-6 result-contents">
-            <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_18.item_id}" do%>
-              <%= image_tag "#{@item_18.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
-            <% end %>
-              <div class="card-body">
-                <p class="card-text"><%= @item_18.series %></p>
+                <p class="card-text"><%= @array_item[11].series %></p>
               </div>
             </div>
           </div>
@@ -267,21 +201,87 @@
 				<div class="row">
           <div class="col-md-12 col-lg-6 result-contents">
             <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_19.item_id}" do%>
-              <%= image_tag "#{@item_19.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <%= link_to "/items/show/#{@array_item[12].item_id}" do%>
+              <%= image_tag "#{@array_item[12].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
             <% end %>
               <div class="card-body">
-                <p class="card-text"><%= @item_19.series %></p>
+                <p class="card-text"><%= @array_item[12].series %></p>
               </div>
             </div>
           </div>
           <div class="col-md-12 col-lg-6 result-contents">
             <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_20.item_id}" do%>
-              <%= image_tag "#{@item_20.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <%= link_to "/items/show/#{@array_item[13].item_id}" do%>
+              <%= image_tag "#{@array_item[13].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
             <% end %>
               <div class="card-body">
-                <p class="card-text"><%= @item_20.series %></p>
+                <p class="card-text"><%= @array_item[13].series %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+				<div class="row">
+          <div class="col-md-12 col-lg-6 result-contents">
+            <div class="card result-item" style="width: 20rem;">
+            <%= link_to "/items/show/#{@array_item[14].item_id}" do%>
+              <%= image_tag "#{@array_item[14].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <% end %>
+              <div class="card-body">
+                <p class="card-text"><%= @array_item[14].series %></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-6 result-contents">
+            <div class="card result-item" style="width: 20rem;">
+            <%= link_to "/items/show/#{@array_item[15].item_id}" do%>
+              <%= image_tag "#{@array_item[15].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <% end %>
+              <div class="card-body">
+                <p class="card-text"><%= @array_item[15].series %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+				<div class="row">
+          <div class="col-md-12 col-lg-6 result-contents">
+            <div class="card result-item" style="width: 20rem;">
+            <%= link_to "/items/show/#{@array_item[16].item_id}" do%>
+              <%= image_tag "#{@array_item[16].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <% end %>
+              <div class="card-body">
+                <p class="card-text"><%= @array_item[16].series %></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-6 result-contents">
+            <div class="card result-item" style="width: 20rem;">
+            <%= link_to "/items/show/#{@array_item[17].item_id}" do%>
+              <%= image_tag "#{@array_item[17].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <% end %>
+              <div class="card-body">
+                <p class="card-text"><%= @array_item[17].series %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+				<div class="row">
+          <div class="col-md-12 col-lg-6 result-contents">
+            <div class="card result-item" style="width: 20rem;">
+            <%= link_to "/items/show/#{@array_item[18].item_id}" do%>
+              <%= image_tag "#{@array_item[18].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <% end %>
+              <div class="card-body">
+                <p class="card-text"><%= @array_item[18].series %></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-6 result-contents">
+            <div class="card result-item" style="width: 20rem;">
+            <%= link_to "/items/show/#{@array_item[19].item_id}" do%>
+              <%= image_tag "#{@array_item[19].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
+            <% end %>
+              <div class="card-body">
+                <p class="card-text"><%= @array_item[19].series %></p>
               </div>
             </div>
           </div>
@@ -302,10 +302,10 @@
 <p> --------------------------------------------- </p>
 
 <p>おすすめ商品 ! </p>
-<p>[おすすめNo1] <%= @item_1.name </p>
-<p>[おすすめNo2] <%= @item_2.name </p>
-<p>[おすすめNo3] <%= @item_3.name </p>
-<p>[おすすめNo4] <%= @item_4.name </p>
-<p>[おすすめNo5] <%= @item_5.name </p>
+<p>[おすすめNo1] <%= @array_item[0].name </p>
+<p>[おすすめNo2] <%= @array_item[1].name </p>
+<p>[おすすめNo3] <%= @array_item[2].name </p>
+<p>[おすすめNo4] <%= @array_item[3].name </p>
+<p>[おすすめNo5] <%= @array_item[4].name </p>
 
 <p> --------------------------------------------- </p> %>

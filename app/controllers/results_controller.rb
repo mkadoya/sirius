@@ -3,10 +3,8 @@ class ResultsController < ApplicationController
 		@user_id = params[:user_id]
 		@category = params[:category]
 
-		# Recommendアイテム数
-		@num_recommend_item = 5
-		# Sub-Recommendアイテム数
-		@num_sub_recommend_item = 15
+		# Seriesの重複を除いたTotalのアイテム数 - 1, -1は配列で使うため
+		@num_all_item = Item.select(:series).distinct.count - 1
 
 		# Userが選択した結果をuser-idとcategoryを指定してDBから抽出
 		@array_record_true = OptionResult.where(user_id: @user_id).where(category: @category).where(result: true)
@@ -30,8 +28,8 @@ class ResultsController < ApplicationController
 			@array_match_condition << Match.where(category: @category).where(option_id: option_id)
 		end
 
-		# おすすめ品が5個なかったら。。Match DBから取得したFilter条件の末尾を削除して再度Item DBをFilter、おすすめ品が5つ以上になるまでloop
-		while @array_item[@num_recommend_item + @num_sub_recommend_item - 1].nil?
+		# おすすめ品が20個なかったら。。Match DBから取得したFilter条件の末尾を削除して再度Item DBをFilter、おすすめ品が5つ以上になるまでloop
+		while @array_item[@num_all_item].nil?
 
 			# 全Itemを格納
 			@array_recommend_item = Item.all
@@ -65,29 +63,6 @@ class ResultsController < ApplicationController
 			# Match条件の末尾の条件を一つ削除
 			@array_match_condition.pop
 		end
-
-		# Itemからアイテム情報を格納
-		@item_1 = @array_item[0]
-		@item_2 = @array_item[1]
-		@item_3 = @array_item[2]
-		@item_4 = @array_item[3]
-		@item_5 = @array_item[4]
-		@item_6 = @array_item[5]
-		@item_7 = @array_item[6]
-		@item_8 = @array_item[7]
-		@item_9 = @array_item[8]
-		@item_10 = @array_item[9]
-		@item_11 = @array_item[10]
-		@item_12 = @array_item[11]
-		@item_13 = @array_item[12]
-		@item_14 = @array_item[13]
-		@item_15 = @array_item[14]
-		@item_16 = @array_item[15]
-		@item_17 = @array_item[16]
-		@item_18 = @array_item[17]
-		@item_19 = @array_item[18]
-		@item_20 = @array_item[19]
-		
 # ------ 以下、大幅Update必要 ! ----------------------------------------------------------------------------
     # 質問の答えから、合致するpattern_idの列を取得。今は、質問数12問固定。。そのうち可変に対応できるようにします
     @pattern_pattern_id = 1
@@ -117,18 +92,29 @@ class ResultsController < ApplicationController
 	end
 
 
-
-
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
 
 	def index2
 		# 手動で入れているけど、questionから引き継がれる
 		@user_id = 5
 		# categoryは今後めっちゃくちゃ増えます！！！！
 		@category = 'laptop'
-		# Recommendアイテム数
-		@num_recommend_item = 5
-		# Sub-Recommendアイテム数
-		@num_sub_recommend_item = 15
+		# Seriesの重複を除いたTotalのアイテム数 - 1, -1は配列で使うため
+		@num_all_item = Item.select(:series).distinct.count - 1
 
 		# Userが選択した結果をuser-idとcategoryを指定してDBから抽出
 		@array_record_true = OptionResult.where(user_id: @user_id).where(category: @category).where(result: true)
@@ -152,8 +138,8 @@ class ResultsController < ApplicationController
 			@array_match_condition << Match.where(category: @category).where(option_id: option_id)
 		end
 
-		# おすすめ品が5個なかったら。。Match DBから取得したFilter条件の末尾を削除して再度Item DBをFilter、おすすめ品が5つ以上になるまでloop
-		while @array_item[@num_recommend_item + @num_sub_recommend_item - 1].nil?
+		# おすすめ品が20個なかったら。。Match DBから取得したFilter条件の末尾を削除して再度Item DBをFilter、おすすめ品が5つ以上になるまでloop
+		while @array_item[@num_all_item].nil?
 
 			# 全Itemを格納
 			@array_recommend_item = Item.all
@@ -187,8 +173,49 @@ class ResultsController < ApplicationController
 			# Match条件の末尾の条件を一つ削除
 			@array_match_condition.pop
 		end
+# ------ 以下、大幅Update必要 ! ----------------------------------------------------------------------------
+    # 質問の答えから、合致するpattern_idの列を取得。今は、質問数12問固定。。そのうち可変に対応できるようにします
+    @pattern_pattern_id = 1
+
+    # Pattern取得
+    @characteristic = Characteristic.find_by(category: @category, pattern_id: @pattern_pattern_id)
+
+    # Patternから属性情報の取得
+    @charasteristic_title = @characteristic.title
+    @charasteristic_body = @characteristic.body
+    @charasteristic_chara_1_str = @characteristic.chara_1_str
+    @charasteristic_chara_2_str = @characteristic.chara_2_str
+    @charasteristic_chara_3_str = @characteristic.chara_3_str
+    @charasteristic_chara_4_str = @characteristic.chara_4_str
+    @charasteristic_chara_5_str = @characteristic.chara_5_str
+    @charasteristic_chara_1_val = @characteristic.chara_1_val
+    @charasteristic_chara_2_val = @characteristic.chara_2_val
+    @charasteristic_chara_3_val = @characteristic.chara_3_val
+    @charasteristic_chara_4_val = @characteristic.chara_4_val
+    @charasteristic_chara_5_val = @characteristic.chara_5_val
+    @charasteristic_item_1 = @characteristic.item_1
+    @charasteristic_item_2 = @characteristic.item_2
+    @charasteristic_item_3 = @characteristic.item_3
+    @charasteristic_item_4 = @characteristic.item_4
+    @charasteristic_item_5 = @characteristic.item_5
+# ------ 以上、大幅Update必要 ! ----------------------------------------------------------------------------
 	end
 
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
+	# ------ Debug by Takai ---------------------------------------------------------------------------------
 
 
 
