@@ -2,12 +2,64 @@
   <div class="top-contents">
     <div class="card border-info rounded-lg question">
       <div class="card-head text-light bg-info question-head">
-        <h3><%= @question.category %>診断： <%= @answers.count %>問目</h3>
+        <%# 20190324 アップデート前 %>
+        <%# <h3><%= @question.category 診断： <%= @answers.count 問目</h3> %>
+        <h3><%= @category_firendly_name %>診断： <%= @question_num %>問目</h3>
       </div>
       <div class="card-body text-dark border-light bg-light question-contents">
         <h4><%= @question.content %></h4>
-        <%= link_to "YES", {:controller => "questions", :action => "index", :id => (@question.id + 1), :answer => "true", :answers => @answers, :question_ids => @question_ids}, :class => "btn btn-outline-primary btn-lg question-button" %>
-        <%= link_to "NO", {:controller => "questions", :action => "index", :id => (@question.id + 1), :answer => "false", :answers => @answers, :question_ids => @question_ids}, :class => "btn btn-outline-danger btn-lg  question-button" %>
+        <%# 20190324 アップデート前 %>
+        <%# <%= link_to "YES", {:controller => "questions", :action => "index", :id => (@question.id + 1), :answer => "true", :answers => @answers, :question_ids => @question_ids}, :class => "btn btn-outline-primary btn-lg question-button" %>
+        <%# <%= link_to "NO", {:controller => "questions", :action => "index", :id => (@question.id + 1), :answer => "false", :answers => @answers, :question_ids => @question_ids}, :class => "btn btn-outline-danger btn-lg  question-button" %>
+        <div class="question-options">
+          <% @options.each do |option|%>
+            <div class="row" style="margin-bottom: 20px;">
+              <div class="col-sm-3">
+              </div>
+              <div class="col-sm-6">
+                <%= link_to option.content,
+                  {
+                    :controller => "results",
+                    # 20190324アップデート前
+                    # :controller => "option_results",
+                    :action => "create",
+                    :category => @category,
+                    :user_id => @user_id,
+                    :question_id => option.question_id,
+                    :question_num => @question_num,
+                    :next_question_id => (@question.next_question_id),
+                    :option_id => option.option_id
+                  },
+                :class => "btn btn-outline-info btn-lg btn-block" %>
+              </div>
+              <div class="col-sm-3">
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="card-footer text-light bg-info question-footer">
+        <div class="row">
+          <div class="col-md-3">
+            <% if @question_num > 1 %>
+              <%= link_to "戻る",{
+                :controller => "questions",
+                :action => "option_index",
+                :category => @category,
+                :user_id => @user_id,
+                :question_num => (@question_num - 2),
+                :next_question_id => @before_question_id
+              },
+              :class => "btn btn-outline-light btn-block" %>
+            <% end %>
+          </div>
+          <div class="col-md-6">
+            <h5>「自分の心と直感に従う、勇気を持ちなさい」</h5>
+            <p>スティーブ・ジョブズ</p>
+          </div>
+          <div class="col-md-3">
+          </div>
+        </div>
       </div>
     </div>
   </div>
