@@ -1,11 +1,13 @@
 class ResultsController < ApplicationController
   def index
 		# 手動で入れているけど、questionから引き継がれる
-		@user_id = 9
+		@user_id = 3
 		# categoryは今後めっちゃくちゃ増えます！！！！
 		@category = 'laptop'
 		# Recommendアイテム数
 		@num_recommend_item = 5
+		# Sub-Recommendアイテム数. 'Sub-Recommend'は、result/index.htmlにおいて表示するやー
+		@num_sub_recommend_item = 15
 
 		# Userが選択した結果をuser-idとcategoryを指定してDBから抽出
 		@array_record_true = OptionResult.where(user_id: @user_id).where(category: @category).where(result: true)
@@ -13,6 +15,8 @@ class ResultsController < ApplicationController
 		# 配列の初期化
 		@array_option_id = Array.new
 		@array_match_condition = Array.new
+		@array_item = Array.new
+		@array_item_display = Array.new
 
 		# MatchさせていくためにItem情報を全部入れる
 		@array_recommend_item = Item.all
@@ -34,8 +38,22 @@ class ResultsController < ApplicationController
 			end
 		end
 
-		# おすすめ品が5つなかったら。。Match DBから取得したFilter条件の末尾を削除して再度Item DBをFilter、おすすめ品が5つ以上になるまでloop
-		while @array_recommend_item[@num_recommend_item - 1].nil?
+		# おすすめ品をRack順にsort
+		@array_recommend_item = @array_recommend_item.order(:rank)
+
+		# Series重複(Color重複)を削除したおすすめ品のSeies一覧を取得
+		@array_recommend_item_distinct = @array_recommend_item.select(:series).distinct
+
+		# Seiries一覧からおすすめItem一覧を取得
+		@array_recommend_item_distinct.each do |recommend_item_distinct|
+			@array_item << Item.find_by(series: recommend_item_distinct.series)
+		end
+
+
+
+
+		# おすすめ品が5個なかったら。。Match DBから取得したFilter条件の末尾を削除して再度Item DBをFilter、おすすめ品が5つ以上になるまでloop
+		while @array_item[@num_recommend_item + @num_sub_recommend_item - 1].nil?
 			@array_recommend_item = Item.all
 			@array_match_condition.pop
 			@array_match_condition.each do |match_condition|
@@ -43,16 +61,23 @@ class ResultsController < ApplicationController
 					@array_recommend_item = @array_recommend_item.where("#{record_match.item_clmn} >= ?", record_match.min).where("#{record_match.item_clmn} <= ?", record_match.max)
 				end
 			end
+			# おすすめ品をRack順にsort
+			@array_recommend_item = @array_recommend_item.order(:rank)
+			# Series重複(Color重複)を削除したおすすめ品のSeies一覧を取得
+			@array_recommend_item_distinct = @array_recommend_item.select(:series).distinct
+			# Seiries一覧からおすすめItem一覧を取得
+			@array_recommend_item_distinct.each do |recommend_item_distinct|
+				@array_item << Item.find_by(series: recommend_item_distinct.series)
+			end
 		end
 
-		# おすすめ品をRack順にsort
-		@array_recommend_item = @array_recommend_item.order(:rank)
-		# Itemからアイテム情報を格納
-		@item_1 = @array_recommend_item[0]
-		@item_2 = @array_recommend_item[1]
-		@item_3 = @array_recommend_item[2]
-		@item_4 = @array_recommend_item[3]
-		@item_5 = @array_recommend_item[4]
+		@item_1 = @array_item[0]
+		@item_2 = @array_item[1]
+		@item_3 = @array_item[2]
+		@item_4 = @array_item[3]
+		@item_5 = @array_item[4]
+
+
   end
 
 
@@ -61,8 +86,8 @@ class ResultsController < ApplicationController
 
   def index2
 		# 手動で入れているけど、questionから引き継がれる
-		@user_id = 9
-		# @user_id = params[:user_id]
+		# @user_id = 10
+		@user_id = params[:user_id]
 
 		# categoryは今後めっちゃくちゃ増えます！！！！
 		@category = params[:category]
