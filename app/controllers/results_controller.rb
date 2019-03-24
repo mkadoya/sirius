@@ -3,6 +3,12 @@ class ResultsController < ApplicationController
 		@user_id = params[:user_id]
 		@category = params[:category]
 
+		#アイテムの表示数：偶数のみ可能
+		@item_display_num = 20
+
+		#アイテムの表示行数
+		@item_display_row_num = @item_display_num / 2 -1
+
 		# Seriesの重複を除いたTotalのアイテム数 - 1, -1は配列で使うため
 		@num_all_item = Item.select(:series).distinct.count - 1
 

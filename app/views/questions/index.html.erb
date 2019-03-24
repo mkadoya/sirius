@@ -44,7 +44,7 @@
             <% if @question_num > 1 %>
               <%= link_to "戻る",{
                 :controller => "questions",
-                :action => "option_index",
+                :action => "index",
                 :category => @category,
                 :user_id => @user_id,
                 :question_num => (@question_num - 2),

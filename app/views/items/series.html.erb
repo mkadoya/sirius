@@ -1,0 +1,109 @@
+<div class="top-main">
+  <div class="top-contents">
+    <div class="card bg-info result">
+      <div class="card-header">
+        商品詳細
+      </div>
+      <ul class="nav nav-tabs nav-info">
+        <%# タブを作成 %>
+        <% @items_array.each do |item|%>
+            <% item_num = @items_array.index(item) %>
+            <li class="nav-item">
+                <a href="#tab<%= item_num %>" class="nav-link text-dark <% if item_num==0 %>active<% end %>" data-toggle="tab"><%= item.color %></a>
+            </li>
+        <% end %>
+      </ul>
+
+      <div class="tab-content">
+        <%# コンテンツを作成 %>
+        <% @items_array.each do |item|%>
+            <% item_num = @items_array.index(item) %>
+
+            <div id="tab<%= item_num %>" class="tab-pane <% if item_num==0 %>active<% end %>">
+                <div class="card-body bg-light text-dark">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-6  col-xl-7">
+                            <h3><%= item.name %></h3>
+                            <br>
+                            <h5>価格：<strong class="text-danger">￥<%= item.price %></strong></h5>
+                            <p style="font-size: 12px;">※価格が変更されている場合がございます。最新の情報はリンクをご確認ください。</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-6  col-xl-7">
+                            <table class="table table-hover table-condensed item-table">
+                                <thead>
+                                    <tr>
+                                        <th>項目</th>
+                                        <th>詳細</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>メーカー</td>
+                                        <td><%= item.maker %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>商品重量</td>
+                                        <td><%= item.weight %>kg</td>
+                                    </tr>
+                                    <tr>
+                                        <td>カラー</td>
+                                        <td><%= item.color %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>サイズ</td>
+                                        <td><%= item.inch %> インチ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>CPU タイプ</td>
+                                        <td><%= item.cpu_name %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>CPU コア数</td>
+                                        <td><%= item.cpu_core %> コア</td>
+                                    </tr>
+                                    <tr>
+                                        <td>RAM</td>
+                                        <td><%= item.ram %> GB</td>
+                                    </tr>
+                                    <% if item.ssd != 0 %>
+                                    <tr>
+                                        <td>SSD</td>
+                                        <td><%= item.ssd %> GB</td>
+                                    </tr>
+                                    <% end %>
+                                    <% if item.hdd != 0 %>
+                                    <tr>
+                                        <td>HDD</td>
+                                        <td><%= item.hdd %> GB</td>
+                                    </tr>
+                                    <% end %>
+                                    <% if item.emmc != 0 %>
+                                    <tr>
+                                        <td>EMMC</td>
+                                        <td><%= item.emmc %> GB</td>
+                                    </tr>
+                                    <% end %>
+                                    <tr>
+                                        <td>バッテリー時間</td>
+                                        <td><%= item.uptime %> 時間</td>
+                                    </tr>
+                                    <tr>
+                                        <td>OS</td>
+                                        <td><%= item.os %></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-12 col-lg-6 col-xl-5">
+                            <%= item.affiliate.html_safe %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
