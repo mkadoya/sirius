@@ -1,106 +1,94 @@
 class ResultsController < ApplicationController
-<<<<<<< HEAD
-  def index
-		# 手動で入れているけど、questionから引き継がれる
-		@user_id = 3
-		# categoryは今後めっちゃくちゃ増えます！！！！
-		@category = 'laptop'
-		# Recommendアイテム数
-		@num_recommend_item = 5
-		# Sub-Recommendアイテム数. 'Sub-Recommend'は、result/index.htmlにおいて表示するやー
-		@num_sub_recommend_item = 15
-
-=======
-		def index
+	def index
 		@user_id = params[:user_id]
 		@category = params[:category]
+
 		# Recommendアイテム数
 		@num_recommend_item = 5
->>>>>>> 8facaa690a17ce6646ecf40696950f9558bc1e2d
+		# Sub-Recommendアイテム数
+		@num_sub_recommend_item = 15
+
 		# Userが選択した結果をuser-idとcategoryを指定してDBから抽出
 		@array_record_true = OptionResult.where(user_id: @user_id).where(category: @category).where(result: true)
+
 		# 配列の初期化
 		@array_option_id = Array.new
 		@array_match_condition = Array.new
-<<<<<<< HEAD
 		@array_item = Array.new
-		@array_item_display = Array.new
+		@array_item_series = Array.new
 
-=======
->>>>>>> 8facaa690a17ce6646ecf40696950f9558bc1e2d
 		# MatchさせていくためにItem情報を全部入れる
 		@array_recommend_item = Item.all
+
 		# Userが答えてtrue flagがついたoption_idを配列で取得
 		@array_record_true.each do |record_true|
 			@array_option_id << record_true.option_id
 		end
-		# Userが答えてtrue flagがついたoption_idをBaseにItem DBでFilterする条件をMatch DBより配列で取得
+
+		# Userが答えてtrueがついたoption_idをBaseにItem DBでFilterする条件をMatch DBより配列で取得
 		@array_option_id.each do |option_id|
 			@array_match_condition << Match.where(category: @category).where(option_id: option_id)
 		end
-		# Filterする条件を元にItem DBをFilter
-		@array_match_condition.each do |match_condition|
-			match_condition.each do |record_match|
-				@array_recommend_item = @array_recommend_item.where("#{record_match.item_clmn} >= ?", record_match.min).where("#{record_match.item_clmn} <= ?", record_match.max)
-			end
-		end
-<<<<<<< HEAD
-
-		# おすすめ品をRack順にsort
-		@array_recommend_item = @array_recommend_item.order(:rank)
-
-		# Series重複(Color重複)を削除したおすすめ品のSeies一覧を取得
-		@array_recommend_item_distinct = @array_recommend_item.select(:series).distinct
-
-		# Seiries一覧からおすすめItem一覧を取得
-		@array_recommend_item_distinct.each do |recommend_item_distinct|
-			@array_item << Item.find_by(series: recommend_item_distinct.series)
-		end
-
-
-
 
 		# おすすめ品が5個なかったら。。Match DBから取得したFilter条件の末尾を削除して再度Item DBをFilter、おすすめ品が5つ以上になるまでloop
 		while @array_item[@num_recommend_item + @num_sub_recommend_item - 1].nil?
-=======
-		# おすすめ品が5つなかったら。。Match DBから取得したFilter条件の末尾を削除して再度Item DBをFilter、おすすめ品が5つ以上になるまでloop
-		while @array_recommend_item[@num_recommend_item - 1].nil?
->>>>>>> 8facaa690a17ce6646ecf40696950f9558bc1e2d
+
+			# 全Itemを格納
 			@array_recommend_item = Item.all
-			@array_match_condition.pop
+
+			# すでにおすすめされておすすめ品(@array_item)に格納されているSeriesをItem.allから削除
+			@array_item_series.each do |item_series|
+				@array_recommend_item = @array_recommend_item.where.not(series: item_series)
+			end
+
+			# Filterする条件を元にItem DBをFilter
 			@array_match_condition.each do |match_condition|
 				match_condition.each do |record_match|
 					@array_recommend_item = @array_recommend_item.where("#{record_match.item_clmn} >= ?", record_match.min).where("#{record_match.item_clmn} <= ?", record_match.max)
 				end
 			end
-			# おすすめ品をRack順にsort
-			@array_recommend_item = @array_recommend_item.order(:rank)
-			# Series重複(Color重複)を削除したおすすめ品のSeies一覧を取得
-			@array_recommend_item_distinct = @array_recommend_item.select(:series).distinct
-			# Seiries一覧からおすすめItem一覧を取得
-			@array_recommend_item_distinct.each do |recommend_item_distinct|
-				@array_item << Item.find_by(series: recommend_item_distinct.series)
-			end
-		end
-<<<<<<< HEAD
 
+			# おすすめ品が空じゃなかったら処理、おすすめ品がからだったら条件削除に飛ぶ
+			unless @array_recommend_item.empty?
+				# おすすめ品をRack順にsort
+				@array_recommend_item = @array_recommend_item.order(:rank)
+				# Series重複(Color重複)を削除したおすすめ品のSeies一覧を取得
+				@array_recommend_item_distinct = @array_recommend_item.select(:series).distinct
+				# Seiries一覧からおすすめItem一覧を取得
+				@array_recommend_item_distinct.each do |recommend_item_distinct|
+					# Series重複を省いたおすすめ品を結果に格納する
+					@array_item << Item.find_by(series: recommend_item_distinct.series)
+					@array_item_series << recommend_item_distinct.series
+				end
+			end
+
+			# Match条件の末尾の条件を一つ削除
+			@array_match_condition.pop
+		end
+
+		# Itemからアイテム情報を格納
 		@item_1 = @array_item[0]
 		@item_2 = @array_item[1]
 		@item_3 = @array_item[2]
 		@item_4 = @array_item[3]
 		@item_5 = @array_item[4]
-
-
-=======
-		# おすすめ品をRack順にsort
-		@array_recommend_item = @array_recommend_item.order(:rank)
-		# Itemからアイテム情報を格納
-		@item_1 = @array_recommend_item[0]
-		@item_2 = @array_recommend_item[1]
-		@item_3 = @array_recommend_item[2]
-		@item_4 = @array_recommend_item[3]
-		@item_5 = @array_recommend_item[4]
-
+		@item_6 = @array_item[5]
+		@item_7 = @array_item[6]
+		@item_8 = @array_item[7]
+		@item_9 = @array_item[8]
+		@item_10 = @array_item[9]
+		@item_11 = @array_item[10]
+		@item_12 = @array_item[11]
+		@item_13 = @array_item[12]
+		@item_14 = @array_item[13]
+		@item_15 = @array_item[14]
+		@item_16 = @array_item[15]
+		@item_17 = @array_item[16]
+		@item_18 = @array_item[17]
+		@item_19 = @array_item[18]
+		@item_20 = @array_item[19]
+		
+# ------ 以下、大幅Update必要 ! ----------------------------------------------------------------------------
     # 質問の答えから、合致するpattern_idの列を取得。今は、質問数12問固定。。そのうち可変に対応できるようにします
     @pattern_pattern_id = 1
 
@@ -125,80 +113,22 @@ class ResultsController < ApplicationController
     @charasteristic_item_3 = @characteristic.item_3
     @charasteristic_item_4 = @characteristic.item_4
     @charasteristic_item_5 = @characteristic.item_5
-
-
-
-		# 20190324 アップデート前
-		# # 手動で入れているけど、questionから引き継がれる
-		# @user_id = 9
-		# # categoryは今後めっちゃくちゃ増えます！！！！
-		# @category = 'laptop'
-		# # Recommendアイテム数
-		# @num_recommend_item = 5
-
-		# # Userが選択した結果をuser-idとcategoryを指定してDBから抽出
-		# @array_record_true = OptionResult.where(user_id: @user_id).where(category: @category).where(result: true)
-
-		# # 配列の初期化
-		# @array_option_id = Array.new
-		# @array_match_condition = Array.new
-
-		# # MatchさせていくためにItem情報を全部入れる
-		# @array_recommend_item = Item.all
-
-		# # Userが答えてtrue flagがついたoption_idを配列で取得
-		# @array_record_true.each do |record_true|
-		# 	@array_option_id << record_true.option_id
-		# end
-
-		# # Userが答えてtrue flagがついたoption_idをBaseにItem DBでFilterする条件をMatch DBより配列で取得
-		# @array_option_id.each do |option_id|
-		# 	@array_match_condition << Match.where(category: @category).where(option_id: option_id)
-		# end
-
-		# # Filterする条件を元にItem DBをFilter
-		# @array_match_condition.each do |match_condition|
-		# 	match_condition.each do |record_match|
-		# 		@array_recommend_item = @array_recommend_item.where("#{record_match.item_clmn} >= ?", record_match.min).where("#{record_match.item_clmn} <= ?", record_match.max)
-		# 	end
-		# end
-
-		# # おすすめ品が5つなかったら。。Match DBから取得したFilter条件の末尾を削除して再度Item DBをFilter、おすすめ品が5つ以上になるまでloop
-		# while @array_recommend_item[@num_recommend_item - 1].nil?
-		# 	@array_recommend_item = Item.all
-		# 	@array_match_condition.pop
-		# 	@array_match_condition.each do |match_condition|
-		# 		match_condition.each do |record_match|
-		# 			@array_recommend_item = @array_recommend_item.where("#{record_match.item_clmn} >= ?", record_match.min).where("#{record_match.item_clmn} <= ?", record_match.max)
-		# 		end
-		# 	end
-		# end
-
-		# # おすすめ品をRack順にsort
-		# @array_recommend_item = @array_recommend_item.order(:rank)
-		# # Itemからアイテム情報を格納
-		# @item_1 = @array_recommend_item[0]
-		# @item_2 = @array_recommend_item[1]
-		# @item_3 = @array_recommend_item[2]
-		# @item_4 = @array_recommend_item[3]
-		# @item_5 = @array_recommend_item[4]
->>>>>>> 8facaa690a17ce6646ecf40696950f9558bc1e2d
-  end
+# ------ 以上、大幅Update必要 ! ----------------------------------------------------------------------------
+	end
 
 
 
 
 
-  def index2
+	def index2
 		# 手動で入れているけど、questionから引き継がれる
-		# @user_id = 10
-		@user_id = params[:user_id]
-
+		@user_id = 5
 		# categoryは今後めっちゃくちゃ増えます！！！！
-		@category = params[:category]
-
+		@category = 'laptop'
 		# Recommendアイテム数
 		@num_recommend_item = 5
+		# Sub-Recommendアイテム数
+		@num_sub_recommend_item = 15
 
 		# Userが選択した結果をuser-idとcategoryを指定してDBから抽出
 		@array_record_true = OptionResult.where(user_id: @user_id).where(category: @category).where(result: true)
@@ -206,6 +136,8 @@ class ResultsController < ApplicationController
 		# 配列の初期化
 		@array_option_id = Array.new
 		@array_match_condition = Array.new
+		@array_item = Array.new
+		@array_item_series = Array.new
 
 		# MatchさせていくためにItem情報を全部入れる
 		@array_recommend_item = Item.all
@@ -215,67 +147,52 @@ class ResultsController < ApplicationController
 			@array_option_id << record_true.option_id
 		end
 
-		# Userが答えてtrue flagがついたoption_idをBaseにItem DBでFilterする条件をMatch DBより配列で取得
+		# Userが答えてtrueがついたoption_idをBaseにItem DBでFilterする条件をMatch DBより配列で取得
 		@array_option_id.each do |option_id|
 			@array_match_condition << Match.where(category: @category).where(option_id: option_id)
 		end
 
-		# Filterする条件を元にItem DBをFilter
-		@array_match_condition.each do |match_condition|
-			match_condition.each do |record_match|
-				@array_recommend_item = @array_recommend_item.where("#{record_match.item_clmn} >= ?", record_match.min).where("#{record_match.item_clmn} <= ?", record_match.max)
-			end
-		end
+		# おすすめ品が5個なかったら。。Match DBから取得したFilter条件の末尾を削除して再度Item DBをFilter、おすすめ品が5つ以上になるまでloop
+		while @array_item[@num_recommend_item + @num_sub_recommend_item - 1].nil?
 
-		# おすすめ品が5つなかったら。。Match DBから取得したFilter条件の末尾を削除して再度Item DBをFilter、おすすめ品が5つ以上になるまでloop
-		while @array_recommend_item[@num_recommend_item - 1].nil?
+			# 全Itemを格納
 			@array_recommend_item = Item.all
-			@array_match_condition.pop
+
+			# すでにおすすめされておすすめ品(@array_item)に格納されているSeriesをItem.allから削除
+			@array_item_series.each do |item_series|
+				@array_recommend_item = @array_recommend_item.where.not(series: item_series)
+			end
+
+			# Filterする条件を元にItem DBをFilter
 			@array_match_condition.each do |match_condition|
 				match_condition.each do |record_match|
 					@array_recommend_item = @array_recommend_item.where("#{record_match.item_clmn} >= ?", record_match.min).where("#{record_match.item_clmn} <= ?", record_match.max)
 				end
 			end
+
+			# おすすめ品が空じゃなかったら処理、おすすめ品がからだったら条件削除に飛ぶ
+			unless @array_recommend_item.empty?
+				# おすすめ品をRack順にsort
+				@array_recommend_item = @array_recommend_item.order(:rank)
+				# Series重複(Color重複)を削除したおすすめ品のSeies一覧を取得
+				@array_recommend_item_distinct = @array_recommend_item.select(:series).distinct
+				# Seiries一覧からおすすめItem一覧を取得
+				@array_recommend_item_distinct.each do |recommend_item_distinct|
+					# Series重複を省いたおすすめ品を結果に格納する
+					@array_item << Item.find_by(series: recommend_item_distinct.series)
+					@array_item_series << recommend_item_distinct.series
+				end
+			end
+
+			# Match条件の末尾の条件を一つ削除
+			@array_match_condition.pop
 		end
-
-		# おすすめ品をRack順にsort
-		@array_recommend_item = @array_recommend_item.order(:rank)
-		# Itemからアイテム情報を格納
-		@item_1 = @array_recommend_item[0]
-		@item_2 = @array_recommend_item[1]
-		@item_3 = @array_recommend_item[2]
-		@item_4 = @array_recommend_item[3]
-		@item_5 = @array_recommend_item[4]
-
-		# 質問の答えから、合致するpattern_idの列を取得。今は、質問数12問固定。。そのうち可変に対応できるようにします
-		@pattern_pattern_id = 1
-
-		# Pattern取得
-		@characteristic = Characteristic.find_by(category: @category, pattern_id: @pattern_pattern_id)
-		# Patternから属性情報の取得
-		@charasteristic_title = @characteristic.title
-		@charasteristic_body = @characteristic.body
-		@charasteristic_chara_1_str = @characteristic.chara_1_str
-		@charasteristic_chara_2_str = @characteristic.chara_2_str
-		@charasteristic_chara_3_str = @characteristic.chara_3_str
-		@charasteristic_chara_4_str = @characteristic.chara_4_str
-		@charasteristic_chara_5_str = @characteristic.chara_5_str
-		@charasteristic_chara_1_val = @characteristic.chara_1_val
-		@charasteristic_chara_2_val = @characteristic.chara_2_val
-		@charasteristic_chara_3_val = @characteristic.chara_3_val
-		@charasteristic_chara_4_val = @characteristic.chara_4_val
-		@charasteristic_chara_5_val = @characteristic.chara_5_val
-		@charasteristic_item_1 = @characteristic.item_1
-		@charasteristic_item_2 = @characteristic.item_2
-		@charasteristic_item_3 = @characteristic.item_3
-		@charasteristic_item_4 = @characteristic.item_4
-		@charasteristic_item_5 = @characteristic.item_5
-  end
+	end
 
 
 
 
-  def create
+	def create
 	# 各パラメーターの導入
     @category         = params[:category] ? params[:category] : "laptop"
     @user_id          = params[:user_id] ? params[:user_id].to_i : nil
@@ -356,5 +273,5 @@ class ResultsController < ApplicationController
 
 		# #index2へリダイレクト
 		# redirect_to :controller => "results", :action => "index2", :user_id => @user_id, :category => @category
-  end
+	end
 end
