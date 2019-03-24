@@ -156,7 +156,7 @@ require 'csv'
  )
  end
 
- 以下はOptionResultを呼び出すパターン
+ #以下はOptionResultを呼び出すパターン
  CSV.foreach('db/OptionResults.csv', headers: true) do |row|
  OptionResult.create(
      :user_id => row[0],

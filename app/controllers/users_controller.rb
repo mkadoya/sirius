@@ -14,6 +14,8 @@ class UsersController < ApplicationController
     @user.save
 
     # 質問一覧に戻る
-    redirect_to :controller => "questions", :action => "option_index", :user_id => @user.user_id, :category => @category
+    redirect_to :controller => "questions", :action => "index", :user_id => @user.user_id, :category => @category
+    # 20190324 アップデート前
+    # redirect_to :controller => "questions", :action => "option_index", :user_id => @user.user_id, :category => @category
   end
 end
