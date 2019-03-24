@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_23_133150) do
+ActiveRecord::Schema.define(version: 2019_03_23_141533) do
 
   create_table "characteristics", force: :cascade do |t|
     t.string "category"
@@ -98,6 +98,17 @@ ActiveRecord::Schema.define(version: 2019_03_23_133150) do
     t.text "sirial"
     t.text "affiliate"
     t.text "image"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.integer "match_id"
+    t.string "category"
+    t.integer "option_id"
+    t.string "item_clmn"
+    t.float "min"
+    t.float "max"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "option_results", force: :cascade do |t|

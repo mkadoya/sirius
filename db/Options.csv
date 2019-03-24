@@ -4,8 +4,8 @@ option_id,category,question_id,content
 3,laptop,1,もっと高いパソコンが欲しい
 4,laptop,2,「性能」が重要
 5,laptop,2,「値段」が重要
-6,laptop,3,Windows派
-7,laptop,3,Mac派
+6,laptop,3,YES
+7,laptop,3,NO
 8,laptop,4,頻繁に外で使う
 9,laptop,4,たまに外で使う
 10,laptop,4,家でしか使わない
@@ -17,7 +17,7 @@ option_id,category,question_id,content
 16,laptop,7,NO
 17,laptop,8,YES
 18,laptop,8,NO
-19,laptop,9,対象に保存する
+19,laptop,9,大量に保存する
 20,laptop,9,少し保存する
 21,laptop,9,ほとんどしない
 22,laptop,10,長時間利用する
