@@ -88,7 +88,7 @@ Item.create(
     )
 end
 
-#以下はPatternsを呼び出すパターン
+# 以下はPatternsを呼び出すパターン
 # CSV.foreach('db/Patterns.csv', headers: true) do |row|
 # Pattern.create(
 #     :category => row['category'],
@@ -108,7 +108,7 @@ end
 #     )
 # end
 
-#以下はPatternsを呼び出すパターン
+# 以下はPatternsを呼び出すパターン
 # CSV.foreach('db/Characteristics.csv', headers: true) do |row|
 # Characteristic.create(
 #     :category => row[0],

@@ -1,129 +1,45 @@
-<div class="top-main">
-  <div class="top-contents">
-    <div class="card bg-info result">
-      <div class="card-header">
-        診断結果
-      </div>
-      <div class="card-body bg-light text-dark">
-        <div class="result-contents">
-          <p class="text-center">あなたのタイプは</p>
-          <h2 class="text-info text-center"><%= @charasteristic_title %>タイプ</h2>
-        </div>
+<h1>Results#index</h1>
 
-        <div class="row">
-          <div class="col-sm-12 col-md-6 result-contents">
+<p> --------------------------------------------- </p>
 
-            <p>[重視1] <%= @charasteristic_chara_1_str %> : <%= @charasteristic_chara_1_val%></p>
-            <div class="result-star-rating position-relative">
-              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_1_val*1.5 %>rem; max-height: 100%;">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-              <div class="result-star-rating-back">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-            </div>
-            <p>[重視2] <%= @charasteristic_chara_2_str %> : <%= @charasteristic_chara_2_val %></p>
-            <div class="result-star-rating position-relative">
-              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_2_val*1.5 %>rem; max-height: 100%;">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-              <div class="result-star-rating-back">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-            </div>
-            <p>[重視3] <%= @charasteristic_chara_3_str %> : <%= @charasteristic_chara_3_val %></p>
-            <div class="result-star-rating position-relative">
-              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_3_val*1.5 %>rem; max-height: 100%;">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-              <div class="result-star-rating-back">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-            </div>
-            <p>[重視4] <%= @charasteristic_chara_4_str %> : <%= @charasteristic_chara_4_val %></p>
-            <div class="result-star-rating position-relative">
-              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_4_val*1.5 %>rem; max-height: 100%;">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-              <div class="result-star-rating-back">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-            </div>
-            <p>[重視5] <%= @charasteristic_chara_5_str %> : <%= @charasteristic_chara_5_val %></p>
-            <div class="result-star-rating position-relative">
-              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_5_val*1.5 %>rem; max-height: 100%;">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-              <div class="result-star-rating-back">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-            </div>
-          </div>
+<p>[User-ID] ==> <%= @user_id %></p>
+<p>[Category] ==> <%= @category %></p>
 
-          <div class="col-sm-12 col-md-6 result-contents">
-            <h4>解説</h4>
-            <p class="card-text"><%= @charasteristic_body %></p>
-          </div>
-        </div>
-        <h4>おすすめ商品</h4>
-        <div class="row">
-          <div class="col-md-12 col-lg-6 result-contents">
-            <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_1.item_id}" do%>
-              <%= image_tag "#{@item_1.image}", class: "card-img-top border", alt: "Card image cap", height: "280px" %>
-            <% end %>
-              <div class="card-body">
-                <p class="card-text"><%= @item_1.series %></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12 col-lg-6 result-contents">
-            <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_2.item_id}" do%>
-              <%= image_tag "#{@item_2.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
-            <% end %>
-              <div class="card-body">
-                <p class="card-text"><%= @item_2.series %></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 col-lg-6 result-contents">
-            <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_3.item_id}" do%>
-              <%= image_tag "#{@item_3.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
-            <% end %>
-              <div class="card-body">
-                <p class="card-text"><%= @item_3.series %></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12 col-lg-6 result-contents">
-            <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_4.item_id}" do%>
-              <%= image_tag "#{@item_4.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
-            <% end %>
-              <div class="card-body">
-                <p class="card-text"><%= @item_4.series %></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 col-lg-6 result-contents">
-            <div class="card result-item" style="width: 20rem;">
-            <%= link_to "/items/show/#{@item_5.item_id}" do%>
-              <%= image_tag "#{@item_5.image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
-            <% end %>
-              <div class="card-body">
-                <p class="card-text"><%= @item_5.series %></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<p> --------------------------------------------- </p>
 
-    </div>
-  </div>
-</div>
+<p>[Item num] ==> <%= @array_item.count %></p>
+
+<p> --------------------------------------------- </p>
+
+<p>Title </p>
+<p>[特徴1]<%= @array_item[0].series %> ====> <%= @array_item[0].name %></p>
+<p>[特徴2]<%= @array_item[1].series %> ====> <%= @array_item[1].name %></p>
+<p>[特徴3]<%= @array_item[2].series %> ====> <%= @array_item[2].name %></p>
+<p>[特徴4]<%= @array_item[3].series %> ====> <%= @array_item[3].name %></p>
+<p>[特徴5]<%= @array_item[4].series %> ====> <%= @array_item[4].name %></p>
+
+<p> --------------------------------------------- </p>
+
+<p>おすすめ商品 ! </p>
+<p>[おすすめNo1]<%= @array_item[0].series %> ====> <%= @array_item[0].name %></p>
+<p>[おすすめNo2]<%= @array_item[1].series %> ====> <%= @array_item[1].name %></p>
+<p>[おすすめNo3]<%= @array_item[2].series %> ====> <%= @array_item[2].name %></p>
+<p>[おすすめNo4]<%= @array_item[3].series %> ====> <%= @array_item[3].name %></p>
+<p>[おすすめNo5]<%= @array_item[4].series %> ====> <%= @array_item[4].name %></p>
+<p>[おすすめNo6]<%= @array_item[5].series %> ====> <%= @array_item[5].name %></p>
+<p>[おすすめNo7]<%= @array_item[6].series %> ====> <%= @array_item[6].name %></p>
+<p>[おすすめNo8]<%= @array_item[7].series %> ====> <%= @array_item[7].name %></p>
+<p>[おすすめNo9]<%= @array_item[8].series %> ====> <%= @array_item[8].name %></p>
+<p>[おすすめNo10]<%= @array_item[9].series %> ====> <%= @array_item[9].name %></p>
+<p>[おすすめNo11]<%= @array_item[10].series %> ====> <%= @array_item[10].name %></p>
+<p>[おすすめNo12]<%= @array_item[11].series %> ====> <%= @array_item[11].name %></p>
+<p>[おすすめNo13]<%= @array_item[12].series %> ====> <%= @array_item[12].name %></p>
+<p>[おすすめNo14]<%= @array_item[13].series %> ====> <%= @array_item[13].name %></p>
+<p>[おすすめNo15]<%= @array_item[14].series %> ====> <%= @array_item[14].name %></p>
+<p>[おすすめNo16]<%= @array_item[15].series %> ====> <%= @array_item[15].name %></p>
+<p>[おすすめNo17]<%= @array_item[16].series %> ====> <%= @array_item[16].name %></p>
+<p>[おすすめNo18]<%= @array_item[17].series %> ====> <%= @array_item[17].name %></p>
+<p>[おすすめNo19]<%= @array_item[18].series %> ====> <%= @array_item[18].name %></p>
+<p>[おすすめNo20]<%= @array_item[19].series %> ====> <%= @array_item[19].name %></p>
+
+<p> --------------------------------------------- </p>
