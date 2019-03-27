@@ -9,6 +9,9 @@ class QuestionsController < ApplicationController
     @question_num     = params[:question_num] ? params[:question_num].to_i : nil
     @next_question_id = params[:next_question_id] ? params[:next_question_id].to_i : nil
 
+    # 最大質問数
+    @max_question_num = Question.where(category: @category).all.count
+
     # ユーザーIDが存在しない場合は、新規ユーザーを作成する。
     if !@user_id
       redirect_to :controller => "users", :action => "create", :category => @category

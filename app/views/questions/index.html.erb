@@ -2,12 +2,26 @@
   <div class="top-contents">
     <div class="card border-info rounded-lg question">
       <div class="card-head text-light bg-info question-head">
-        <%# 20190324 アップデート前 %>
-        <%# <h3><%= @question.category 診断： <%= @answers.count 問目</h3> %>
-        <h3><%= @category_firendly_name %>診断： <%= @question_num %>問目</h3>
+        <div class="row">
+          <div class="col-md-6">
+          <%# 20190324 アップデート前 %>
+          <%# <h3><%= @question.category 診断： <%= @answers.count 問目</h3> %>
+            <h3><%= @category_firendly_name %>診断： <%= @question_num %>問目</h3>
+          </div>
+          <div class="col-md-6">
+            <span style="margin-right:10px;">回答率：</span>
+            <meter style="width:250px;" min="0" max="<%=@max_question_num%>" value="<%=@question_num-1%>"> <%=@question_num-1%>/<%=@max_question_num%></meter>
+            <span style="margin-left:10px;"><%=@question_num-1%>/<%=@max_question_num%></span>
+          </div>
       </div>
       <div class="card-body text-dark border-light bg-light question-contents">
-        <h4><%= @question.content %></h4>
+        <div class="row text-left">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-8">
+            <h4><%= @question.content %></h4>
+          </div>
+          <div class="col-sm-2"></div>
+        </div>
         <%# 20190324 アップデート前 %>
         <%# <%= link_to "YES", {:controller => "questions", :action => "index", :id => (@question.id + 1), :answer => "true", :answers => @answers, :question_ids => @question_ids}, :class => "btn btn-outline-primary btn-lg question-button" %>
         <%# <%= link_to "NO", {:controller => "questions", :action => "index", :id => (@question.id + 1), :answer => "false", :answers => @answers, :question_ids => @question_ids}, :class => "btn btn-outline-danger btn-lg  question-button" %>
