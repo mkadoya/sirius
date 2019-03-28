@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_28_111033) do
+ActiveRecord::Schema.define(version: 2019_03_28_163401) do
 
   create_table "characteristics", force: :cascade do |t|
     t.string "category"
@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 2019_03_28_111033) do
     t.datetime "updated_at", null: false
     t.text "content"
     t.integer "next_question_id"
+    t.integer "remain_question_num"
   end
 
   create_table "patterns", force: :cascade do |t|
@@ -156,6 +157,7 @@ ActiveRecord::Schema.define(version: 2019_03_28_111033) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "question_id"
+    t.integer "remain_question_num"
   end
 
   create_table "results", force: :cascade do |t|

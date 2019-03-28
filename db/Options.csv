@@ -1,7 +1,7 @@
 option_id,category,question_id,content,next_question_id
 1,laptop,1,買う,13
-2,laptop,1,もっと安いパソコンが欲しい,2
-3,laptop,1,もっと高いパソコンが欲しい,2
+2,laptop,1,もう少し安い方がよい,2
+3,laptop,1,もう少し高い方がよい,2
 4,laptop,2,「性能」が重要,3
 5,laptop,2,「値段」が重要,3
 6,laptop,3,YES,4
@@ -26,8 +26,8 @@ option_id,category,question_id,content,next_question_id
 25,laptop,11,1ポートで十分,12
 26,laptop,11,2ポート必要,12
 27,laptop,11,3ポート以上必要,12
-28,laptop,12,頻繁に利用したい,
-29,laptop,12,たまに利用したい,
-30,laptop,12,利用しない,
+28,laptop,12,頻繁に利用したい,0
+29,laptop,12,たまに利用したい,0
+30,laptop,12,利用しない,0
 31,laptop,13,YES,2
 32,laptop,13,NO,2

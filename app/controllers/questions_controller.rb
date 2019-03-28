@@ -9,8 +9,7 @@ class QuestionsController < ApplicationController
     @next_question_id = params[:next_question_id] ? params[:next_question_id].to_i : nil
     @user_id          = cookies[:user_id]
 
-    # 最大質問数
-    @max_question_num = Question.where(category: @category).all.count
+
 
     # Cookie情報がない場合、新規ユーザーを作成する。
     if !@user_id
@@ -31,8 +30,9 @@ class QuestionsController < ApplicationController
       @question_num += 1
     end
 
+
     # 次の質問がない場合（最後の質問だった場合）、リザルト画面を表示する
-    if !@next_question_id && (@question_num != 1)
+    if @next_question_id==0
       redirect_to :controller => "questions", :action => "result", :category => @category and return
     end
 
@@ -43,6 +43,53 @@ class QuestionsController < ApplicationController
     else
       @question = Question.find_by(question_id: @next_question_id)
     end
+
+    # 最大質問数
+    @max_question_num = @question_num + @question.remain_question_num
+
+    # #全部のルートの格納方法
+    # @all_options = Option.where(category:@category).all
+
+    # @all_options.each |option| do
+    #   @option_arrow = {s: option.question_id, d:option.next_question_id}
+    #   if !@option_arrows
+    #     @option_arrows = [@option_arrow]
+    #   else
+    #     @option_arrows.push(@option_arrow)
+    #   end
+    # end
+
+    # @option_arrows = @option_arrows.uniq
+
+    # #コスト計算
+    # @cost = {q:1, cost:1, fix:true}
+    # @costs = [@cost]
+    # while(@option_arrows.count != 0)
+    #   @costs.each |cost| do
+    #     if cost[:fix]
+    #       @option_arrows.each |option_arrow| do
+    #         if option_arrow[:s] == cost[:q]
+    #           cost = {q:option_arrow[:d],cost:cost[:cost],fix:false}
+    #           @costs.push(cost)
+    #           @option_arrows.delete(option_allow)
+    #         end
+    #       end
+    #       @costs |cost| do
+    #         @option_arrows.each |option_arrow| do
+    #           counter = 0
+    #           if option_arrow[:d] == cost[:q]
+    #             counter += 1
+    #           end
+    #           if counter ==0
+    #             new_cost == {q:cost[:q],cost:cost[:cost],fix:cost[:fix]}
+    #             @costs.delete(cost)
+    #             @costs.push(new_cost)
+    #           end
+    #         end
+    #       end
+    #     end
+    #   end
+    # end
 
     # 1問目でなければ前回の質問IDを導入する
     if @question_num != 1

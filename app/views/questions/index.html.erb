@@ -11,7 +11,7 @@
           <div class="col-md-6">
             <span style="margin-right:10px;">回答率：</span>
             <meter style="width:250px;" min="0" max="<%=@max_question_num%>" value="<%=@question_num-1%>"> <%=@question_num-1%>/<%=@max_question_num%></meter>
-            <span style="margin-left:10px;"><%=@question_num-1%>/<%=@max_question_num%></span>
+            <%# <span style="margin-left:10px;"><%=@question_num-1/<%=@max_question_num</span>  %>
           </div>
       </div>
       <div class="card-body text-dark border-light bg-light question-contents">
@@ -69,6 +69,7 @@
           </div>
           <div class="col-md-6 text-center">
             <h5 style="margin-top:10px">直感で答えよう！</h5>
+            <%= @costs %>
           </div>
           <div class="col-md-3">
           </div>

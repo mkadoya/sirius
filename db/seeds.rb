@@ -15,6 +15,7 @@ require 'csv'
 #          :question_id => row[0],
 #          :category => row[1],
 #          :content => row[2],
+#          :remain_question_num => row[3],
 #      )
 #  end
 
@@ -137,7 +138,7 @@ require 'csv'
        :category => row[1],
        :question_id => row[2],
        :content => row[3],
-       :next_question_id =>  row[4],
+       :next_question_id => row[4],
    )
  end
 
