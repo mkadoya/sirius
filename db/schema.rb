@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_23_162258) do
+ActiveRecord::Schema.define(version: 2019_03_28_111033) do
 
   create_table "characteristics", force: :cascade do |t|
     t.string "category"
@@ -115,10 +115,10 @@ ActiveRecord::Schema.define(version: 2019_03_23_162258) do
     t.integer "user_id"
     t.string "category"
     t.integer "question_id"
-    t.integer "option_id"
     t.boolean "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "option_id"
   end
 
   create_table "options", force: :cascade do |t|
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 2019_03_23_162258) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "content"
+    t.integer "next_question_id"
   end
 
   create_table "patterns", force: :cascade do |t|
@@ -152,12 +153,9 @@ ActiveRecord::Schema.define(version: 2019_03_23_162258) do
   create_table "questions", force: :cascade do |t|
     t.string "category"
     t.text "content"
-    t.boolean "option"
-    t.integer "option_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "question_id"
-    t.integer "next_question_id"
   end
 
   create_table "results", force: :cascade do |t|
@@ -167,25 +165,6 @@ ActiveRecord::Schema.define(version: 2019_03_23_162258) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "category"
-  end
-
-  create_table "userpatterns", force: :cascade do |t|
-    t.string "category"
-    t.integer "pattern_id"
-    t.boolean "answer_1"
-    t.boolean "answer_2"
-    t.boolean "answer_3"
-    t.boolean "answer_4"
-    t.boolean "answer_5"
-    t.boolean "answer_6"
-    t.boolean "answer_7"
-    t.boolean "answer_8"
-    t.boolean "answer_9"
-    t.boolean "answer_10"
-    t.boolean "answer_11"
-    t.boolean "answer_12"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

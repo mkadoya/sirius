@@ -5,9 +5,9 @@ class QuestionsController < ApplicationController
 
     # 各パラメーターの導入
     @category         = params[:category] ? params[:category] : "laptop"
-    @user_id          = cookies[:user_id]
     @question_num     = params[:question_num] ? params[:question_num].to_i : nil
     @next_question_id = params[:next_question_id] ? params[:next_question_id].to_i : nil
+    @user_id          = cookies[:user_id]
 
     # 最大質問数
     @max_question_num = Question.where(category: @category).all.count
@@ -46,7 +46,20 @@ class QuestionsController < ApplicationController
 
     # 1問目でなければ前回の質問IDを導入する
     if @question_num != 1
-      @before_question_id = Question.find_by(next_question_id: @question.question_id).question_id
+      range = Range.new(1, @question_num-1)
+      range.each do |num|
+    	# 1問目のquestion_idは1であることを前提とする
+	      if num==1
+		      option_id = OptionResult.find_by(user_id:@user_id, question_id:1, result:true).option_id
+          @n_question_id = Option.find_by(option_id:option_id).next_question_id
+          @before_question_id = Option.find_by(option_id:option_id).question_id
+        else
+          option_id = OptionResult.find_by(user_id:@user_id, question_id:@n_question_id, result:true).option_id
+          @n_question_id = Option.find_by(option_id:option_id).next_question_id
+          @before_question_id = Option.find_by(option_id:option_id).question_id
+        end
+      end
+    #   @before_question_id = Question.find_by(next_question_id: @question.question_id).question_id
     end
 
     # 選択肢を取得する

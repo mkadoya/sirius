@@ -31,10 +31,13 @@
             aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <%# <div class="collapse navbar-collapse" id="navmenu1">
+        <div class="collapse navbar-collapse" id="navmenu1">
           <ul class="navbar-nav">
             <li  class="nav-item">
-              <%= link_to "ホーム", {:controller => "home", :action => "top"}, :class => "nav-item nav-link"
+              <%= link_to "ホーム", {:controller => "home", :action => "top"}, :class => "nav-item nav-link" %>
+            </li>
+            <li  class="nav-item">
+              <%= link_to "使い方", {:controller => "home", :action => "description"}, :class => "nav-item nav-link" %>
             </li>
               <%# <li  class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" hred="/" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

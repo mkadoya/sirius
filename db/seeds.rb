@@ -10,16 +10,13 @@
 require 'csv'
 
 #以下はQuestionsを呼び出すパターン
- CSV.foreach('db/Questions.csv', headers: true) do |row|
-     Question.create(
-         :question_id => row[0],
-         :category => row[1],
-         :content => row[2],
-         :option => row[3],
-         :option_id => row[4],
-         :next_question_id => row[5],
-     )
- end
+#  CSV.foreach('db/Questions.csv', headers: true) do |row|
+#      Question.create(
+#          :question_id => row[0],
+#          :category => row[1],
+#          :content => row[2],
+#      )
+#  end
 
 #以下はItemsを呼び出すパターン
 # CSV.foreach('db/Items.csv', headers: true) do |row|
@@ -134,14 +131,15 @@ require 'csv'
 # end
 
 #以下はOptionを呼び出すパターン
-#  CSV.foreach('db/Options.csv', headers: true) do |row|
-#  Option.create(
-#      :option_id => row[0],
-#      :category => row[1],
-#      :question_id => row[2],
-#      :content => row[3],
-#  )
-#  end
+   CSV.foreach('db/Options.csv', headers: true) do |row|
+   Option.create(
+       :option_id => row[0],
+       :category => row[1],
+       :question_id => row[2],
+       :content => row[3],
+       :next_question_id =>  row[4],
+   )
+ end
 
 # 以下はMatchを呼び出すパターン
 #  CSV.foreach('db/Matchs.csv', headers: true) do |row|
