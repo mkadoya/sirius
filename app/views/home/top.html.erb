@@ -4,7 +4,8 @@
     <p>あなたにとって一番ベストな選択を</p>
     <div class="container category">
       <div class="row">
-        <div class="col-sm-12 col-md-6 col-lg-6 category-item">
+        <div class="col-sm-12 col-md-3"></div>
+        <div class="col-sm-12 col-md-6 category-item">
           <div class="icon-circle">
             <i class="fas fa-laptop fa-stack-1x"></i>
           </div>
@@ -12,14 +13,15 @@
           <p>パソコン診断では、あなたの使用用途に合わせて最適なパソコンを提案します。</p>
           <%= link_to "パソコンの診断をはじめる", {:controller => "questions", :action => "index", :category => "laptop" }, :class => "btn btn-outline-light btn-block" %>
         </div>
-        <div class="col-sm-12 col-md-6 col-lg-6">
-          <div class="icon-circle">
+        <%# <div class="col-sm-12 col-md-6 col-lg-6"> %>
+          <%# <div class="icon-circle">
             <i class="fas fa-mobile-alt fa-stack-1x"></i>
           </div>
           <h4>スマホの診断</h4>
-          <p>スマホ診断では、あなたの使用用途に合わせて最適なスマホを提案します。</p>
-          <%= link_to "スマホの診断をはじめる", {:controller => "questions", :action => "index", :category => "laptop" }, :class => "btn btn-outline-light btn-block" %>
-        </div>
+          <p>スマホ診断では、あなたの使用用途に合わせて最適なスマホを提案します。</p> %>
+          <%# <%= link_to "スマホの診断をはじめる", {:controller => "questions", :action => "index", :category => "laptop" }, :class => "btn btn-outline-light btn-block" %>
+        <%# </div> %>
+        <div class="col-sm-12 col-md-3"></div>
       </div>
     </div>
   </div>
