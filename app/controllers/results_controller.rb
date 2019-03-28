@@ -1,6 +1,6 @@
 class ResultsController < ApplicationController
 	def index
-		@user_id = params[:user_id]
+		@user_id = cookies[:user_id]
 		@category = params[:category]
 
 		#アイテムの表示数：偶数のみ可能
@@ -278,7 +278,7 @@ class ResultsController < ApplicationController
 	def create
 	# 各パラメーターの導入
     @category         = params[:category] ? params[:category] : "laptop"
-    @user_id          = params[:user_id] ? params[:user_id].to_i : nil
+    @user_id          = cookies[:user_id]
     @question_id      = params[:question_id] ? params[:question_id].to_i : nil
     @question_num     = params[:question_num] ? params[:question_num].to_i : nil
     @next_question_id     = params[:next_question_id] ? params[:next_question_id].to_i : nil
@@ -301,7 +301,7 @@ class ResultsController < ApplicationController
         end
 	  end
 
-	  redirect_to :controller => "questions", :action => "index", :user_id => @user_id, :category => @category, :next_question_id => @next_question_id, :question_num => @question_num and return
+	  redirect_to :controller => "questions", :action => "index", :category => @category, :next_question_id => @next_question_id, :question_num => @question_num and return
 	  	# 20190324　アップデート前
     	#redirect_to :controller => "questions", :action => "option_index", :user_id => @user_id, :category => @category, :next_question_id => @next_question_id, :question_num => @question_num and return
     end
@@ -326,7 +326,7 @@ class ResultsController < ApplicationController
     end
 
     # 質問ページへリダイレクトする
-    redirect_to :controller => "questions", :action => "index", :user_id => @user_id, :category => @category, :next_question_id => @next_question_id, :question_num => @question_num
+    redirect_to :controller => "questions", :action => "index", :category => @category, :next_question_id => @next_question_id, :question_num => @question_num
 
 		# 20190324 アップデート前
 		# #answer/question_id結果を格納
