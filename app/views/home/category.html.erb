@@ -1,22 +1,55 @@
-<p>Option1 : <%= @option1 %></p>
-<p>Option2 : <%= @option2 %></p>
-<p>Option3 : <%= @option3 %></p>
-<p>OptionCount : <%= @options.count %></p>
+<div class="row">
+    <div class="col-md-8">
+        <div class="header-img">
+            <img src="/header-category.jpg" class="img-fluid">
+            <div class="header-category-text">
+                <h1>カテゴリーを選択しましょう</h1>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-contents">
+                <h2>カテゴリーの選択</h2>
+                <p>調べてみたいカテゴリーを選択してみましょう。</p>
+                <p>カテゴリーの中にあるボタンをクリックすると質問がスタートします。</p>
+                <h3>パソコン</h3>
+                <p>最新の100種類以上のノートパソコンからあなたへ最適なアイテムを紹介します。</p>
+                <p>自分がノートパソコンを使うシーンを想定しながら、質問に答えてみましょう。</p>
+                <canvas id="question-status-graph" height="100" width="100"></canvas>
+                <button class="btn btn-primary" id="openModal">パソコンの診断を始める</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-contents">
+                <h2>最新の記事</h2>
+            </div>
+        </div>
+    </div>
 
+    <!-- モーダルエリアここから -->
+    <section id="modalArea" class="modalArea">
+    <div id="modalBg" class="modalBg">
+        <div class="question-card bg-light">
+            <div class="question-card-head">
+                <h3>１問目</h3>
+                <p>利用シーンを想定して答えていきましょう</p>
+                <h2>あなたの性別は？</h2>
+            </div>
+            <div class="question-float-btn">＜</div>
+            <div class="question-card-contents">
+                <div class="card-contents question-card-contents">
+                    <div class="question-float-option">男性</div>
+                    <div class="question-float-option">女性</div>
+                </div>
+            </div>
 
-<div class="btn-group btn-group-toggle" data-toggle="buttons">
-  <label class="btn btn-primary btn-option">
-    <input type="checkbox" autocomplete="off"> アクティブ
-  </label>
+            <div id="closeModal" class="closeModal">
+            ×
+            </div>
+        </div>
+    </div>
+    </section>
+    <!-- モーダルエリアここまで -->
 
-  <label class="btn btn-primary btn-option">
-    <input type="checkbox" autocomplete="off"> チェック
-  </label>
-
-  <label class="btn btn-primary btn-option">
-    <input type="checkbox" autocomplete="off"> チェック
-　</label>
 </div>
-
-<%= link_to "次へ", {:controller => "home", :action => "category", :option1 => "false", :option2 => "true", :option3 => "false"}, :class => "btn btn-outline-primary btn-lg question-button" %>
-

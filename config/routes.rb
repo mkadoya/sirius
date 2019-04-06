@@ -14,8 +14,10 @@ Rails.application.routes.draw do
   get 'questions/option_index' => "questions#option_index"
   get 'questions/result' => "questions#result"
   get 'questions/option_result' => "questions#option_result"
+  # get "/" => "home#top"
   get "/" => "home#top"
   get "/category" => "home#category"
   get 'home/top'
+  get 'home/description'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
