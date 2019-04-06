@@ -14,3 +14,41 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+$(function () {
+    $('#openModal').click(function () {
+        $('#modalArea').fadeIn();
+    });
+    // $('#closeModal , #modalBg').click(function () {
+    //     $('#modalArea').fadeOut();
+    // });
+    $('#closeModal').click(function () {
+        $('#modalArea').fadeOut();
+    });
+});
+
+var doughnutData = [
+    {
+        value: 30,
+        color: "#aaf2fb"
+    },
+    {
+        value: 50,
+        color: "#ffb6b9"
+    },
+    {
+        value: 120,
+        color: "#ffe361"
+    },
+    {
+        value: 170,
+        color: "#fbaa6e"
+    },
+    {
+        value: 70,
+        color: "#A8BECB"
+    }
+];
+
+var myDoughnut = new Chart(document.getElementById("question-status-graph").
+    getContext("2d")).Doughnut(doughnutData);

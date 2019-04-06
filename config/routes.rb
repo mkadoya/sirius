@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'questions/option_index' => "questions#option_index"
   get 'questions/result' => "questions#result"
   get 'questions/option_result' => "questions#option_result"
+  # get "/" => "home#top"
   get "/" => "home#top"
   get "/category" => "home#category"
   get 'home/top'

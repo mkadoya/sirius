@@ -13,3 +13,27 @@
  *= require_tree .
  *= require_self
  */
+
+ body {
+    font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic';
+    background-color: #f7f7f7;
+ }
+
+ .footer{
+     background-color: #6ec6ff;
+     color: white;
+ }
+
+ .footer-logo{
+     text-indent: 1em;
+     font-size: 32px;
+     padding-top:50px;
+     padding-bottom: 20px;
+
+ }
+
+ .footer-contents{
+     text-indent: 1em;
+     padding-top: 80px;
+     padding-bottom: 20px;
+ }

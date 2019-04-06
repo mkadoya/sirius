@@ -1,4 +1,102 @@
-<div class="main top-main">
+<div class="container-fluid top">
+  <div class="row">
+      <div class="col-md-12">
+        <nav class="navbar navbar-dark navbar-expand-md">
+          <div class="navbar-inner">
+              <button class="navbar-toggler" type="button"
+                data-toggle="collapse"
+                data-target="#navmenu1"
+                aria-controls="navmenu1"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navmenu1">
+                <ul class="navbar-nav" style="font-weight:bold">
+                  <li  class="nav-item" style="margin-left:50px;"><a class="nav-item nav-link active" href="/">ホーム</a></li>
+                  <li  class="nav-item" style="margin-left:50px;"><a class="nav-item nav-link" href="#">ヘルプ</a></li>
+                  <% if @user_id %>
+                    <li  class="nav-item" style="margin-left:50px;"><a class="nav-item nav-link" href="#">過去の結果</a></li>
+                  <% end %>
+                  <li  class="nav-item" style="margin-left:50px;"><a class="nav-item nav-link" href="#">記事</a></li>
+                </ul>
+              </div>
+          </div>
+        </nav>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="search text-dark">
+        <div class="search-contents">
+        <h1>自分に一番のアイテムを検索しましょう。</h1>
+        <%= form_tag({:controller => "questions", :action => "index"}, {method: :get}) do %>
+          <div class="form-group">
+            <%= label_tag 'category', 'カテゴリー' ,{:class => 'form-label'} %>
+            <%= select_tag 'category', options_for_select([["パソコン","laptop"]],:selected=>"laptop"), {:class => "form-control"} %>
+          </div>
+          <div class="form-group">
+            <%= submit_tag "探す", :name => nil, :class => "btn-primary btn-lg form-button" %>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>カテゴリーで探す</h2>
+      <div class="card" style="width: 20rem;">
+        <img class="card-img-top" src="/category-laptop.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h4 class="card-title">ノートパソコン</h4>
+          <p class="card-text">値段、目的、使い方に合わせてあなたに最適のパソコンを紹介します。</p>
+          <a href="#" class="btn btn-primary">はじめる</a>
+        </div>
+      </div>
+      <h2>目的で探す</h2>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card" style="width: 20rem;">
+            <img class="card-img-top" src="/laptop-outside.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h4 class="card-title">外出先用のパソコンを探す</h4>
+              <p class="card-text">喫茶店や外出先に利用しやすいパソコンを紹介します。</p>
+              <a href="#" class="btn btn-primary">はじめる</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card" style="width: 20rem;">
+            <img class="card-img-top" src="/laptop-work.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h4 class="card-title">仕事用のパソコンを探す</h4>
+              <p class="card-text">ビジネスとして利用しやすいパソコンを紹介します。</p>
+              <a href="#" class="btn btn-primary">はじめる</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2>あなたへのおすすめ</h2>
+      <div class="slider">
+        <%= image_tag '/laptop-outside.jpg' %>
+        <%= image_tag '/laptop-work.jpg' %>
+        <%= image_tag '/laptop-outside.jpg' %>
+        <%= image_tag '/laptop-work.jpg' %>
+        <%= image_tag '/laptop-outside.jpg' %>
+      </div>
+      
+      <h2>人気のアイテム</h2>
+      <h2>注目のアイテム</h2>
+    </div>
+    <div class="col-md-4">
+      <h2>最新の記事</h2>
+    </div>
+  </div>
+</div>
+<%# <div class="main top-main">
   <div class="top-contents">
     <h2>Leading the best item for you</h2>
     <p>あなたにとって一番ベストな選択を</p>
@@ -10,9 +108,9 @@
             <i class="fas fa-laptop fa-stack-1x"></i>
           </div>
           <h4>パソコンの診断</h4>
-          <p>パソコン診断では、あなたの使用用途に合わせて最適なパソコンを提案します。</p>
-          <%= link_to "パソコンの診断をはじめる", {:controller => "questions", :action => "index", :category => "laptop" }, :class => "btn btn-outline-light btn-block" %>
-        </div>
+          <p>パソコン診断では、あなたの使用用途に合わせて最適なパソコンを提案します。</p> %>
+          <%# <%= link_to "パソコンの診断をはじめる", {:controller => "questions", :action => "index", :category => "laptop" }, :class => "btn btn-outline-light btn-block" %>
+        <%# </div> %>
         <%# <div class="col-sm-12 col-md-6 col-lg-6"> %>
           <%# <div class="icon-circle">
             <i class="fas fa-mobile-alt fa-stack-1x"></i>
@@ -21,8 +119,8 @@
           <p>スマホ診断では、あなたの使用用途に合わせて最適なスマホを提案します。</p> %>
           <%# <%= link_to "スマホの診断をはじめる", {:controller => "questions", :action => "index", :category => "laptop" }, :class => "btn btn-outline-light btn-block" %>
         <%# </div> %>
-        <div class="col-sm-12 col-md-3"></div>
+        <%# <div class="col-sm-12 col-md-3"></div>
       </div>
     </div>
   </div>
-</div>
+</div> %>

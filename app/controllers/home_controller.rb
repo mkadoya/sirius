@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def top
+    @user_id = cookies[:user_id]
   end
   def description
   end
@@ -8,6 +9,5 @@ class HomeController < ApplicationController
     @option1 = params[:option1]
     @option2 = params[:option2]
     @option3 = params[:option3]
-
   end
 end
