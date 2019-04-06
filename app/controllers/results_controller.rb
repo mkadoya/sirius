@@ -116,16 +116,17 @@ class ResultsController < ApplicationController
 
 	def index2
 		# 手動で入れているけど、questionから引き継がれる
-		@user_id = 4
+		@user_id = 3
 		# categoryは今後めっちゃくちゃ増えます！！！！
 		@category = 'laptop'
 		# Recommend Number
 		@num_recommend = 5
-		# Seriesの重複を除いたTotalのアイテム数 - 1, -1は配列で使うため
-		@num_all_series = Item.select(:series).distinct.count - 1
+		# Seriesの重複を除いたTotalのアイテム数
+		@num_all_series = Item.select(:series).distinct.count
 		# Totalのアイテム数
 		@num_all_items = Item.all.count
-
+		# Star Max value
+		@value_star_max = 10
 
 		# Userが選択した結果をuser-idとcategoryを指定してDBから抽出
 		@array_record_true = OptionResult.where(user_id: @user_id).where(category: @category).where(result: true)
@@ -136,7 +137,9 @@ class ResultsController < ApplicationController
 		@array_item = Array.new
 		@array_item_series = Array.new
 		@array_effective_column = Array.new
-		@array_difference_avrg = Array.new
+		@hash_difference_avrg = Hash.new
+		@array_star = Array.new
+		@array_star_normalize = Array.new
 
 		# MatchさせていくためにItem情報を全部入れる
 		@array_recommend_item = Item.all
@@ -155,16 +158,28 @@ class ResultsController < ApplicationController
 		@array_match_condition.each do |match_condition|
 			match_condition.each do |record_match|
 				@array_effective_column << [record_match.item_clmn, 1 - Item.where("#{record_match.item_clmn} >= ?", record_match.min).where("#{record_match.item_clmn} <= ?", record_match.max).count.to_f/@num_all_items]
-				@array_difference_avrg  << [record_match.item_clmn, Item.average(:"#{record_match.item_clmn}")]
+				@hash_difference_avrg.store(record_match.item_clmn, Item.average(:"#{record_match.item_clmn}"))
 #				@array_difference_avrg  << [record_match.item_clmn, Item.average(:record_match.item_clmn), @array_item.first(5).average(:record_match.item_clmn)]
 			end
 		end
 		# 最もEffectiveが高いもの(match条件にて合致する項目数が少ないもの)をSortして昇順で5つ取得
 		@array_effective_column = @array_effective_column.uniq!(&:first).sort { |a, b| b[1] <=> a[1] }.first(5)
-		@array_difference_avrg = @array_difference_avrg.uniq!(&:first)
+
+		# Star設定
+		@array_effective_column.each do |colmn, val|
+			@array_star << val
+		end
+		@star_max = @array_star.max
+		@array_star.each do |val|
+			@array_star_normalize << ((val - 0)/(@star_max - 0) * 6).ceil + 3
+		end
+
+		#
+
+
 
 		# おすすめ品がTotal個数ではなかったら。。Match DBから取得したFilter条件の末尾を削除して再度Item DBをFilter、おすすめ品が5つ以上になるまでloop
-		while @array_item[@num_all_series].nil?
+		while @array_item[@num_all_series - 1].nil?
 
 			# 全Itemを格納
 			@array_recommend_item = Item.all
@@ -230,30 +245,8 @@ class ResultsController < ApplicationController
 
 
 # ------ 以下、大幅Update必要 ! ----------------------------------------------------------------------------
-    # 質問の答えから、合致するpattern_idの列を取得。今は、質問数12問固定。。そのうち可変に対応できるようにします
-    @pattern_pattern_id = 1
 
-    # Pattern取得
-    @characteristic = Characteristic.find_by(category: @category, pattern_id: @pattern_pattern_id)
 
-    # Patternから属性情報の取得
-    @charasteristic_title = @characteristic.title
-    @charasteristic_body = @characteristic.body
-    @charasteristic_chara_1_str = @characteristic.chara_1_str
-    @charasteristic_chara_2_str = @characteristic.chara_2_str
-    @charasteristic_chara_3_str = @characteristic.chara_3_str
-    @charasteristic_chara_4_str = @characteristic.chara_4_str
-    @charasteristic_chara_5_str = @characteristic.chara_5_str
-    @charasteristic_chara_1_val = @characteristic.chara_1_val
-    @charasteristic_chara_2_val = @characteristic.chara_2_val
-    @charasteristic_chara_3_val = @characteristic.chara_3_val
-    @charasteristic_chara_4_val = @characteristic.chara_4_val
-    @charasteristic_chara_5_val = @characteristic.chara_5_val
-    @charasteristic_item_1 = @characteristic.item_1
-    @charasteristic_item_2 = @characteristic.item_2
-    @charasteristic_item_3 = @characteristic.item_3
-    @charasteristic_item_4 = @characteristic.item_4
-    @charasteristic_item_5 = @characteristic.item_5
 # ------ 以上、大幅Update必要 ! ----------------------------------------------------------------------------
 	end
 

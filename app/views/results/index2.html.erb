@@ -13,24 +13,70 @@
 <p>[Item num] ==> <%= @array_item.count %></p>
 
 <p> --------------------------------------------- </p>
+<p> --------------------------------------------- </p>
 
-<p>[特徴1]<%= @array_effective_column[0][0] %> ====> <%= @array_effective_column[0][1] %></p>
-<p>[特徴2]<%= @array_effective_column[1][0] %> ====> <%= @array_effective_column[1][1] %></p>
-<p>[特徴3]<%= @array_effective_column[2][0] %> ====> <%= @array_effective_column[2][1] %></p>
-<p>[特徴4]<%= @array_effective_column[3][0] %> ====> <%= @array_effective_column[3][1] %></p>
-<p>[特徴5]<%= @array_effective_column[4][0] %> ====> <%= @array_effective_column[4][1] %></p>
+<p>Star ! </p>
 
 <p> --------------------------------------------- </p>
 
-<p>[平均からの差分1]<%= @array_difference_avrg[0][0] %> ====> <%= @array_difference_avrg[0][1] %> ====> <%= @array_rec_avrg[0][1] %></p>
-<p>[平均からの差分2]<%= @array_difference_avrg[1][0] %> ====> <%= @array_difference_avrg[1][1] %> ====> <%= @array_rec_avrg[1][1] %></p>
-<p>[平均からの差分3]<%= @array_difference_avrg[2][0] %> ====> <%= @array_difference_avrg[2][1] %> ====> <%= @array_rec_avrg[2][1] %></p>
-<p>[平均からの差分4]<%= @array_difference_avrg[3][0] %> ====> <%= @array_difference_avrg[3][1] %> ====> <%= @array_rec_avrg[3][1] %></p>
-<p>[平均からの差分5]<%= @array_difference_avrg[4][0] %> ====> <%= @array_difference_avrg[4][1] %> ====> <%= @array_rec_avrg[4][1] %></p>
+<p>[特徴1]<%= @array_effective_column[0][0] %> ====> <%= @array_star_normalize[0] %></p>
+<p>[特徴2]<%= @array_effective_column[1][0] %> ====> <%= @array_star_normalize[1] %></p>
+<p>[特徴3]<%= @array_effective_column[2][0] %> ====> <%= @array_star_normalize[2] %></p>
+<p>[特徴4]<%= @array_effective_column[3][0] %> ====> <%= @array_star_normalize[3] %></p>
+<p>[特徴5]<%= @array_effective_column[4][0] %> ====> <%= @array_star_normalize[4] %></p>
 
+<p> --------------------------------------------- </p>
 <p> --------------------------------------------- </p>
 
 <p>おすすめ商品 ! </p>
+
+<p> --------------------------------------------- </p>
+
+<p>[おすすめNo1]</p>
+<p>製品名 : <%= @array_item[0].series %></p>
+<p>値段 : <%= @array_item[0].price %></p>
+<p><%= @array_effective_column[0][0] %> : <%= @array_item[0][@array_effective_column[0][0]] %></p>
+<p>[Avrg1]<%= @hash_difference_avrg[@array_effective_column[0][0]] %> </p>
+
+<p><%= @array_effective_column[1][0] %> : <%= @array_item[0][@array_effective_column[1][0]] %></p>
+<p>[Avrg2]<%= @hash_difference_avrg[@array_effective_column[1][0]] %> </p>
+
+<p><%= @array_effective_column[2][0] %> : <%= @array_item[0][@array_effective_column[2][0]] %></p>
+<p>[Avrg3]<%= @hash_difference_avrg[@array_effective_column[2][0]] %> </p>
+
+<p><%= @array_effective_column[3][0] %> : <%= @array_item[0][@array_effective_column[3][0]] %></p>
+<p>[Avrg4]<%= @hash_difference_avrg[@array_effective_column[3][0]] %> </p>
+
+<p><%= @array_effective_column[4][0] %> : <%= @array_item[0][@array_effective_column[4][0]] %></p>
+<p>[Avrg5]<%= @hash_difference_avrg[@array_effective_column[4][0]] %> </p>
+
+<p> --------------------------------------------- </p>
+
+<p>[おすすめNo2]</p>
+<p>製品名 : <%= @array_item[1].series %></p>
+<p>値段 : <%= @array_item[1].price %></p>
+<p><%= @array_effective_column[0][0] %> : <%= @array_item[1][@array_effective_column[0][0]] %></p>
+<p><%= @array_effective_column[1][0] %> : <%= @array_item[1][@array_effective_column[1][0]] %></p>
+<p><%= @array_effective_column[2][0] %> : <%= @array_item[1][@array_effective_column[2][0]] %></p>
+<p><%= @array_effective_column[3][0] %> : <%= @array_item[1][@array_effective_column[3][0]] %></p>
+<p><%= @array_effective_column[4][0] %> : <%= @array_item[1][@array_effective_column[4][0]] %></p>
+
+<p> --------------------------------------------- </p>
+
+<p>[おすすめNo3]</p>
+<p>製品名 : <%= @array_item[2].series %></p>
+<p>値段 : <%= @array_item[2].price %></p>
+<p><%= @array_effective_column[0][0] %> : <%= @array_item[2][@array_effective_column[0][0]] %></p>
+<p><%= @array_effective_column[1][0] %> : <%= @array_item[2][@array_effective_column[1][0]] %></p>
+<p><%= @array_effective_column[2][0] %> : <%= @array_item[2][@array_effective_column[2][0]] %></p>
+<p><%= @array_effective_column[3][0] %> : <%= @array_item[2][@array_effective_column[3][0]] %></p>
+<p><%= @array_effective_column[4][0] %> : <%= @array_item[2][@array_effective_column[4][0]] %></p>
+
+<p> --------------------------------------------- </p>
+<p> --------------------------------------------- </p>
+
+
+<p>一覧：おすすめ品 ! </p>
 <p>[おすすめNo1]<%= @array_item[0].series %> ====> <%= @array_item[0].name %></p>
 <p>[おすすめNo2]<%= @array_item[1].series %> ====> <%= @array_item[1].name %></p>
 <p>[おすすめNo3]<%= @array_item[2].series %> ====> <%= @array_item[2].name %></p>
@@ -95,5 +141,7 @@
 <p>[おすすめNo62]<%= @array_item[61].series %> ====> <%= @array_item[61].name %></p>
 <p>[おすすめNo63]<%= @array_item[62].series %> ====> <%= @array_item[62].name %></p>
 <p>[おすすめNo64]<%= @array_item[63].series %> ====> <%= @array_item[63].name %></p>
+
+<p> --------------------------------------------- </p>
 
 <p> --------------------------------------------- </p>
