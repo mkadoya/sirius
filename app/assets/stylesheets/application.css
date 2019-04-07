@@ -19,9 +19,10 @@
     background-color: #f7f7f7;
  }
 
- .footer{
-     background-color: #6ec6ff;
-     color: white;
+
+ footer{
+     /* background-color: #6ec6ff; */
+     margin-top:100px;
  }
 
  .footer-logo{

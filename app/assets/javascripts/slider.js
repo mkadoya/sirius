@@ -1,12 +1,12 @@
 $(function () {
     $('.slider').slick({
         dots: true,
-        infinite: false,
+        infinite: true,
         speed: 300,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        prevArrow: '<div class="slick-button">＜</div>',
-        nextArrow: '<div class="slick-button">＞</div>',
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        prevArrow: '<div class="slick-button-prev">＜</div>',
+        nextArrow: '<div class="slick-button-next">＞</div>',
         responsive: [
             {
                 breakpoint: 1024,
