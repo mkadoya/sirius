@@ -4,7 +4,7 @@ class ResultsController < ApplicationController
 		@category = params[:category]
 
 		#アイテムの表示数：偶数のみ可能
-		@item_display_num = 20
+		@item_display_num = 6
 
 		#アイテムの表示行数
 		@item_display_row_num = @item_display_num / 2 -1

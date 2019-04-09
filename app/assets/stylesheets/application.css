@@ -14,27 +14,67 @@
  *= require_self
  */
 
- body {
-    font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic';
-    background-color: #f7f7f7;
- }
+body {
+   font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic';
+   background-color: #f7f7f7;
+}
+
+h2{
+  font-weight: bold;
+  font-size:24px;
+  padding: 0.5em 0.5em;
+  margin-top:3em;
+  margin-bottom:1em;
+  background: transparent;
+  border-left: solid 5px #2196f3;
+}
+
+h3{
+  font-weight: bold;
+  font-size:20px;
+  padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
+  color: #494949;/*文字色*/
+  background: #f0f0f0;/*背景色*/
+  border-left: solid 5px #6ec6ff;/*左線*/
+  margin-bottom:1em;
+  margin-top:2em;
+}
+
+h5{
+  text-align: center;
+  color: white;
+  font-size:1em;
+  width: 8em;
+  padding: 0.5em 1em;
+  background: #2196f3;
+}
+
+h6{
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  font-size:1em;
+  width: 19.95em;
+  padding: 1em 1em;
+  /* background: #f9a66b; */
+  background: #6ec6ff;;
+}
 
 
- footer{
-     /* background-color: #6ec6ff; */
-     margin-top:100px;
- }
 
- .footer-logo{
-     text-indent: 1em;
-     font-size: 32px;
-     padding-top:50px;
-     padding-bottom: 20px;
+footer{
+    /* background-color: #6ec6ff; */
+    margin-top:100px;
+}
+.footer-logo{
+    text-indent: 1em;
+    font-size: 32px;
+    padding-top:50px;
+    padding-bottom: 20px;
+}
 
- }
-
- .footer-contents{
-     text-indent: 1em;
-     padding-top: 80px;
-     padding-bottom: 20px;
- }
+.footer-contents{
+    text-indent: 1em;
+    padding-top: 80px;
+    padding-bottom: 20px;
+}

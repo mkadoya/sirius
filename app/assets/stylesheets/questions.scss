@@ -6,7 +6,7 @@
 .modalArea {
   display: none;
   position: fixed;
-  z-index: 1; /*サイトによってここの数値は調整 */
+  z-index: 10; /*サイトによってここの数値は調整 */
   top: 0;
   left: 0;
   width: 100%;
@@ -59,7 +59,7 @@
   max-width: 1000px;
   color: white;
   text-align: center;
-  z-index: 2;
+  z-index: 12;
   box-shadow: 10px 10px 5px gray;
   // border-radius: 20px 0px 20px 20px; //角を丸くする
   @media screen and (max-width: 768px) {
@@ -146,7 +146,7 @@
   vertical-align: middle;
   overflow: hidden;
   transition: .4s;
-  z-index: 4;
+  z-index: 14;
   box-shadow: 1px 1px 2px -1px black;
   cursor: pointer;
 }
@@ -162,6 +162,7 @@
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
   border-bottom: none;
 }
+
 
 // .question-float-option {
 //   position: relative;
@@ -193,103 +194,103 @@
 
 
 
-.jumbotron {
-    background:url("/question-header.jpg")
-    center no-repeat;
-    background-size: cover;
-    color:white;
-}
+// .jumbotron {
+//     background:url("/question-header.jpg")
+//     center no-repeat;
+//     background-size: cover;
+//     color:white;
+// }
 
-.quesiton-header{
-    color: white;
-    font-weight:bold;
-    width: 100vw;
-    height: auto;
-    background-image: url("/question-header.jpg");
-}
+// .quesiton-header{
+//     color: white;
+//     font-weight:bold;
+//     width: 100vw;
+//     height: auto;
+//     background-image: url("/question-header.jpg");
+// }
 
-.question-header-text h1{
-    margin: 80px 0px 20px 0px;
-}
+// .question-header-text h1{
+//     margin: 80px 0px 20px 0px;
+// }
 
-.question-header-text p{
-    margin: 0px 0px 80px 0px;
-}
+// .question-header-text p{
+//     margin: 0px 0px 80px 0px;
+// }
 
 
-.question{
-    width: 80%;
-    height: 500px;
-}
+// .question{
+//     width: 80%;
+//     height: 500px;
+// }
 
-.question-text{
-    font-weight: bold;
-    font-size: 30px;
-    margin-bottom: 45px;
+// .question-text{
+//     font-weight: bold;
+//     font-size: 30px;
+//     margin-bottom: 45px;
 
-    @media screen and (max-width: 768px) {
-        font-size: 25px;
-    }
+//     @media screen and (max-width: 768px) {
+//         font-size: 25px;
+//     }
 
-    @media screen and (max-width: 544px) {
-        font-size: 20px;
-    }
-}
+//     @media screen and (max-width: 544px) {
+//         font-size: 20px;
+//     }
+// }
 
-.question-options{
-    position: relative;
-}
+// .question-options{
+//     position: relative;
+// }
 
-.question-option-button{
-    width:60%;
-    font-size: 20px;
-}
+// .question-option-button{
+//     width:60%;
+//     font-size: 20px;
+// }
 
-.question .question-button-prev{
-    position: absolute;
-    top: 50%;
-    left: 5%;
-    -webkit-transform: translate(0, -50%);
-    -ms-transform: translate(0, -50%);
-    transform: translate(0, -50%);
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 30px;
+// .question .question-button-prev{
+//     position: absolute;
+//     top: 50%;
+//     left: 5%;
+//     -webkit-transform: translate(0, -50%);
+//     -ms-transform: translate(0, -50%);
+//     transform: translate(0, -50%);
+//     text-decoration: none;
+//     cursor: pointer;
+//     font-size: 30px;
 
-    color:white;
-    background: #5bc0de;
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    border-radius: 50%;
-    // border: solid 1px #5bc0de;
-    text-align: center;
-    vertical-align: middle;
-    overflow: hidden;
-    font-weight: bold;
-    transition: .4s;
+//     color:white;
+//     background: #5bc0de;
+//     width: 60px;
+//     height: 60px;
+//     line-height: 60px;
+//     border-radius: 50%;
+//     // border: solid 1px #5bc0de;
+//     text-align: center;
+//     vertical-align: middle;
+//     overflow: hidden;
+//     font-weight: bold;
+//     transition: .4s;
 
-    @media screen and (max-width: 768px) {
-        left:0px;
-        font-size: 25px;
-        width: 50px;
-        height: 50px;
-        line-height: 50px;
-    }
+//     @media screen and (max-width: 768px) {
+//         left:0px;
+//         font-size: 25px;
+//         width: 50px;
+//         height: 50px;
+//         line-height: 50px;
+//     }
 
-    @media screen and (max-width: 544px) {
-        left:0px;
-        font-size: 20px;
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
-    }
-}
+//     @media screen and (max-width: 544px) {
+//         left:0px;
+//         font-size: 20px;
+//         width: 40px;
+//         height: 40px;
+//         line-height: 40px;
+//     }
+// }
 
-.question .question-button-prev:hover{
-    background:#238FAD;
-    color:white;
-}
+// .question .question-button-prev:hover{
+//     background:#238FAD;
+//     color:white;
+// }
 
 
 /* top ================================ */
