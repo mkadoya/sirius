@@ -112,6 +112,10 @@
 .item-img{
   width: 360px;
   height: 320px;
+  @media screen and (max-width: 544px) {
+    width: 340px;
+    height: 300px;
+  }
 }
 
 .item-detail{
