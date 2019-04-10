@@ -29,16 +29,6 @@ h2{
   border-left: solid 5px #2196f3;
 }
 
-h3{
-  font-weight: bold;
-  font-size:20px;
-  padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
-  color: #494949;/*文字色*/
-  background: #f0f0f0;/*背景色*/
-  border-left: solid 5px #6ec6ff;/*左線*/
-  margin-bottom:1em;
-  margin-top:2em;
-}
 
 h5{
   text-align: center;

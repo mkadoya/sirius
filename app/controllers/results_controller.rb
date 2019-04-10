@@ -95,6 +95,15 @@ class ResultsController < ApplicationController
     @charasteristic_item_4 = @characteristic.item_4
     @charasteristic_item_5 = @characteristic.item_5
 # ------ 以上、大幅Update必要 ! ----------------------------------------------------------------------------
+		@item_counter = 0
+		
+		@items_array = Array.new
+		@array_item.each do |item|
+			@series_items = Item.where(series: item.series).all
+			@series_items.each do |s_item|
+				@items_array.push(s_item)
+			end
+		end
 	end
 
 

@@ -6,35 +6,15 @@
       <p>ぜひ最後まで答えてみてください。</p>
       <button class="btn btn-primary btn-lg" id="openModal">質問を続ける</button>
       <h2>スペックが高いパソコン</h2>
-      <div class="slider">
-        <%= image_tag '/laptop-outside.jpg' %>
-        <%= image_tag '/laptop-work.jpg' %>
-        <%= image_tag '/laptop-outside.jpg' %>
-        <%= image_tag '/laptop-work.jpg' %>
-      </div>
+
       <h2>あなたへのおすすめ</h2>
-      <div class="slider">
-        <%= image_tag '/laptop-outside.jpg' %>
-        <%= image_tag '/laptop-work.jpg' %>
-        <%= image_tag '/laptop-outside.jpg' %>
-        <%= image_tag '/laptop-work.jpg' %>
-      </div>
+
 
       <h2>人気のアイテム</h2>
-      <div class="slider">
-        <%= image_tag '/laptop-outside.jpg' %>
-        <%= image_tag '/laptop-work.jpg' %>
-        <%= image_tag '/laptop-outside.jpg' %>
-        <%= image_tag '/laptop-work.jpg' %>
-      </div>
+
 
       <h2>注目のアイテム</h2>
-      <div class="slider">
-        <%= image_tag '/laptop-outside.jpg' %>
-        <%= image_tag '/laptop-work.jpg' %>
-        <%= image_tag '/laptop-outside.jpg' %>
-        <%= image_tag '/laptop-work.jpg' %>
-      </div>
+
     </div>
     <div class="col-md-4">
       <h2>最新の記事</h2>
@@ -121,7 +101,6 @@
 
 <!-- ↓ページが読み込まれたと同時にモーダルエリアを起動する -->
 <script type="text/javascript">
-//= require jquery
   var h2 = $('h2').offset().top -50;
   window.onload = $('#modalArea').fadeIn(0);
 </script>

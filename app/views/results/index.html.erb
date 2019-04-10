@@ -80,7 +80,7 @@
         <div class="card-body">
           <h4 class="card-title"><%= @array_item[num*2].series %></h4>
           <p class="card-text">￥<%= @array_item[num*2].price %></p>
-          <%= link_to "詳細を見る", {:controller => "items",:action => "show",:series => @array_item[num*2].series }, :class => "btn btn-block btn-outline-secondary" %>
+          <button class="btn btn-block btn-outline-secondary" id="item_btn_<%=num*2%>">詳細を見る</button>
         </div>
       </div>
     </div>
@@ -91,7 +91,7 @@
         <div class="card-body">
           <h4 class="card-title"><%= @array_item[num*2+1].series %></h4>
           <p class="card-text">￥<%= @array_item[num*2+1].price %></p>
-          <%= link_to "詳細を見る", {:controller => "items",:action => "show",:series => @array_item[num*2+1].series }, :class => "btn btn-block btn-outline-secondary" %>
+          <button class="btn btn-block btn-outline-secondary" id="item_btn_<%=num*2+1%>">詳細を見る</button>
         </div>
       </div>
     </div>
@@ -99,6 +99,128 @@
   <% end %>
 </div>
 
+<% for num in 0..(@item_display_num-1) do %>
+<div class="container item">
+  <div class="row  result-contents">
+    <div class="col-md-12">
+      <h2 id="item_<%=num%>">第<%= num+1 %>位のアイテム</h2>
+      <ul class="nav nav-pills">
+        <%# タブを作成 %>
+        <li class="nav-item dropdown" type="button">
+          <a class="nav-link dropdown-toggle btn-primary active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">　デザイン　</a>
+          <div class="dropdown-menu">
+          <% @items_array.each do |item|%>
+            <% if item.series == @array_item[num].series %>
+              <% item_num = @items_array.index(item) %>
+                <a href="#tab<%= item_num %>" class="dropdown-item" data-toggle="tab"><%= item.color %></a>
+              <% @item_counter += 1%>
+            <% end %>
+          <% end %>
+          </div>
+        </li>
+        <% @item_counter=0 %>
+      </ul>
+      <div class="tab-content item-detail border text-dark">
+        <%# コンテンツを作成 %>
+        <% @items_array.each do |item|%>
+          <% if item.series == @array_item[num].series %>
+            <% item_num = @items_array.index(item) %>
+            <div id="tab<%= item_num %>" class="tab-pane <% if @item_counter==0 %>active<% end %>">
+              <div class="row">
+                  <div class="col-md-12">
+                      <h3><%= item.name %></h3>
+                      <%# <%= image_tag "#{item.image}", class: "item-img" %>
+                      <p>価格：￥<%= item.price %></p>
+                      <p style="font-size: 12px;">※価格が変更されている場合がございます。最新の情報はリンクをご確認ください。</p>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-6">
+                    <%= image_tag "#{item.image}", class: "item-img" %>
+                  </div>
+                  <div class="col-lg-6">
+                      <table class="table table-hover table-condensed item-table">
+                          <thead>
+                              <tr>
+                                  <th>項目</th>
+                                  <th>詳細</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>メーカー</td>
+                                  <td><%= item.maker %></td>
+                              </tr>
+                              <tr>
+                                  <td>商品重量</td>
+                                  <td><%= item.weight %>kg</td>
+                              </tr>
+                              <tr>
+                                  <td>カラー</td>
+                                  <td><%= item.color %></td>
+                              </tr>
+                              <tr>
+                                  <td>サイズ</td>
+                                  <td><%= item.inch %> インチ</td>
+                              </tr>
+                              <tr>
+                                  <td>CPU タイプ</td>
+                                  <td><%= item.cpu_name %></td>
+                              </tr>
+                              <tr>
+                                  <td>CPU コア数</td>
+                                  <td><%= item.cpu_core %> コア</td>
+                              </tr>
+                              <tr>
+                                  <td>RAM</td>
+                                  <td><%= item.ram %> GB</td>
+                              </tr>
+                              <% if item.ssd != 0 %>
+                              <tr>
+                                  <td>SSD</td>
+                                  <td><%= item.ssd %> GB</td>
+                              </tr>
+                              <% end %>
+                              <% if item.hdd != 0 %>
+                              <tr>
+                                  <td>HDD</td>
+                                  <td><%= item.hdd %> GB</td>
+                              </tr>
+                              <% end %>
+                              <% if item.emmc != 0 %>
+                              <tr>
+                                  <td>EMMC</td>
+                                  <td><%= item.emmc %> GB</td>
+                              </tr>
+                              <% end %>
+                              <tr>
+                                  <td>バッテリー時間</td>
+                                  <td><%= item.uptime %> 時間</td>
+                              </tr>
+                              <tr>
+                                  <td>OS</td>
+                                  <td><%= item.os %></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 offset-md-6">
+                  <%= item.affiliate.html_safe %>
+                </div>
+              </div>
+            </div>
+            <% @item_counter+=1 %>
+          <% end %>
+        <% end %>
+        <% @item_counter=0 %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
 
 
 
@@ -109,7 +231,7 @@
 <script type="text/javascript">
   window.onload = function(){
       var result = $('.result').offset().top;
-        $('html, body').animate({ scrollTop: result }, 2000, 'swing');
+        $('html, body').animate({ scrollTop: result }, 1000, 'swing');
   }
 </script>
 

@@ -1,4 +1,3 @@
-
 $(function () {
     $('#openModal').click(function () {
         $('#modalArea').fadeIn();
