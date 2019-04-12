@@ -30,10 +30,30 @@ class QuestionsController < ApplicationController
       @question_num += 1
     end
 
+    # 1問目でなければ前回の質問IDを導入する
+    if @question_num != 1
+      range = Range.new(1, @question_num-1)
+      range.each do |num|
+    	# 1問目のquestion_idは1であることを前提とする
+	      if num==1
+		      option_id = OptionResult.find_by(user_id:@user_id, question_id:1, result:true).option_id
+          @n_question_id = Option.find_by(option_id:option_id).next_question_id
+          @before_question_id = Option.find_by(option_id:option_id).question_id
+        else
+          option_id = OptionResult.find_by(user_id:@user_id, question_id:@n_question_id, result:true).option_id
+          @n_question_id = Option.find_by(option_id:option_id).next_question_id
+          @before_question_id = Option.find_by(option_id:option_id).question_id
+        end
+      end
+    #   @before_question_id = Question.find_by(next_question_id: @question.question_id).question_id
+    end
 
     # 次の質問がない場合（最後の質問だった場合）、リザルト画面を表示する
     if @next_question_id==0
-      redirect_to :controller => "questions", :action => "result", :category => @category and return
+      # redirect_to :controller => "results", :action => "index", :category => @category and return
+      # question_numがmax_question_num+1のため
+      @max_question_num = @question_num - 1
+      return
     end
 
     # 次の質問が存在しない場合は、ID：１の質問を導入する
@@ -91,23 +111,7 @@ class QuestionsController < ApplicationController
     #   end
     # end
 
-    # 1問目でなければ前回の質問IDを導入する
-    if @question_num != 1
-      range = Range.new(1, @question_num-1)
-      range.each do |num|
-    	# 1問目のquestion_idは1であることを前提とする
-	      if num==1
-		      option_id = OptionResult.find_by(user_id:@user_id, question_id:1, result:true).option_id
-          @n_question_id = Option.find_by(option_id:option_id).next_question_id
-          @before_question_id = Option.find_by(option_id:option_id).question_id
-        else
-          option_id = OptionResult.find_by(user_id:@user_id, question_id:@n_question_id, result:true).option_id
-          @n_question_id = Option.find_by(option_id:option_id).next_question_id
-          @before_question_id = Option.find_by(option_id:option_id).question_id
-        end
-      end
-    #   @before_question_id = Question.find_by(next_question_id: @question.question_id).question_id
-    end
+
 
     # 選択肢を取得する
     @options = Option.where(question_id: @question.question_id).all

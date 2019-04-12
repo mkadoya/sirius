@@ -60,3 +60,15 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# jQuery
+gem "jquery-rails"
+
+# Kadoya add Passanger for http access
+gem 'passenger'
+
+# Font-Awesome
+gem 'font-awesome-rails'
+
+# Froala
+gem 'wysiwyg-rails'

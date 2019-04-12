@@ -10,30 +10,107 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+*= require froala_editor.min.css
+*= require froala_style.min.css
+*= require font-awesome
+*= require plugins/char_counter.min.css
+*= require plugins/code_view.min.css
+*= require plugins/colors.min.css
+*= require plugins/emoticons.min.css
+*= require plugins/file.min.css
+*= require plugins/fullscreen.min.css
+*= require plugins/image_manager.min.css
+*= require plugins/image.min.css
+*= require plugins/line_breaker.min.css
+*= require plugins/quick_insert.min.css
+*= require plugins/table.min.css
+*= require plugins/video.min.css
  *= require_tree .
  *= require_self
  */
 
- body {
-    font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic';
-    background-color: #f7f7f7;
- }
 
- .footer{
-     background-color: #6ec6ff;
-     color: white;
- }
+body {
+   font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic';
+   background-color: #f7f7f7;
+}
 
- .footer-logo{
-     text-indent: 1em;
-     font-size: 32px;
-     padding-top:50px;
-     padding-bottom: 20px;
+h1{
+  font-weight: bold;
+  margin-top: 1em;
+}
 
- }
+h2{
+  font-weight: bold;
+  font-size:24px;
+  padding: 0.5em 0.5em;
+  margin-top:1em;
+  margin-bottom:1em;
+  background: transparent;
+  border-left: solid 5px #2196f3;
+}
 
- .footer-contents{
-     text-indent: 1em;
-     padding-top: 80px;
-     padding-bottom: 20px;
- }
+
+h5{
+  text-align: center;
+  color: white;
+  font-size:1em;
+  width: 8em;
+  padding: 0.5em 1em;
+  background: #2196f3;
+}
+
+h6{
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  font-size:1em;
+  width: 19.95em;
+  padding: 1em 1em;
+  /* background: #f9a66b; */
+  background: #6ec6ff;;
+}
+
+.row-1{
+  margin-bottom: 1em;
+}
+
+
+.article-text-overflow{
+  font-size: 0.75em;
+  overflow: hidden;
+  width: 100%;
+  height:6em;
+
+  /* white-space: nowrap; */
+  /* text-overflow: ellipsis; */
+}
+
+@media screen and (max-width: 992px) {
+  .article-text-overflow{
+    font-size: 1em;
+    height: 10.5em;
+    padding: 1em 0em;
+  }
+  .article-text-overflow strong{
+    font-size: 1.5em;
+  }
+}
+
+
+footer{
+    /* background-color: #6ec6ff; */
+    margin-top:100px;
+}
+.footer-logo{
+    text-indent: 1em;
+    font-size: 32px;
+    padding-top:50px;
+    padding-bottom: 20px;
+}
+
+.footer-contents{
+    text-indent: 1em;
+    padding-top: 80px;
+    padding-bottom: 20px;
+}

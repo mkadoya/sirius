@@ -2,24 +2,150 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.col-0 .col-md-4 { padding: 0 0px;}
+.col-0 .col-md-5 { padding: 0 0px;}
+.col-0 .col-md-6 { padding: 0 0px;}
+.col-0 .col-md-7 { padding: 0 0px;}
+.col-0 .col-md-8 { padding: 0 0px;}
+.col-0 .col-md-12 { padding: 0 0px;}
 
 .result{
-    text-align: left;
-    margin: 0 auto;
-    width: 70%;
-    @media screen and (max-width: 499px) {
-    /*　画面サイズ 499pxまで適用　*/
-    width: 90%;
-    }
+  width: 55%;
+
+  @media screen and (max-width: 1200px) {
+     width: 70%;
+  }
+
+  @media screen and (max-width: 992px) {
+     width: 85%;
+  }
+
+  @media screen and (max-width: 544px) {
+     width: 90%;
+  }
+}
+
+.item{
+  width: 70%;
+
+  @media screen and (max-width: 1200px) {
+     width: 80%;
+  }
+
+  @media screen and (max-width: 992px) {
+     width: 90%;
+  }
+
+  @media screen and (max-width: 544px) {
+     width: 100%;
+  }
+}
+
+.img-type{
+  // -webkit-filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.5));
+  // -moz-filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.5));
+  // -o-filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.5));
+  // -ms-filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.5));
+  // filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.5));
+  border-radius: 10px 10px 10px 10px;
+  margin-bottom: 50px;
 }
 
 .result-contents{
-    margin-bottom: 30px;
+  position: relative;
+  margin-top: 30px;
 }
 
-.result-item{
-    margin: 0 auto;
+.result-type{
+  text-align: center;
 }
+
+.result-type p{
+  font-size:28px;
+  font-weight: bold;
+}
+
+.result-type span{
+  font-size: 64px;
+  font-weight: bold;
+  // color: #ff8833;
+  color: #0069c0;
+  @media screen and (max-width: 544px) {
+     font-size: 48px;
+  }
+}
+
+.result-commentary{
+  position: relative;
+  background: white;
+  padding: 1em 1em 0 1em;
+  border: solid 0.5px rgb(219, 219, 219);
+  box-shadow: 1px 0 2px 1px rgb(219, 219, 219);
+}
+
+.result-recommend{
+  position: relative;
+  background: white;
+  padding: 0.5em 1em;
+  border: solid 0.5px rgb(219, 219, 219);
+  box-shadow: 1px 0 2px 1px rgb(219, 219, 219);
+}
+
+.result-chart{
+  position: relative;
+  padding: 20px 0 0 0;
+  text-align: center;
+  background-color: white;
+  border: solid 0.5px rgb(219, 219, 219);
+  box-shadow: 1px 0 2px 1px rgb(219, 219, 219);
+}
+
+.result-chart p{
+  font-weight: bold;
+  padding:0em 3em;
+}
+
+.card-item{
+  box-shadow: 3px 3px 3px gray;
+}
+
+.item-img{
+  width: 360px;
+  height: 320px;
+  @media screen and (max-width: 544px) {
+    width: 300px;
+    height: 260px;
+  }
+}
+
+.item-detail{
+  position:relative;
+  background-color: white;
+  padding: 3em 3em;
+  box-shadow: 3px 3px 3px gray;
+}
+
+.item-detail h3{
+  font-size:24px;
+}
+
+// .result{
+//     text-align: left;
+//     margin: 0 auto;
+//     width: 70%;
+//     @media screen and (max-width: 499px) {
+//     /*　画面サイズ 499pxまで適用　*/
+//     width: 90%;
+//     }
+// }
+
+// .result-contents{
+//     margin-bottom: 30px;
+// }
+
+// .result-item{
+//     margin: 0 auto;
+// }
 
 .result-star-rating {
   position: relative;
