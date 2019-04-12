@@ -5,8 +5,8 @@ $(function () {
         speed: 300,
         slidesToShow: 3,
         slidesToScroll: 1,
-        prevArrow: '<div class="slick-button-prev">＜</div>',
-        nextArrow: '<div class="slick-button-next">＞</div>',
+        prevArrow: '<div class="slick-button-prev">◀</div>',
+        nextArrow: '<div class="slick-button-next">▶</div>',
         responsive: [
             {
                 breakpoint: 1024,

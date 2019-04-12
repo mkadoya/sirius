@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :articles
   get 'users/show'
   get 'users/create'
   get 'option_results/result'

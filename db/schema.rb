@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_28_163401) do
+ActiveRecord::Schema.define(version: 2019_04_12_045918) do
+
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "preview"
+  end
 
   create_table "characteristics", force: :cascade do |t|
     t.string "category"

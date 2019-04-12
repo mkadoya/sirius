@@ -108,7 +108,7 @@
     transform: translate(0, -50%);
     z-index: 4;
     text-decoration: none;
-    background: white;
+    background: RGBA(255,255,255,0.5);
     color: gray;
     font-size: 20px;
     font-weight: bold;
@@ -120,14 +120,14 @@
     vertical-align: middle;
     overflow: hidden;
     transition: .4s;
-    box-shadow: 2px 2px 4px -4px black;
+    // box-shadow: 2px 2px 4px -4px black;
     cursor: pointer;
 }
 
 .slick-button-next{
-    right: -25px;
+    right: 0px;
 }
 
 .slick-button-prev{
-    left: -25px;
+    left: 0px;
 }

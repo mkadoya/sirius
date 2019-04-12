@@ -66,3 +66,9 @@ gem "jquery-rails"
 
 # Kadoya add Passanger for http access
 gem 'passenger'
+
+# Font-Awesome
+gem 'font-awesome-rails'
+
+# Froala
+gem 'wysiwyg-rails'
