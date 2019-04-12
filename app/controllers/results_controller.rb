@@ -1,6 +1,6 @@
 class ResultsController < ApplicationController
 	def index
-		@user_id = cookies[:user_id]
+		@user_id = params[:user_id]
 		@category = params[:category]
 
 		#アイテムの表示数：偶数のみ可能
@@ -115,18 +115,25 @@ class ResultsController < ApplicationController
 	# ------ Debug by Takai ---------------------------------------------------------------------------------
 
 	def index2
-		# 手動で入れているけど、questionから引き継がれる
-		@user_id = 3
-		# categoryは今後めっちゃくちゃ増えます！！！！
-		@category = 'laptop'
+		# 配列の初期化 : Debug用
+		@debug_array = Array.new
+		# 手動で入れているけど、questionから引き継がれる : Debug用
+		@user_id = 10
+		# categoryは今後めっちゃくちゃ増えます！！！！ : Debug用
+		@category = "laptop"
+
 		# Recommend Number
-		@num_recommend = 5
+		@num_recommend = 3
 		# Seriesの重複を除いたTotalのアイテム数
 		@num_all_series = Item.select(:series).distinct.count
 		# Totalのアイテム数
 		@num_all_items = Item.all.count
 		# Star Max value
 		@value_star_max = 10
+		# remove from 優先順位 star
+		@str_remove_star = ["price", "emmc", "usb_c", "webcamera"]
+		# 優先順位特殊な条件たち
+		# @hash_pri = {"dvd" => 30, "blueray" => 20, "emmc" => 10, "hdd" => 30, "webcamera" => 0, "touchpannel" => 20, "gpu_ram" => 40}
 
 		# Userが選択した結果をuser-idとcategoryを指定してDBから抽出
 		@array_record_true = OptionResult.where(user_id: @user_id).where(category: @category).where(result: true)
@@ -137,9 +144,12 @@ class ResultsController < ApplicationController
 		@array_item = Array.new
 		@array_item_series = Array.new
 		@array_effective_column = Array.new
-		@hash_difference_avrg = Hash.new
 		@array_star = Array.new
 		@array_star_normalize = Array.new
+		@array_match_condition_test = Array.new
+		@hash_difference_avrg = Hash.new
+		@hash_rec_avrg = Hash.new
+		@hash_star = Hash.new
 
 		# MatchさせていくためにItem情報を全部入れる
 		@array_recommend_item = Item.all
@@ -147,6 +157,7 @@ class ResultsController < ApplicationController
 		# Userが答えてtrue flagがついたoption_idを配列で取得
 		@array_record_true.each do |record_true|
 			@array_option_id << record_true.option_id
+			@debug_array << [Question.find_by(question_id: Option.find_by(option_id: record_true.option_id).question_id).content, Option.find_by(option_id: record_true.option_id).content]
 		end
 
 		# Userが答えてtrueがついたoption_idをBaseにItem DBでFilterする条件をMatch DBより配列で取得
@@ -158,25 +169,23 @@ class ResultsController < ApplicationController
 		@array_match_condition.each do |match_condition|
 			match_condition.each do |record_match|
 				@array_effective_column << [record_match.item_clmn, 1 - Item.where("#{record_match.item_clmn} >= ?", record_match.min).where("#{record_match.item_clmn} <= ?", record_match.max).count.to_f/@num_all_items]
-				@hash_difference_avrg.store(record_match.item_clmn, Item.average(:"#{record_match.item_clmn}"))
-#				@array_difference_avrg  << [record_match.item_clmn, Item.average(:record_match.item_clmn), @array_item.first(5).average(:record_match.item_clmn)]
+				@hash_difference_avrg.store(record_match.item_clmn, Item.average(:"#{record_match.item_clmn}").round(1))
+				# @array_difference_avrg  << [record_match.item_clmn, Item.average(:record_match.item_clmn), @array_item.first(5).average(:record_match.item_clmn)]
 			end
 		end
+
 		# 最もEffectiveが高いもの(match条件にて合致する項目数が少ないもの)をSortして昇順で5つ取得
-		@array_effective_column = @array_effective_column.uniq!(&:first).sort { |a, b| b[1] <=> a[1] }.first(5)
+		# @array_effective_column = @array_effective_column.reject{|clmn, val| clmn == @str_remove_star}.uniq!(&:first).sort { |a, b| b[1] <=> a[1] }.first(5)
 
 		# Star設定
-		@array_effective_column.each do |colmn, val|
-			@array_star << val
-		end
-		@star_max = @array_star.max
-		@array_star.each do |val|
-			@array_star_normalize << ((val - 0)/(@star_max - 0) * 6).ceil + 3
-		end
-
-		#
-
-
+		# @array_effective_column.each do |colmn, val|
+		# 	@array_star << val
+		# end
+		# @star_max = @array_star.max
+		# @star_min = @array_star.min
+		# @array_star.each do |val|
+		# 	@array_star_normalize << ((val - @star_min)/(@star_max - @star_min) * 6).ceil + 3
+		# end
 
 		# おすすめ品がTotal個数ではなかったら。。Match DBから取得したFilter条件の末尾を削除して再度Item DBをFilter、おすすめ品が5つ以上になるまでloop
 		while @array_item[@num_all_series - 1].nil?
@@ -215,14 +224,10 @@ class ResultsController < ApplicationController
 		end
 
 
-		@array_rec_avrg = Array.new
-		@array_match_condition_test = Array.new
-
 		# Userが答えてtrueがついたoption_idをBaseにItem DBでFilterする条件をMatch DBより配列で取得
 		@array_option_id.each do |option_id_test|
 			@array_match_condition_test << Match.where(category: @category).where(option_id: option_id_test)
 		end
-
 
 		# 最もEffectiveが高いもの(match条件にて合致する項目数が少ないもの)を計算
 		@array_match_condition_test.each do |match_condition_test|
@@ -238,11 +243,35 @@ class ResultsController < ApplicationController
 					end
 					num += num_add
 				end
-			@array_rec_avrg << [record_match_test.item_clmn, num/@num_recommend.to_f]
+			@hash_rec_avrg.store(record_match_test.item_clmn, (num/@num_recommend.to_f).round(1))
 			end
 		end
-		@array_rec_avrg = @array_rec_avrg.uniq!(&:first)
 
+		# Starのためのおすすめ品の平均値からのずれを算出
+		@hash_rec_avrg.each do |key, value|
+			if value != 0
+				if Item.pluck(:"#{key}").first.is_a?(Numeric) == false
+					@value_star = Item.pluck(:"#{key}").join(" ").gsub("false", "0").gsub("true", "1").split(" ").map(&:to_i)
+				else
+					@value_star = Item.pluck(:"#{key}")
+				end
+				 @hash_star.store(key, (10 - (@value_star.sort.reverse.index{|i| i <= value} / @num_all_items.to_f * 10).round))
+			end
+		end
+
+		# 特殊条件の削除
+		# @hash_pri.each do |key, value|
+		# 	if @hash_star[key] == value
+		# 		@hash_star.delete(key)
+		# 	end
+		# end
+		# priceの削除
+		@str_remove_star.each do |key|
+			@hash_star.delete(key)
+		end
+
+		# 順位が小さい順にSort
+		@hash_star = Hash[@hash_star.sort_by{ |_, v| -v }]
 
 # ------ 以下、大幅Update必要 ! ----------------------------------------------------------------------------
 
@@ -267,11 +296,10 @@ class ResultsController < ApplicationController
 	# ------ Debug by Takai ---------------------------------------------------------------------------------
 
 
-
 	def create
 	# 各パラメーターの導入
     @category         = params[:category] ? params[:category] : "laptop"
-    @user_id          = cookies[:user_id]
+    @user_id          = params[:user_id] ? params[:user_id].to_i : nil
     @question_id      = params[:question_id] ? params[:question_id].to_i : nil
     @question_num     = params[:question_num] ? params[:question_num].to_i : nil
     @next_question_id     = params[:next_question_id] ? params[:next_question_id].to_i : nil
@@ -294,7 +322,7 @@ class ResultsController < ApplicationController
         end
 	  end
 
-	  redirect_to :controller => "questions", :action => "index", :category => @category, :next_question_id => @next_question_id, :question_num => @question_num and return
+	  redirect_to :controller => "questions", :action => "index", :user_id => @user_id, :category => @category, :next_question_id => @next_question_id, :question_num => @question_num and return
 	  	# 20190324　アップデート前
     	#redirect_to :controller => "questions", :action => "option_index", :user_id => @user_id, :category => @category, :next_question_id => @next_question_id, :question_num => @question_num and return
     end
@@ -319,7 +347,7 @@ class ResultsController < ApplicationController
     end
 
     # 質問ページへリダイレクトする
-    redirect_to :controller => "questions", :action => "index", :category => @category, :next_question_id => @next_question_id, :question_num => @question_num
+    redirect_to :controller => "questions", :action => "index", :user_id => @user_id, :category => @category, :next_question_id => @next_question_id, :question_num => @question_num
 
 		# 20190324 アップデート前
 		# #answer/question_id結果を格納

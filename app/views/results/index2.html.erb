@@ -1,29 +1,32 @@
 <h1>Results#index</h1>
 <p> --------------------------------------------- </p>
 
-<p>[debug] ==> <%= @array_option_id[0] %></p>
-
-<p> --------------------------------------------- </p>
-
 <p>[User-ID] ==> <%= @user_id %></p>
-<p>[Category] ==> <%= @category %></p>
+<p>[Record] ==> <%= @debug_array %></p>
+
+<p>[Recommend Avrg] ==> <%= @hash_rec_avrg %></p>
+<p>[All Avrg] ==> <%= @hash_difference_avrg %></p>
+<p>[Record] ==> <%= @hash_star %></p>
 
 <p> --------------------------------------------- </p>
-
-<p>[Item num] ==> <%= @array_item.count %></p>
-
 <p> --------------------------------------------- </p>
-<p> --------------------------------------------- </p>
-
 <p>Star ! </p>
 
-<p> --------------------------------------------- </p>
+<p>[あなたにとって重要な点1]<%= @hash_star.keys[0] %> ====> <%= @hash_star.values[0] %></p>
+<p>[あなたにとって重要な点2]<%= @hash_star.keys[1] %> ====> <%= @hash_star.values[1] %></p>
+<p>[あなたにとって重要な点3]<%= @hash_star.keys[2] %> ====> <%= @hash_star.values[2] %></p>
+<p>[あなたにとって重要な点4]<%= @hash_star.keys[3] %> ====> <%= @hash_star.values[3] %></p>
+<p>[あなたにとって重要な点5]<%= @hash_star.keys[4] %> ====> <%= @hash_star.values[4] %></p>
 
-<p>[特徴1]<%= @array_effective_column[0][0] %> ====> <%= @array_star_normalize[0] %></p>
-<p>[特徴2]<%= @array_effective_column[1][0] %> ====> <%= @array_star_normalize[1] %></p>
-<p>[特徴3]<%= @array_effective_column[2][0] %> ====> <%= @array_star_normalize[2] %></p>
-<p>[特徴4]<%= @array_effective_column[3][0] %> ====> <%= @array_star_normalize[3] %></p>
-<p>[特徴5]<%= @array_effective_column[4][0] %> ====> <%= @array_star_normalize[4] %></p>
+<p> --------------------------------------------- </p>
+<p> --------------------------------------------- </p>
+<p>あたなにおすすめのスペック </p>
+
+<p>[<%= @hash_star.keys[0] %> ] => <%= @hash_rec_avrg[@hash_star.keys[0]] %></p>
+<p>[<%= @hash_star.keys[1] %> ] => <%= @hash_rec_avrg[@hash_star.keys[1]] %></p>
+<p>[<%= @hash_star.keys[2] %> ] => <%= @hash_rec_avrg[@hash_star.keys[2]] %></p>
+<p>[<%= @hash_star.keys[3] %> ] => <%= @hash_rec_avrg[@hash_star.keys[3]] %></p>
+<p>[<%= @hash_star.keys[4] %> ] => <%= @hash_rec_avrg[@hash_star.keys[4]] %></p>
 
 <p> --------------------------------------------- </p>
 <p> --------------------------------------------- </p>
@@ -35,42 +38,55 @@
 <p>[おすすめNo1]</p>
 <p>製品名 : <%= @array_item[0].series %></p>
 <p>値段 : <%= @array_item[0].price %></p>
-<p><%= @array_effective_column[0][0] %> : <%= @array_item[0][@array_effective_column[0][0]] %></p>
-<p>[Avrg1]<%= @hash_difference_avrg[@array_effective_column[0][0]] %> </p>
-
-<p><%= @array_effective_column[1][0] %> : <%= @array_item[0][@array_effective_column[1][0]] %></p>
-<p>[Avrg2]<%= @hash_difference_avrg[@array_effective_column[1][0]] %> </p>
-
-<p><%= @array_effective_column[2][0] %> : <%= @array_item[0][@array_effective_column[2][0]] %></p>
-<p>[Avrg3]<%= @hash_difference_avrg[@array_effective_column[2][0]] %> </p>
-
-<p><%= @array_effective_column[3][0] %> : <%= @array_item[0][@array_effective_column[3][0]] %></p>
-<p>[Avrg4]<%= @hash_difference_avrg[@array_effective_column[3][0]] %> </p>
-
-<p><%= @array_effective_column[4][0] %> : <%= @array_item[0][@array_effective_column[4][0]] %></p>
-<p>[Avrg5]<%= @hash_difference_avrg[@array_effective_column[4][0]] %> </p>
+<p><%= @hash_star.keys[0] %> : <%= @array_item[0][@hash_star.keys[0]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[0]] %> </p>
+<p><%= @hash_star.keys[1] %> : <%= @array_item[0][@hash_star.keys[1]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[1]] %> </p>
+<p><%= @hash_star.keys[2] %> : <%= @array_item[0][@hash_star.keys[2]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[2]] %> </p>
+<p><%= @hash_star.keys[3] %> : <%= @array_item[0][@hash_star.keys[3]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[3]] %> </p>
+<p><%= @hash_star.keys[4] %> : <%= @array_item[0][@hash_star.keys[4]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[4]] %> </p>
 
 <p> --------------------------------------------- </p>
 
 <p>[おすすめNo2]</p>
 <p>製品名 : <%= @array_item[1].series %></p>
 <p>値段 : <%= @array_item[1].price %></p>
-<p><%= @array_effective_column[0][0] %> : <%= @array_item[1][@array_effective_column[0][0]] %></p>
-<p><%= @array_effective_column[1][0] %> : <%= @array_item[1][@array_effective_column[1][0]] %></p>
-<p><%= @array_effective_column[2][0] %> : <%= @array_item[1][@array_effective_column[2][0]] %></p>
-<p><%= @array_effective_column[3][0] %> : <%= @array_item[1][@array_effective_column[3][0]] %></p>
-<p><%= @array_effective_column[4][0] %> : <%= @array_item[1][@array_effective_column[4][0]] %></p>
+<p><%= @hash_star.keys[0] %> : <%= @array_item[1][@hash_star.keys[0]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[0]] %> </p>
+<p><%= @hash_star.keys[1] %> : <%= @array_item[1][@hash_star.keys[1]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[1]] %> </p>
+<p><%= @hash_star.keys[2] %> : <%= @array_item[1][@hash_star.keys[2]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[2]] %> </p>
+<p><%= @hash_star.keys[3] %> : <%= @array_item[1][@hash_star.keys[3]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[3]] %> </p>
+<p><%= @hash_star.keys[4] %> : <%= @array_item[1][@hash_star.keys[4]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[4]] %> </p>
 
 <p> --------------------------------------------- </p>
 
 <p>[おすすめNo3]</p>
 <p>製品名 : <%= @array_item[2].series %></p>
 <p>値段 : <%= @array_item[2].price %></p>
-<p><%= @array_effective_column[0][0] %> : <%= @array_item[2][@array_effective_column[0][0]] %></p>
-<p><%= @array_effective_column[1][0] %> : <%= @array_item[2][@array_effective_column[1][0]] %></p>
-<p><%= @array_effective_column[2][0] %> : <%= @array_item[2][@array_effective_column[2][0]] %></p>
-<p><%= @array_effective_column[3][0] %> : <%= @array_item[2][@array_effective_column[3][0]] %></p>
-<p><%= @array_effective_column[4][0] %> : <%= @array_item[2][@array_effective_column[4][0]] %></p>
+<p><%= @hash_star.keys[0] %> : <%= @array_item[2][@hash_star.keys[0]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[0]] %> </p>
+<p><%= @hash_star.keys[1] %> : <%= @array_item[2][@hash_star.keys[1]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[1]] %> </p>
+<p><%= @hash_star.keys[2] %> : <%= @array_item[2][@hash_star.keys[2]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[2]] %> </p>
+<p><%= @hash_star.keys[3] %> : <%= @array_item[2][@hash_star.keys[3]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[3]] %> </p>
+<p><%= @hash_star.keys[4] %> : <%= @array_item[2][@hash_star.keys[4]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[4]] %> </p>
+
+<p> --------------------------------------------- </p>
+
+<p>[おすすめNo4]</p>
+<p>製品名 : <%= @array_item[3].series %></p>
+<p>値段 : <%= @array_item[3].price %></p>
+<p><%= @hash_star.keys[0] %> : <%= @array_item[3][@hash_star.keys[0]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[0]] %> </p>
+<p><%= @hash_star.keys[1] %> : <%= @array_item[3][@hash_star.keys[1]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[1]] %> </p>
+<p><%= @hash_star.keys[2] %> : <%= @array_item[3][@hash_star.keys[2]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[2]] %> </p>
+<p><%= @hash_star.keys[3] %> : <%= @array_item[3][@hash_star.keys[3]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[3]] %> </p>
+<p><%= @hash_star.keys[4] %> : <%= @array_item[3][@hash_star.keys[4]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[4]] %> </p>
+
+<p> --------------------------------------------- </p>
+
+<p>[おすすめNo5]</p>
+<p>製品名 : <%= @array_item[4].series %></p>
+<p>値段 : <%= @array_item[4].price %></p>
+<p><%= @hash_star.keys[0] %> : <%= @array_item[4][@hash_star.keys[0]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[0]] %> </p>
+<p><%= @hash_star.keys[1] %> : <%= @array_item[4][@hash_star.keys[1]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[1]] %> </p>
+<p><%= @hash_star.keys[2] %> : <%= @array_item[4][@hash_star.keys[2]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[2]] %> </p>
+<p><%= @hash_star.keys[3] %> : <%= @array_item[4][@hash_star.keys[3]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[3]] %> </p>
+<p><%= @hash_star.keys[4] %> : <%= @array_item[4][@hash_star.keys[4]] %>, 平均 : <%= @hash_difference_avrg[@hash_star.keys[4]] %> </p>
 
 <p> --------------------------------------------- </p>
 <p> --------------------------------------------- </p>
