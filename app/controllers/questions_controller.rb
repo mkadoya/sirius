@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
     @next_question_id = params[:next_question_id] ? params[:next_question_id].to_i : nil
     @user_id          = cookies[:user_id]
 
-
+    @start_question_id = Question.find_by(category: @category).question_id
 
     # Cookie情報がない場合、新規ユーザーを作成する。
     if !@user_id
@@ -31,12 +31,11 @@ class QuestionsController < ApplicationController
     end
 
     # 1問目でなければ前回の質問IDを導入する
-    if @question_num != 1
+    if @question_num != @start_question_id
       range = Range.new(1, @question_num-1)
       range.each do |num|
-    	# 1問目のquestion_idは1であることを前提とする
 	      if num==1
-		      option_id = OptionResult.find_by(user_id:@user_id, question_id:1, result:true).option_id
+		      option_id = OptionResult.find_by(user_id:@user_id, question_id:@start_question_id, result:true).option_id
           @n_question_id = Option.find_by(option_id:option_id).next_question_id
           @before_question_id = Option.find_by(option_id:option_id).question_id
         else
@@ -59,7 +58,7 @@ class QuestionsController < ApplicationController
     # 次の質問が存在しない場合は、ID：１の質問を導入する
     # 次の質問が存在している場合は、そのIDの問題を導入する
     if !@next_question_id
-      @question = Question.find_by(question_id: 1)
+      @question = Question.find_by(question_id: @start_question_id)
     else
       @question = Question.find_by(question_id: @next_question_id)
     end

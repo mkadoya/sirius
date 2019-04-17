@@ -1,0 +1,2 @@
+class ToiletpaperItem < ApplicationRecord
+end

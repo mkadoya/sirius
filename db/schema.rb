@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_12_045918) do
+ActiveRecord::Schema.define(version: 2019_04_17_131442) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 2019_04_12_045918) do
     t.text "sirial"
     t.text "affiliate"
     t.text "image"
+    t.string "category"
   end
 
   create_table "matches", force: :cascade do |t|
@@ -138,7 +139,6 @@ ActiveRecord::Schema.define(version: 2019_04_12_045918) do
     t.datetime "updated_at", null: false
     t.text "content"
     t.integer "next_question_id"
-    t.integer "remain_question_num"
   end
 
   create_table "patterns", force: :cascade do |t|
@@ -176,6 +176,35 @@ ActiveRecord::Schema.define(version: 2019_04_12_045918) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "category"
+  end
+
+  create_table "temp_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "toiletpaper_items", force: :cascade do |t|
+    t.integer "item_id"
+    t.string "category"
+    t.string "maker"
+    t.text "name"
+    t.integer "price"
+    t.boolean "single"
+    t.boolean "double"
+    t.integer "cost"
+    t.integer "soft"
+    t.integer "flavor"
+    t.integer "smooth"
+    t.integer "water"
+    t.boolean "design"
+    t.integer "fun"
+    t.text "series"
+    t.text "affiliate"
+    t.text "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

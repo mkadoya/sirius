@@ -132,29 +132,29 @@ require 'csv'
 # end
 
 #以下はOptionを呼び出すパターン
-   CSV.foreach('db/Options.csv', headers: true) do |row|
-   Option.create(
-       :option_id => row[0],
-       :category => row[1],
-       :question_id => row[2],
-       :content => row[3],
-       :next_question_id => row[4],
-   )
- end
-
-# 以下はMatchを呼び出すパターン
-#  CSV.foreach('db/Matchs.csv', headers: true) do |row|
-#  Match.create(
-#      :match_id => row[0],
-#      :category => row[1],
-#      :option_id => row[2],
-#      :item_clmn => row[3],
-#      :min => row[4],
-#      :max => row[5]
-#  )
+#    CSV.foreach('db/Options.csv', headers: true) do |row|
+#    Option.create(
+#        :option_id => row[0],
+#        :category => row[1],
+#        :question_id => row[2],
+#        :content => row[3],
+#        :next_question_id => row[4],
+#    )
 #  end
 
- #以下はOptionResultを呼び出すパターン
+# 以下はMatchを呼び出すパターン
+ CSV.foreach('db/Matchs.csv', headers: true) do |row|
+ Match.create(
+     :match_id => row[0],
+     :category => row[1],
+     :option_id => row[2],
+     :item_clmn => row[3],
+     :min => row[4],
+     :max => row[5]
+ )
+ end
+
+# 以下はOptionResultを呼び出すパターン
 #  CSV.foreach('db/OptionResults.csv', headers: true) do |row|
 #  OptionResult.create(
 #      :user_id => row[0],
@@ -164,3 +164,26 @@ require 'csv'
 #      :result => row[4],
 #  )
 #  end
+
+#以下はOptionResultを呼び出すパターン
+# CSV.foreach('db/Toiletpaper_items.csv', headers: true) do |row|
+# ToiletpaperItem.create(
+#     :item_id => row[0],
+#     :category => row[1],
+#     :maker => row[2],
+#     :name => row[3],
+#     :price => row[4],
+#     :single => row[5],
+#     :double => row[6],
+#     :cost => row[7],
+#     :soft => row[8],
+#     :flavor => row[9],
+#     :smooth => row[10],
+#     :water => row[11],
+#     :design => row[12],
+#     :fun => row[13],
+#     :series => row[14],
+#     :affiliate => row[15],
+#     :image => row[16],
+# )
+# end

@@ -31,3 +31,11 @@ option_id,category,question_id,content,next_question_id
 30,laptop,12,利用しない,0
 31,laptop,13,YES,2
 32,laptop,13,NO,2
+33,toiletpaper,14,YES,15
+34,toiletpaper,14,NO,15
+35,toiletpaper,15,YES,16
+36,toiletpaper,15,NO,16
+37,toiletpaper,16,YES,17
+38,toiletpaper,16,NO,17
+39,toiletpaper,17,YES,0
+40,toiletpaper,17,NO,0
