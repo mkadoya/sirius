@@ -72,3 +72,9 @@ gem 'font-awesome-rails'
 
 # Froala
 gem 'wysiwyg-rails'
+
+# Active Admin
+gem 'devise'
+gem 'cancancan'
+gem 'activeadmin'
+gem 'activeadmin_froala_editor'

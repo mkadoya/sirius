@@ -5,8 +5,8 @@
     <h1><%= @article.title %></h1>
     <img class="img-fluid" src="<%= @article.image %>"  alt="Responsive image">
     <%= sanitize @article.content , tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div), attributes:  %w(id class href) %>
-    <%= link_to 'Edit', edit_article_path(@article) %> |
-    <%= link_to 'Back', articles_path %>
+    <%# <%= link_to 'Edit', edit_article_path(@article)  |
+    <%= link_to 'Back', articles_path %> 
     </div>
     <div class="col-md-4">
       <h2>最新の記事</h2>

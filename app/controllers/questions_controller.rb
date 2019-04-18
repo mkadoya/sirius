@@ -13,9 +13,9 @@ class QuestionsController < ApplicationController
 
     # Cookie情報がない場合、新規ユーザーを作成する。
     if !@user_id
-      @new_user_id = User.order(user_id: "DESC").first.user_id + 1
+      @new_user_id = TempUser.order(user_id: "DESC").first.user_id + 1
       @new_user_name = "Guest"
-      @user = User.create(user_id: @new_user_id, name:@new_user_name)
+      @user = TempUser.create(user_id: @new_user_id, name:@new_user_name)
       @user.save
       cookies.permanent[:user_id] = { :value => @new_user_id}
       redirect_to :controller => "questions", :action => "index", :category => @category and return

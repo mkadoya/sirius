@@ -25,9 +25,9 @@
 *= require plugins/quick_insert.min.css
 *= require plugins/table.min.css
 *= require plugins/video.min.css
- *= require_tree .
- *= require_self
- */
+*= require_tree ./main
+*= require_self
+*/
 
 
 body {

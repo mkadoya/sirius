@@ -187,3 +187,6 @@ require 'csv'
 #     :image => row[16],
 # )
 # end
+
+#以下はActive Admin用
+# AdminUser.create!(email: 'mkadoya111@gmail.com', password: 'pa55w0rd!', password_confirmation: 'pa55w0rd!') if Rails.env.development?
