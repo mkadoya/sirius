@@ -72,3 +72,6 @@ gem 'font-awesome-rails'
 
 # Froala
 gem 'wysiwyg-rails'
+
+# Stats
+gem 'statsample'

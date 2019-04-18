@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_12_045918) do
+ActiveRecord::Schema.define(version: 2019_04_13_121501) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -107,6 +107,11 @@ ActiveRecord::Schema.define(version: 2019_04_12_045918) do
     t.text "sirial"
     t.text "affiliate"
     t.text "image"
+    t.integer "volume"
+    t.integer "gpu_score"
+    t.boolean "windows"
+    t.boolean "mac"
+    t.boolean "chrome"
   end
 
   create_table "matches", force: :cascade do |t|

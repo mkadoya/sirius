@@ -4,8 +4,8 @@ option_id,category,question_id,content,next_question_id
 3,laptop,1,もう少し安い方がよい,2
 4,laptop,2,「性能」が重要,3
 5,laptop,2,「値段」が重要,3
-6,laptop,3,YES,4
-7,laptop,3,NO,4
+6,laptop,3,Windows派,4
+7,laptop,3,Mac派,4
 8,laptop,4,頻繁に外で使う,5
 9,laptop,4,たまに外で使う,5
 10,laptop,4,家でしか使わない,5

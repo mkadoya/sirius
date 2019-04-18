@@ -96,7 +96,7 @@ class ResultsController < ApplicationController
     @charasteristic_item_5 = @characteristic.item_5
 # ------ 以上、大幅Update必要 ! ----------------------------------------------------------------------------
 		@item_counter = 0
-		
+
 		@items_array = Array.new
 		@array_item.each do |item|
 			@series_items = Item.where(series: item.series).all
@@ -130,22 +130,12 @@ class ResultsController < ApplicationController
 		@user_id = 10
 		# categoryは今後めっちゃくちゃ増えます！！！！ : Debug用
 		@category = "laptop"
-
-		# Recommend Number
-		@num_recommend = 3
-		# Seriesの重複を除いたTotalのアイテム数
-		@num_all_series = Item.select(:series).distinct.count
-		# Totalのアイテム数
-		@num_all_items = Item.all.count
-		# Star Max value
-		@value_star_max = 10
+		# おすすめスペックとして算出する上記おすすめ品項目
+		@num_recommend = 10
 		# remove from 優先順位 star
-		@str_remove_star = ["price", "emmc", "usb_c", "webcamera"]
-		# 優先順位特殊な条件たち
-		# @hash_pri = {"dvd" => 30, "blueray" => 20, "emmc" => 10, "hdd" => 30, "webcamera" => 0, "touchpannel" => 20, "gpu_ram" => 40}
-
-		# Userが選択した結果をuser-idとcategoryを指定してDBから抽出
-		@array_record_true = OptionResult.where(user_id: @user_id).where(category: @category).where(result: true)
+		@str_remove_star = ["emmc", "usb_c", "webcamera"]
+		# 値が小さいほど良い項目List
+		@column_asc_good = ["price", "weight"]
 
 		# 配列の初期化
 		@array_option_id = Array.new
@@ -156,12 +146,20 @@ class ResultsController < ApplicationController
 		@array_star = Array.new
 		@array_star_normalize = Array.new
 		@array_match_condition_test = Array.new
+		# 辞書型の初期化
 		@hash_difference_avrg = Hash.new
 		@hash_rec_avrg = Hash.new
+		@hash_rec_star = Hash.new
 		@hash_star = Hash.new
 
 		# MatchさせていくためにItem情報を全部入れる
 		@array_recommend_item = Item.all
+		# Totalのアイテム数
+		@num_all_items = Item.all.count
+		# Seriesの重複を除いたTotalのアイテム数
+		@num_all_series = Item.select(:series).distinct.count
+		# Userが選択した結果をuser-idとcategoryを指定してDBから抽出
+		@array_record_true = OptionResult.where(user_id: @user_id).where(category: @category).where(result: true)
 
 		# Userが答えてtrue flagがついたoption_idを配列で取得
 		@array_record_true.each do |record_true|
@@ -264,28 +262,36 @@ class ResultsController < ApplicationController
 				else
 					@value_star = Item.pluck(:"#{key}")
 				end
-				 @hash_star.store(key, (10 - (@value_star.sort.reverse.index{|i| i <= value} / @num_all_items.to_f * 10).round))
+				@hash_star.store(key, (10 - (@value_star.sort.reverse.index{|i| i <= value} / @num_all_items.to_f * 10).round))
+				# 基本項目をVectoyに入れる
+				@df_default = Daru::Vector[@value_star]
+				# 基本項目での推奨値を偏差値計算して中央値を5に変更、ただし4-7に固まって楽しくないので、偏差値は2倍の変動にしている
+				ss = (((@hash_rec_avrg["#{key}"] - @df_default.mean )/@df_default.std * 20 + 50)/10).round
+				# 項目によっては（例えば値段）、小さい値の方が良いのでその項目は10から偏差値をひいいて評価
+				if @column_asc_good.include?(key) == true
+					ss = 10 - ss
+				end
+				# 偏差値にx2の補正を入れているので、over 10, under 0になるものはlimitをかける
+				if ss > 10
+					ss = 10
+				elsif ss < 0
+					ss = 0
+				end
+				# 結果をHash（辞書型）に入れ込む
+				@hash_rec_star.store(key, ss)
 			end
 		end
 
-		# 特殊条件の削除
-		# @hash_pri.each do |key, value|
-		# 	if @hash_star[key] == value
-		# 		@hash_star.delete(key)
-		# 	end
-		# end
-		# priceの削除
+		# priceなどの特殊項目の削除
 		@str_remove_star.each do |key|
+			@hash_rec_star.delete(key)
 			@hash_star.delete(key)
 		end
 
 		# 順位が小さい順にSort
+		@hash_rec_star = Hash[@hash_rec_star.sort_by{ |_, v| -v }]
 		@hash_star = Hash[@hash_star.sort_by{ |_, v| -v }]
 
-# ------ 以下、大幅Update必要 ! ----------------------------------------------------------------------------
-
-
-# ------ 以上、大幅Update必要 ! ----------------------------------------------------------------------------
 	end
 
 	# ------ Debug by Takai ---------------------------------------------------------------------------------
