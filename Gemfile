@@ -78,3 +78,6 @@ gem 'devise'
 gem 'cancancan'
 gem 'activeadmin'
 gem 'activeadmin_froala_editor'
+
+# Google Analytics
+gem 'google-analytics-rails'
