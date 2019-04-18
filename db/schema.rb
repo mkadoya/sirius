@@ -10,7 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_04_13_121501) do
+=======
+ActiveRecord::Schema.define(version: 2019_04_18_052838) do
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.integer "resource_id"
+    t.string "author_type"
+    t.integer "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
+  create_table "admin_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+>>>>>>> 625001655c41e3e896fa454714d724cc224bf3cb
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -107,11 +137,15 @@ ActiveRecord::Schema.define(version: 2019_04_13_121501) do
     t.text "sirial"
     t.text "affiliate"
     t.text "image"
+<<<<<<< HEAD
     t.integer "volume"
     t.integer "gpu_score"
     t.boolean "windows"
     t.boolean "mac"
     t.boolean "chrome"
+=======
+    t.string "category"
+>>>>>>> 625001655c41e3e896fa454714d724cc224bf3cb
   end
 
   create_table "matches", force: :cascade do |t|
@@ -143,7 +177,6 @@ ActiveRecord::Schema.define(version: 2019_04_13_121501) do
     t.datetime "updated_at", null: false
     t.text "content"
     t.integer "next_question_id"
-    t.integer "remain_question_num"
   end
 
   create_table "patterns", force: :cascade do |t|
@@ -183,6 +216,7 @@ ActiveRecord::Schema.define(version: 2019_04_13_121501) do
     t.string "category"
   end
 
+<<<<<<< HEAD
   create_table "userpatterns", force: :cascade do |t|
     t.string "category"
     t.integer "pattern_id"
@@ -203,10 +237,47 @@ ActiveRecord::Schema.define(version: 2019_04_13_121501) do
   end
 
   create_table "users", force: :cascade do |t|
+=======
+  create_table "temp_users", force: :cascade do |t|
+>>>>>>> 625001655c41e3e896fa454714d724cc224bf3cb
     t.integer "user_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "toiletpaper_items", force: :cascade do |t|
+    t.integer "item_id"
+    t.string "category"
+    t.string "maker"
+    t.text "name"
+    t.integer "price"
+    t.boolean "single"
+    t.boolean "double"
+    t.integer "cost"
+    t.integer "soft"
+    t.integer "flavor"
+    t.integer "smooth"
+    t.integer "water"
+    t.boolean "design"
+    t.integer "fun"
+    t.text "series"
+    t.text "affiliate"
+    t.text "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end

@@ -73,5 +73,16 @@ gem 'font-awesome-rails'
 # Froala
 gem 'wysiwyg-rails'
 
+<<<<<<< HEAD
 # Stats
 gem 'statsample'
+=======
+# Active Admin
+gem 'devise'
+gem 'cancancan'
+gem 'activeadmin'
+gem 'activeadmin_froala_editor'
+
+# Google Analytics
+gem 'google-analytics-rails'
+>>>>>>> 625001655c41e3e896fa454714d724cc224bf3cb
