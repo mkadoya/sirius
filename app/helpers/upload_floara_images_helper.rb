@@ -1,0 +1,2 @@
+module UploadFloaraImagesHelper
+end

@@ -17,9 +17,11 @@ form do |f|
     inputs 'Form' do
         input :title
         input :preview
-        input :content, as: :froala_editor, :input_html => { :height => '500px' }
+        input :content, as: :froala_editor, html_options: { id: 'floara-upload-image' }
         input :image
     end
     actions
 end
+
+
 end
