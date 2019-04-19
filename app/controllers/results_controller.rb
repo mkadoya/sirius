@@ -157,8 +157,8 @@ class ResultsController < ApplicationController
 				# 偏差値にx2の補正を入れているので、over 10, under 0になるものはlimitをかける
 				if ss > 10
 					ss = 10
-				elsif ss < 1
-					ss = 1
+				elsif ss < 3
+					ss = 3
 				end
 				# 結果をHash（辞書型）に入れ込む
 				@hash_rec_star.store(key, ss)
