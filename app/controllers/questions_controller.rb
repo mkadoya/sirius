@@ -1,3 +1,4 @@
+
 class QuestionsController < ApplicationController
   def index
     # カテゴリーのフレンドリーネーム
@@ -41,20 +42,11 @@ class QuestionsController < ApplicationController
       range = Range.new(1, @question_num-1)
       range.each do |num|
 	      if num==1
-					# 最初のUserの時は空なので、
-					if OptionResult.find_by(user_id:@user_id, question_id:@start_question_id, result:true).nil? == true
-						option_id = 2
-					else
-		      	option_id = OptionResult.find_by(user_id:@user_id, question_id:@start_question_id, result:true).option_id
-					end
+		      option_id = OptionResult.find_by(user_id:@user_id, question_id:@start_question_id, result:true).option_id
           @n_question_id = Option.find_by(option_id:option_id).next_question_id
           @before_question_id = Option.find_by(option_id:option_id).question_id
         else
-					if OptionResult.find_by(user_id:@user_id, question_id:@start_question_id, result:true).nil? == true
-						option_id = 2
-					else
-          	option_id = OptionResult.find_by(user_id:@user_id, question_id:@n_question_id, result:true).option_id
-					end
+          option_id = OptionResult.find_by(user_id:@user_id, question_id:@n_question_id, result:true).option_id
           @n_question_id = Option.find_by(option_id:option_id).next_question_id
           @before_question_id = Option.find_by(option_id:option_id).question_id
         end
@@ -169,5 +161,4 @@ class QuestionsController < ApplicationController
     # @question_ids = params[:question_ids]
     # @category = params[:category]
   end
-
 end

@@ -1,8 +1,7 @@
 class OptionResultsController < ApplicationController
   def result
-    @user_id = params[:user_id]
+    @user_id = cookies[:user_id]
     @category = params[:category]
-    @user_id = 3
     # Question idを重複なしで、昇順で取り出します
     @arr_question_id = Question.pluck(:question_id).uniq.sort
 

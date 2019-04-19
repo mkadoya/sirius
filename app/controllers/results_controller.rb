@@ -1,20 +1,21 @@
 class ResultsController < ApplicationController
 	def index
-		@user_id = params[:user_id]
+		@user_id = cookies[:user_id]
 		@category = params[:category]
 
 		#アイテムの表示数：偶数のみ可能
 		@item_display_num = 6
 
 		#アイテムの表示行数
-		@item_display_row_num = @item_display_num / 2 -1
+		@item_display_row_num = @item_display_num / 2 - 1
 
 		# 配列の初期化 : Debug用
 		@debug_array = Array.new
 
-		@num_recommend = 10
+		# 推奨個数
+		@num_recommend = 3
 		# remove from 優先順位 star
-		@str_remove_star = ["emmc", "usb_c", "webcamera"]
+		@str_remove_star = ["emmc", "usb_c", "webcamera", "usb_a", "gpu_ram"]
 		# 値が小さいほど良い項目List
 		@column_asc_good = ["price", "weight"]
 
@@ -231,13 +232,13 @@ class ResultsController < ApplicationController
 		# 配列の初期化 : Debug用
 		@debug_array = Array.new
 		# 手動で入れているけど、questionから引き継がれる : Debug用
-		@user_id = 10
+		@user_id = 1
 		# categoryは今後めっちゃくちゃ増えます！！！！ : Debug用
 		@category = "laptop"
 		# おすすめスペックとして算出する上記おすすめ品項目
 		@num_recommend = 10
 		# remove from 優先順位 star
-		@str_remove_star = ["emmc", "usb_c", "webcamera"]
+		@str_remove_star = ["emmc", "usb_c", "webcamera", "usb_a", "gpu_ram"]
 		# 値が小さいほど良い項目List
 		@column_asc_good = ["price", "weight"]
 

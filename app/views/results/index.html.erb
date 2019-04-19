@@ -1,16 +1,12 @@
-<div class="container result">
-  <div class="row result-contents">
-    <div class="col-md-12">
-      <div class="result-type">
-        <p>あなたのタイプ</p>
-        <p><span><%= @charasteristic_title %></span></p>
-        <img src="/type-a.jpg" class="img-fluid img-type" >
-      </div>
-    </div>
-  </div>
-  <div class="row result-contents">
-    <div class="col-md-12">
-      <h5>解説</h5>
+
+			<p>[User-ID] ==> <%= @user_id %></p>
+			<p>[Record] ==> <%= @debug_array %></p>
+
+			<p>[Recommend Avrg] ==> <%= @hash_rec_avrg %></p>
+			<p>[All Avrg] ==> <%= @hash_difference_avrg %></p>
+			<p>[Record] ==> <%= @hash_rec_star %></p>
+			<p>[Debug] ==> <%= @hash_star %></p>
+
     </div>
   </div>
   <div class="row ">
@@ -27,12 +23,6 @@
           <li><%= @hash_rec_star.keys[2] %></li>
 					<p>あなたにとっておすすめの<%= @hash_rec_star.keys[2] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[2]] %>です。</p>
 					<p>標準的な<%= @hash_rec_star.keys[2] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[2]] %>です。</p>
-          <li><%= @hash_rec_star.keys[3] %></li>
-					<p>あなたにとっておすすめの<%= @hash_rec_star.keys[3] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[3]] %>です。</p>
-					<p>標準的な<%= @hash_rec_star.keys[3] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[3]] %>です。</p>
-          <li><%= @hash_rec_star.keys[4] %></li>
-					<p>あなたにとっておすすめの<%= @hash_rec_star.keys[4] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[4]] %>です。</p>
-					<p>標準的な<%= @hash_rec_star.keys[4] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[4]] %>です。</p>
         </ul>
       </div>
     </div>
@@ -151,19 +141,42 @@
                     <%= image_tag "#{item.image}", class: "item-img" %>
                   </div>
 									<div class="col-md-6">
-										<p>値段 : <%= item.price %>円。あなたにおすすめの値段は、<%= @hash_rec_avrg["price"].round(-3).to_i %>円です。</p>
-										<p>スペック : <%= item.cpu_score %>。あなたにおすすめのスペックは、<%= @hash_rec_avrg["cpu_score"].round(-2).to_i %>です。</p>
-										<p>インチ : <%= item.inch %>インチ。あなたにおすすめの画面の大きさは、<%= @hash_rec_avrg["inch"].round(1) %>インチです。</p>
-										<p>重量 : <%= item.weight %>kg。あなたにおすすめの重さは、<%= @hash_rec_avrg["weight"].round(3) %>kgです。</p>
-										<p>バッテリー時間 : <%= item.uptime %>時間です。あなたにおすすめのバッテリー時間は、<%= @hash_rec_avrg["uptime"].round(1) %>時間です。</p>
-
-										<br>
-										<p>[あなたにとって重要な点]</p>
-										<p><%= @hash_rec_star.keys[0] %> : <%= item[@hash_rec_star.keys[0]] %>, あたなにおすすめ : <%= @hash_rec_avrg[@hash_rec_star.keys[0]] %> </p>
-										<p><%= @hash_rec_star.keys[1] %> : <%= item[@hash_rec_star.keys[1]] %>, あたなにおすすめ : <%= @hash_rec_avrg[@hash_rec_star.keys[1]] %> </p>
-										<p><%= @hash_rec_star.keys[2] %> : <%= item[@hash_rec_star.keys[2]] %>, あたなにおすすめ : <%= @hash_rec_avrg[@hash_rec_star.keys[2]] %> </p>
-										<p><%= @hash_rec_star.keys[3] %> : <%= item[@hash_rec_star.keys[3]] %>, あたなにおすすめ : <%= @hash_rec_avrg[@hash_rec_star.keys[3]] %> </p>
-										<p><%= @hash_rec_star.keys[4] %> : <%= item[@hash_rec_star.keys[4]] %>, あたなにおすすめ : <%= @hash_rec_avrg[@hash_rec_star.keys[4]] %> </p>
+										<table class="table table-hover table-condensed specm-table">
+												<thead>
+														<tr>
+																<th>項目</th>
+																<th>商品性能</th>
+																<th>あなたへのおすすめ性能</th>
+														</tr>
+												</thead>
+												<tbody>
+														<tr>
+																<td>値段</td>
+																<td><%= item.price %>円</td>
+																<td><%= @hash_rec_avrg["price"].round(-3).to_i %>円</td>
+														</tr>
+														<tr>
+																<td>スペック</td>
+																<td><%= item.cpu_score %></td>
+																<td><%= @hash_rec_avrg["cpu_score"].round(-2).to_i %></td>
+														</tr>
+														<tr>
+																<td>サイズ</td>
+																<td><%= item.inch %> インチ</td>
+																<td><%= @hash_rec_avrg["inch"].round(1) %> インチ</td>
+														</tr>
+														<tr>
+																<td>重量</td>
+																<td><%= item.weight %> kg</td>
+																<td><%= @hash_rec_avrg["weight"].round(3) %> kg</td>
+														</tr>
+														<tr>
+																<td>バッテリー時間</td>
+																<td><%= item.uptime %> 時間</td>
+																<td><%= @hash_rec_avrg["uptime"].round(1) %> 時間</td>
+														</tr>
+												</tbody>
+										</table>
                   </div>
                   <div class="col-lg-6">
                       <table class="table table-hover table-condensed item-table">
