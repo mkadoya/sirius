@@ -69,7 +69,7 @@ class OptionResultsController < ApplicationController
     @question_num     = params[:question_num] ? params[:question_num].to_i : nil
     @next_question_id = params[:next_question_id] ? params[:next_question_id].to_i : nil
     @selected_option_id  = params[:option_id] ? params[:option_id].to_i : nil
-    @user_id          = cookies[:user_id]
+    @user_id          = params[:user_id]
 
     # オプション一覧の取得
     @options =  Option.where(question_id: @question_id).all

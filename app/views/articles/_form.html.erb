@@ -40,7 +40,15 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <script>
-    $(function() {
-        $('#article_content').froalaEditor();
-    });
+$(function() {
+  // $('#article_content').froalaEditor();
+  $('#article_content').froalaEditor({
+    // Set the image upload URL.
+    imageUploadURL: '/upload_image',
+
+    imageUploadParams: {
+        id: 'my_editor'
+    }
+  });
+});
 </script>
