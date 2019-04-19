@@ -36,10 +36,11 @@ class ResultsController < ApplicationController
 
 		# MatchさせていくためにItem情報を全部入れる
 		@array_recommend_item = Item.all
+		@all_item =  Item.all
 		# Totalのアイテム数
-		@num_all_items = Item.all.count
+		@num_all_items = @all_item.all.count
 		# Seriesの重複を除いたTotalのアイテム数
-		@num_all_series = Item.select(:series).distinct.count
+		@num_all_series = @all_item.select(:series).distinct.count
 		# Userが選択した結果をuser-idとcategoryを指定してDBから抽出
 		@array_record_true = OptionResult.where(user_id: @user_id).where(category: @category).where(result: true)
 
@@ -57,8 +58,8 @@ class ResultsController < ApplicationController
 		# 最もEffectiveが高いもの(match条件にて合致する項目数が少ないもの)を計算
 		@array_match_condition.each do |match_condition|
 			match_condition.each do |record_match|
-				@array_effective_column << [record_match.item_clmn, 1 - Item.where("#{record_match.item_clmn} >= ?", record_match.min).where("#{record_match.item_clmn} <= ?", record_match.max).count.to_f/@num_all_items]
-				@hash_difference_avrg.store(record_match.item_clmn, Item.average(:"#{record_match.item_clmn}").round(1))
+				@array_effective_column << [record_match.item_clmn, 1 - @all_item.where("#{record_match.item_clmn} >= ?", record_match.min).where("#{record_match.item_clmn} <= ?", record_match.max).count.to_f/@num_all_items]
+				@hash_difference_avrg.store(record_match.item_clmn, @all_item.average(:"#{record_match.item_clmn}").round(1))
 				# @array_difference_avrg  << [record_match.item_clmn, Item.average(:record_match.item_clmn), @array_item.first(5).average(:record_match.item_clmn)]
 			end
 		end
@@ -103,7 +104,7 @@ class ResultsController < ApplicationController
 				# Seiries一覧からおすすめItem一覧を取得
 				@array_recommend_item_distinct.each do |recommend_item_distinct|
 					# Series重複を省いたおすすめ品を結果に格納する
-					@array_item << Item.find_by(series: recommend_item_distinct.series)
+					@array_item << @all_item.find_by(series: recommend_item_distinct.series)
 					@array_item_series << recommend_item_distinct.series
 				end
 			end
@@ -139,16 +140,16 @@ class ResultsController < ApplicationController
 		# Starのためのおすすめ品の平均値からのずれを算出
 		@hash_rec_avrg.each do |key, value|
 			if value != 0
-				if Item.pluck(:"#{key}").first.is_a?(Numeric) == false
-					@value_star = Item.pluck(:"#{key}").join(" ").gsub("false", "0").gsub("true", "1").split(" ").map(&:to_i)
+				if @all_item.pluck(:"#{key}").first.is_a?(Numeric) == false
+					@value_star = @all_item.pluck(:"#{key}").join(" ").gsub("false", "0").gsub("true", "1").split(" ").map(&:to_i)
 				else
-					@value_star = Item.pluck(:"#{key}")
+					@value_star = @all_item.pluck(:"#{key}")
 				end
 				@hash_star.store(key, (10 - (@value_star.sort.reverse.index{|i| i <= value} / @num_all_items.to_f * 10).round))
 				# 基本項目をVectoyに入れる
 				@df_default = Daru::Vector[@value_star]
-				# 基本項目での推奨値を偏差値計算して中央値を5に変更、ただし4-7に固まって楽しくないので、偏差値は2倍の変動にしている
-				ss = (((@hash_rec_avrg["#{key}"] - @df_default.mean )/@df_default.std * 20 + 50)/10).round
+				# 基本項目での推奨値を偏差値計算して中央値を5に変更、ただし4-7に固まって楽しくないので、偏差値は3倍の変動にしている
+				ss = (((@hash_rec_avrg["#{key}"] - @df_default.mean )/@df_default.std * 30 + 50)/10).round
 				# 項目によっては（例えば値段）、小さい値の方が良いのでその項目は10から偏差値をひいいて評価
 				if @column_asc_good.include?(key) == true
 					ss = 10 - ss
@@ -156,8 +157,8 @@ class ResultsController < ApplicationController
 				# 偏差値にx2の補正を入れているので、over 10, under 0になるものはlimitをかける
 				if ss > 10
 					ss = 10
-				elsif ss < 0
-					ss = 0
+				elsif ss < 1
+					ss = 1
 				end
 				# 結果をHash（辞書型）に入れ込む
 				@hash_rec_star.store(key, ss)
@@ -204,7 +205,7 @@ class ResultsController < ApplicationController
 
 		@items_array = Array.new
 		@array_item.each do |item|
-			@series_items = Item.where(series: item.series).all
+			@series_items = @all_item.where(series: item.series).all
 			@series_items.each do |s_item|
 				@items_array.push(s_item)
 			end

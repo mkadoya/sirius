@@ -175,6 +175,44 @@
 																<td><%= item.uptime %> 時間</td>
 																<td><%= @hash_rec_avrg["uptime"].round(1) %> 時間</td>
 														</tr>
+													</tbody>
+											</table>
+	                  </div>
+										<div class="col-md-6">
+											<table class="table table-hover table-condensed specm-table">
+													<thead>
+															<tr>
+																	<th>あなたにとって重要な項目</th>
+																	<th>商品性能</th>
+																	<th>あなたへのおすすめ性能</th>
+															</tr>
+													</thead>
+													<tbody>
+														<tr>
+																<td><%= @hash_rec_star.keys[0] %></td>
+																<td><%= item[@hash_rec_star.keys[0]] %></td>
+																<td><%= @hash_rec_avrg[@hash_rec_star.keys[0]] %></td>
+														</tr>
+														<tr>
+																<td><%= @hash_rec_star.keys[1] %></td>
+																<td><%= item[@hash_rec_star.keys[1]] %></td>
+																<td><%= @hash_rec_avrg[@hash_rec_star.keys[1]] %></td>
+														</tr>
+														<tr>
+																<td><%= @hash_rec_star.keys[2] %></td>
+																<td><%= item[@hash_rec_star.keys[2]] %></td>
+																<td><%= @hash_rec_avrg[@hash_rec_star.keys[2]] %></td>
+														</tr>
+														<tr>
+																<td><%= @hash_rec_star.keys[3] %></td>
+																<td><%= item[@hash_rec_star.keys[3]] %></td>
+																<td><%= @hash_rec_avrg[@hash_rec_star.keys[3]] %></td>
+														</tr>
+														<tr>
+																<td><%= @hash_rec_star.keys[4] %></td>
+																<td><%= item[@hash_rec_star.keys[4]] %></td>
+																<td><%= @hash_rec_avrg[@hash_rec_star.keys[4]] %></td>
+														</tr>
 												</tbody>
 										</table>
                   </div>

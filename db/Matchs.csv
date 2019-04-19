@@ -1,8 +1,8 @@
 match_id,category,option_id,item_clmn,min,max
 1,laptop,1,price,0,200000
-2,laptop,2,price,0,1000000
-3,laptop,3,price,0,120000
-4,laptop,4,cpu_score,8000,100000
+2,laptop,2,price,0,150000
+3,laptop,3,price,0,1000000
+4,laptop,4,cpu_score,7000,100000
 5,laptop,4,ram,8,128
 6,laptop,4,ssd,128,10000
 7,laptop,5,price,0,120000
