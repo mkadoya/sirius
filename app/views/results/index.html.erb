@@ -1,18 +1,32 @@
+<p>[User-ID] ==> <%= @user_id %></p>
+<p>[Record] ==> <%= @debug_array %></p>
 
-			<p>[User-ID] ==> <%= @user_id %></p>
-			<p>[Record] ==> <%= @debug_array %></p>
+<p>[Recommend Avrg] ==> <%= @hash_rec_avrg %></p>
+<p>[All Avrg] ==> <%= @hash_difference_avrg %></p>
+<p>[Record] ==> <%= @hash_rec_star %></p>
+<p>[Debug] ==> <%= @hash_star %></p>
 
-			<p>[Recommend Avrg] ==> <%= @hash_rec_avrg %></p>
-			<p>[All Avrg] ==> <%= @hash_difference_avrg %></p>
-			<p>[Record] ==> <%= @hash_rec_star %></p>
-			<p>[Debug] ==> <%= @hash_star %></p>
+<p>一覧：おすすめ品 ! </p>
+<p>[おすすめNo1]<%= @array_item[0].series %> ====> <%= @array_item[0].name %></p>
+<p>[おすすめNo2]<%= @array_item[1].series %> ====> <%= @array_item[1].name %></p>
+<p>[おすすめNo3]<%= @array_item[2].series %> ====> <%= @array_item[2].name %></p>
+<p>[おすすめNo4]<%= @array_item[3].series %> ====> <%= @array_item[3].name %></p>
+<p>[おすすめNo5]<%= @array_item[4].series %> ====> <%= @array_item[4].name %></p>
+<p>[おすすめNo6]<%= @array_item[5].series %> ====> <%= @array_item[5].name %></p>
+<p>[おすすめNo7]<%= @array_item[6].series %> ====> <%= @array_item[6].name %></p>
+<p>[おすすめNo8]<%= @array_item[7].series %> ====> <%= @array_item[7].name %></p>
+<p>[おすすめNo9]<%= @array_item[8].series %> ====> <%= @array_item[8].name %></p>
+<p>[おすすめNo10]<%= @array_item[9].series %> ====> <%= @array_item[9].name %></p>
 
-    </div>
+<%# ここから大量コメントアウト %>
+<% if false%>
+
+</div>
   </div>
   <div class="row ">
     <div class="col-md-12">
       <div class="result-commentary">
-        <p>あなたは　＜<%= @charasteristic_body %>＞　という特徴をもっています。</p>
+        <p>あなたは　<修正必要。。。>　という特徴をもっています。</p>
         <ul>
           <li><%= @hash_rec_star.keys[0] %></li>
           <p>あなたにとっておすすめの<%= @hash_rec_star.keys[0] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[0]] %>です。</p>
@@ -344,8 +358,6 @@
 
 
 
-<%# ここから大量コメントアウト %>
-<% if false%>
 <div class="top-main">
   <div class="top-contents">
     <div class="card bg-info result">

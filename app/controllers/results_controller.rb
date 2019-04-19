@@ -1,23 +1,23 @@
 class ResultsController < ApplicationController
 	def index
-		@user_id = cookies[:user_id]
-		@category = params[:category]
 
+		# 人が定義しているParameterシリーズ
 		#アイテムの表示数：偶数のみ可能
 		@item_display_num = 6
-
 		#アイテムの表示行数
 		@item_display_row_num = @item_display_num / 2 - 1
-
-		# 配列の初期化 : Debug用
-		@debug_array = Array.new
-
 		# 推奨個数
 		@num_recommend = 3
-		# remove from 優先順位 star
-		@str_remove_star = ["emmc", "usb_c", "webcamera", "usb_a", "gpu_ram"]
-		# 値が小さいほど良い項目List
-		@column_asc_good = ["price", "weight"]
+		# 評価の最高値
+		@num_star_max = 10
+		# 評価の最低値、実際は0だけど、あまりに低いとテンション下がるのでBaseライン
+		@num_star_min = 3
+		# 評価のための偏差値補正
+		@num_std_mod = 3
+
+		# User-id, categoryをquestion_controllerから引き受ける
+		@user_id = cookies[:user_id]
+		@category = params[:category]
 
 		# 配列の初期化
 		@array_option_id = Array.new
@@ -28,15 +28,39 @@ class ResultsController < ApplicationController
 		@array_star = Array.new
 		@array_star_normalize = Array.new
 		@array_match_condition_test = Array.new
+		@debug_array = Array.new
 		# 辞書型の初期化
 		@hash_difference_avrg = Hash.new
 		@hash_rec_avrg = Hash.new
 		@hash_rec_star = Hash.new
 		@hash_star = Hash.new
 
+# ------ ここから、修正必要 by Takai -----------------------------------------------------------
+# ------ ここから、修正必要 by Takai -----------------------------------------------------------
+# ------ ここから、修正必要 by Takai -----------------------------------------------------------
+# ------ ここから、修正必要 by Takai -----------------------------------------------------------
+# ------ ここから、修正必要 by Takai -----------------------------------------------------------
+		# いけていないかつ、Categoryが増えるごとにCodingしないといけないので変更必要。。。
+		# remove from 優先順位 star
+		@str_remove_star = ["emmc", "usb_c", "webcamera", "usb_a", "gpu_ram"]
+		# 値が小さいほど良い項目List
+		@column_asc_good = ["price", "weight"]
+
 		# MatchさせていくためにItem情報を全部入れる
-		@array_recommend_item = Item.all
-		@all_item =  Item.all
+		if @category == "laptop"
+			@array_recommend_item = Item.all
+			@all_item = Item.all
+		else
+			@array_recommend_item = ToiletpaperItem.all
+			@all_item = ToiletpaperItem.all
+		end
+
+# ------ ここまで、修正必要 by Takai -----------------------------------------------------------
+# ------ ここまで、修正必要 by Takai -----------------------------------------------------------
+# ------ ここまで、修正必要 by Takai -----------------------------------------------------------
+# ------ ここまで、修正必要 by Takai -----------------------------------------------------------
+# ------ ここまで、修正必要 by Takai -----------------------------------------------------------
+
 		# Totalのアイテム数
 		@num_all_items = @all_item.all.count
 		# Seriesの重複を除いたTotalのアイテム数
@@ -64,24 +88,25 @@ class ResultsController < ApplicationController
 			end
 		end
 
-		# 最もEffectiveが高いもの(match条件にて合致する項目数が少ないもの)をSortして昇順で5つ取得
-		# @array_effective_column = @array_effective_column.reject{|clmn, val| clmn == @str_remove_star}.uniq!(&:first).sort { |a, b| b[1] <=> a[1] }.first(5)
-
-		# Star設定
-		# @array_effective_column.each do |colmn, val|
-		# 	@array_star << val
-		# end
-		# @star_max = @array_star.max
-		# @star_min = @array_star.min
-		# @array_star.each do |val|
-		# 	@array_star_normalize << ((val - @star_min)/(@star_max - @star_min) * 6).ceil + 3
-		# end
-
 		# おすすめ品がTotal個数ではなかったら。。Match DBから取得したFilter条件の末尾を削除して再度Item DBをFilter、おすすめ品が5つ以上になるまでloop
 		while @array_item[@num_all_series - 1].nil?
 
-			# 全Itemを格納
-			@array_recommend_item = Item.all
+# ------ ここから、修正必要 by Takai -----------------------------------------------------------
+# ------ ここから、修正必要 by Takai -----------------------------------------------------------
+# ------ ここから、修正必要 by Takai -----------------------------------------------------------
+# ------ ここから、修正必要 by Takai -----------------------------------------------------------
+# ------ ここから、修正必要 by Takai -----------------------------------------------------------
+			# MatchさせていくためにItem情報を全部入れる
+			if @category == "laptop"
+				@array_recommend_item = Item.all
+			else
+				@array_recommend_item = ToiletpaperItem.all
+			end
+# ------ ここまで、修正必要 by Takai -----------------------------------------------------------
+# ------ ここまで、修正必要 by Takai -----------------------------------------------------------
+# ------ ここまで、修正必要 by Takai -----------------------------------------------------------
+# ------ ここまで、修正必要 by Takai -----------------------------------------------------------
+# ------ ここまで、修正必要 by Takai -----------------------------------------------------------
 
 			# すでにおすすめされておすすめ品(@array_item)に格納されているSeriesをItem.allから削除
 			@array_item_series.each do |item_series|
@@ -149,16 +174,16 @@ class ResultsController < ApplicationController
 				# 基本項目をVectoyに入れる
 				@df_default = Daru::Vector[@value_star]
 				# 基本項目での推奨値を偏差値計算して中央値を5に変更、ただし4-7に固まって楽しくないので、偏差値は3倍の変動にしている
-				ss = (((@hash_rec_avrg["#{key}"] - @df_default.mean )/@df_default.std * 30 + 50)/10).round
+				ss = (((@hash_rec_avrg["#{key}"] - @df_default.mean )/@df_default.std * 10 * @num_std_mod + 50)/10).round
 				# 項目によっては（例えば値段）、小さい値の方が良いのでその項目は10から偏差値をひいいて評価
 				if @column_asc_good.include?(key) == true
-					ss = 10 - ss
+					ss = @num_star_max - ss
 				end
-				# 偏差値にx2の補正を入れているので、over 10, under 0になるものはlimitをかける
-				if ss > 10
-					ss = 10
-				elsif ss < 3
-					ss = 3
+				# 偏差値にx2の補正を入れているので、over @num_star_max, under @num_star_maxになるものはlimitをかける
+				if ss > @num_star_max
+					ss = @num_star_max
+				elsif ss < @num_star_min
+					ss = @num_star_min
 				end
 				# 結果をHash（辞書型）に入れ込む
 				@hash_rec_star.store(key, ss)
@@ -175,32 +200,6 @@ class ResultsController < ApplicationController
 		@hash_rec_star = Hash[@hash_rec_star.sort_by{ |_, v| -v }]
 		@hash_star = Hash[@hash_star.sort_by{ |_, v| -v }]
 
-# ------ 以下、大幅Update必要 ! ----------------------------------------------------------------------------
-    # 質問の答えから、合致するpattern_idの列を取得。今は、質問数12問固定。。そのうち可変に対応できるようにします
-    @pattern_pattern_id = 1
-
-    # Pattern取得
-    @characteristic = Characteristic.find_by(category: @category, pattern_id: @pattern_pattern_id)
-
-    # Patternから属性情報の取得
-    @charasteristic_title = @characteristic.title
-    @charasteristic_body = @characteristic.body
-    @charasteristic_chara_1_str = @characteristic.chara_1_str
-    @charasteristic_chara_2_str = @characteristic.chara_2_str
-    @charasteristic_chara_3_str = @characteristic.chara_3_str
-    @charasteristic_chara_4_str = @characteristic.chara_4_str
-    @charasteristic_chara_5_str = @characteristic.chara_5_str
-    @charasteristic_chara_1_val = @characteristic.chara_1_val
-    @charasteristic_chara_2_val = @characteristic.chara_2_val
-    @charasteristic_chara_3_val = @characteristic.chara_3_val
-    @charasteristic_chara_4_val = @characteristic.chara_4_val
-    @charasteristic_chara_5_val = @characteristic.chara_5_val
-    @charasteristic_item_1 = @characteristic.item_1
-    @charasteristic_item_2 = @characteristic.item_2
-    @charasteristic_item_3 = @characteristic.item_3
-    @charasteristic_item_4 = @characteristic.item_4
-    @charasteristic_item_5 = @characteristic.item_5
-# ------ 以上、大幅Update必要 ! ----------------------------------------------------------------------------
 		@item_counter = 0
 
 		@items_array = Array.new

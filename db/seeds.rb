@@ -137,15 +137,15 @@ require 'csv'
 # end
 
 #以下はOptionを呼び出すパターン
- #   CSV.foreach('db/Options.csv', headers: true) do |row|
- #   Option.create(
- #       :option_id => row[0],
- #       :category => row[1],
- #       :question_id => row[2],
- #       :content => row[3],
- #       :next_question_id => row[4],
- #   )
- # end
+   CSV.foreach('db/Options.csv', headers: true) do |row|
+   Option.create(
+       :option_id => row[0],
+       :category => row[1],
+       :question_id => row[2],
+       :content => row[3],
+       :next_question_id => row[4],
+   )
+ end
 
 # 以下はMatchを呼び出すパターン
  CSV.foreach('db/Matchs.csv', headers: true) do |row|
