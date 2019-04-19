@@ -10,9 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2019_04_13_121501) do
-=======
 ActiveRecord::Schema.define(version: 2019_04_18_052838) do
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -40,7 +37,6 @@ ActiveRecord::Schema.define(version: 2019_04_18_052838) do
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
->>>>>>> 625001655c41e3e896fa454714d724cc224bf3cb
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -137,15 +133,12 @@ ActiveRecord::Schema.define(version: 2019_04_18_052838) do
     t.text "sirial"
     t.text "affiliate"
     t.text "image"
-<<<<<<< HEAD
     t.integer "volume"
     t.integer "gpu_score"
     t.boolean "windows"
     t.boolean "mac"
     t.boolean "chrome"
-=======
     t.string "category"
->>>>>>> 625001655c41e3e896fa454714d724cc224bf3cb
   end
 
   create_table "matches", force: :cascade do |t|
@@ -216,30 +209,7 @@ ActiveRecord::Schema.define(version: 2019_04_18_052838) do
     t.string "category"
   end
 
-<<<<<<< HEAD
-  create_table "userpatterns", force: :cascade do |t|
-    t.string "category"
-    t.integer "pattern_id"
-    t.boolean "answer_1"
-    t.boolean "answer_2"
-    t.boolean "answer_3"
-    t.boolean "answer_4"
-    t.boolean "answer_5"
-    t.boolean "answer_6"
-    t.boolean "answer_7"
-    t.boolean "answer_8"
-    t.boolean "answer_9"
-    t.boolean "answer_10"
-    t.boolean "answer_11"
-    t.boolean "answer_12"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "users", force: :cascade do |t|
-=======
   create_table "temp_users", force: :cascade do |t|
->>>>>>> 625001655c41e3e896fa454714d724cc224bf3cb
     t.integer "user_id"
     t.string "name"
     t.datetime "created_at", null: false
@@ -264,6 +234,25 @@ ActiveRecord::Schema.define(version: 2019_04_18_052838) do
     t.text "series"
     t.text "affiliate"
     t.text "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "userpatterns", force: :cascade do |t|
+    t.string "category"
+    t.integer "pattern_id"
+    t.boolean "answer_1"
+    t.boolean "answer_2"
+    t.boolean "answer_3"
+    t.boolean "answer_4"
+    t.boolean "answer_5"
+    t.boolean "answer_6"
+    t.boolean "answer_7"
+    t.boolean "answer_8"
+    t.boolean "answer_9"
+    t.boolean "answer_10"
+    t.boolean "answer_11"
+    t.boolean "answer_12"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

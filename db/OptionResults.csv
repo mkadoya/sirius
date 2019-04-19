@@ -299,3 +299,11 @@ user_id,category,question_id,option_id,result
 10,laptop,12,28,TRUE
 10,laptop,12,29,FALSE
 10,laptop,12,30,FALSE
+11,toiletpaper,14,33,FALSE
+11,toiletpaper,14,34,TRUE
+11,toiletpaper,15,35,FALSE
+11,toiletpaper,15,36,TRUE
+11,toiletpaper,16,37,FALSE
+11,toiletpaper,16,38,TRUE
+11,toiletpaper,17,39,FALSE
+11,toiletpaper,17,40,TRUE

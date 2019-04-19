@@ -136,64 +136,39 @@ require 'csv'
 # )
 # end
 
-<<<<<<< HEAD
-# 以下はOptionを呼び出すパターン
-#   CSV.foreach('db/Options.csv', headers: true) do |row|
-#   Option.create(
-#       :option_id => row[0],
-#       :category => row[1],
-#       :question_id => row[2],
-#       :content => row[3],
-#       :next_question_id => row[4],
-#   )
-# end
-=======
 #以下はOptionを呼び出すパターン
-#    CSV.foreach('db/Options.csv', headers: true) do |row|
-#    Option.create(
-#        :option_id => row[0],
-#        :category => row[1],
-#        :question_id => row[2],
-#        :content => row[3],
-#        :next_question_id => row[4],
-#    )
-#  end
->>>>>>> 625001655c41e3e896fa454714d724cc224bf3cb
+ #   CSV.foreach('db/Options.csv', headers: true) do |row|
+ #   Option.create(
+ #       :option_id => row[0],
+ #       :category => row[1],
+ #       :question_id => row[2],
+ #       :content => row[3],
+ #       :next_question_id => row[4],
+ #   )
+ # end
 
 # 以下はMatchを呼び出すパターン
- CSV.foreach('db/Matchs.csv', headers: true) do |row|
- Match.create(
-     :match_id => row[0],
-     :category => row[1],
-     :option_id => row[2],
-     :item_clmn => row[3],
-     :min => row[4],
-     :max => row[5]
- )
- end
-
-<<<<<<< HEAD
-#以下はOptionResultを呼び出すパターン
- # CSV.foreach('db/OptionResults.csv', headers: true) do |row|
- # OptionResult.create(
- #     :user_id => row[0],
+ # CSV.foreach('db/Matchs.csv', headers: true) do |row|
+ # Match.create(
+ #     :match_id => row[0],
  #     :category => row[1],
- #     :question_id => row[2],
- #     :option_id => row[3],
- #     :result => row[4],
+ #     :option_id => row[2],
+ #     :item_clmn => row[3],
+ #     :min => row[4],
+ #     :max => row[5]
  # )
  # end
-=======
+
 # 以下はOptionResultを呼び出すパターン
-#  CSV.foreach('db/OptionResults.csv', headers: true) do |row|
-#  OptionResult.create(
-#      :user_id => row[0],
-#      :category => row[1],
-#      :question_id => row[2],
-#      :option_id => row[3],
-#      :result => row[4],
-#  )
-#  end
+ CSV.foreach('db/OptionResults.csv', headers: true) do |row|
+ OptionResult.create(
+     :user_id => row[0],
+     :category => row[1],
+     :question_id => row[2],
+     :option_id => row[3],
+     :result => row[4],
+ )
+ end
 
 #以下はOptionResultを呼び出すパターン
 # CSV.foreach('db/Toiletpaper_items.csv', headers: true) do |row|
@@ -220,4 +195,3 @@ require 'csv'
 
 #以下はActive Admin用
 # AdminUser.create!(email: 'mkadoya111@gmail.com', password: 'pa55w0rd!', password_confirmation: 'pa55w0rd!') if Rails.env.development?
->>>>>>> 625001655c41e3e896fa454714d724cc224bf3cb

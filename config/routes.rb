@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'items/series' => "items#series"
   get 'results/index'
   get 'results/index2'
+  get 'results/index3'
   get 'results/create' => "results/create"
   get 'questions/index' => "questions#index"
   get 'questions/option_index' => "questions#option_index"

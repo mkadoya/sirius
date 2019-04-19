@@ -1,38 +1,3 @@
-<<<<<<< HEAD
-option_id,category,question_id,content,next_question_id
-1,laptop,1,買う,13
-2,laptop,1,もう少し高い方がよい,2
-3,laptop,1,もう少し安い方がよい,2
-4,laptop,2,「性能」が重要,3
-5,laptop,2,「値段」が重要,3
-6,laptop,3,Windows派,4
-7,laptop,3,Mac派,4
-8,laptop,4,頻繁に外で使う,5
-9,laptop,4,たまに外で使う,5
-10,laptop,4,家でしか使わない,5
-11,laptop,5,YES,6
-12,laptop,5,NO,6
-13,laptop,6,YES,7
-14,laptop,6,NO,7
-15,laptop,7,YES,8
-16,laptop,7,NO,8
-17,laptop,8,YES,9
-18,laptop,8,NO,9
-19,laptop,9,大量に保存する,10
-20,laptop,9,少し保存する,10
-21,laptop,9,ほとんどしない,10
-22,laptop,10,長時間利用する,11
-23,laptop,10,少し利用する,11
-24,laptop,10,利用しない,11
-25,laptop,11,1ポートで十分,12
-26,laptop,11,2ポート必要,12
-27,laptop,11,3ポート以上必要,12
-28,laptop,12,頻繁に利用したい,0
-29,laptop,12,たまに利用したい,0
-30,laptop,12,利用しない,0
-31,laptop,13,YES,2
-32,laptop,13,NO,2
-=======
 option_id,category,question_id,content,next_question_id
 1,laptop,1,買う,13
 2,laptop,1,もう少し安い方がよい,2
@@ -74,4 +39,3 @@ option_id,category,question_id,content,next_question_id
 38,toiletpaper,16,NO,17
 39,toiletpaper,17,YES,0
 40,toiletpaper,17,NO,0
->>>>>>> 625001655c41e3e896fa454714d724cc224bf3cb
