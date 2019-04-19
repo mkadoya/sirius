@@ -18,16 +18,21 @@
       <div class="result-commentary">
         <p>あなたは　＜<%= @charasteristic_body %>＞　という特徴をもっています。</p>
         <ul>
-          <li><%= @charasteristic_chara_1_str %></li>
-          <p>説明テキスト</p>
-          <li><%= @charasteristic_chara_2_str %></li>
-          <p>説明テキスト</p>
-          <li><%= @charasteristic_chara_3_str %></li>
-          <p>説明テキスト</p>
-          <li><%= @charasteristic_chara_4_str %></li>
-          <p>説明テキスト</p>
-          <li><%= @charasteristic_chara_5_str %></li>
-          <p>説明テキスト</p>
+          <li><%= @hash_rec_star.keys[0] %></li>
+          <p>あなたにとっておすすめの<%= @hash_rec_star.keys[0] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[0]] %>です。</p>
+					<p>標準的な<%= @hash_rec_star.keys[0] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[0]] %>です。</p>
+          <li><%= @hash_rec_star.keys[1] %></li>
+					<p>あなたにとっておすすめの<%= @hash_rec_star.keys[1] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[1]] %>です。</p>
+					<p>標準的な<%= @hash_rec_star.keys[1] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[1]] %>です。</p>
+          <li><%= @hash_rec_star.keys[2] %></li>
+					<p>あなたにとっておすすめの<%= @hash_rec_star.keys[2] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[2]] %>です。</p>
+					<p>標準的な<%= @hash_rec_star.keys[2] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[2]] %>です。</p>
+          <li><%= @hash_rec_star.keys[3] %></li>
+					<p>あなたにとっておすすめの<%= @hash_rec_star.keys[3] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[3]] %>です。</p>
+					<p>標準的な<%= @hash_rec_star.keys[3] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[3]] %>です。</p>
+          <li><%= @hash_rec_star.keys[4] %></li>
+					<p>あなたにとっておすすめの<%= @hash_rec_star.keys[4] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[4]] %>です。</p>
+					<p>標準的な<%= @hash_rec_star.keys[4] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[4]] %>です。</p>
         </ul>
       </div>
     </div>
@@ -40,21 +45,28 @@
   <div class="row ">
     <div class="col-md-12">
       <div class="result-chart">
-        <p>あなたにとって重要な５つのポイント</p>
+        <p>項目</p>
         <div class="result-chart-graph">
-          <input id='c_1' name='c_1' type='hidden' value='<%= @charasteristic_chara_1_str %>'>
-          <input id='c_2' name='c_2' type='hidden' value='<%= @charasteristic_chara_2_str %>'>
-          <input id='c_3' name='c_3' type='hidden' value='<%= @charasteristic_chara_3_str %>'>
-          <input id='c_4' name='c_4' type='hidden' value='<%= @charasteristic_chara_4_str %>'>
-          <input id='c_5' name='c_5' type='hidden' value='<%= @charasteristic_chara_5_str %>'>
-          <input id='c_v_1' name='c_v_1' type='hidden' value='<%= @charasteristic_chara_1_val%>'>
-          <input id='c_v_2' name='c_v_2' type='hidden' value='<%= @charasteristic_chara_2_val%>'>
-          <input id='c_v_3' name='c_v_3' type='hidden' value='<%= @charasteristic_chara_3_val%>'>
-          <input id='c_v_4' name='c_v_4' type='hidden' value='<%= @charasteristic_chara_4_val%>'>
-          <input id='c_v_5' name='c_v_5' type='hidden' value='<%= @charasteristic_chara_5_val%>'>
-
+          <input id='c_1' name='c_1' type='hidden' value='安さ'>
+          <input id='c_2' name='c_2' type='hidden' value='スペック'>
+          <input id='c_3' name='c_3' type='hidden' value='画面の大きさ'>
+          <input id='c_4' name='c_4' type='hidden' value='軽さ'>
+          <input id='c_5' name='c_5' type='hidden' value='バッテリー時間'>
+          <input id='c_v_1' name='c_v_1' type='hidden' value='<%= @hash_rec_star["price"]%>'>
+          <input id='c_v_2' name='c_v_2' type='hidden' value='<%= @hash_rec_star["cpu_score"]%>'>
+          <input id='c_v_3' name='c_v_3' type='hidden' value='<%= @hash_rec_star["inch"]%>'>
+          <input id='c_v_4' name='c_v_4' type='hidden' value='<%= @hash_rec_star["weight"]%>'>
+          <input id='c_v_5' name='c_v_5' type='hidden' value='<%= @hash_rec_star["uptime"]%>'>
           <canvas id="resultChart"></canvas>
         </div>
+				<div class="result-commentary-fundamental">
+					<p>[安さ] ★<%= @hash_rec_star["price"] %> : 平均の値段は、<%= @hash_difference_avrg["price"].round(-3).to_i %>円です。あなたにおすすめの値段は、<%= @hash_rec_avrg["price"].round(-3).to_i %>円です。</p>
+					<p>[スペック] ★<%= @hash_rec_star["cpu_score"] %> : 平均のスペックは、<%= @hash_difference_avrg["cpu_score"].round(-2).to_i %>です。あなたにおすすめのスペックは、<%= @hash_rec_avrg["cpu_score"].round(-2).to_i %>です。</p>
+					<p>[画面の大きさ] ★<%= @hash_rec_star["inch"] %> : 平均の画面の大きさは、<%= @hash_difference_avrg["inch"].round(1) %>インチです。あなたにおすすめの画面の大きさは、<%= @hash_rec_avrg["inch"].round(1) %>インチです。</p>
+					<p>[軽さ] ★<%= @hash_rec_star["weight"] %> : 平均の重量は、<%= @hash_difference_avrg["weight"].round(3) %>kgです。あなたにおすすめの重量は、<%= @hash_rec_avrg["weight"].round(3) %>kgです。</p>
+					<p>[バッテリー時間] ★<%= @hash_rec_star["uptime"] %> : 平均のバッテリー時間は、<%= @hash_difference_avrg["uptime"].round(1) %>時間です。あなたにおすすめのバッテリー時間は、<%= @hash_rec_avrg["uptime"].round(1) %>時間です。</p>
+	      </div>
+
       </div>
     </div>
   </div>
@@ -66,7 +78,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="result-commentary">
-        <p>今までのあなたが質問に回答してきた結果をもとに、その特徴にあったアイテムのランキングを表示しています。気になったアイテムがあったら「詳細を見る」ページで参考にしてください。</p>
+        <p>あなたへのおすすめ商品</p>
       </div>
     </div>
   </div>
@@ -137,6 +149,21 @@
               <div class="row">
                   <div class="col-md-6">
                     <%= image_tag "#{item.image}", class: "item-img" %>
+                  </div>
+									<div class="col-md-6">
+										<p>値段 : <%= item.price %>円。あなたにおすすめの値段は、<%= @hash_rec_avrg["price"].round(-3).to_i %>円です。</p>
+										<p>スペック : <%= item.cpu_score %>。あなたにおすすめのスペックは、<%= @hash_rec_avrg["cpu_score"].round(-2).to_i %>です。</p>
+										<p>インチ : <%= item.inch %>インチ。あなたにおすすめの画面の大きさは、<%= @hash_rec_avrg["inch"].round(1) %>インチです。</p>
+										<p>重量 : <%= item.weight %>kg。あなたにおすすめの重さは、<%= @hash_rec_avrg["weight"].round(3) %>kgです。</p>
+										<p>バッテリー時間 : <%= item.uptime %>時間です。あなたにおすすめのバッテリー時間は、<%= @hash_rec_avrg["uptime"].round(1) %>時間です。</p>
+
+										<br>
+										<p>[あなたにとって重要な点]</p>
+										<p><%= @hash_rec_star.keys[0] %> : <%= item[@hash_rec_star.keys[0]] %>, あたなにおすすめ : <%= @hash_rec_avrg[@hash_rec_star.keys[0]] %> </p>
+										<p><%= @hash_rec_star.keys[1] %> : <%= item[@hash_rec_star.keys[1]] %>, あたなにおすすめ : <%= @hash_rec_avrg[@hash_rec_star.keys[1]] %> </p>
+										<p><%= @hash_rec_star.keys[2] %> : <%= item[@hash_rec_star.keys[2]] %>, あたなにおすすめ : <%= @hash_rec_avrg[@hash_rec_star.keys[2]] %> </p>
+										<p><%= @hash_rec_star.keys[3] %> : <%= item[@hash_rec_star.keys[3]] %>, あたなにおすすめ : <%= @hash_rec_avrg[@hash_rec_star.keys[3]] %> </p>
+										<p><%= @hash_rec_star.keys[4] %> : <%= item[@hash_rec_star.keys[4]] %>, あたなにおすすめ : <%= @hash_rec_avrg[@hash_rec_star.keys[4]] %> </p>
                   </div>
                   <div class="col-lg-6">
                       <table class="table table-hover table-condensed item-table">

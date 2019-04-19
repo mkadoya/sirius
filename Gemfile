@@ -84,3 +84,6 @@ gem 'google-analytics-rails'
 
 # Thin
 gem 'thin'
+
+# Stats用
+gem 'statsample'

@@ -13,7 +13,13 @@ class QuestionsController < ApplicationController
 
     # Cookie情報がない場合、新規ユーザーを作成する。
     if !@user_id
-      @new_user_id = TempUser.order(user_id: "DESC").first.user_id + 1
+			# 最初のユーザの場合には、@new_user_idとして1を設定
+      if TempUser.first.nil? == true
+        @new_user_id = 1
+			# 2番以降のUserは、既存のUser-idの一番大き奴に1足したIDにする
+      else
+        @new_user_id = TempUser.order(user_id: "DESC").first.user_id + 1
+      end
       @new_user_name = "Guest"
       @user = TempUser.create(user_id: @new_user_id, name:@new_user_name)
       @user.save
@@ -35,11 +41,20 @@ class QuestionsController < ApplicationController
       range = Range.new(1, @question_num-1)
       range.each do |num|
 	      if num==1
-		      option_id = OptionResult.find_by(user_id:@user_id, question_id:@start_question_id, result:true).option_id
+					# 最初のUserの時は空なので、
+					if OptionResult.find_by(user_id:@user_id, question_id:@start_question_id, result:true).nil? == true
+						option_id = 2
+					else
+		      	option_id = OptionResult.find_by(user_id:@user_id, question_id:@start_question_id, result:true).option_id
+					end
           @n_question_id = Option.find_by(option_id:option_id).next_question_id
           @before_question_id = Option.find_by(option_id:option_id).question_id
         else
-          option_id = OptionResult.find_by(user_id:@user_id, question_id:@n_question_id, result:true).option_id
+					if OptionResult.find_by(user_id:@user_id, question_id:@start_question_id, result:true).nil? == true
+						option_id = 2
+					else
+          	option_id = OptionResult.find_by(user_id:@user_id, question_id:@n_question_id, result:true).option_id
+					end
           @n_question_id = Option.find_by(option_id:option_id).next_question_id
           @before_question_id = Option.find_by(option_id:option_id).question_id
         end
