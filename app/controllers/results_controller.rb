@@ -435,7 +435,7 @@ class ResultsController < ApplicationController
 		# 配列の初期化 : Debug用
 		@debug_array = Array.new
 		# 手動で入れているけど、questionから引き継がれる : Debug用
-		@user_id = 11
+		@user_id = cookies[:user_id]
 		# categoryは今後めっちゃくちゃ増えます！！！！ : Debug用
 		@category = "toiletpaper"
 		# おすすめスペックとして算出する上記おすすめ品項目
