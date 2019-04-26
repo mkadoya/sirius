@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   # GET /articles
@@ -17,11 +18,13 @@ class ArticlesController < ApplicationController
 
   # GET /articles/new
   def new
+    redirect_to '/admin'
     @article = Article.new
   end
 
   # GET /articles/1/edit
   def edit
+    redirect_to '/admin'
   end
 
   # POST /articles

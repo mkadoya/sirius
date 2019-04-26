@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  post "/upload_image" => "upload_floara_image#upload_image", :as => :upload_image
-  get "/download_file/:name" => "upload_floara_image#access_file", :as => :upload_access_file, :name => /.*/
+  # post "/upload_image" => "upload_floara_images#upload_image", :as => :upload_image
+  # get "/download_file/:name" => "upload_floara_images#access_file", :as => :upload_access_file, :name => /.*/
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users
