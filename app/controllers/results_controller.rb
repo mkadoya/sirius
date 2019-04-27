@@ -28,7 +28,7 @@ class ResultsController < ApplicationController
 		@array_star = Array.new
 		@array_star_normalize = Array.new
 		@array_match_condition_test = Array.new
-		@debug_array = Array.new
+		@array_debug = Array.new
 		# 辞書型の初期化
 		@hash_difference_avrg = Hash.new
 		@hash_rec_avrg = Hash.new
@@ -71,7 +71,7 @@ class ResultsController < ApplicationController
 		# Userが答えてtrue flagがついたoption_idを配列で取得
 		@array_record_true.each do |record_true|
 			@array_option_id << record_true.option_id
-			@debug_array << [Question.find_by(question_id: Option.find_by(option_id: record_true.option_id).question_id).content, Option.find_by(option_id: record_true.option_id).content]
+			@array_debug << [Question.find_by(question_id: Option.find_by(option_id: record_true.option_id).question_id).content, Option.find_by(option_id: record_true.option_id).content]
 		end
 
 		# Userが答えてtrueがついたoption_idをBaseにItem DBでFilterする条件をMatch DBより配列で取得
@@ -230,7 +230,7 @@ class ResultsController < ApplicationController
 
 	def index2
 		# 配列の初期化 : Debug用
-		@debug_array = Array.new
+		@array_debug = Array.new
 		# 手動で入れているけど、questionから引き継がれる : Debug用
 		@user_id = 1
 		# categoryは今後めっちゃくちゃ増えます！！！！ : Debug用
@@ -269,7 +269,7 @@ class ResultsController < ApplicationController
 		# Userが答えてtrue flagがついたoption_idを配列で取得
 		@array_record_true.each do |record_true|
 			@array_option_id << record_true.option_id
-			@debug_array << [Question.find_by(question_id: Option.find_by(option_id: record_true.option_id).question_id).content, Option.find_by(option_id: record_true.option_id).content]
+			@array_debug << [Question.find_by(question_id: Option.find_by(option_id: record_true.option_id).question_id).content, Option.find_by(option_id: record_true.option_id).content]
 		end
 
 		# Userが答えてtrueがついたoption_idをBaseにItem DBでFilterする条件をMatch DBより配列で取得
@@ -433,7 +433,7 @@ class ResultsController < ApplicationController
 
 	def index3
 		# 配列の初期化 : Debug用
-		@debug_array = Array.new
+		@array_debug = Array.new
 		# 手動で入れているけど、questionから引き継がれる : Debug用
 		@user_id = cookies[:user_id]
 		# categoryは今後めっちゃくちゃ増えます！！！！ : Debug用
@@ -472,7 +472,7 @@ class ResultsController < ApplicationController
 		# Userが答えてtrue flagがついたoption_idを配列で取得
 		@array_record_true.each do |record_true|
 			@array_option_id << record_true.option_id
-			@debug_array << [Question.find_by(question_id: Option.find_by(option_id: record_true.option_id).question_id).content, Option.find_by(option_id: record_true.option_id).content]
+			@array_debug << [Question.find_by(question_id: Option.find_by(option_id: record_true.option_id).question_id).content, Option.find_by(option_id: record_true.option_id).content]
 		end
 
 		# Userが答えてtrueがついたoption_idをBaseにItem DBでFilterする条件をMatch DBより配列で取得
