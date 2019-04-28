@@ -81,84 +81,9 @@ class QuestionsController < ApplicationController
     # 最大質問数
     @max_question_num = @question_num + @question.remain_question_num
 
-    # #全部のルートの格納方法
-    # @all_options = Option.where(category:@category).all
-
-    # @all_options.each |option| do
-    #   @option_arrow = {s: option.question_id, d:option.next_question_id}
-    #   if !@option_arrows
-    #     @option_arrows = [@option_arrow]
-    #   else
-    #     @option_arrows.push(@option_arrow)
-    #   end
-    # end
-
-    # @option_arrows = @option_arrows.uniq
-
-    # #コスト計算
-    # @cost = {q:1, cost:1, fix:true}
-    # @costs = [@cost]
-    # while(@option_arrows.count != 0)
-    #   @costs.each |cost| do
-    #     if cost[:fix]
-    #       @option_arrows.each |option_arrow| do
-    #         if option_arrow[:s] == cost[:q]
-    #           cost = {q:option_arrow[:d],cost:cost[:cost],fix:false}
-    #           @costs.push(cost)
-    #           @option_arrows.delete(option_allow)
-    #         end
-    #       end
-    #       @costs |cost| do
-    #         @option_arrows.each |option_arrow| do
-    #           counter = 0
-    #           if option_arrow[:d] == cost[:q]
-    #             counter += 1
-    #           end
-    #           if counter ==0
-    #             new_cost == {q:cost[:q],cost:cost[:cost],fix:cost[:fix]}
-    #             @costs.delete(cost)
-    #             @costs.push(new_cost)
-    #           end
-    #         end
-    #       end
-    #     end
-    #   end
-    # end
-
-
-
     # 選択肢を取得する
     @options = Option.where(question_id: @question.question_id).all
 
-    # 20190324　アップデート前
-
-    # # 回答結果を配列に保管する
-    # if params[:answer]
-    #   @answers = params[:answers]
-    #   @question_ids = params[:question_ids]
-    #   @answers.push(params[:answer])
-    # else
-    #   # 借りの値を1行入れる。のちに削除する。
-    #   @answers = ["0"]
-    #   @question_ids = ["0"]
-    # end
-
-    # # レコード数以上の質問になったらリザルト画面を表示する
-    # @answers_count = @answers.count - 1
-    # @questions_num = Question.where(category: "laptop").all.count
-
-    # if @answers_count < @questions_num
-    #   @questions = Question.where(category: "laptop").all
-    #   @question = @questions.last(@questions_num - @answers_count).first
-    #   @question_ids.push(@question.question_id)
-    # else
-    #   # 借りの1行目を削除する
-    #   @answers.shift(1)
-    #   @question_ids.shift(1)
-    #   # カテゴリーの値を入れる
-    #   @category = Question.find_by(question_id:@question_ids[0]).category
-    #   redirect_to :controller => "questions", :action => "result", :answers => @answers, :question_ids => @question_ids, :category => @category
-    # end
   end
 
   def result

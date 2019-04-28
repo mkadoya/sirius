@@ -18,7 +18,8 @@ class ResultsController < ApplicationController
 		# User-id, categoryをquestion_controllerから引き受ける
 		@user_id = cookies[:user_id]
 		@category = params[:category]
-
+		@question_finish = params[:question_finish]
+		
 		# 配列の初期化
 		@array_option_id = Array.new
 		@array_match_condition = Array.new

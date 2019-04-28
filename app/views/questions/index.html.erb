@@ -5,16 +5,6 @@
       <p>質問の結果に応じて、あなたに最適なアイテムを紹介します。</p>
       <p>ぜひ最後まで答えてみてください。</p>
       <button class="btn btn-primary btn-lg" id="openModal">質問を続ける</button>
-      <h2>スペックが高いパソコン</h2>
-
-      <h2>あなたへのおすすめ</h2>
-
-
-      <h2>人気のアイテム</h2>
-
-
-      <h2>注目のアイテム</h2>
-
     </div>
     <div class="col-md-4">
       <h2>最新の記事</h2>
@@ -65,6 +55,14 @@
                 </div>
               </div>
             <% end %>
+            <%= link_to "途中結果を見る",
+            {
+              :controller => "results",
+              :action => "index",
+              :category => @category,
+              :question_finish => false,
+            },
+            :class => "btn btn-primary question-btn-right"%>
           <% else %>
             <p>おつかれさまでした！</p>
             <%= link_to "結果を見る",
@@ -72,6 +70,7 @@
                       :controller => "results",
                       :action => "index",
                       :category => @category,
+                      :question_finish => true,
                     },
                   :class => "btn btn-outline-secondary btn-block mx-auto question-card-button",
                   :id => "result" %>

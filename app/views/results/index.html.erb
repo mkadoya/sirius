@@ -18,6 +18,18 @@
 <p>[おすすめNo9]<%= @array_item[8].series %> ====> <%= @array_item[8].name %></p>
 <p>[おすすめNo10]<%= @array_item[9].series %> ====> <%= @array_item[9].name %></p>
 
+<div class="container">
+  <div class="row row-1">
+    <% if @question_finish == "false" %>
+    <div class="col-md-12">
+      <h2>質問に答えよう</h2>
+      <p>質問の結果に応じて、あなたに最適なアイテムを紹介します。</p>
+      <p>ぜひ最後まで答えてみてください。</p>
+      <%= link_to "質問に戻る", :back, :class => "btn btn-primary btn-lg" %>
+    </div>
+    <% end %>
+  </div>
+</div>
 
 </div>
   </div>
