@@ -36,26 +36,6 @@
   </div>
 </header>
 <main>
-<p>[User-ID] ==> <%= @user_id %></p>
-<p>[Record] ==> <%= @array_debug %></p>
-
-<p>[Recommend Avrg] ==> <%= @hash_rec_avrg %></p>
-<p>[All Avrg] ==> <%= @hash_difference_avrg %></p>
-<p>[Record] ==> <%= @hash_rec_star %></p>
-<p>[Debug] ==> <%= @hash_star %></p>
-
-<p>一覧：おすすめ品 ! </p>
-<p>[おすすめNo1]<%= @array_item[0].series %> ====> <%= @array_item[0].name %></p>
-<p>[おすすめNo2]<%= @array_item[1].series %> ====> <%= @array_item[1].name %></p>
-<p>[おすすめNo3]<%= @array_item[2].series %> ====> <%= @array_item[2].name %></p>
-<p>[おすすめNo4]<%= @array_item[3].series %> ====> <%= @array_item[3].name %></p>
-<p>[おすすめNo5]<%= @array_item[4].series %> ====> <%= @array_item[4].name %></p>
-<p>[おすすめNo6]<%= @array_item[5].series %> ====> <%= @array_item[5].name %></p>
-<p>[おすすめNo7]<%= @array_item[6].series %> ====> <%= @array_item[6].name %></p>
-<p>[おすすめNo8]<%= @array_item[7].series %> ====> <%= @array_item[7].name %></p>
-<p>[おすすめNo9]<%= @array_item[8].series %> ====> <%= @array_item[8].name %></p>
-<p>[おすすめNo10]<%= @array_item[9].series %> ====> <%= @array_item[9].name %></p>
-
 <div class="container">
   <div class="row row-1">
     <div class="col-md-12">
@@ -685,6 +665,12 @@
       <a href="#" class="readMoreBtn">
         <span class="moreText">もっと見る</span><span class="arrowDown"></span>
       </a>
+      <p>[User-ID] ==> <%= @user_id %></p>
+      <p>[Record] ==> <%= @array_debug %></p>
+      <p>[Recommend Avrg] ==> <%= @hash_rec_avrg %></p>
+      <p>[All Avrg] ==> <%= @hash_difference_avrg %></p>
+      <p>[Record] ==> <%= @hash_rec_star %></p>
+      <p>[Debug] ==> <%= @hash_star %></p>
     </div>
   </div>
 </div>
