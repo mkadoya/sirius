@@ -17,7 +17,7 @@ option_id,category,question_id,content,next_question_id
 16,laptop,7,NO,8
 17,laptop,8,大量に保存する,9
 18,laptop,8,少し保存する,9
-19,laptop,8,ほとんどしない,10
+19,laptop,8,ほとんどしない,9
 20,laptop,9,長時間利用する,10
 21,laptop,9,少し利用する,10
 22,laptop,9,利用しない,10
@@ -37,3 +37,115 @@ option_id,category,question_id,content,next_question_id
 36,toiletpaper,16,NO,17
 37,toiletpaper,17,YES,0
 38,toiletpaper,17,NO,0
+39,pc,18,持ち運ぶ,19
+40,pc,18,持ち運ばない,20
+41,pc,19,半日以上利用する,21
+42,pc,19,半日以上は利用しない,21
+43,pc,20,持ち運ぶ,21
+44,pc,20,持ち運ばない,21
+45,pc,21,Mac派,22
+46,pc,21,Windos派,22
+47,pc,21,どちらでもOK,22
+48,pc,22,動画編集をする,26
+49,pc,22,RAW編集をする,23
+50,pc,22,DTMをする,24
+51,pc,22,ゲームをする,28
+52,pc,22,どちらもやらない,30
+53,pc,23,Lightroom CC,24
+54,pc,23,Photoshop CC,24
+55,pc,23,Silkypix Developer Studio,24
+56,pc,23,Photomatix Pro,24
+57,pc,23,DxO PhotoLab,24
+58,pc,23,Capture One Pro,24
+59,pc,23,Affinity Photo,24
+60,pc,23,Photomatix,24
+61,pc,23,その他,24
+62,pc,23,決めていない,24
+63,pc,24,スマートフォン,25
+64,pc,24,コンデジ,25
+65,pc,24,ミラーレス一眼,25
+66,pc,24,一眼レフ,25
+67,pc,24,その他,25
+68,pc,25,Wifiで転送,27
+69,pc,25,SDカードで転送,26
+70,pc,25,USBで転送,0
+71,pc,25,その他,0
+72,pc,26,SDカード用スロットは必須,0
+73,pc,26,必須ではない,0
+74,pc,27,Wifi機能は必須,0
+75,pc,27,必須ではない,0
+76,pc,28,EDM,27
+77,pc,28,Jazz,27
+78,pc,28,テクノ,27
+79,pc,28,トランス,27
+80,pc,28,アニソン,27
+81,pc,28,その他,27
+82,pc,29,Cubase,0
+83,pc,29,Ableton Live,0
+84,pc,29,Studio One,0
+85,pc,29,FL Studio,0
+86,pc,29,Logic Pro,0
+87,pc,29,Pro Tools,0
+88,pc,29,その他,0
+89,pc,29,決めていない,0
+90,pc,30,4K動画編集をする,27
+91,pc,30,長時間動画の編集をする,27
+92,pc,30,高度な技術を使った動画編集をする,27
+93,pc,30,どちらもやらない,27
+94,pc,31,Premiere Pro,32
+95,pc,31,DaVinci Resolve,32
+96,pc,31,Filmora,32
+97,pc,31,Final Cut Pro,32
+98,pc,31,iMovie,32
+99,pc,31,Premiere Elements,32
+0,pc,31,Media Composer,32
+101,pc,31,その他,32
+102,pc,31,決めていない,32
+103,pc,32,スマートフォン,25
+104,pc,32,アクションカム,25
+105,pc,32,ミラーレス一眼,25
+106,pc,32,ハンディカム,25
+107,pc,32,その他,25
+108,pc,33,ブラウザゲーム,29
+109,pc,33,MMORPG,35
+110,pc,33,FPS,34
+111,pc,33,オープンワールド,36
+112,pc,33,その他,0
+113,pc,34,Call of Duty: Black Ops 4,37
+114,pc,34,Counter-Strike: Global Offensive,37
+115,pc,34,PUBG,37
+116,pc,34,BATTLEFIELD Ⅴ,37
+117,pc,34,Dead by Daylight,37
+118,pc,34,その他,37
+119,pc,35,World of Warcraft,37
+120,pc,35,なんか１,37
+121,pc,35,なんか２,37
+122,pc,35,なんか３,37
+123,pc,35,その他,37
+124,pc,36,アサシンクリード,37
+125,pc,36,マインクラフト,37
+126,pc,36,その他,37
+127,pc,37,FHDで60fps (推奨),0
+128,pc,37,高くなってもいいからFHDで144fps (プロ仕様),0
+129,pc,37,fpsはこだわらないから4kでゲームしたい,0
+130,pc,37,ガチ勢じゃないから遊べればOK！,0
+131,pc,38,Office作業をする,39
+132,pc,38,プログラミングをする,39
+133,pc,38,どちらもやらない,39
+134,pc,39,YES,40
+135,pc,39,NO,40
+136,pc,40,YES,41
+137,pc,40,NO,41
+138,pc,41,YES,42
+139,pc,41,NO,42
+140,pc,42,YES,44
+141,pc,42,NO,43
+142,pc,43,必要,0
+143,pc,43,不要,44
+144,pc,44,性能のほうが大事,45
+145,pc,44,安いほうが良いがある程度のスペックは欲しい,45
+146,pc,44,とりあえず動けばいいから、安ければ安いほうがいい！,0
+147,pc,45,YES,46
+148,pc,45,NO,46
+149,pc,46,YES,0
+150,pc,46,NO,0

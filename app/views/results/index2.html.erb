@@ -13,11 +13,11 @@
 <p> --------------------------------------------- </p>
 <p>基本項目 </p>
 
-<p>[安さ] ★<%= @hash_rec_star["price"] %> : 平均の値段は、<%= @hash_difference_avrg["price"].round(-3).to_i %>円です。あなたにおすすめの値段は、<%= @hash_rec_avrg["price"].round(-3).to_i %>円です。</p>
-<p>[スペック] ★<%= @hash_rec_star["cpu_score"] %> : 平均のスペックは、<%= @hash_difference_avrg["cpu_score"].round(-2).to_i %>です。あなたにおすすめのスペックは、<%= @hash_rec_avrg["cpu_score"].round(-2).to_i %>です。</p>
-<p>[画面の大きさ] ★<%= @hash_rec_star["inch"] %> : 平均の画面の大きさは、<%= @hash_difference_avrg["inch"].round(1) %>インチです。あなたにおすすめの画面の大きさは、<%= @hash_rec_avrg["inch"].round(1) %>インチです。</p>
-<p>[軽さ] ★<%= @hash_rec_star["weight"] %> : 平均の重量は、<%= @hash_difference_avrg["weight"].round(3) %>kgです。あなたにおすすめの重量は、<%= @hash_rec_avrg["weight"].round(3) %>kgです。</p>
-<p>[バッテリー時間] ★<%= @hash_rec_star["uptime"] %> : 平均のバッテリー時間は、<%= @hash_difference_avrg["uptime"].round(1) %>時間です。あなたにおすすめのバッテリー時間は、<%= @hash_rec_avrg["uptime"].round(1) %>時間です。</p>
+<p>[安さ] ★<%= @hash_rec_star["price"] %> : 平均の値段は、<%= @hash_difference_avrg["price"].to_i %>円です。あなたにおすすめの値段は、<%= @hash_rec_avrg["price"].to_i %>円です。</p>
+<p>[スペック] ★<%= @hash_rec_star["cpu_score"] %> : 平均のスペックは、<%= @hash_difference_avrg["cpu_score"].to_i %>です。あなたにおすすめのスペックは、<%= @hash_rec_avrg["cpu_score"].to_i %>です。</p>
+<p>[画面の大きさ] ★<%= @hash_rec_star["inch"] %> : 平均の画面の大きさは、<%= @hash_difference_avrg["inch"] %>インチです。あなたにおすすめの画面の大きさは、<%= @hash_rec_avrg["inch"] %>インチです。</p>
+<p>[軽さ] ★<%= @hash_rec_star["weight"] %> : 平均の重量は、<%= @hash_difference_avrg["weight"] %>kgです。あなたにおすすめの重量は、<%= @hash_rec_avrg["weight"] %>kgです。</p>
+<p>[バッテリー時間] ★<%= @hash_rec_star["uptime"] %> : 平均のバッテリー時間は、<%= @hash_difference_avrg["uptime"] %>時間です。あなたにおすすめのバッテリー時間は、<%= @hash_rec_avrg["uptime"] %>時間です。</p>
 
 <p> --------------------------------------------- </p>
 <p> --------------------------------------------- </p>
@@ -67,11 +67,11 @@
 <br>
 <p>[基本情報]</p>
 <p>製品名 : <%= @array_item[1].series %></p>
-<p>値段 : <%= @array_item[1].price %>円。あなたにおすすめの値段は、<%= @hash_rec_avrg["price"].round(-3).to_i %>円です。</p>
-<p>スペック : <%= @array_item[1].cpu_score %>。あなたにおすすめのスペックは、<%= @hash_rec_avrg["cpu_score"].round(-2).to_i %>です。</p>
-<p>インチ : <%= @array_item[1].inch %>インチ。あなたにおすすめの画面の大きさは、<%= @hash_rec_avrg["inch"].round(1) %>インチです。</p>
-<p>重量 : <%= @array_item[1].weight %>kg。あなたにおすすめの重さは、<%= @hash_rec_avrg["weight"].round(3) %>kgです。</p>
-<p>バッテリー時間 : <%= @array_item[1].uptime %>時間です。あなたにおすすめのバッテリー時間は、<%= @hash_rec_avrg["uptime"].round(1) %>時間です。</p>
+<p>値段 : <%= @array_item[1].price %>円。あなたにおすすめの値段は、<%= @hash_rec_avrg["price"].to_i %>円です。</p>
+<p>スペック : <%= @array_item[1].cpu_score %>。あなたにおすすめのスペックは、<%= @hash_rec_avrg["cpu_score"].to_i %>です。</p>
+<p>インチ : <%= @array_item[1].inch %>インチ。あなたにおすすめの画面の大きさは、<%= @hash_rec_avrg["inch"] %>インチです。</p>
+<p>重量 : <%= @array_item[1].weight %>kg。あなたにおすすめの重さは、<%= @hash_rec_avrg["weight"] %>kgです。</p>
+<p>バッテリー時間 : <%= @array_item[1].uptime %>時間です。あなたにおすすめのバッテリー時間は、<%= @hash_rec_avrg["uptime"] %>時間です。</p>
 
 <br>
 <p>[あなたにとって重要な点]</p>

@@ -3,7 +3,7 @@ class ResultsController < ApplicationController
 
 		# 人が定義しているParameterシリーズ
 		#アイテムの表示数：偶数のみ可能
-		@item_display_num = 6
+		@item_display_num = 60
 		#アイテムの表示行数
 		@item_display_row_num = @item_display_num / 2 - 1
 		# 推奨個数
@@ -40,6 +40,37 @@ class ResultsController < ApplicationController
 # ------ ここから、修正必要 by Takai -----------------------------------------------------------
 # ------ ここから、修正必要 by Takai -----------------------------------------------------------
 # ------ ここから、修正必要 by Takai -----------------------------------------------------------
+
+
+
+# ------ 以下、大幅Update必要 ! ----------------------------------------------------------------------------
+    # 質問の答えから、合致するpattern_idの列を取得。今は、質問数12問固定。。そのうち可変に対応できるようにします
+    @pattern_pattern_id = 1
+
+    # Pattern取得
+    @characteristic = Characteristic.find_by(category: @category, pattern_id: @pattern_pattern_id)
+
+    # Patternから属性情報の取得
+    @charasteristic_title = @characteristic.title
+    @charasteristic_body = @characteristic.body
+    @charasteristic_chara_1_str = @characteristic.chara_1_str
+    @charasteristic_chara_2_str = @characteristic.chara_2_str
+    @charasteristic_chara_3_str = @characteristic.chara_3_str
+    @charasteristic_chara_4_str = @characteristic.chara_4_str
+    @charasteristic_chara_5_str = @characteristic.chara_5_str
+    @charasteristic_chara_1_val = @characteristic.chara_1_val
+    @charasteristic_chara_2_val = @characteristic.chara_2_val
+    @charasteristic_chara_3_val = @characteristic.chara_3_val
+    @charasteristic_chara_4_val = @characteristic.chara_4_val
+    @charasteristic_chara_5_val = @characteristic.chara_5_val
+    @charasteristic_item_1 = @characteristic.item_1
+    @charasteristic_item_2 = @characteristic.item_2
+    @charasteristic_item_3 = @characteristic.item_3
+    @charasteristic_item_4 = @characteristic.item_4
+    @charasteristic_item_5 = @characteristic.item_5
+# ------ 以上、大幅Update必要 ! ----------------------------------------------------------------------------
+
+
 		# いけていないかつ、Categoryが増えるごとにCodingしないといけないので変更必要。。。
 		# remove from 優先順位 star
 		@str_remove_star = ["emmc", "usb_c", "webcamera", "usb_a", "gpu_ram"]
@@ -48,8 +79,10 @@ class ResultsController < ApplicationController
 
 		# MatchさせていくためにItem情報を全部入れる
 		if @category == "laptop"
-			@array_recommend_item = Item.all
-			@all_item = Item.all
+			@array_recommend_item = Pc.all
+			@all_item = Pc.all
+			# @array_recommend_item = Item.all
+			# @all_item = Item.all
 		else
 			@array_recommend_item = ToiletpaperItem.all
 			@all_item = ToiletpaperItem.all
@@ -83,7 +116,7 @@ class ResultsController < ApplicationController
 		@array_match_condition.each do |match_condition|
 			match_condition.each do |record_match|
 				@array_effective_column << [record_match.item_clmn, 1 - @all_item.where("#{record_match.item_clmn} >= ?", record_match.min).where("#{record_match.item_clmn} <= ?", record_match.max).count.to_f/@num_all_items]
-				@hash_difference_avrg.store(record_match.item_clmn, @all_item.average(:"#{record_match.item_clmn}").round(1))
+				@hash_difference_avrg.store(record_match.item_clmn, @all_item.average(:"#{record_match.item_clmn}"))
 				# @array_difference_avrg  << [record_match.item_clmn, Item.average(:record_match.item_clmn), @array_item.first(5).average(:record_match.item_clmn)]
 			end
 		end
@@ -98,7 +131,7 @@ class ResultsController < ApplicationController
 # ------ ここから、修正必要 by Takai -----------------------------------------------------------
 			# MatchさせていくためにItem情報を全部入れる
 			if @category == "laptop"
-				@array_recommend_item = Item.all
+				@array_recommend_item = Pc.all
 			else
 				@array_recommend_item = ToiletpaperItem.all
 			end
@@ -166,9 +199,9 @@ class ResultsController < ApplicationController
 		@hash_rec_avrg.each do |key, value|
 			if value != 0
 				if @all_item.pluck(:"#{key}").first.is_a?(Numeric) == false
-					@value_star = @all_item.pluck(:"#{key}").join(" ").gsub("false", "0").gsub("true", "1").split(" ").map(&:to_i)
+					@value_star = @all_item.pluck(:"#{key}").join(" ").gsub("false", "0").gsub("true", "1").split(" ").map(&:to_i).compact
 				else
-					@value_star = @all_item.pluck(:"#{key}")
+					@value_star = @all_item.pluck(:"#{key}").compact
 				end
 				@hash_star.store(key, (10 - (@value_star.sort.reverse.index{|i| i <= value} / @num_all_items.to_f * 10).round))
 				# 基本項目をVectoyに入れる

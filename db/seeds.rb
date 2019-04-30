@@ -19,6 +19,87 @@ require 'csv'
   #     )
   # end
 
+	#以下はPcsを呼び出すパターン
+	CSV.foreach('db/Pcs.csv', headers: true) do |row|
+	Pc.create(
+    :item_id => row[0],
+    :category => row[1],
+    :maker => row[2],
+    :name => row[3],
+    :price => row[4],
+    :shop_num => row[5],
+    :rank => row[6],
+    :satisfaction => row[7],
+    :quote => row[8],
+    :revier => row[9],
+    :inch => row[10],
+    :resolution => row[11],
+    :wide => row[12],
+    :touchpannel => row[13],
+    :twoinone => row[14],
+    :case => row[15],
+    :cpu_name => row[16],
+    :cpu_clockspeed => row[17],
+    :cpu_core => row[18],
+    :cpu_score => row[19],
+    :hdd => row[20],
+    :hdd_speed => row[21],
+    :ssd => row[22],
+    :emmc => row[23],
+    :optane => row[24],
+    :ram => row[25],
+    :volume => row[26],
+    :ram_max => row[27],
+    :ram_type => row[28],
+    :ram_all_slot => row[29],
+    :ram_empty_clot => row[30],
+    :gpu_name => row[31],
+    :gpu_ram => row[32],
+    :gpu_score => row[33],
+    :drive => row[34],
+    :dvd => row[35],
+    :blueray => row[36],
+    :wireless => row[37],
+    :lan => row[38],
+    :cellular => row[39],
+    :wifi_direct => row[40],
+    :nfc => row[41],
+    :faceprint => row[42],
+    :fingerprint => row[43],
+    :webcamera => row[44],
+    :bluetooth => row[45],
+    :tenkey => row[46],
+    :touchpen => row[47],
+    :gamingpc => row[48],
+    :fanless => row[49],
+    :output_4k => row[50],
+    :watercool => row[51],
+    :tv_tuner => row[52],
+    :tv_tuner_4k => row[53],
+    :hdmi => row[54],
+    :minihdmi => row[55],
+    :minidisplay => row[56],
+    :vga => row[57],
+    :usb_a => row[58],
+    :usb_c => row[59],
+    :sd => row[60],
+    :microsd => row[61],
+    :os => row[62],
+    :windows => row[63],
+    :mac => row[64],
+    :chrome => row[65],
+    :office => row[66],
+    :uptime => row[67],
+    :weight => row[68],
+    :color => row[69],
+    :date_sale => row[70],
+    :series => row[71],
+    :sirial => row[72],
+    :affiliate => row[73],
+    :image => row[74],
+	    )
+	end
+
 #以下はItemsを呼び出すパターン
 # CSV.foreach('db/Items.csv', headers: true) do |row|
 # Item.create(
@@ -148,16 +229,16 @@ require 'csv'
  # end
 
 # 以下はMatchを呼び出すパターン
- CSV.foreach('db/Matchs.csv', headers: true) do |row|
- Match.create(
-     :match_id => row[0],
-     :category => row[1],
-     :option_id => row[2],
-     :item_clmn => row[3],
-     :min => row[4],
-     :max => row[5]
- )
- end
+ # CSV.foreach('db/Matchs.csv', headers: true) do |row|
+ # Match.create(
+ #     :match_id => row[0],
+ #     :category => row[1],
+ #     :option_id => row[2],
+ #     :item_clmn => row[3],
+ #     :min => row[4],
+ #     :max => row[5]
+ # )
+ # end
 
 # 以下はOptionResultを呼び出すパターン
 #  CSV.foreach('db/OptionResults.csv', headers: true) do |row|

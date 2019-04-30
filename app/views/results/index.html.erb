@@ -6,112 +6,180 @@
 <p>[Record] ==> <%= @hash_rec_star %></p>
 <p>[Debug] ==> <%= @hash_star %></p>
 
-<p>一覧：おすすめ品 ! </p>
-<p>[おすすめNo1]<%= @array_item[0].series %> ====> <%= @array_item[0].name %></p>
-<p>[おすすめNo2]<%= @array_item[1].series %> ====> <%= @array_item[1].name %></p>
-<p>[おすすめNo3]<%= @array_item[2].series %> ====> <%= @array_item[2].name %></p>
-<p>[おすすめNo4]<%= @array_item[3].series %> ====> <%= @array_item[3].name %></p>
-<p>[おすすめNo5]<%= @array_item[4].series %> ====> <%= @array_item[4].name %></p>
-<p>[おすすめNo6]<%= @array_item[5].series %> ====> <%= @array_item[5].name %></p>
-<p>[おすすめNo7]<%= @array_item[6].series %> ====> <%= @array_item[6].name %></p>
-<p>[おすすめNo8]<%= @array_item[7].series %> ====> <%= @array_item[7].name %></p>
-<p>[おすすめNo9]<%= @array_item[8].series %> ====> <%= @array_item[8].name %></p>
-<p>[おすすめNo10]<%= @array_item[9].series %> ====> <%= @array_item[9].name %></p>
+<div class="top-main">
+  <div class="top-contents">
+    <div class="card bg-info result">
+      <div class="card-header">
+        診断結果
+      </div>
+      <div class="card-body bg-light text-dark">
+        <div class="result-contents">
+          <p class="text-center">あなたのタイプは</p>
+          <h2 class="text-info text-center"><%= @charasteristic_title %>タイプ</h2>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-md-6 result-contents">
+
+            <p>[重視1] <%= @charasteristic_chara_1_str %> : <%= @charasteristic_chara_1_val%></p>
+            <div class="result-star-rating position-relative">
+              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_1_val*1.5 %>rem; max-height: 100%;">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+              <div class="result-star-rating-back">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+            </div>
+            <p>[重視2] <%= @charasteristic_chara_2_str %> : <%= @charasteristic_chara_2_val %></p>
+            <div class="result-star-rating position-relative">
+              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_2_val*1.5 %>rem; max-height: 100%;">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+              <div class="result-star-rating-back">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+            </div>
+            <p>[重視3] <%= @charasteristic_chara_3_str %> : <%= @charasteristic_chara_3_val %></p>
+            <div class="result-star-rating position-relative">
+              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_3_val*1.5 %>rem; max-height: 100%;">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+              <div class="result-star-rating-back">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+            </div>
+            <p>[重視4] <%= @charasteristic_chara_4_str %> : <%= @charasteristic_chara_4_val %></p>
+            <div class="result-star-rating position-relative">
+              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_4_val*1.5 %>rem; max-height: 100%;">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+              <div class="result-star-rating-back">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+            </div>
+            <p>[重視5] <%= @charasteristic_chara_5_str %> : <%= @charasteristic_chara_5_val %></p>
+            <div class="result-star-rating position-relative">
+              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_5_val*1.5 %>rem; max-height: 100%;">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+              <div class="result-star-rating-back">
+                <h4>★★★★★★★★★★</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 result-contents">
+            <h4>解説</h4>
+            <p class="card-text"><%= @charasteristic_body %></p>
+          </div>
+        </div>
+        <h4>おすすめ商品</h4>
+			</div>
+			  </div>
+			  <div class="row ">
+			    <div class="col-md-8">
+			      <div class="result-commentary">
+			        <p>あなたは　<修正必要。。。>　という特徴をもっています。</p>
+			        <ul>
+			          <li><%= @hash_rec_star.keys[0] %></li>
+			          <p>あなたにとっておすすめの<%= @hash_rec_star.keys[0] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[0]] %>です。</p>
+								<p>標準的な<%= @hash_rec_star.keys[0] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[0]] %>です。</p>
+			          <li><%= @hash_rec_star.keys[1] %></li>
+								<p>あなたにとっておすすめの<%= @hash_rec_star.keys[1] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[1]] %>です。</p>
+								<p>標準的な<%= @hash_rec_star.keys[1] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[1]] %>です。</p>
+			          <li><%= @hash_rec_star.keys[2] %></li>
+								<p>あなたにとっておすすめの<%= @hash_rec_star.keys[2] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[2]] %>です。</p>
+								<p>標準的な<%= @hash_rec_star.keys[2] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[2]] %>です。</p>
+			        </ul>
+			      </div>
+			    </div>
+			  </div>
+			  <div class="row result-contents">
+			    <div class="col-md-8">
+			      <h5>特徴</h5>
+			    </div>
+			  </div>
+			  <div class="row ">
+			    <div class="col-md-8">
+			      <div class="result-chart">
+			        <p>項目</p>
+			        <div class="result-chart-graph">
+			          <input id='c_1' name='c_1' type='hidden' value='安さ'>
+			          <input id='c_2' name='c_2' type='hidden' value='スペック'>
+			          <input id='c_3' name='c_3' type='hidden' value='画面の大きさ'>
+			          <input id='c_4' name='c_4' type='hidden' value='軽さ'>
+			          <input id='c_5' name='c_5' type='hidden' value='バッテリー時間'>
+			          <input id='c_v_1' name='c_v_1' type='hidden' value='<%= @hash_rec_star["price"]%>'>
+			          <input id='c_v_2' name='c_v_2' type='hidden' value='<%= @hash_rec_star["cpu_score"]%>'>
+			          <input id='c_v_3' name='c_v_3' type='hidden' value='<%= @hash_rec_star["inch"]%>'>
+			          <input id='c_v_4' name='c_v_4' type='hidden' value='<%= @hash_rec_star["weight"]%>'>
+			          <input id='c_v_5' name='c_v_5' type='hidden' value='<%= @hash_rec_star["uptime"]%>'>
+			          <canvas id="resultChart"></canvas>
+			        </div>
+							<div class="result-commentary-fundamental">
+								<p>[安さ] ★<%= @hash_rec_star["price"] %> : 平均の値段は、<%= @hash_difference_avrg["price"].round(-3).to_i %>円です。あなたにおすすめの値段は、<%= @hash_rec_avrg["price"].round(-3).to_i %>円です。</p>
+								<p>[スペック] ★<%= @hash_rec_star["cpu_score"] %> : 平均のスペックは、<%= @hash_difference_avrg["cpu_score"].round(-2).to_i %>です。あなたにおすすめのスペックは、<%= @hash_rec_avrg["cpu_score"].round(-2).to_i %>です。</p>
+								<p>[画面の大きさ] ★<%= @hash_rec_star["inch"] %> : 平均の画面の大きさは、<%= @hash_difference_avrg["inch"].round(1) %>インチです。あなたにおすすめの画面の大きさは、<%= @hash_rec_avrg["inch"].round(1) %>インチです。</p>
+								<p>[軽さ] ★<%= @hash_rec_star["weight"] %> : 平均の重量は、<%= @hash_difference_avrg["weight"].round(3) %>kgです。あなたにおすすめの重量は、<%= @hash_rec_avrg["weight"].round(3) %>kgです。</p>
+								<p>[バッテリー時間] ★<%= @hash_rec_star["uptime"] %> : 平均のバッテリー時間は、<%= @hash_difference_avrg["uptime"].round(1) %>時間です。あなたにおすすめのバッテリー時間は、<%= @hash_rec_avrg["uptime"].round(1) %>時間です。</p>
+				      </div>
+
+			      </div>
+			    </div>
+			  </div>
+			  <div class="row result-contents">
+			    <div class="col-md-12">
+			      <h5>ランキング</h5>
+			    </div>
+			  </div>
+			  <div class="row">
+			    <div class="col-md-8">
+			      <div class="result-commentary">
+			        <p>あなたへのおすすめ商品</p>
+			      </div>
+			    </div>
+			  </div>
+			  <% for num in 0..@item_display_row_num do %>
+			  <div class="row  result-contents">
+			    <div class="col-md-6">
+			      <div class="card card-item" style="width: 20rem;">
+			        <h6>第<%=num*2+1%>位</h6>
+			        <%= image_tag "#{@array_item[num*2].image}", class: "card-img-top", alt: "Card image cap", height: "280px" %>
+			        <div class="card-body">
+			          <h4 class="card-title"><%= @array_item[num*2].series %></br>
+			                                ￥<%= @array_item[num*2].price %></h4>
+								<p class="card-text"><%= @hash_rec_star.keys[0] %> : <%= @array_item[num*2][@hash_rec_star.keys[0]] %></br>
+								                     <%= @hash_rec_star.keys[1] %> : <%= @array_item[num*2][@hash_rec_star.keys[1]] %></br>
+                                     <%= @hash_rec_star.keys[2] %> : <%= @array_item[num*2][@hash_rec_star.keys[2]] %></p>
+			          <button class="btn btn-block btn-outline-secondary" id="item_btn_<%=num*2%>">詳細を見る</button>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="col-md-6">
+			      <div class="card card-item" style="width: 20rem;">
+			        <h6>第<%=num*2+2%>位</h6>
+			        <%= image_tag "#{@array_item[num*2+1].image}", class: "card-img-top", alt: "Card image cap", height: "280px" %>
+			        <div class="card-body">
+								<h4 class="card-title"><%= @array_item[num*2+1].series %></br>
+			                                ￥<%= @array_item[num*2+1].price %></h4>
+								<p class="card-text"><%= @hash_rec_star.keys[0] %> : <%= @array_item[num*2+1][@hash_rec_star.keys[0]] %></br>
+								                     <%= @hash_rec_star.keys[1] %> : <%= @array_item[num*2+1][@hash_rec_star.keys[1]] %></br>
+                                     <%= @hash_rec_star.keys[2] %> : <%= @array_item[num*2+1][@hash_rec_star.keys[2]] %></p>
+			          <button class="btn btn-block btn-outline-secondary" id="item_btn_<%=num*2+1%>">詳細を見る</button>
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+			  <% end %>
+			</div>
 
 
+
+      </div>
+    </div>
+  </div>
 </div>
-  </div>
-  <div class="row ">
-    <div class="col-md-12">
-      <div class="result-commentary">
-        <p>あなたは　<修正必要。。。>　という特徴をもっています。</p>
-        <ul>
-          <li><%= @hash_rec_star.keys[0] %></li>
-          <p>あなたにとっておすすめの<%= @hash_rec_star.keys[0] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[0]] %>です。</p>
-					<p>標準的な<%= @hash_rec_star.keys[0] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[0]] %>です。</p>
-          <li><%= @hash_rec_star.keys[1] %></li>
-					<p>あなたにとっておすすめの<%= @hash_rec_star.keys[1] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[1]] %>です。</p>
-					<p>標準的な<%= @hash_rec_star.keys[1] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[1]] %>です。</p>
-          <li><%= @hash_rec_star.keys[2] %></li>
-					<p>あなたにとっておすすめの<%= @hash_rec_star.keys[2] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[2]] %>です。</p>
-					<p>標準的な<%= @hash_rec_star.keys[2] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[2]] %>です。</p>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="row result-contents">
-    <div class="col-md-12">
-      <h5>特徴</h5>
-    </div>
-  </div>
-  <div class="row ">
-    <div class="col-md-12">
-      <div class="result-chart">
-        <p>項目</p>
-        <div class="result-chart-graph">
-          <input id='c_1' name='c_1' type='hidden' value='安さ'>
-          <input id='c_2' name='c_2' type='hidden' value='スペック'>
-          <input id='c_3' name='c_3' type='hidden' value='画面の大きさ'>
-          <input id='c_4' name='c_4' type='hidden' value='軽さ'>
-          <input id='c_5' name='c_5' type='hidden' value='バッテリー時間'>
-          <input id='c_v_1' name='c_v_1' type='hidden' value='<%= @hash_rec_star["price"]%>'>
-          <input id='c_v_2' name='c_v_2' type='hidden' value='<%= @hash_rec_star["cpu_score"]%>'>
-          <input id='c_v_3' name='c_v_3' type='hidden' value='<%= @hash_rec_star["inch"]%>'>
-          <input id='c_v_4' name='c_v_4' type='hidden' value='<%= @hash_rec_star["weight"]%>'>
-          <input id='c_v_5' name='c_v_5' type='hidden' value='<%= @hash_rec_star["uptime"]%>'>
-          <canvas id="resultChart"></canvas>
-        </div>
-				<div class="result-commentary-fundamental">
-					<p>[安さ] ★<%= @hash_rec_star["price"] %> : 平均の値段は、<%= @hash_difference_avrg["price"].round(-3).to_i %>円です。あなたにおすすめの値段は、<%= @hash_rec_avrg["price"].round(-3).to_i %>円です。</p>
-					<p>[スペック] ★<%= @hash_rec_star["cpu_score"] %> : 平均のスペックは、<%= @hash_difference_avrg["cpu_score"].round(-2).to_i %>です。あなたにおすすめのスペックは、<%= @hash_rec_avrg["cpu_score"].round(-2).to_i %>です。</p>
-					<p>[画面の大きさ] ★<%= @hash_rec_star["inch"] %> : 平均の画面の大きさは、<%= @hash_difference_avrg["inch"].round(1) %>インチです。あなたにおすすめの画面の大きさは、<%= @hash_rec_avrg["inch"].round(1) %>インチです。</p>
-					<p>[軽さ] ★<%= @hash_rec_star["weight"] %> : 平均の重量は、<%= @hash_difference_avrg["weight"].round(3) %>kgです。あなたにおすすめの重量は、<%= @hash_rec_avrg["weight"].round(3) %>kgです。</p>
-					<p>[バッテリー時間] ★<%= @hash_rec_star["uptime"] %> : 平均のバッテリー時間は、<%= @hash_difference_avrg["uptime"].round(1) %>時間です。あなたにおすすめのバッテリー時間は、<%= @hash_rec_avrg["uptime"].round(1) %>時間です。</p>
-	      </div>
 
-      </div>
-    </div>
-  </div>
-  <div class="row result-contents">
-    <div class="col-md-12">
-      <h5>ランキング</h5>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="result-commentary">
-        <p>あなたへのおすすめ商品</p>
-      </div>
-    </div>
-  </div>
-  <% for num in 0..@item_display_row_num do %>
-  <div class="row  result-contents">
-    <div class="col-md-6">
-
-      <div class="card card-item" style="width: 20rem;">
-        <h6>第<%=num*2+1%>位</h6>
-        <%= image_tag "#{@array_item[num*2].image}", class: "card-img-top", alt: "Card image cap", height: "280px" %>
-        <div class="card-body">
-          <h4 class="card-title"><%= @array_item[num*2].series %></h4>
-          <p class="card-text">￥<%= @array_item[num*2].price %></p>
-          <button class="btn btn-block btn-outline-secondary" id="item_btn_<%=num*2%>">詳細を見る</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card card-item" style="width: 20rem;">
-        <h6>第<%=num*2+2%>位</h6>
-        <%= image_tag "#{@array_item[num*2+1].image}", class: "card-img-top", alt: "Card image cap", height: "280px" %>
-        <div class="card-body">
-          <h4 class="card-title"><%= @array_item[num*2+1].series %></h4>
-          <p class="card-text">￥<%= @array_item[num*2+1].price %></p>
-          <button class="btn btn-block btn-outline-secondary" id="item_btn_<%=num*2+1%>">詳細を見る</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <% end %>
-</div>
 
 <% for num in 0..(@item_display_num-1) do %>
 <div class="container item">
@@ -358,107 +426,6 @@
 
 
 
-<div class="top-main">
-  <div class="top-contents">
-    <div class="card bg-info result">
-      <div class="card-header">
-        診断結果
-      </div>
-      <div class="card-body bg-light text-dark">
-        <div class="result-contents">
-          <p class="text-center">あなたのタイプは</p>
-          <h2 class="text-info text-center"><%= @charasteristic_title %>タイプ</h2>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-12 col-md-6 result-contents">
-
-            <p>[重視1] <%= @charasteristic_chara_1_str %> : <%= @charasteristic_chara_1_val%></p>
-            <div class="result-star-rating position-relative">
-              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_1_val*1.5 %>rem; max-height: 100%;">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-              <div class="result-star-rating-back">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-            </div>
-            <p>[重視2] <%= @charasteristic_chara_2_str %> : <%= @charasteristic_chara_2_val %></p>
-            <div class="result-star-rating position-relative">
-              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_2_val*1.5 %>rem; max-height: 100%;">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-              <div class="result-star-rating-back">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-            </div>
-            <p>[重視3] <%= @charasteristic_chara_3_str %> : <%= @charasteristic_chara_3_val %></p>
-            <div class="result-star-rating position-relative">
-              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_3_val*1.5 %>rem; max-height: 100%;">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-              <div class="result-star-rating-back">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-            </div>
-            <p>[重視4] <%= @charasteristic_chara_4_str %> : <%= @charasteristic_chara_4_val %></p>
-            <div class="result-star-rating position-relative">
-              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_4_val*1.5 %>rem; max-height: 100%;">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-              <div class="result-star-rating-back">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-            </div>
-            <p>[重視5] <%= @charasteristic_chara_5_str %> : <%= @charasteristic_chara_5_val %></p>
-            <div class="result-star-rating position-relative">
-              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_5_val*1.5 %>rem; max-height: 100%;">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-              <div class="result-star-rating-back">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-12 col-md-6 result-contents">
-            <h4>解説</h4>
-            <p class="card-text"><%= @charasteristic_body %></p>
-          </div>
-        </div>
-        <h4>おすすめ商品</h4>
-
-        <% for num in 0..@item_display_row_num do %>
-        <div class="row">
-          <div class="col-md-12 col-lg-6 result-contents">
-            <div class="card result-item" style="width: 20rem;">
-            <%= link_to :controller => "items",:action => "show",:series => @array_item[num*2].series do%>
-              <%= image_tag "#{@array_item[num*2].image}", class: "card-img-top border", alt: "Card image cap", height: "280px" %>
-            <% end %>
-              <div class="card-body">
-                <p class="card-text"><%= @array_item[num*2].series %></p>
-                <p class="card-text">￥<%= @array_item[num*2].price %></p>
-                <%= link_to "詳細を見る", {:controller => "items",:action => "show",:series => @array_item[num*2].series }, :class => "btn btn-info btn-block" %>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12 col-lg-6 result-contents">
-            <div class="card result-item" style="width: 20rem;">
-            <%= link_to :controller => "items",:action => "show",:series => @array_item[num*2+1].series do%>
-              <%= image_tag "#{@array_item[num*2+1].image}", class: "card-img-top border", alt: "Card image cap", height: "280px"  %>
-            <% end %>
-              <div class="card-body">
-                <p class="card-text"><%= @array_item[num*2+1].series %></p>
-                <p class="card-text">￥<%= @array_item[num*2+1].price %></p>
-                <%= link_to "詳細を見る", {:controller => "items",:action => "show",:series => @array_item[num*2].series }, :class => "btn btn-info btn-block" %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
 <% end %>
 <%# 20190324アップデート前 %>
 <%# <h1>Results#index</h1>
