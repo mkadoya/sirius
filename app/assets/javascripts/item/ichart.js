@@ -8,14 +8,20 @@ var c_v_2 = $('#c_v_2').val();
 var c_v_3 = $('#c_v_3').val();
 var c_v_4 = $('#c_v_4').val();
 var c_v_5 = $('#c_v_5').val();
-var ctx = document.getElementById("resultChart");
+// var c_a_1 = $('#c_a_1').val();
+// var c_a_2 = $('#c_a_2').val();
+// var c_a_3 = $('#c_a_3').val();
+// var c_a_4 = $('#c_a_4').val();
+// var c_a_5 = $('#c_a_5').val();
+
+var ctx = document.getElementById("itemChart");
 var myRadarChart = new Chart(ctx, {
     type: 'radar',
     data: {
         labels: [c_1, c_2, c_3, c_4, c_5],
         datasets: [{
             label: 'Average',
-            data: [5, 5, 5, 5, 5],
+            data: [5,5,5,5,5],
             borderColor: 'RGBA(66, 133, 244, 1)',
             borderWidth: 1,
             backgroundColor: 'RGBA(66, 133, 244, 0)',
