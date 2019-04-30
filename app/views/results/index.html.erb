@@ -44,74 +44,6 @@
 <p>[Record] ==> <%= @hash_rec_star %></p>
 <p>[Debug] ==> <%= @hash_star %></p>
 
-<<<<<<< HEAD
-<div class="top-main">
-  <div class="top-contents">
-    <div class="card bg-info result">
-      <div class="card-header">
-        診断結果
-      </div>
-      <div class="card-body bg-light text-dark">
-        <div class="result-contents">
-          <p class="text-center">あなたのタイプは</p>
-          <h2 class="text-info text-center"><%= @charasteristic_title %>タイプ</h2>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-12 col-md-6 result-contents">
-
-            <p>[重視1] <%= @charasteristic_chara_1_str %> : <%= @charasteristic_chara_1_val%></p>
-            <div class="result-star-rating position-relative">
-              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_1_val*1.5 %>rem; max-height: 100%;">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-              <div class="result-star-rating-back">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-            </div>
-            <p>[重視2] <%= @charasteristic_chara_2_str %> : <%= @charasteristic_chara_2_val %></p>
-            <div class="result-star-rating position-relative">
-              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_2_val*1.5 %>rem; max-height: 100%;">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-              <div class="result-star-rating-back">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-            </div>
-            <p>[重視3] <%= @charasteristic_chara_3_str %> : <%= @charasteristic_chara_3_val %></p>
-            <div class="result-star-rating position-relative">
-              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_3_val*1.5 %>rem; max-height: 100%;">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-              <div class="result-star-rating-back">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-            </div>
-            <p>[重視4] <%= @charasteristic_chara_4_str %> : <%= @charasteristic_chara_4_val %></p>
-            <div class="result-star-rating position-relative">
-              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_4_val*1.5 %>rem; max-height: 100%;">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-              <div class="result-star-rating-back">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-            </div>
-            <p>[重視5] <%= @charasteristic_chara_5_str %> : <%= @charasteristic_chara_5_val %></p>
-            <div class="result-star-rating position-relative">
-              <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @charasteristic_chara_5_val*1.5 %>rem; max-height: 100%;">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-              <div class="result-star-rating-back">
-                <h4>★★★★★★★★★★</h4>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-12 col-md-6 result-contents">
-            <h4>解説</h4>
-            <p class="card-text"><%= @charasteristic_body %></p>
-          </div>
-=======
 <p>一覧：おすすめ品 ! </p>
 <p>[おすすめNo1]<%= @array_item[0].series %> ====> <%= @array_item[0].name %></p>
 <p>[おすすめNo2]<%= @array_item[1].series %> ====> <%= @array_item[1].name %></p>
@@ -433,7 +365,6 @@
               :series => @array_item[num*2+1].series,
             },
             :class => "btn btn-primary question-btn-right"%>
->>>>>>> ef3186886566c2b13540263666fd7819057e5b71
         </div>
         <h4>おすすめ商品</h4>
 			</div>
@@ -540,13 +471,10 @@
       </div>
     </div>
   </div>
-<<<<<<< HEAD
-=======
   <% end %>
   <a href="#" class="readMoreBtn">
     <span class="moreText">もっと見る</span><span class="arrowDown"></span>
   </a>
->>>>>>> ef3186886566c2b13540263666fd7819057e5b71
 </div>
 
 

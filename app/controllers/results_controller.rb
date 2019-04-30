@@ -17,12 +17,7 @@ class ResultsController < ApplicationController
 			@item_display_num = ToiletpaperItem.distinct.count(:series)
 		end
 		#アイテムの表示数：偶数のみ可能
-<<<<<<< HEAD
 		@item_display_num = 60
-=======
-		# @item_display_num = 6
-
->>>>>>> ef3186886566c2b13540263666fd7819057e5b71
 		#アイテムの表示行数
 		@item_display_row_num = @item_display_num / 2 - 1
 
