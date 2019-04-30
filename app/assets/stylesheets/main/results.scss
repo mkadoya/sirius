@@ -41,12 +41,16 @@
   }
 }
 
+.readMoreBtn{
+  text-decoration:none;
+  display:block;
+  padding:8px 0 10px;
+  border: solid 0.4px gray;
+  border-radius:25px;
+  cursor : pointer;
+}
+
 .img-type{
-  // -webkit-filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.5));
-  // -moz-filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.5));
-  // -o-filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.5));
-  // -ms-filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.5));
-  // filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.5));
   border-radius: 10px 10px 10px 10px;
   margin-bottom: 50px;
 }
@@ -76,6 +80,7 @@
 }
 
 .result-commentary{
+  margin-bottom: 30px;
   position: relative;
   background: white;
   padding: 1em 1em 0 1em;
@@ -94,7 +99,6 @@
 .result-chart{
   position: relative;
   padding: 20px 0 0 0;
-  text-align: center;
   background-color: white;
   border: solid 0.5px rgb(219, 219, 219);
   box-shadow: 1px 0 2px 1px rgb(219, 219, 219);
@@ -107,6 +111,7 @@
 
 .card-item{
   box-shadow: 3px 3px 3px gray;
+  display: none;
 }
 
 .item-img{
@@ -116,6 +121,10 @@
     width: 300px;
     height: 260px;
   }
+}
+
+.item-details{
+  display:none;
 }
 
 .item-detail{
@@ -128,6 +137,73 @@
 .item-detail h3{
   font-size:24px;
 }
+
+.items{
+  display:none;
+}
+
+.item-ranking{
+  padding: 0 0.5em 0.2em 0.5em;
+  margin: 0 0 2em 0;
+  color: white;
+  width: 3em;
+  font-size: 13px;
+}
+
+.item-image{
+  height: 53%;
+  @media screen and (max-width: 992px) {
+     height: 60%;
+  }
+
+  @media screen and (max-width: 768px) {
+     height: 65%;
+  }
+
+  @media screen and (max-width: 544px) {
+     height: 65%;
+  }
+}
+
+.item-explain{
+  padding: 0.5em 0.5em 3em 0.5em;
+  font-size: 13px;
+
+  @media screen and (max-width: 992px) {
+     font-size: 13px;
+  }
+
+  @media screen and (max-width: 768px) {
+     font-size: 14px;
+
+  }
+
+  @media screen and (max-width: 544px) {
+     font-size: 18px;
+  }
+}
+
+.item-explain p{
+  margin: 0;
+}
+
+.item-explain p span{
+  font-size: 20px;
+  font-weight: bold;
+  @media screen and (max-width: 992px) {
+     font-size: 22px;
+  }
+
+  @media screen and (max-width: 768px) {
+     font-size: 24px;
+
+  }
+
+  @media screen and (max-width: 544px) {
+     font-size: 26px;
+  }
+}
+
 
 // .result{
 //     text-align: left;

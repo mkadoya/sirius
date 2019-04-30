@@ -1,11 +1,31 @@
 class ResultsController < ApplicationController
 	def index
 
+		# User-id, category, Question_finishをquestion_controllerから引き受ける
+		@user_id = cookies[:user_id]
+		@category = params[:category]
+		@question_finish = params[:question_finish]
+
+		# 記事のインポート
+		@articles = Article.all
+
 		# 人が定義しているParameterシリーズ
+		# アイテム数を取得する
+		if @category == "laptop"
+			@item_display_num = Item.distinct.count(:series)
+		else
+			@item_display_num = ToiletpaperItem.distinct.count(:series)
+		end
 		#アイテムの表示数：偶数のみ可能
+<<<<<<< HEAD
 		@item_display_num = 60
+=======
+		# @item_display_num = 6
+
+>>>>>>> ef3186886566c2b13540263666fd7819057e5b71
 		#アイテムの表示行数
 		@item_display_row_num = @item_display_num / 2 - 1
+
 		# 推奨個数
 		@num_recommend = 3
 		# 評価の最高値
@@ -15,9 +35,7 @@ class ResultsController < ApplicationController
 		# 評価のための偏差値補正
 		@num_std_mod = 3
 
-		# User-id, categoryをquestion_controllerから引き受ける
-		@user_id = cookies[:user_id]
-		@category = params[:category]
+
 
 		# 配列の初期化
 		@array_option_id = Array.new
