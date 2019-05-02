@@ -8,8 +8,10 @@ class QuestionsController < ApplicationController
     @question_num     = params[:question_num] ? params[:question_num].to_i : nil
     @next_question_id = params[:next_question_id] ? params[:next_question_id].to_i : nil
     @user_id          = cookies[:user_id]
-
     @start_question_id = Question.find_by(category: @category).question_id
+
+    # 記事のインポート
+    @articles = Article.all
 
     # Cookie情報がない場合、新規ユーザーを作成する。
     if !@user_id

@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   def top
     @user_id = cookies[:user_id]
     @articles = Article.order(id: :desc).first(10)
+    @laptops = Item.all.last(5)
   end
   def description
   end

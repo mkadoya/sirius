@@ -56,16 +56,30 @@
 </header>
 <main>
 <div class="container">
-  <div class="row">
-    <div class="col-md-8">
+  <div class="row row-1">
+    <div class="col-md-12">
       <h2>質問に答えよう</h2>
       <p>質問の結果に応じて、あなたに最適なアイテムを紹介します。</p>
-      <p>ぜひ最後まで答えてみてください。</p>
-      <button class="btn btn-primary btn-lg" id="openModal">質問を続ける</button>
+      <p>最後まで答えることで、より正確な結果を得ることができます。</p>
+      <button class="btn btn-primary mt-3" id="openModal">質問を続ける</button>
     </div>
+  </div>
+  <div class="row row-1">
+    <div class="col-md-12">
+      <h2>記事一覧</h2>
+    </div>
+  </div>
+  <% @articles.each do |article| %>
+  <div class="row row-1">
     <div class="col-md-4">
-      <h2>最新の記事</h2>
+      <img class="img-fluid" src="<%= article.image %>"  alt="Responsive image">
     </div>
+    <div class="col-md-8">
+      <h3><%= link_to article.title, article %></h3>
+      <p><%= article.preview %></p>
+    </div>
+  </div>
+  <% end %>
   </div>
 </div>
 </main>
@@ -158,169 +172,5 @@
 
 <!-- ↓ページが読み込まれたと同時にモーダルエリアを起動する -->
 <script type="text/javascript">
-  var h2 = $('h2').offset().top -50;
   window.onload = $('#modalArea').fadeIn(0);
 </script>
-
-
-
-<%# 大量のコメントアウト %>
-
-<%# <div class="container quesiton-header">
-  <div class="row">
-    <div class="col-md-12">
-        <div class="question-header-text">
-          <h1>質問に答えてみよう</h1>
-          <p>実際に利用するシーンを想定しながら質問に答えていきましょう。</p>
-        </div>
-    </div>
-  </div>
-</div> %>
-<%#
-<div class="jumbotron">
-  <div class="container">
-    <h1>質問に答えてみましょう</h1>
-    実際に利用するシーンを想定しながら質問に答えて。
-  </div>
-</div> %>
-
-
-
-
-
-
-
-
-
-  <%# コメントアウト %>
-  <% if false %>
-  <div class="row">
-    <div class="col-md-12">
-      <h2>質問に答える</h2>
-      <h3><%= @question_num %>問目</h3>
-      <div class="question mx-auto">
-        <p class="question-text"><%= @question.content %></p>
-        <div class="question-options">
-          <% @options.each do |option|%>
-            <div class="row" style="margin-bottom: 40px;">
-              <div class="col-md-12">
-                <%= link_to option.content,
-                  {
-                    :controller => "results",
-                    # 20190324アップデート前
-                    # :controller => "option_results",
-                    :action => "create",
-                    :category => @category,
-                    :question_id => option.question_id,
-                    :question_num => @question_num,
-                    :option_id => option.option_id,
-                    :next_question_id => option.next_question_id,
-                  },
-                :class => "btn btn-outline-info btn-lg btn-block mx-auto question-option-button" %>
-              </div>
-            </div>
-          <% end %>
-          <% if @question_num > 1 %>
-            <%= link_to "＜",
-            {
-              :controller => "questions",
-              :action => "index",
-              :category => @category,
-              :user_id => @user_id,
-              :question_num => (@question_num - 2),
-              :next_question_id => @before_question_id
-            },
-            :class => "question-button-prev"%>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <% end %>
-<%# コメントアウトはここまで %>
-
-<%# コメントアウト %>
-<% if false %>
-<div class="top-main">
-  <div class="top-contents">
-    <div class="card border-info rounded-lg question">
-      <div class="card-head text-light bg-info question-head">
-        <div class="row">
-          <div class="col-md-6">
-          <%# 20190324 アップデート前 %>
-          <%# <h3><%= @question.category 診断： <%= @answers.count 問目</h3> %>
-            <h3><%= @category_firendly_name %>診断： <%= @question_num %>問目</h3>
-          </div>
-          <div class="col-md-6">
-            <span style="margin-right:10px;">回答率：</span>
-            <meter style="width:250px;" min="0" max="<%=@max_question_num%>" value="<%=@question_num-1%>"> <%=@question_num-1%>/<%=@max_question_num%></meter>
-            <%# <span style="margin-left:10px;"><%=@question_num-1/<%=@max_question_num</span>
-             %>
-          </div>
-      </div>
-      <div class="card-body text-dark border-light bg-light question-contents">
-        <div class="row text-left">
-          <div class="col-sm-2"></div>
-          <div class="col-sm-8">
-            <h4><%= @question.content %></h4>
-          </div>
-          <div class="col-sm-2"></div>
-        </div>
-        <%# 20190324 アップデート前 %>
-        <%# <%= link_to "YES", {:controller => "questions", :action => "index", :id => (@question.id + 1), :answer => "true", :answers => @answers, :question_ids => @question_ids}, :class => "btn btn-outline-primary btn-lg question-button" %>
-        <%# <%= link_to "NO", {:controller => "questions", :action => "index", :id => (@question.id + 1), :answer => "false", :answers => @answers, :question_ids => @question_ids}, :class => "btn btn-outline-danger btn-lg  question-button" %>
-        <div class="question-options">
-          <% @options.each do |option|%>
-            <div class="row" style="margin-bottom: 20px;">
-              <div class="col-sm-3">
-              </div>
-              <div class="col-sm-6">
-                <%= link_to option.content,
-                  {
-                    :controller => "results",
-                    # 20190324アップデート前
-                    # :controller => "option_results",
-                    :action => "create",
-                    :category => @category,
-                    :question_id => option.question_id,
-                    :question_num => @question_num,
-                    :option_id => option.option_id,
-                    :next_question_id => option.next_question_id,
-                  },
-                :class => "btn btn-outline-info btn-lg btn-block" %>
-              </div>
-              <div class="col-sm-3">
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
-      <div class="card-footer text-light bg-info question-footer">
-        <div class="row">
-          <div class="col-md-3">
-            <% if @question_num > 1 %>
-              <%= link_to "戻る",
-              {
-                :controller => "questions",
-                :action => "index",
-                :category => @category,
-                :user_id => @user_id,
-                :question_num => (@question_num - 2),
-                :next_question_id => @before_question_id
-              },
-              :class => "btn btn-outline-light btn-block"%>
-            <% end %>
-          </div>
-          <div class="col-md-6 text-center">
-            <h5 style="margin-top:10px">直感で答えよう！</h5>
-            <%= @costs %>
-          </div>
-          <div class="col-md-3">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<% end %>
-<%# コメントアウトはここまで %>

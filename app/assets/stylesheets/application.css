@@ -37,15 +37,14 @@ body {
 
 h1{
   font-weight: bold;
-  margin-top: 1em;
+  padding: 0.5em 0 0.5em 0;
 }
 
 h2{
   font-weight: bold;
   font-size:24px;
   padding: 0.5em 0.5em;
-  margin-top:1em;
-  margin-bottom:1em;
+  margin: 1em 0 1em 0;
   background: transparent;
   border-left: solid 5px #4285F4;
 }
@@ -53,17 +52,13 @@ h2{
 h3{
   font-weight: bold;
   font-size:22px;
-  /* padding: 0.5em 0.5em; */
-  margin-top:0.5em;
-  margin-bottom:0.5em;
+  padding: 0.5em 0 0.5em 0;
 }
 
 h4{
   font-weight: bold;
   font-size:20px;
-  padding: 0.5em 0.5em;
-  margin-top:1em;
-  margin-bottom:1em;
+  padding: 0.5em 0 0.5em 0;
 }
 
 h5{

@@ -9,38 +9,6 @@
 .col-0 .col-md-8 { padding: 0 0px;}
 .col-0 .col-md-12 { padding: 0 0px;}
 
-.result{
-  width: 55%;
-
-  @media screen and (max-width: 1200px) {
-     width: 70%;
-  }
-
-  @media screen and (max-width: 992px) {
-     width: 85%;
-  }
-
-  @media screen and (max-width: 544px) {
-     width: 90%;
-  }
-}
-
-.item{
-  width: 70%;
-
-  @media screen and (max-width: 1200px) {
-     width: 80%;
-  }
-
-  @media screen and (max-width: 992px) {
-     width: 90%;
-  }
-
-  @media screen and (max-width: 544px) {
-     width: 100%;
-  }
-}
-
 .readMoreBtn{
   text-decoration:none;
   display:block;
@@ -80,7 +48,6 @@
 }
 
 .result-commentary{
-  margin-bottom: 30px;
   position: relative;
   background: white;
   padding: 1em 1em 0 1em;

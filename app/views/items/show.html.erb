@@ -39,19 +39,22 @@
 <main>
 <div class="container bg-white">
     <div class="row row-1">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <h2><%= @item.name %></h2>
-            <p>価格：￥<%= @item.price %></p>
+        </div>
+    </div>
+    <div class="row row-1">
+        <div class="col-md-6">
+            <h3>価格：￥<%= @item.price %></h3>
             <p style="font-size: 12px;">※価格が変更されている場合がございます。最新の情報はリンクをご確認ください。</p>
             <%= image_tag "#{@item.image}", class: "img-fluid" %>
-
         </div>
         <div class="col-md-6">
             <h3 class="text-center">基本性能</h3>
-            <div class="row row-1">
+            <div class="row row-1 ml-2">
                 <div class="blue-box"></div><p>おすすめのスペック</p>
             </div>
-            <div class="row row-1">
+            <div class="row row-1 ml-2">
                 <div class="orange-box"></div><p>商品のスペック</p>
             </div>
             <input id='c_1' name='c_1' type='hidden' value='値段'>
@@ -230,7 +233,7 @@
         <div class="col-md-6 offset-md-6">
             <%= @item.affiliate.html_safe %>
             <div class="row row-1">
-                <%= link_to "結果に戻る", :back, :class => "btn btn-primary" %>
+                <%= link_to "結果に戻る", :back, :class => "btn btn-primary ml-3" %>
             </div>
         </div>
     </div>

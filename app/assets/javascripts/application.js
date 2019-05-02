@@ -13,7 +13,7 @@
 //= require jquery
 //= require rails-ujs
 //= require activestorage
-//= require_tree
+//= require Chart.min
 //= require froala_editor.min.js
 //= require plugins/align.min.js
 //= require plugins/char_counter.min.js
@@ -42,7 +42,97 @@
 //= require plugins/video.min.js
 //= require languages/ja.js
 
+// alert("Kadoya");
 jQuery(function ($) {
+
+    var ctx = document.getElementById("myChart");
+    var c_question_num = $('#c_question_num').val();
+    var r_question_num = $('#r_question_num').val();
+
+    var myPieChart = new Chart(ctx, {
+        //グラフの種類
+        type: 'doughnut',
+        //データの設定
+        data: {
+            //データ項目のラベル
+            labels: ["済", "未"],
+            //データセット
+            datasets: [{
+                //背景色
+                backgroundColor: [
+                    "#ffcc66",
+                    "#F2F2F2"
+                ],
+                //背景色(ホバーしたとき)
+                hoverBackgroundColor: [
+                    "#ffcc66",
+                    "#F2F2F2"
+                ],
+                borderWidth: 0,
+                //グラフのデータ
+                data: [c_question_num, r_question_num]
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            animation: {
+                animateRotate: true,
+                duration: 2000,
+                render: false,
+            },
+        }
+    });
+
+    $('#openModal').click(function () {
+        $('#modalArea').fadeIn();
+    });
+
+    $('#closeModal').click(function () {
+        $('#modalArea').fadeOut();
+        var h2 = $('h2').offset().top - 50;
+        $('html, body').animate({ scrollTop: h2 }, 1000, 'swing');
+    });
+
+    $('.slider').slick({
+        dots: true,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        prevArrow: '<div class="slick-button-prev">◀</div>',
+        nextArrow: '<div class="slick-button-next">▶</div>',
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+    });
+
     $('.latest-article, .p').each(function () {
         var $target = $(this);
 

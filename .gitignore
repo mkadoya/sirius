@@ -33,3 +33,6 @@
 # Ignore certification file
 /config/certs/*
 !/config/certs/.keep
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key

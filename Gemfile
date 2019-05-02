@@ -92,3 +92,6 @@ gem 'statsample'
 # Upload Image
 gem 'carrierwave'
 gem 'rmagick'
+
+# Chart
+gem 'chart-js-rails'

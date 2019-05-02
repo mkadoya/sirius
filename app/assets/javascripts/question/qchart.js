@@ -1,7 +1,7 @@
 var ctx = document.getElementById("myChart");
-
 var c_question_num = $('#c_question_num').val();
 var r_question_num = $('#r_question_num').val();
+
 var myPieChart = new Chart(ctx, {
     //グラフの種類
     type: 'doughnut',
