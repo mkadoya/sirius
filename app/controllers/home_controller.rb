@@ -1,18 +1,13 @@
 class HomeController < ApplicationController
   def top
-    @user_id = cookies[:user_id]
+    @user_id = cookies[:user_id].presence || 0
     @articles = Article.order(id: :desc).first(10)
     @laptops = Item.all.last(5)
-  end
-  def description
-  end
-  def category
-    @options = ["インターネット","仕事","動画視聴","デザイン","プログラミング","その他" ]
-    @option1 = params[:option1]
-    @option2 = params[:option2]
-    @option3 = params[:option3]
-  end
-  def article
+    @result_displayed = false
 
+    # 結果の表示判定
+    if (OptionResult.where(user_id: @user_id).count > 0)
+      @result_displayed = true
+    end
   end
 end

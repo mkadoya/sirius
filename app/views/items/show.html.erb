@@ -15,7 +15,7 @@
                 <div class="collapse navbar-collapse" id="navmenu1">
                   <ul class="navbar-nav" style="font-weight:bold">
                     <li  class="nav-item" style="margin-left:50px;"><a class="nav-item nav-link active" href="/">ホーム</a></li>
-                    <% if @user_id %>
+                    <% if @result_displayed %>
                       <li  class="nav-item" style="margin-left:50px;">
                       <%= link_to "結果",
                       {
@@ -50,7 +50,9 @@
             <%= image_tag "#{@item.image}", class: "img-fluid" %>
         </div>
         <div class="col-md-6">
-            <h3 class="text-center">基本性能</h3>
+            <h3 class="text-center">基本性能<br>
+            <small style="font-size:0.6em;">※未回答の結果は表示されません。</small>
+            </h3>
             <div class="row row-1 ml-2">
                 <div class="blue-box"></div><p>おすすめのスペック</p>
             </div>
@@ -79,27 +81,57 @@
                 <tbody>
                     <tr>
                         <td>値段</td>
-                        <td><%= @hash_rec_avrg["price"].round(-3).to_i %>円</td>
+                        <td>
+                        <% if @hash_rec_avrg["price"] %>
+                          <%= @hash_rec_avrg["price"].round(-3).to_i %>円
+                        <% else %>
+                          未回答
+                        <% end %>
+                        </td>
                         <td><%= @item.price %>円</td>
                     </tr>
                     <tr>
                         <td>スペック(CPU)</td>
-                        <td><%= @hash_rec_avrg["cpu_score"].round(-2).to_i %></td>
+                        <td>
+                        <% if @hash_rec_avrg["cpu_score"] %>
+                          <%= @hash_rec_avrg["cpu_score"].round(-2).to_i %>
+                        <% else %>
+                          未回答
+                        <% end %>
+                        </td>
                         <td><%= @item.cpu_score %></td>
                     </tr>
                     <tr>
                         <td>サイズ</td>
-                        <td><%= @hash_rec_avrg["inch"].round(1) %> インチ</td>
+                        <td>
+                        <% if @hash_rec_avrg["inch"] %>
+                          <%= @hash_rec_avrg["inch"].round(1) %> インチ
+                        <% else %>
+                          未回答
+                        <% end %>
+                        </td>
                         <td><%= @item.inch %> インチ</td>
                     </tr>
                     <tr>
                         <td>重量</td>
-                        <td><%= @hash_rec_avrg["weight"].round(3) %> kg</td>
+                        <td>
+                        <% if @hash_rec_avrg["weight"] %>
+                          <%= @hash_rec_avrg["weight"].round(3) %> kg
+                        <% else %>
+                          未回答
+                        <% end %>
+                        </td>
                         <td><%= @item.weight %> kg</td>
                     </tr>
                     <tr>
                         <td>バッテリー時間</td>
-                        <td><%= @hash_rec_avrg["uptime"].round(1) %> 時間</td>
+                        <td>
+                        <% if @hash_rec_avrg["uptime"] %>
+                          <%= @hash_rec_avrg["uptime"].round(1) %> 時間
+                        <% else %>
+                          未回答
+                        <% end %>
+                        </td>
                         <td><%= @item.uptime %> 時間</td>
                     </tr>
                 </tbody>

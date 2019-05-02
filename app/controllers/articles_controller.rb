@@ -5,21 +5,29 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @user_id = cookies[:user_id]
+    @user_id = cookies[:user_id].presence || 0
     @articles = Article.order(id: :desc).all
+    @result_displayed = false
+    # 結果の表示判定
+    if (OptionResult.where(user_id: @user_id).count > 0)
+      @result_displayed = true
+    end
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
-    @user_id = cookies[:user_id]
+    @user_id = cookies[:user_id].presence || 0
     @articles = Article.order(id: :desc).first(10)
+    # 結果の表示判定
+    if (OptionResult.where(user_id: @user_id).count > 0)
+      @result_displayed = true
+    end
   end
 
   # GET /articles/new
   def new
     redirect_to '/admin'
-    @article = Article.new
   end
 
   # GET /articles/1/edit
@@ -30,6 +38,7 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
+    redirect_to '/admin'
     @article = Article.new(article_params)
 
     respond_to do |format|
@@ -46,6 +55,7 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
+    redirect_to '/admin'
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
@@ -60,6 +70,7 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
+    redirect_to '/admin'
     @article.destroy
     respond_to do |format|
       format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }

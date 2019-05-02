@@ -223,6 +223,9 @@ class ResultsController < ApplicationController
 				@items_array.push(s_item)
 			end
 		end
+
+
+
 	end
 
 

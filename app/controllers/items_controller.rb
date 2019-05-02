@@ -1,10 +1,16 @@
 class ItemsController < ApplicationController
   def show
 	# User-id, category, Question_finishをquestion_controllerから引き受ける
-	@user_id = cookies[:user_id]
+		@user_id = cookies[:user_id].presence || 0
     @category = params[:category]
     @series = params[:series]
     @item_id = params[:item_id]
+		@result_displayed = false
+		
+		# 結果の表示判定
+    if (OptionResult.where(user_id: @user_id).count > 0)
+      @result_displayed = true
+    end
 
     # アイテムを特定
     @item = Item.find_by(item_id: @item_id)

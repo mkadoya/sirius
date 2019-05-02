@@ -1,4 +1,3 @@
-//= require jquery
 
 var c_1 = $('#c_1').val();
 var c_2 = $('#c_2').val();

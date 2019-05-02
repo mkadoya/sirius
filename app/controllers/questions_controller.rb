@@ -7,14 +7,16 @@ class QuestionsController < ApplicationController
     @category         = params[:category] ? params[:category] : "laptop"
     @question_num     = params[:question_num] ? params[:question_num].to_i : nil
     @next_question_id = params[:next_question_id] ? params[:next_question_id].to_i : nil
-    @user_id          = cookies[:user_id]
+    @user_id          = cookies[:user_id].presence || 0
     @start_question_id = Question.find_by(category: @category).question_id
+    @result_displayed = false
 
     # 記事のインポート
     @articles = Article.all
 
     # Cookie情報がない場合、新規ユーザーを作成する。
-    if !@user_id
+    if @user_id == 0
+
 			# 最初のユーザの場合には、@new_user_idとして1を設定
       if TempUser.first.nil? == true
         @new_user_id = 1
@@ -28,6 +30,11 @@ class QuestionsController < ApplicationController
       cookies.permanent[:user_id] = { :value => @new_user_id}
       redirect_to :controller => "questions", :action => "index", :category => @category and return
       # redirect_to :controller => "users", :action => "create", :category => @category
+    end
+
+    # 結果の表示判定
+    if (OptionResult.where(user_id: @user_id).count > 0)
+      @result_displayed = true
     end
 
     # 質問数が存在しない場合は、１に設定する
