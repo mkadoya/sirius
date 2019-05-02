@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
   resources :articles
+  resources :images
   get 'option_results/result'
   get 'option_results/create'
   get 'options/get' => "options#get"
