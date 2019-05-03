@@ -39,8 +39,7 @@
 <div class="container text-dark">
   <div class="row">
     <div class="col-md-8">
-      <h1>最新記事</h1>
-      <h2>パソコンに関する記事</h2>
+      <h1>記事一覧</h1>
       <% @articles.each do |article| %>
       <div class="row row-1">
         <div class="col-md-4">
@@ -52,9 +51,19 @@
         </div>
       </div>
       <% end %>
+      <h2>サイトの利用方法</h2>
+      <div class="row row-1">
+        <div class="col-md-4">
+          <img class="img-fluid" src="<%= @article_howtouse.image %>"  alt="Responsive image">
+        </div>
+        <div class="col-md-8">
+          <h3><%= link_to @article_howtouse.title, "/articles/1" %></h3>
+          <p><%= @article_howtouse.preview %></p>
+        </div>
+      </div>
     </div>
     <div class="col-md-4">
-      <h2>記事一覧</h2>
+      <h2>最新の記事</h2>
       <% @articles.each do |article| %>
       <div class="row row-1">
         <div class="col-md-4">

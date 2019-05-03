@@ -134,28 +134,23 @@
         </div>
       </div>
 
-      <h2>あなたへのおすすめ</h2>
-      <div class="slider">
+      <h2>人気のアイテム</h2>
+      <div class="slider bg-white">
         <% @laptops.each do |laptop| %>
-        <%= image_tag "#{laptop.image}", :class => "image-fluid" %>
+         <%= link_to image_tag("#{laptop["image"]}", class: "img-fluid"),
+          {
+            :controller => "items",
+            :action => "show",
+            :item_id => laptop["url"],
+            :category => "laptop",
+            :series => laptop["series"],
+          } %>
         <% end %>
       </div>
 
-      <h2>人気のアイテム</h2>
-      <div class="slider">
-        <%= image_tag '/laptop-outside.jpg' %>
-        <%= image_tag '/laptop-work.jpg' %>
-        <%= image_tag '/laptop-outside.jpg' %>
-        <%= image_tag '/laptop-work.jpg' %>
-      </div>
-
-      <h2>注目のアイテム</h2>
-      <div class="slider">
-        <%= image_tag '/laptop-outside.jpg' %>
-        <%= image_tag '/laptop-work.jpg' %>
-        <%= image_tag '/laptop-outside.jpg' %>
-        <%= image_tag '/laptop-work.jpg' %>
-      </div>
+      <h2>サイトの利用方法について</h2>
+      <p>本サイトの利用方法については<a href="/articles/1">こちら</a>の記事からご覧ください。</p>
+      <p>カテゴリーの選び方や結果の表示方法について記載されております。</p><br>
 
     </div>
     <div class="col-md-4">

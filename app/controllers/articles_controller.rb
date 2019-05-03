@@ -8,6 +8,7 @@ class ArticlesController < ApplicationController
     @user_id = cookies[:user_id].presence || 0
     @articles = Article.order(id: :desc).all
     @result_displayed = false
+    @article_howtouse = Article.find_by(id:1)
     # 結果の表示判定
     if (OptionResult.where(user_id: @user_id).count > 0)
       @result_displayed = true
