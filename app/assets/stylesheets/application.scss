@@ -1,51 +1,46 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
-*= require froala_editor.min.css
-*= require froala_style.min.css
-*= require font-awesome
-*= require plugins/char_counter.min.css
-*= require plugins/code_view.min.css
-*= require plugins/colors.min.css
-*= require plugins/emoticons.min.css
-*= require plugins/file.min.css
-*= require plugins/fullscreen.min.css
-*= require plugins/image_manager.min.css
-*= require plugins/image.min.css
-*= require plugins/line_breaker.min.css
-*= require plugins/quick_insert.min.css
-*= require plugins/table.min.css
-*= require plugins/video.min.css
-*= require_tree ./main
-*= require_self
-*/
+@import "bootstrap";
+@import "froala_editor.min.css";
+@import "froala_style.min.css";
+@import "font-awesome";
+@import "plugins/char_counter.min.css";
+@import "plugins/code_view.min.css";
+@import "plugins/colors.min.css";
+@import "plugins/emoticons.min.css";
+@import "plugins/file.min.css";
+@import "plugins/fullscreen.min.css";
+@import "plugins/image_manager.min.css";
+@import "plugins/image.min.css";
+@import "plugins/line_breaker.min.css";
+@import "plugins/quick_insert.min.css";
+@import "plugins/table.min.css";
+@import "plugins/video.min.css";
+@import "./main/articles";
+@import "./main/home";
+@import "./main/items";
+@import "./main/option_results";
+@import "./main/options";
+@import "./main/questions";
+@import "./main/results";
+@import "./main/scaffolds";
+@import "./main/slick-theme";
+@import "./main/slick";
 
-
-body {
+body{
    font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic';
    background-color: #f7f7f7;
 }
 
 h1{
   font-weight: bold;
-  margin-top: 1em;
+  font-size: 28px;
+  padding: 0.5em 0 0 0;
 }
 
 h2{
   font-weight: bold;
   font-size:24px;
   padding: 0.5em 0.5em;
-  margin-top:1em;
-  margin-bottom:1em;
+  margin: 0.5em 0 0.5em 0;
   background: transparent;
   border-left: solid 5px #4285F4;
 }
@@ -53,17 +48,13 @@ h2{
 h3{
   font-weight: bold;
   font-size:22px;
-  /* padding: 0.5em 0.5em; */
-  margin-top:0.5em;
-  margin-bottom:0.5em;
+  padding: 0.5em 0 0.5em 0;
 }
 
 h4{
   font-weight: bold;
   font-size:20px;
-  padding: 0.5em 0.5em;
-  margin-top:1em;
-  margin-bottom:1em;
+  padding: 0.5em 0 0.5em 0;
 }
 
 h5{

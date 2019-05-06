@@ -42,17 +42,15 @@
       <h1>あなたの特徴とおすすめの商品を紹介します。</h1>
     </div>
   </div>
-</div>
-
-<div class="container">
+  <% if @question_finish == "false" %>
   <div class="row row-1">
-    <% if @question_finish == "false" %>
     <div class="col-md-12">
       <h2>質問に答えよう</h2>
       <p>質問の結果に応じて、あなたに最適なアイテムを紹介します。</p>
       <p>ぜひ最後まで答えてみてください。</p>
       <%= link_to "質問に戻る", :back, :class => "btn btn-primary" %>
     </div>
+<<<<<<< HEAD
     <% end %>
   </div>
 </div>
@@ -77,16 +75,21 @@
         </ul>
       </div>
     </div>
+=======
+>>>>>>> a7ffca5b38ebfd9bf7423e32ec9a1fddbde0e3ff
   </div>
+  <% end %>
   <div class="row result-contents">
     <div class="col-md-12">
-      <h5>特徴</h5>
+      <h2>あなたの特徴と重要な観点</h2>
     </div>
   </div>
-  <div class="row ">
+  <div class="row">
     <div class="col-md-12">
       <div class="result-commentary">
-        <h3 class="text-center">全体平均に対するあなたの特徴</h3>
+        <h3 class="text-center">全体平均に対するあなたの特徴<br>
+        <small style="font-size:0.6em;">※未回答の結果は表示されません。</small>
+        </h3>
         <div class="result-chart-graph">
           <input id='c_1' name='c_1' type='hidden' value='値段'>
           <input id='c_2' name='c_2' type='hidden' value='スペック'>
@@ -126,6 +129,7 @@
                 <tbody>
                     <tr>
                         <td>値段</td>
+<<<<<<< HEAD
                         <td><%= @hash_rec_avrg["price"] %>円</td>
                         <td><%= @hash_all_avrg["price"] %>円</td>
                     </tr>
@@ -148,6 +152,89 @@
                         <td>バッテリー時間</td>
                         <td><%= @hash_rec_avrg["uptime"] %> 時間</td>
                         <td><%= @hash_all_avrg["uptime"] %> 時間</td>
+=======
+                        <td>
+                        <% if @hash_rec_avrg["price"] %>
+                          <%= @hash_rec_avrg["price"].round(-3).to_i %>円
+                        <% else %>
+                          未回答
+                        <% end %>
+                        </td>
+                        <td>
+                        <% if @hash_difference_avrg["price"] %>
+                          <%= @hash_difference_avrg["price"].round(-3).to_i %>円
+                        <% else %>
+                          未回答
+                        <% end %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>スペック(CPU)</td>
+                        <td>
+                        <% if @hash_rec_avrg["cpu_score"] %>
+                          <%= @hash_rec_avrg["cpu_score"].round(-2).to_i %>
+                        <% else %>
+                          未回答
+                        <% end %>
+                        </td>
+                        <td>
+                        <% if @hash_difference_avrg["cpu_score"] %>
+                          <%= @hash_difference_avrg["cpu_score"].round(-2).to_i %>
+                        <% else %>
+                          未回答
+                        <% end %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>サイズ</td>
+                        <td>
+                        <% if @hash_rec_avrg["inch"] %>
+                          <%= @hash_rec_avrg["inch"].round(1) %> インチ
+                        <% else %>
+                          未回答
+                        <% end %>
+                        </td>
+                        <td>
+                        <% if @hash_difference_avrg["inch"] %>
+                          <%= @hash_difference_avrg["inch"].round(1) %> インチ</td>
+                        <% else %>
+                          未回答
+                        <% end %>
+                    </tr>
+                    <tr>
+                        <td>重量</td>
+                        <td>
+                        <% if @hash_rec_avrg["weight"] %>
+                          <%= @hash_rec_avrg["weight"].round(3) %> kg
+                        <% else %>
+                          未回答
+                        <% end %>
+                        </td>
+                        <td>
+                        <% if @hash_difference_avrg["weight"] %>
+                          <%= @hash_difference_avrg["weight"].round(3) %> kg
+                        <% else %>
+                          未回答
+                        <% end %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>バッテリー時間</td>
+                        <td>
+                        <% if @hash_rec_avrg["uptime"] %>
+                          <%= @hash_rec_avrg["uptime"].round(1) %> 時間
+                        <% else %>
+                          未回答
+                        <% end %>
+                        </td>
+                        <td>
+                        <% if @hash_difference_avrg["uptime"] %>
+                          <%= @hash_difference_avrg["uptime"].round(1) %> 時間
+                        <% else %>
+                          未回答
+                        <% end %>
+                        </td>
+>>>>>>> a7ffca5b38ebfd9bf7423e32ec9a1fddbde0e3ff
                     </tr>
                 </tbody>
               </table>
@@ -225,6 +312,7 @@
             </div>
           </div>
         </div>
+<<<<<<< HEAD
           <%# コメントアウト %>
           <% if false %>
 					<p>[安さ] ★<%= @hash_rec_star["price"] %> : 平均の値段は、<%= @hash_all_avrg["price"] %>円です。あなたにおすすめの値段は、<%= @hash_rec_avrg["price"] %>円です。</p>
@@ -234,6 +322,8 @@
 					<p>[バッテリー時間] ★<%= @hash_rec_star["uptime"] %> : 平均のバッテリー時間は、<%= @hash_all_avrg["uptime"] %>時間です。あなたにおすすめのバッテリー時間は、<%= @hash_rec_avrg["uptime"] %>時間です。</p>
           <% end %>
           <%# コメントアウト終了 %>
+=======
+>>>>>>> a7ffca5b38ebfd9bf7423e32ec9a1fddbde0e3ff
       </div>
     </div>
   </div>
@@ -282,7 +372,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-        <pre><p class="readMoreBtn w-75 text-center text-dark mx-auto"><i class="fas fa-sort-down"></i>　もっと見る</p></pre>
+        <pre><p class="readMoreBtn w-75 text-center text-dark mx-auto"><i class="fas fa-sort-down" aria-hidden="true"></i>　もっと見る</p></pre>
     </div>
   </div>
   <div class="row mb-10">
@@ -299,6 +389,7 @@
         </div>
       </div>
       <% end %>
+<<<<<<< HEAD
       <p>[User-ID] ==> <%= @user_id %></p>
       <p>[Record] ==> <%= @array_debug %></p>
       <p>[Recommend Avrg] ==> <%= @hash_rec_avrg %></p>
@@ -311,10 +402,13 @@
       <p>[Debug] ==> <%= @array_item[3].item_id %></p>
 			<p>[Debug] ==> <%= @array_item[4].item_id %></p>
       <p>[Debug] ==> <%= @array_item[5].item_id %></p>
+=======
+>>>>>>> a7ffca5b38ebfd9bf7423e32ec9a1fddbde0e3ff
     </div>
   </div>
 </div>
 </main>
+<<<<<<< HEAD
 
 
 <% if false %>
@@ -746,3 +840,5 @@
 <p>[おすすめNo5] <%= @array_item[4].name </p>
 
 <p> --------------------------------------------- </p> %>
+=======
+>>>>>>> a7ffca5b38ebfd9bf7423e32ec9a1fddbde0e3ff

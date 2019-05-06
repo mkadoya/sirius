@@ -49,6 +49,9 @@
   font-size: 32px;
   font-weight: bold;
   padding-bottom:30px;
+  @media screen and (max-width: 544px) {
+    font-size: 28px;
+  }
 }
 
 .search p{
@@ -72,17 +75,21 @@
   float: right;
 }
 
-.card{
-  margin-bottom: 20px;
+.text-on-image-center{
+  position: absolute;
+  color:white;
+  font-weight: bold;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  margin:0;
+  padding:0;
 }
 
-.card-title{
-  height:2em;
-}
 
-.card-text{
-  height:4em;
-}
 
 
 

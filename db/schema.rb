@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_05_02_083432) do
+=======
+ActiveRecord::Schema.define(version: 2019_05_02_110659) do
+>>>>>>> a7ffca5b38ebfd9bf7423e32ec9a1fddbde0e3ff
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -67,6 +71,13 @@ ActiveRecord::Schema.define(version: 2019_05_02_083432) do
     t.integer "item_3"
     t.integer "item_4"
     t.integer "item_5"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

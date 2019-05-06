@@ -138,9 +138,23 @@ class ResultsController < ApplicationController
 
 
 
+<<<<<<< HEAD
 # ------ Recommendation 2nd : Recommendation 1stと同じcluster_subから出す -----------------------------------------------------------------------
 		# Recommendation 1stのitem_idの配列を全体から引いて、残りのitem_idの配列を作成
 		@array_item_id_remain = @actrec_all_item.pluck(:item_id) - @array_item_id_1st
+=======
+		@items_array = Array.new
+		@array_item.each do |item|
+			@series_items = @all_item.where(series: item.series).all
+			@series_items.each do |s_item|
+				@items_array.push(s_item)
+			end
+		end
+
+
+
+	end
+>>>>>>> a7ffca5b38ebfd9bf7423e32ec9a1fddbde0e3ff
 
 		# All itemからRecommendation 1stのitem_idを削除したActive Recordを取得
 		@actrec_remain_item = @actrec_all_item.where(item_id: @array_item_id_remain)

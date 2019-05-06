@@ -2,11 +2,9 @@
 // $(function () {
 jQuery(function ($) {
     $('#openModal').click(function () {
-        $('#modalArea').fadeIn();
+        // $('#modalArea').fadeIn();
+        alert("こんにちは")
     });
-    // $('#closeModal , #modalBg').click(function () {
-    //     $('#modalArea').fadeOut();
-    // });
     $('#closeModal').click(function () {
         $('#modalArea').fadeOut();
         var h2 = $('h2').offset().top -50;
