@@ -67,13 +67,13 @@
         <ul>
           <li><%= @hash_rec_star.keys[0] %></li>
           <p>あなたにとっておすすめの<%= @hash_rec_star.keys[0] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[0]] %>です。</p>
-					<p>標準的な<%= @hash_rec_star.keys[0] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[0]] %>です。</p>
+					<p>標準的な<%= @hash_rec_star.keys[0] %>のスペックは、<%= @hash_all_avrg[@hash_rec_star.keys[0]] %>です。</p>
           <li><%= @hash_rec_star.keys[1] %></li>
 					<p>あなたにとっておすすめの<%= @hash_rec_star.keys[1] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[1]] %>です。</p>
-					<p>標準的な<%= @hash_rec_star.keys[1] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[1]] %>です。</p>
+					<p>標準的な<%= @hash_rec_star.keys[1] %>のスペックは、<%= @hash_all_avrg[@hash_rec_star.keys[1]] %>です。</p>
           <li><%= @hash_rec_star.keys[2] %></li>
 					<p>あなたにとっておすすめの<%= @hash_rec_star.keys[2] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[2]] %>です。</p>
-					<p>標準的な<%= @hash_rec_star.keys[2] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[2]] %>です。</p>
+					<p>標準的な<%= @hash_rec_star.keys[2] %>のスペックは、<%= @hash_all_avrg[@hash_rec_star.keys[2]] %>です。</p>
         </ul>
       </div>
     </div>
@@ -126,28 +126,28 @@
                 <tbody>
                     <tr>
                         <td>値段</td>
-                        <td><%= @hash_rec_avrg["price"].round(-3).to_i %>円</td>
-                        <td><%= @hash_difference_avrg["price"].round(-3).to_i %>円</td>
+                        <td><%= @hash_rec_avrg["price"] %>円</td>
+                        <td><%= @hash_all_avrg["price"] %>円</td>
                     </tr>
                     <tr>
                         <td>スペック(CPU)</td>
-                        <td><%= @hash_rec_avrg["cpu_score"].round(-2).to_i %></td>
-                        <td><%= @hash_difference_avrg["cpu_score"].round(-2).to_i %></td>
+                        <td><%= @hash_rec_avrg["cpu_score"] %></td>
+                        <td><%= @hash_all_avrg["cpu_score"] %></td>
                     </tr>
                     <tr>
                         <td>サイズ</td>
-                        <td><%= @hash_rec_avrg["inch"].round(1) %> インチ</td>
-                        <td><%= @hash_difference_avrg["inch"].round(1) %> インチ</td>
+                        <td><%= @hash_rec_avrg["inch"] %> インチ</td>
+                        <td><%= @hash_all_avrg["inch"] %> インチ</td>
                     </tr>
                     <tr>
                         <td>重量</td>
-                        <td><%= @hash_rec_avrg["weight"].round(3) %> kg</td>
-                        <td><%= @hash_difference_avrg["weight"].round(3) %> kg</td>
+                        <td><%= @hash_rec_avrg["weight"] %> kg</td>
+                        <td><%= @hash_all_avrg["weight"] %> kg</td>
                     </tr>
                     <tr>
                         <td>バッテリー時間</td>
-                        <td><%= @hash_rec_avrg["uptime"].round(1) %> 時間</td>
-                        <td><%= @hash_difference_avrg["uptime"].round(1) %> 時間</td>
+                        <td><%= @hash_rec_avrg["uptime"] %> 時間</td>
+                        <td><%= @hash_all_avrg["uptime"] %> 時間</td>
                     </tr>
                 </tbody>
               </table>
@@ -227,11 +227,11 @@
         </div>
           <%# コメントアウト %>
           <% if false %>
-					<p>[安さ] ★<%= @hash_rec_star["price"] %> : 平均の値段は、<%= @hash_difference_avrg["price"].round(-3).to_i %>円です。あなたにおすすめの値段は、<%= @hash_rec_avrg["price"].round(-3).to_i %>円です。</p>
-					<p>[スペック] ★<%= @hash_rec_star["cpu_score"] %> : 平均のスペックは、<%= @hash_difference_avrg["cpu_score"].round(-2).to_i %>です。あなたにおすすめのスペックは、<%= @hash_rec_avrg["cpu_score"].round(-2).to_i %>です。</p>
-					<p>[画面の大きさ] ★<%= @hash_rec_star["inch"] %> : 平均の画面の大きさは、<%= @hash_difference_avrg["inch"].round(1) %>インチです。あなたにおすすめの画面の大きさは、<%= @hash_rec_avrg["inch"].round(1) %>インチです。</p>
-					<p>[軽さ] ★<%= @hash_rec_star["weight"] %> : 平均の重量は、<%= @hash_difference_avrg["weight"].round(3) %>kgです。あなたにおすすめの重量は、<%= @hash_rec_avrg["weight"].round(3) %>kgです。</p>
-					<p>[バッテリー時間] ★<%= @hash_rec_star["uptime"] %> : 平均のバッテリー時間は、<%= @hash_difference_avrg["uptime"].round(1) %>時間です。あなたにおすすめのバッテリー時間は、<%= @hash_rec_avrg["uptime"].round(1) %>時間です。</p>
+					<p>[安さ] ★<%= @hash_rec_star["price"] %> : 平均の値段は、<%= @hash_all_avrg["price"] %>円です。あなたにおすすめの値段は、<%= @hash_rec_avrg["price"] %>円です。</p>
+					<p>[スペック] ★<%= @hash_rec_star["cpu_score"] %> : 平均のスペックは、<%= @hash_all_avrg["cpu_score"] %>です。あなたにおすすめのスペックは、<%= @hash_rec_avrg["cpu_score"] %>です。</p>
+					<p>[画面の大きさ] ★<%= @hash_rec_star["inch"] %> : 平均の画面の大きさは、<%= @hash_all_avrg["inch"] %>インチです。あなたにおすすめの画面の大きさは、<%= @hash_rec_avrg["inch"] %>インチです。</p>
+					<p>[軽さ] ★<%= @hash_rec_star["weight"] %> : 平均の重量は、<%= @hash_all_avrg["weight"] %>kgです。あなたにおすすめの重量は、<%= @hash_rec_avrg["weight"] %>kgです。</p>
+					<p>[バッテリー時間] ★<%= @hash_rec_star["uptime"] %> : 平均のバッテリー時間は、<%= @hash_all_avrg["uptime"] %>時間です。あなたにおすすめのバッテリー時間は、<%= @hash_rec_avrg["uptime"] %>時間です。</p>
           <% end %>
           <%# コメントアウト終了 %>
       </div>
@@ -302,9 +302,15 @@
       <p>[User-ID] ==> <%= @user_id %></p>
       <p>[Record] ==> <%= @array_debug %></p>
       <p>[Recommend Avrg] ==> <%= @hash_rec_avrg %></p>
-      <p>[All Avrg] ==> <%= @hash_difference_avrg %></p>
+      <p>[All Avrg] ==> <%= @hash_all_avrg %></p>
       <p>[Record] ==> <%= @hash_rec_star %></p>
       <p>[Debug] ==> <%= @hash_star %></p>
+      <p>[Debug] ==> <%= @array_item[0].item_id %></p>
+      <p>[Debug] ==> <%= @array_item[1].item_id %></p>
+			<p>[Debug] ==> <%= @array_item[2].item_id %></p>
+      <p>[Debug] ==> <%= @array_item[3].item_id %></p>
+			<p>[Debug] ==> <%= @array_item[4].item_id %></p>
+      <p>[Debug] ==> <%= @array_item[5].item_id %></p>
     </div>
   </div>
 </div>
@@ -362,13 +368,13 @@
 			        <ul>
 			          <li><%= @hash_rec_star.keys[0] %></li>
 			          <p>あなたにとっておすすめの<%= @hash_rec_star.keys[0] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[0]] %>です。</p>
-								<p>標準的な<%= @hash_rec_star.keys[0] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[0]] %>です。</p>
+								<p>標準的な<%= @hash_rec_star.keys[0] %>のスペックは、<%= @hash_all_avrg[@hash_rec_star.keys[0]] %>です。</p>
 			          <li><%= @hash_rec_star.keys[1] %></li>
 								<p>あなたにとっておすすめの<%= @hash_rec_star.keys[1] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[1]] %>です。</p>
-								<p>標準的な<%= @hash_rec_star.keys[1] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[1]] %>です。</p>
+								<p>標準的な<%= @hash_rec_star.keys[1] %>のスペックは、<%= @hash_all_avrg[@hash_rec_star.keys[1]] %>です。</p>
 			          <li><%= @hash_rec_star.keys[2] %></li>
 								<p>あなたにとっておすすめの<%= @hash_rec_star.keys[2] %>のスペックは、<%= @hash_rec_avrg[@hash_rec_star.keys[2]] %>です。</p>
-								<p>標準的な<%= @hash_rec_star.keys[2] %>のスペックは、<%= @hash_difference_avrg[@hash_rec_star.keys[2]] %>です。</p>
+								<p>標準的な<%= @hash_rec_star.keys[2] %>のスペックは、<%= @hash_all_avrg[@hash_rec_star.keys[2]] %>です。</p>
 			        </ul>
 			      </div>
 			    </div>
@@ -396,11 +402,11 @@
 			          <canvas id="resultChart"></canvas>
 			        </div>
 							<div class="result-commentary-fundamental">
-								<p>[安さ] ★<%= @hash_rec_star["price"] %> : 平均の値段は、<%= @hash_difference_avrg["price"].round(-3).to_i %>円です。あなたにおすすめの値段は、<%= @hash_rec_avrg["price"].round(-3).to_i %>円です。</p>
-								<p>[スペック] ★<%= @hash_rec_star["cpu_score"] %> : 平均のスペックは、<%= @hash_difference_avrg["cpu_score"].round(-2).to_i %>です。あなたにおすすめのスペックは、<%= @hash_rec_avrg["cpu_score"].round(-2).to_i %>です。</p>
-								<p>[画面の大きさ] ★<%= @hash_rec_star["inch"] %> : 平均の画面の大きさは、<%= @hash_difference_avrg["inch"].round(1) %>インチです。あなたにおすすめの画面の大きさは、<%= @hash_rec_avrg["inch"].round(1) %>インチです。</p>
-								<p>[軽さ] ★<%= @hash_rec_star["weight"] %> : 平均の重量は、<%= @hash_difference_avrg["weight"].round(3) %>kgです。あなたにおすすめの重量は、<%= @hash_rec_avrg["weight"].round(3) %>kgです。</p>
-								<p>[バッテリー時間] ★<%= @hash_rec_star["uptime"] %> : 平均のバッテリー時間は、<%= @hash_difference_avrg["uptime"].round(1) %>時間です。あなたにおすすめのバッテリー時間は、<%= @hash_rec_avrg["uptime"].round(1) %>時間です。</p>
+								<p>[安さ] ★<%= @hash_rec_star["price"] %> : 平均の値段は、<%= @hash_all_avrg["price"] %>円です。あなたにおすすめの値段は、<%= @hash_rec_avrg["price"] %>円です。</p>
+								<p>[スペック] ★<%= @hash_rec_star["cpu_score"] %> : 平均のスペックは、<%= @hash_all_avrg["cpu_score"] %>です。あなたにおすすめのスペックは、<%= @hash_rec_avrg["cpu_score"] %>です。</p>
+								<p>[画面の大きさ] ★<%= @hash_rec_star["inch"] %> : 平均の画面の大きさは、<%= @hash_all_avrg["inch"] %>インチです。あなたにおすすめの画面の大きさは、<%= @hash_rec_avrg["inch"] %>インチです。</p>
+								<p>[軽さ] ★<%= @hash_rec_star["weight"] %> : 平均の重量は、<%= @hash_all_avrg["weight"] %>kgです。あなたにおすすめの重量は、<%= @hash_rec_avrg["weight"] %>kgです。</p>
+								<p>[バッテリー時間] ★<%= @hash_rec_star["uptime"] %> : 平均のバッテリー時間は、<%= @hash_all_avrg["uptime"] %>時間です。あなたにおすすめのバッテリー時間は、<%= @hash_rec_avrg["uptime"] %>時間です。</p>
 				      </div>
 
 			      </div>
@@ -517,27 +523,27 @@
                               <tr>
                                   <td>値段</td>
                                   <td><%= item.price %>円</td>
-                                  <td><%= @hash_rec_avrg["price"].round(-3).to_i %>円</td>
+                                  <td><%= @hash_rec_avrg["price"] %>円</td>
                               </tr>
                               <tr>
                                   <td>スペック</td>
                                   <td><%= item.cpu_score %></td>
-                                  <td><%= @hash_rec_avrg["cpu_score"].round(-2).to_i %></td>
+                                  <td><%= @hash_rec_avrg["cpu_score"] %></td>
                               </tr>
                               <tr>
                                   <td>サイズ</td>
                                   <td><%= item.inch %> インチ</td>
-                                  <td><%= @hash_rec_avrg["inch"].round(1) %> インチ</td>
+                                  <td><%= @hash_rec_avrg["inch"] %> インチ</td>
                               </tr>
                               <tr>
                                   <td>重量</td>
                                   <td><%= item.weight %> kg</td>
-                                  <td><%= @hash_rec_avrg["weight"].round(3) %> kg</td>
+                                  <td><%= @hash_rec_avrg["weight"] %> kg</td>
                               </tr>
                               <tr>
                                   <td>バッテリー時間</td>
                                   <td><%= item.uptime %> 時間</td>
-                                  <td><%= @hash_rec_avrg["uptime"].round(1) %> 時間</td>
+                                  <td><%= @hash_rec_avrg["uptime"] %> 時間</td>
                               </tr>
                             </tbody>
                         </table>
