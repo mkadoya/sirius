@@ -15,7 +15,7 @@
                 <div class="collapse navbar-collapse" id="navmenu1">
                   <ul class="navbar-nav" style="font-weight:bold">
                     <li  class="nav-item" style="margin-left:50px;"><a class="nav-item nav-link active" href="/">ホーム</a></li>
-                    <% if @result_displayed %>
+                    <% if @user_id %>
                       <li  class="nav-item" style="margin-left:50px;">
                       <%= link_to "結果",
                       {

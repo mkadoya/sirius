@@ -29,7 +29,6 @@ class QuestionsController < ApplicationController
       @user.save
       cookies.permanent[:user_id] = { :value => @new_user_id}
       redirect_to :controller => "questions", :action => "index", :category => @category and return
-      # redirect_to :controller => "users", :action => "create", :category => @category
     end
 
     # 結果の表示判定
@@ -68,13 +67,10 @@ class QuestionsController < ApplicationController
           @before_question_id = Option.find_by(option_id:option_id).question_id
         end
       end
-    #   @before_question_id = Question.find_by(next_question_id: @question.question_id).question_id
     end
 
     # 次の質問がない場合（最後の質問だった場合）、リザルト画面を表示する
     if @next_question_id==0
-      # redirect_to :controller => "results", :action => "index", :category => @category and return
-      # question_numがmax_question_num+1のため
       @max_question_num = @question_num - 1
       return
     end
@@ -92,16 +88,11 @@ class QuestionsController < ApplicationController
 
     # 選択肢を取得する
     @options = Option.where(question_id: @question.question_id).all
-
   end
 
   def result
     @user_id = cookies[:user_id]
     @category = params[:category]
-    # 20190324 アップデート前
-    # @answers = params[:answers]
-    # @question_ids = params[:question_ids]
-    # @category = params[:category]
   end
 
 end

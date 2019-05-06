@@ -56,9 +56,9 @@
 </header>
 <main>
 <div class="container">
-  <div class="row row-1">
+  <div class="row mb-5 mt-5">
     <div class="col-md-12">
-      <h1>質問に答えてあなたに一番のアイテムを探しましょう。</h1>
+      <h1 class="mb-5">質問に答えてあなたに一番のアイテムを探しましょう。</h1>
       <h2>質問を続ける</h2>
       <p>質問の結果に応じて、あなたに最適なアイテムを紹介します。</p>
       <p>最後まで答えることで、より正確な結果を得ることができます。</p>
@@ -66,7 +66,7 @@
     </div>
   </div>
   <% if @result_displayed %>
-  <div class="row row-1">
+  <div class="row mb-5">
     <div class="col-md-12">
       <h2>途中の結果を見る</h2>
       <p>質問が途中でも、診断結果を見ることができます。</p>
@@ -82,22 +82,24 @@
     </div>
   </div>
   <% end %>
-  <div class="row row-1">
+  <div class="row mb-5">
     <div class="col-md-12">
       <h2>記事一覧</h2>
     </div>
   </div>
-  <% @articles.each do |article| %>
-  <div class="row row-1">
-    <div class="col-md-4">
+
+  <div class="row mb-5">
+    <% @articles.each do |article| %>
+    <div class="col-md-4 row-1">
       <img class="img-fluid" src="<%= article.image %>"  alt="Responsive image">
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 row-1">
       <h3><%= link_to article.title, article %></h3>
       <p><%= article.preview %></p>
     </div>
+    <% end %>
   </div>
-  <% end %>
+
   </div>
 </div>
 </main>

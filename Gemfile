@@ -95,3 +95,7 @@ gem 'rmagick'
 
 # Chart
 gem 'chart-js-rails'
+
+# Bootstrap
+gem 'bootstrap'
+gem 'mini_racer'

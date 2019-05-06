@@ -13,6 +13,8 @@
 //= require jquery
 //= require rails-ujs
 //= require activestorage
+//= require bootstrap-sprockets
+//= require popper
 //= require Chart.min
 //= require ./slick/slick.min.js
 //= require froala_editor.min.js

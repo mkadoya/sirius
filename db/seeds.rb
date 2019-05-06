@@ -10,14 +10,14 @@
 require 'csv'
 
 #以下はQuestionsを呼び出すパターン
-CSV.foreach('db/Questions.csv', headers: true) do |row|
-    Question.create(
-        :question_id => row[0],
-        :category => row[1],
-        :content => row[2],
-        :remain_question_num => row[3],
-    )
-end
+# CSV.foreach('db/Questions.csv', headers: true) do |row|
+#     Question.create(
+#         :question_id => row[0],
+#         :category => row[1],
+#         :content => row[2],
+#         :remain_question_num => row[3],
+#     )
+# end
 
 #以下はItemsを呼び出すパターン
 CSV.foreach('db/Items.csv', headers: true) do |row|
@@ -92,72 +92,72 @@ Item.create(
 end
 
 # 以下はPatternsを呼び出すパターン
-CSV.foreach('db/Patterns.csv', headers: true) do |row|
-Pattern.create(
-    :category => row['category'],
-    :pattern_id => row['pattern_id'],
-    :answer_1 => row['answer_1'],
-    :answer_2 => row['answer_2'],
-    :answer_3 => row['answer_3'],
-    :answer_4 => row['answer_4'],
-    :answer_5 => row['answer_5'],
-    :answer_6 => row['answer_6'],
-    :answer_7 => row['answer_7'],
-    :answer_8 => row['answer_8'],
-    :answer_9 => row['answer_9'],
-    :answer_10 => row['answer_10'],
-    :answer_11 => row['answer_11'],
-    :answer_12 => row['answer_12']
-    )
-end
+# CSV.foreach('db/Patterns.csv', headers: true) do |row|
+# Pattern.create(
+#     :category => row['category'],
+#     :pattern_id => row['pattern_id'],
+#     :answer_1 => row['answer_1'],
+#     :answer_2 => row['answer_2'],
+#     :answer_3 => row['answer_3'],
+#     :answer_4 => row['answer_4'],
+#     :answer_5 => row['answer_5'],
+#     :answer_6 => row['answer_6'],
+#     :answer_7 => row['answer_7'],
+#     :answer_8 => row['answer_8'],
+#     :answer_9 => row['answer_9'],
+#     :answer_10 => row['answer_10'],
+#     :answer_11 => row['answer_11'],
+#     :answer_12 => row['answer_12']
+#     )
+# end
 
 # 以下はPatternsを呼び出すパターン
-CSV.foreach('db/Characteristics.csv', headers: true) do |row|
-Characteristic.create(
-    :category => row[0],
-    :pattern_id => row[1],
-    :title => row[2],
-    :body => row[3],
-    :chara_1_str => row[4],
-    :chara_1_val => row[5],
-    :chara_2_str => row[6],
-    :chara_2_val => row[7],
-    :chara_3_str => row[8],
-    :chara_3_val => row[9],
-    :chara_4_str => row[10],
-    :chara_4_val => row[11],
-    :chara_5_str => row[12],
-    :chara_5_val => row[13],
-    :item_1 => row[14],
-    :item_2 => row[15],
-    :item_3 => row[16],
-    :item_4 => row[17],
-    :item_5 => row[18],
-)
-end
+# CSV.foreach('db/Characteristics.csv', headers: true) do |row|
+# Characteristic.create(
+#     :category => row[0],
+#     :pattern_id => row[1],
+#     :title => row[2],
+#     :body => row[3],
+#     :chara_1_str => row[4],
+#     :chara_1_val => row[5],
+#     :chara_2_str => row[6],
+#     :chara_2_val => row[7],
+#     :chara_3_str => row[8],
+#     :chara_3_val => row[9],
+#     :chara_4_str => row[10],
+#     :chara_4_val => row[11],
+#     :chara_5_str => row[12],
+#     :chara_5_val => row[13],
+#     :item_1 => row[14],
+#     :item_2 => row[15],
+#     :item_3 => row[16],
+#     :item_4 => row[17],
+#     :item_5 => row[18],
+# )
+# end
 
 # 以下はOptionを呼び出すパターン
-   CSV.foreach('db/Options.csv', headers: true) do |row|
-   Option.create(
-       :option_id => row[0],
-       :category => row[1],
-       :question_id => row[2],
-       :content => row[3],
-       :next_question_id => row[4],
-   )
- end
+#    CSV.foreach('db/Options.csv', headers: true) do |row|
+#    Option.create(
+#        :option_id => row[0],
+#        :category => row[1],
+#        :question_id => row[2],
+#        :content => row[3],
+#        :next_question_id => row[4],
+#    )
+#  end
 
 # 以下はMatchを呼び出すパターン
- CSV.foreach('db/Matchs.csv', headers: true) do |row|
- Match.create(
-     :match_id => row[0],
-     :category => row[1],
-     :option_id => row[2],
-     :item_clmn => row[3],
-     :min => row[4],
-     :max => row[5]
- )
- end
+#  CSV.foreach('db/Matchs.csv', headers: true) do |row|
+#  Match.create(
+#      :match_id => row[0],
+#      :category => row[1],
+#      :option_id => row[2],
+#      :item_clmn => row[3],
+#      :min => row[4],
+#      :max => row[5]
+#  )
+#  end
 
 # 以下はOptionResultを呼び出すパターン
 #  CSV.foreach('db/OptionResults.csv', headers: true) do |row|
@@ -171,27 +171,27 @@ end
 #  end
 
 #以下はToiletPaperを呼び出すパターン
-CSV.foreach('db/Toiletpaper_items.csv', headers: true) do |row|
-ToiletpaperItem.create(
-    :item_id => row[0],
-    :category => row[1],
-    :maker => row[2],
-    :name => row[3],
-    :price => row[4],
-    :single => row[5],
-    :double => row[6],
-    :cost => row[7],
-    :soft => row[8],
-    :flavor => row[9],
-    :smooth => row[10],
-    :water => row[11],
-    :design => row[12],
-    :fun => row[13],
-    :series => row[14],
-    :affiliate => row[15],
-    :image => row[16],
-)
-end
+# CSV.foreach('db/Toiletpaper_items.csv', headers: true) do |row|
+# ToiletpaperItem.create(
+#     :item_id => row[0],
+#     :category => row[1],
+#     :maker => row[2],
+#     :name => row[3],
+#     :price => row[4],
+#     :single => row[5],
+#     :double => row[6],
+#     :cost => row[7],
+#     :soft => row[8],
+#     :flavor => row[9],
+#     :smooth => row[10],
+#     :water => row[11],
+#     :design => row[12],
+#     :fun => row[13],
+#     :series => row[14],
+#     :affiliate => row[15],
+#     :image => row[16],
+# )
+# end
 
 #以下はActive Admin用
-AdminUser.create!(email: 'mkadoya111@gmail.com', password: 'pa55w0rd!', password_confirmation: 'pa55w0rd!') if Rails.env.development?
+# AdminUser.create!(email: 'mkadoya111@gmail.com', password: 'pa55w0rd!', password_confirmation: 'pa55w0rd!') if Rails.env.development?
