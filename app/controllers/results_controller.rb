@@ -80,7 +80,7 @@ class ResultsController < ApplicationController
 		# Seriesの重複を除いたTotalのアイテム数
 		@num_all_series = @all_item.select(:series).distinct.count
 		# Userが選択した結果をuser-idとcategoryを指定してDBから抽出
-		@array_record_true = OptionResult.where(user_id: @user_id).where(category: @category).where(result: true)
+		@array_record_true = Result.where(user_id: @user_id).where(category: @category).where(result: true)
 
 		# Userが答えてtrue flagがついたoption_idを配列で取得
 		@array_record_true.each do |record_true|
@@ -281,7 +281,7 @@ class ResultsController < ApplicationController
 		# Seriesの重複を除いたTotalのアイテム数
 		@num_all_series = Item.select(:series).distinct.count
 		# Userが選択した結果をuser-idとcategoryを指定してDBから抽出
-		@array_record_true = OptionResult.where(user_id: @user_id).where(category: @category).where(result: true)
+		@array_record_true = Result.where(user_id: @user_id).where(category: @category).where(result: true)
 
 		# Userが答えてtrue flagがついたoption_idを配列で取得
 		@array_record_true.each do |record_true|
@@ -484,7 +484,7 @@ class ResultsController < ApplicationController
 		# Seriesの重複を除いたTotalのアイテム数
 		@num_all_series = ToiletpaperItem.select(:series).distinct.count
 		# Userが選択した結果をuser-idとcategoryを指定してDBから抽出
-		@array_record_true = OptionResult.where(user_id: @user_id).where(category: @category).where(result: true)
+		@array_record_true = Result.where(user_id: @user_id).where(category: @category).where(result: true)
 
 		# Userが答えてtrue flagがついたoption_idを配列で取得
 		@array_record_true.each do |record_true|
@@ -635,86 +635,4 @@ class ResultsController < ApplicationController
 	# ------ Debug by Takai ---------------------------------------------------------------------------------
 	# ------ Debug by Takai ---------------------------------------------------------------------------------
 
-	def create
-	# 各パラメーターの導入
-    @category         = params[:category] ? params[:category] : "laptop"
-    @user_id          = params[:user_id] ? params[:user_id].to_i : nil
-    @question_id      = params[:question_id] ? params[:question_id].to_i : nil
-    @question_num     = params[:question_num] ? params[:question_num].to_i : nil
-    @next_question_id     = params[:next_question_id] ? params[:next_question_id].to_i : nil
-    @selected_option_id        = params[:option_id] ? params[:option_id].to_i : nil
-
-    # オプション一覧の取得
-    @options =  Option.where(question_id: @question_id).all
-
-    # 結果が存在しているか確認し、存在している場合はアップデートする
-    # アップデート後は質問ページへリダイレクトする
-    @results = OptionResult.where(user_id: @user_id).where(question_id: @question_id).all
-    if @results.count > 0
-      @results.each do |result|
-        if @selected_option_id  == result.option_id
-          result.result = true
-          result.save
-        else
-          result.result = false
-          result.save
-        end
-	  end
-
-	  redirect_to :controller => "questions", :action => "index", :user_id => @user_id, :category => @category, :next_question_id => @next_question_id, :question_num => @question_num and return
-	  	# 20190324　アップデート前
-    	#redirect_to :controller => "questions", :action => "option_index", :user_id => @user_id, :category => @category, :next_question_id => @next_question_id, :question_num => @question_num and return
-    end
-
-    # 結果の作成
-    # オプションとして選択されたID以外はFALSEで格納する
-    @options.each do |option|
-      if @selected_option_id  == option.option_id
-        @result = true
-      else
-        @result = false
-      end
-
-      @option_result = OptionResult.create(
-        user_id: @user_id,
-        option_id: option.option_id,
-        category: @category,
-        question_id: @question_id,
-        result: @result
-        )
-      @option_result.save
-    end
-
-    # 質問ページへリダイレクトする
-    redirect_to :controller => "questions", :action => "index", :user_id => @user_id, :category => @category, :next_question_id => @next_question_id, :question_num => @question_num
-
-		# 20190324 アップデート前
-		# #answer/question_id結果を格納
-		# @answers = params[:answers]
-		# @question_ids = params[:question_ids]
-		# @category = params[:category]
-
-		# #ResultDBの中でユーザーIDが一番古いものを取得
-		# @result = Result.order(updated_at: "DESC").first
-
-		# #ユーザーIDが存在しなかったら「1」。存在したらインクリメントしたユーザーIDを指定
-		# if @result.nil?
-		# 	@user_id = 1
-		# else
-		# 	@user_id = @result.user_id.to_i + 1
-		# end
-
-		# #データベースへ書き込み
-		# @question_num = 0
-
-		# @answers.each do |answer|
-		# 	@question_id = @question_ids[@question_num].to_i
-		# 	@result = Result.create(user_id: @user_id, question_id: @question_id, answer:answer)
-		# 	@result.save
-		# 	@question_num += 1
-		# end
-
-		# #index2へリダイレクト
-		# redirect_to :controller => "results", :action => "index2", :user_id => @user_id, :category => @category
-	end
 end

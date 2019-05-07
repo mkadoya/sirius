@@ -6,7 +6,7 @@ class HomeController < ApplicationController
     @result_displayed = false
 
     # 結果の表示判定
-    if (OptionResult.where(user_id: @user_id).count > 0)
+    if (Result.where(user_id: @user_id).count > 0)
       @result_displayed = true
     end
 

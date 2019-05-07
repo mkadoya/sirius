@@ -6,9 +6,9 @@ class ItemsController < ApplicationController
     @series = params[:series]
     @item_id = params[:item_id]
 		@result_displayed = false
-		
+
 		# 結果の表示判定
-    if (OptionResult.where(user_id: @user_id).count > 0)
+    if (Result.where(user_id: @user_id).count > 0)
       @result_displayed = true
     end
 
@@ -88,7 +88,7 @@ class ItemsController < ApplicationController
 		# Seriesの重複を除いたTotalのアイテム数
 		@num_all_series = @all_item.select(:series).distinct.count
 		# Userが選択した結果をuser-idとcategoryを指定してDBから抽出
-		@array_record_true = OptionResult.where(user_id: @user_id).where(category: @category).where(result: true)
+		@array_record_true = Result.where(user_id: @user_id).where(category: @category).where(result: true)
 
 		# Userが答えてtrue flagがついたoption_idを配列で取得
 		@array_record_true.each do |record_true|
