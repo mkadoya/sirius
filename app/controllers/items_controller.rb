@@ -12,13 +12,8 @@ class ItemsController < ApplicationController
       @result_displayed = true
     end
 
-		# Test用
-		@user_id = 12
-		@question_finish = true
-
-
 		# 結果の表示判定
-		if (OptionResult.where(user_id: @user_id).count > 0)
+		if (Result.where(user_id: @user_id).count > 0)
 			@result_displayed = true
 		end
 
@@ -93,7 +88,7 @@ class ItemsController < ApplicationController
 
 		# ------ Recommendation 1st : Filter条件から出す -----------------------------------------------------------------------
 		# Userが選択した結果を元にoption_idを抽出
-		@array_option_id = OptionResult.where(user_id: @user_id).where(category: @category).where(result: true).pluck(:option_id)
+		@array_option_id = Result.where(user_id: @user_id).where(category: @category).where(result: true).pluck(:option_id)
 
 		# Userが選択した結果のoption_idを元にMatch条件を抽出
 		@array_option_id.each do |option_id|
@@ -137,10 +132,20 @@ class ItemsController < ApplicationController
 		@array_column_names = ["price", "ssd", "cpu_score", "ram", "weight", "uptime", "gpu_score", "item_id", "windows", "inch"]
 		# 全アイテムの各カラムごとの平均、おすすめ品の各カラムごとの平均を算出する
 		@array_column_names.each do |column|
-			# 全アイテムの各カラムごとの平均
-			@hash_all_avrg.store(column, @actrec_all_item.average(:"#{column}"))
-			# Recommendation 1stの各カラムごとの平均
-			@hash_rec_avrg.store(column, @actrec_recommend_item.average(:"#{column}"))
+			# 小数点が歩かないかチェック
+			if @item["#{column}"].to_s.include?(".")
+				effective_decimal = @item["#{column}"].to_s.split(".")[1].size
+				# 全アイテムの各カラムごとの平均
+				@hash_all_avrg.store(column, @actrec_all_item.average(:"#{column}").round(effective_decimal))
+				# Recommendation 1stの各カラムごとの平均
+				@hash_rec_avrg.store(column, @actrec_recommend_item.average(:"#{column}").round(effective_decimal))
+			else
+				effective_decimal = 0
+				# 全アイテムの各カラムごとの平均
+				@hash_all_avrg.store(column, @actrec_all_item.average(:"#{column}").round(effective_decimal).to_i)
+				# Recommendation 1stの各カラムごとの平均
+				@hash_rec_avrg.store(column, @actrec_recommend_item.average(:"#{column}").round(effective_decimal).to_i)
+			end
 
 			# Daru:Vectoryに入れるために、各カラムごとの前処理. 1:True, Falseを0, 1に変換. 2:nil削除.
 			if @actrec_all_item.pluck(:"#{column}").compact.first.is_a?(Numeric) == false
@@ -149,7 +154,7 @@ class ItemsController < ApplicationController
 				array_column_value = @actrec_all_item.pluck(:"#{column}").compact
 			end
 			# Hashに入れる
-			@hash_column_array.store(:"#{column}", array_column_value)
+			@hash_column_array.store("#{column}", array_column_value)
 		end
 		# ----------------------------------------------------------------------------------------------------------------
 
@@ -160,7 +165,7 @@ class ItemsController < ApplicationController
 		@array_column_names.each do |column|
 
 			# 各カラムごとの全製品の値をDataframeに入れる
-			@df_default = Daru::Vector[@hash_column_array[:"#{column}"]]
+			@df_default = Daru::Vector[@hash_column_array["#{column}"]]
 			unless @hash_rec_avrg["#{column}"].nil? || @df_default.std == 0
 				# 基本項目での推奨値を偏差値計算して中央値を5に変更、ただし4-7に固まって楽しくないので、偏差値は@hash_condition_star["integer_std_mod"]倍の補正をしている
 				@integer_star = (((@hash_rec_avrg["#{column}"] - @df_default.mean )/@df_default.std * 10 * @hash_condition_star[:integer_std_mod] + 50)/10).round
@@ -187,12 +192,12 @@ class ItemsController < ApplicationController
 		# 各カラムごとにloop
 		@array_column_names.each do |column|
 			# 各カラムごとの全製品の値をDataframeに入れる
-			@df_default = Daru::Vector[@hash_column_array[:"#{column}"]]
+			@df_default = Daru::Vector[@hash_column_array["#{column}"]]
 			@integer_item = @item["#{column}"]
 			unless @integer_item.nil? || @df_default.std == 0 || @integer_item.class == String
-				if @integer_item = true
+				if @integer_item == true
 					@integer_item = 1
-				elsif @integer_item = false
+				elsif @integer_item == false
 					@integer_item = 0
 				end
 				# 基本項目での推奨値を偏差値計算して中央値を5に変更、ただし4-7に固まって楽しくないので、偏差値は@hash_condition_star["integer_std_mod"]倍の補正をしている

@@ -52,12 +52,12 @@ match_id,category,option_id,item_clmn,min,max
 51,toiletpaper,36,soft,1,5
 52,toiletpaper,37,flavor,2,3
 53,toiletpaper,38,flavor,1,1
-54,pc,39,category,"laptop","laptop"
+54,pc,39,weight,0,1000
 55,pc,40,item_id,1,1000
 56,pc,41,uptime,10,100
-57,pc,41,weight,16,100
+57,pc,41,weight,0,16
 58,pc,42,item_id,1,1000
-59,pc,43,category,"laptop","laptop"
+59,pc,43,weight,0,1000
 60,pc,44,item_id,1,1000
 61,pc,45,mac,1,1
 62,pc,46,windows,1,1
@@ -204,7 +204,7 @@ match_id,category,option_id,item_clmn,min,max
 203,pc,136,item_id,1,1000
 204,pc,137,touchpannel,1,1
 205,pc,138,item_id,1,1000
-206,pc,139,case,"tower","tower"
+206,pc,139,case,tower,tower
 207,pc,140,item_id,1,1000
 208,pc,141,tv_tuner,1,1
 209,pc,142,item_id,1,1000
