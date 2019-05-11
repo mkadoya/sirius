@@ -9,6 +9,7 @@ class QuestionsController < ApplicationController
     @next_question_id = params[:next_question_id] ? params[:next_question_id].to_i : nil
     @user_id          = cookies[:user_id].presence || 0
     @start_question_id = Question.find_by(category: @category).question_id
+    @option_id = params[:option_id].presence || 0
     @result_displayed = false
 
     # 記事のインポート
@@ -27,12 +28,49 @@ class QuestionsController < ApplicationController
       @new_user_name = "Guest"
       @user = TempUser.create(user_id: @new_user_id, name:@new_user_name)
       @user.save
-      cookies.permanent[:user_id] = { :value => @new_user_id}
+      cookies.permanent[:user_id] = { :value => @new_user_id }
       redirect_to :controller => "questions", :action => "index", :category => @category and return
     end
 
+  # 選択されたOptionが存在している場合はデータベースに書き込む
+    if (@option_id != 0)
+      @selected_option = Option.where(option_id: @option_id).first
+      selected_question = @selected_option.question_id.to_i
+      # 選択されたオプションに紐づくQuestionに紐づくオプション一覧の取得
+      all_options =  Option.where(question_id: selected_question).all
+      # 結果が存在しているか確認し、存在している場合はアップデートする
+      @results = Result.where(user_id: @user_id).where(question_id: selected_question).all
+      if @results.count > 0
+        @results.each do |result|
+          if @selected_option.option_id  == result.option_id
+            result.result = true
+            result.save
+          else
+            result.result = false
+            result.save
+          end
+        end
+      else
+        all_options.each do |option|
+          if @selected_option.option_id  == option.option_id
+            @result = true
+          else
+            @result = false
+          end
+          @option_result = Result.create(
+            user_id: @user_id,
+            option_id: option.option_id,
+            category: @category,
+            question_id: selected_question,
+            result: @result
+          )
+          @option_result.save
+        end
+      end
+    end
+
     # 結果の表示判定
-    if (OptionResult.where(user_id: @user_id).count > 0)
+    if (Result.where(user_id: @user_id).count > 0)
       @result_displayed = true
     end
 
@@ -42,31 +80,6 @@ class QuestionsController < ApplicationController
       @question_num = 1
     else
       @question_num += 1
-    end
-
-    # 1問目でなければ前回の質問IDを導入する
-    if @question_num != @start_question_id
-      range = Range.new(1, @question_num-1)
-      range.each do |num|
-	      if num==1
-					# 最初のUserの時は空なので、
-					if OptionResult.find_by(user_id:@user_id, question_id:@start_question_id, result:true).nil? == true
-						option_id = 2
-					else
-		      	option_id = OptionResult.find_by(user_id:@user_id, question_id:@start_question_id, result:true).option_id
-					end
-          @n_question_id = Option.find_by(option_id:option_id).next_question_id
-          @before_question_id = Option.find_by(option_id:option_id).question_id
-        else
-					if OptionResult.find_by(user_id:@user_id, question_id:@start_question_id, result:true).nil? == true
-						option_id = 2
-					else
-          	option_id = OptionResult.find_by(user_id:@user_id, question_id:@n_question_id, result:true).option_id
-					end
-          @n_question_id = Option.find_by(option_id:option_id).next_question_id
-          @before_question_id = Option.find_by(option_id:option_id).question_id
-        end
-      end
     end
 
     # 次の質問がない場合（最後の質問だった場合）、リザルト画面を表示する
@@ -88,11 +101,22 @@ class QuestionsController < ApplicationController
 
     # 選択肢を取得する
     @options = Option.where(question_id: @question.question_id).all
-  end
 
-  def result
-    @user_id = cookies[:user_id]
-    @category = params[:category]
+    # 1問目でなければ前回の質問IDを導入する
+    if  @question.question_id != @start_question_id
+      # range = Range.new(1, @question_num-1)
+      range = Range.new(1, @question_num - 1)
+      range.each do |num|
+        if num==1
+          option_id = Result.find_by(user_id:@user_id, question_id:@start_question_id, result:true).option_id
+          @n_question_id = Option.find_by(option_id:option_id).next_question_id
+          @before_question_id = Option.find_by(option_id:option_id).question_id
+        else
+          option_id = Result.find_by(user_id:@user_id, question_id:@n_question_id, result:true).option_id
+          @n_question_id = Option.find_by(option_id:option_id).next_question_id
+          @before_question_id = Option.find_by(option_id:option_id).question_id
+        end
+      end
+    end
   end
-
 end

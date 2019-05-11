@@ -7,6 +7,11 @@ class ItemsController < ApplicationController
 		@item_id = params[:item_id]
 		@result_displayed = false
 
+		# 結果の表示判定
+    if (Result.where(user_id: @user_id).count > 0)
+      @result_displayed = true
+    end
+
 		# Test用
 		@user_id = 12
 		@question_finish = true

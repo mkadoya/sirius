@@ -133,9 +133,8 @@
                 <div class="col-md-12">
                   <%= link_to option.content,
                     {
-                      :controller => "results",
-                      :action => "create",
-                      :user_id => @user_id,
+                      :controller => "questions",
+                      :action => "index",
                       :category => @category,
                       :question_id => option.question_id,
                       :question_num => @question_num,
@@ -175,7 +174,6 @@
                 :controller => "questions",
                 :action => "index",
                 :category => @category,
-                :user_id => @user_id,
                 :question_num => (@question_num - 2),
                 :next_question_id => @before_question_id
               },
