@@ -64,12 +64,12 @@
             <input id='c_3' name='c_3' type='hidden' value='サイズ'>
             <input id='c_4' name='c_4' type='hidden' value='重量'>
             <input id='c_5' name='c_5' type='hidden' value='バッテリー時間'>
-            <input id='c_v_1' name='c_v_1' type='hidden' value='<%= @hash_rec_star["price"]%>'>
-            <input id='c_v_2' name='c_v_2' type='hidden' value='<%= @hash_rec_star["cpu_score"]%>'>
-            <input id='c_v_3' name='c_v_3' type='hidden' value='<%= @hash_rec_star["inch"]%>'>
-            <input id='c_v_4' name='c_v_4' type='hidden' value='<%= @hash_rec_star["weight"]%>'>
-            <input id='c_v_5' name='c_v_5' type='hidden' value='<%= @hash_rec_star["uptime"]%>'>
-            <canvas id="itemChart"></canvas>
+            <input id='c_v_1' name='c_v_1' type='hidden' value='<%= @hash_item_star["price"]%>'>
+            <input id='c_v_2' name='c_v_2' type='hidden' value='<%= @hash_item_star["cpu_score"]%>'>
+            <input id='c_v_3' name='c_v_3' type='hidden' value='<%= @hash_item_star["inch"]%>'>
+            <input id='c_v_4' name='c_v_4' type='hidden' value='<%= @hash_item_star["weight"]%>'>
+            <input id='c_v_5' name='c_v_5' type='hidden' value='<%= @hash_item_star["uptime"]%>'>
+						<canvas id="itemChart"></canvas>
             <table class="table table-hover table-condensed specm-table">
                 <thead>
                     <tr>
@@ -83,7 +83,7 @@
                         <td>値段</td>
                         <td>
                         <% if @hash_rec_avrg["price"] %>
-                          <%= @hash_rec_avrg["price"].round(-3).to_i %>円
+                          <%= @hash_rec_avrg["price"] %>円
                         <% else %>
                           未回答
                         <% end %>
@@ -94,7 +94,7 @@
                         <td>スペック(CPU)</td>
                         <td>
                         <% if @hash_rec_avrg["cpu_score"] %>
-                          <%= @hash_rec_avrg["cpu_score"].round(-2).to_i %>
+                          <%= @hash_rec_avrg["cpu_score"] %>
                         <% else %>
                           未回答
                         <% end %>
@@ -105,7 +105,7 @@
                         <td>サイズ</td>
                         <td>
                         <% if @hash_rec_avrg["inch"] %>
-                          <%= @hash_rec_avrg["inch"].round(1) %> インチ
+                          <%= @hash_rec_avrg["inch"] %> インチ
                         <% else %>
                           未回答
                         <% end %>
@@ -116,7 +116,7 @@
                         <td>重量</td>
                         <td>
                         <% if @hash_rec_avrg["weight"] %>
-                          <%= @hash_rec_avrg["weight"].round(3) %> kg
+                          <%= @hash_rec_avrg["weight"] %> kg
                         <% else %>
                           未回答
                         <% end %>
@@ -127,7 +127,7 @@
                         <td>バッテリー時間</td>
                         <td>
                         <% if @hash_rec_avrg["uptime"] %>
-                          <%= @hash_rec_avrg["uptime"].round(1) %> 時間
+                          <%= @hash_rec_avrg["uptime"] %> 時間
                         <% else %>
                           未回答
                         <% end %>
@@ -168,27 +168,27 @@
                     <tr>
                         <td><%= @hash_rec_star.keys[0] %></td>
                         <td><%= @hash_rec_avrg[@hash_rec_star.keys[0]] %></td>
-                        <td><%= @item.price %></td>
+                        <td><%= @item[@hash_rec_star.keys[0]] %></td>
                     </tr>
                     <tr>
                         <td><%= @hash_rec_star.keys[1] %></td>
                         <td><%= @hash_rec_avrg[@hash_rec_star.keys[1]] %></td>
-                        <td><%= @item.cpu_score %></td>
+                        <td><%= @item[@hash_rec_star.keys[1]] %></td>
                     </tr>
                     <tr>
                         <td><%= @hash_rec_star.keys[2] %></td>
                         <td><%= @hash_rec_avrg[@hash_rec_star.keys[2]] %></td>
-                        <td><%= @item.inch %></td>
+                        <td><%= @item[@hash_rec_star.keys[2]] %></td>
                     </tr>
                     <tr>
                         <td><%= @hash_rec_star.keys[3] %></td>
                         <td><%= @hash_rec_avrg[@hash_rec_star.keys[3]] %></td>
-                        <td><%= @item.weight %></td>
+                        <td><%= @item[@hash_rec_star.keys[3]] %></td>
                     </tr>
                     <tr>
                         <td><%= @hash_rec_star.keys[4] %></td>
                         <td><%= @hash_rec_avrg[@hash_rec_star.keys[4]] %></td>
-                        <td><%= @item.uptime %></td>
+                        <td><%= @item[@hash_rec_star.keys[4]] %></td>
                     </tr>
                 </tbody>
             </table>
@@ -231,19 +231,19 @@
                         <td>RAM</td>
                         <td><%= @item.ram %> GB</td>
                     </tr>
-                    <% if @item.ssd != 0 %>
+                    <% if @item.ssd != 0 && @item.ssd.nil? == false%>
                     <tr>
                         <td>SSD</td>
                         <td><%= @item.ssd %> GB</td>
                     </tr>
                     <% end %>
-                    <% if @item.hdd != 0 %>
+                    <% if @item.hdd != 0 && @item.hdd.nil? == false %>
                     <tr>
                         <td>HDD</td>
                         <td><%= @item.hdd %> GB</td>
                     </tr>
                     <% end %>
-                    <% if @item.emmc != 0 %>
+                    <% if @item.emmc != 0  && @item.emmc.nil? == false%>
                     <tr>
                         <td>EMMC</td>
                         <td><%= @item.emmc %> GB</td>

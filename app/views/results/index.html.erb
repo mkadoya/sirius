@@ -95,8 +95,8 @@
                 <thead>
                     <tr>
                         <th>項目</th>
-                        <th>平均</th>
                         <th>おすすめ</th>
+                        <th>平均</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -110,8 +110,8 @@
                         <% end %>
                         </td>
                         <td>
-                        <% if @hash_difference_avrg["price"] %>
-                          <%= @hash_difference_avrg["price"].round(-3).to_i %>円
+                        <% if @hash_all_avrg["price"] %>
+                          <%= @hash_all_avrg["price"].round(-3).to_i %>円
                         <% else %>
                           未回答
                         <% end %>
@@ -127,8 +127,8 @@
                         <% end %>
                         </td>
                         <td>
-                        <% if @hash_difference_avrg["cpu_score"] %>
-                          <%= @hash_difference_avrg["cpu_score"].round(-2).to_i %>
+                        <% if @hash_all_avrg["cpu_score"] %>
+                          <%= @hash_all_avrg["cpu_score"].round(-2).to_i %>
                         <% else %>
                           未回答
                         <% end %>
@@ -144,8 +144,8 @@
                         <% end %>
                         </td>
                         <td>
-                        <% if @hash_difference_avrg["inch"] %>
-                          <%= @hash_difference_avrg["inch"].round(1) %> インチ</td>
+                        <% if @hash_all_avrg["inch"] %>
+                          <%= @hash_all_avrg["inch"].round(1) %> インチ</td>
                         <% else %>
                           未回答
                         <% end %>
@@ -154,14 +154,14 @@
                         <td>重量</td>
                         <td>
                         <% if @hash_rec_avrg["weight"] %>
-                          <%= @hash_rec_avrg["weight"].round(3) %> kg
+                          <%= @hash_rec_avrg["weight"].round(2) %> kg
                         <% else %>
                           未回答
                         <% end %>
                         </td>
                         <td>
-                        <% if @hash_difference_avrg["weight"] %>
-                          <%= @hash_difference_avrg["weight"].round(3) %> kg
+                        <% if @hash_all_avrg["weight"] %>
+                          <%= @hash_all_avrg["weight"].round(2) %> kg
                         <% else %>
                           未回答
                         <% end %>
@@ -177,8 +177,8 @@
                         <% end %>
                         </td>
                         <td>
-                        <% if @hash_difference_avrg["uptime"] %>
-                          <%= @hash_difference_avrg["uptime"].round(1) %> 時間
+                        <% if @hash_all_avrg["uptime"] %>
+                          <%= @hash_all_avrg["uptime"].round(1) %> 時間
                         <% else %>
                           未回答
                         <% end %>
@@ -201,9 +201,9 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>値段</td>
+                    <td><%= @hash_rec_star.keys[0] %></td>
                     <td>
-                    <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @hash_rec_star["price"] %>rem; max-height: 100%;">
+                    <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @hash_rec_star.values[0] %>rem; max-height: 100%;">
                       <p>★★★★★★★★★★</p>
                     </div>
                     <div class="result-star-rating-back">
@@ -212,9 +212,9 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>スペック(CPU)</td>
+                    <td><%= @hash_rec_star.keys[1] %></td>
                     <td>
-                    <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @hash_rec_star["cpu_score"] %>rem; max-height: 100%;">
+                    <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @hash_rec_star.values[1] %>rem; max-height: 100%;">
                       <p>★★★★★★★★★★</p>
                     </div>
                     <div class="result-star-rating-back">
@@ -223,9 +223,9 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>サイズ</td>
+                    <td><%= @hash_rec_star.keys[2] %></td>
                     <td>
-                    <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @hash_rec_star["inch"] %>rem; max-height: 100%;">
+                    <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @hash_rec_star.values[2] %>rem; max-height: 100%;">
                       <p>★★★★★★★★★★</p>
                     </div>
                     <div class="result-star-rating-back">
@@ -234,9 +234,9 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>重量</td>
+                    <td><%= @hash_rec_star.keys[3] %></td>
                     <td>
-                    <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @hash_rec_star["weight"] %>rem; max-height: 100%;">
+                    <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @hash_rec_star.values[3] %>rem; max-height: 100%;">
                       <p>★★★★★★★★★★</p>
                     </div>
                     <div class="result-star-rating-back">
@@ -245,9 +245,9 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>バッテリー時間</td>
+                    <td><%= @hash_rec_star.keys[4] %></td>
                     <td>
-                    <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @hash_rec_star["uptime"] %>rem; max-height: 100%;">
+                    <div class="position-absolute overflow-hidden star-rating-front text-warning"style="max-width: <%= @hash_rec_star.values[4] %>rem; max-height: 100%;">
                       <p>★★★★★★★★★★</p>
                     </div>
                     <div class="result-star-rating-back">
@@ -289,10 +289,10 @@
         </div>
         <div class="item-explain">
           <p><span>￥<%= @array_item[num].price %></span></p>
-          <p>メモリ:<%= @array_item[num].ram %>GB,
-          SSD:<%= @array_item[num].ssd %>GB,
-          バッテリー:<%= @array_item[num].uptime %>時間,
-          重さ:<%= @array_item[num].weight %>kg<br>
+          <p><%= @hash_rec_star.keys[0] %>:<%= @array_item[num][@hash_rec_star.keys[0]] %>,
+          <%= @hash_rec_star.keys[1] %>:<%= @array_item[num][@hash_rec_star.keys[1]] %>,
+          <%= @hash_rec_star.keys[2] %>:<%= @array_item[num][@hash_rec_star.keys[2]] %>,
+          <%= @hash_rec_star.keys[3] %>:<%= @array_item[num][@hash_rec_star.keys[3]] %>,<br>
           <%= link_to "詳細を見る",
             {
               :controller => "items",
@@ -325,6 +325,14 @@
         </div>
       </div>
       <% end %>
+			<p>[Total-Time] ==> <%= @exec_time %> sec</p>
+			<p>[REC-Time] ==> <%= @exec_time_rec %> sec</p>
+			<p>[User-ID] ==> <%= @user_id %></p>
+			<p>[REC] ==> <%= @actrec_recommend_item.first(5) %></p>
+      <p>[Record] ==> <%= @array_debug %></p>
+      <p>[Recommend Avrg] ==> <%= @hash_rec_avrg %></p>
+      <p>[All Avrg] ==> <%= @hash_all_avrg %></p>
+      <p>[Record] ==> <%= @hash_rec_star %></p>
     </div>
   </div>
 </div>
