@@ -72,6 +72,7 @@ class ItemsController < ApplicationController
 		# 辞書型の初期化
 		@hash_all_avrg = Hash.new
 		@hash_rec_avrg = Hash.new
+		@hash_rec_star = Hash.new
 		@hash_item_star = Hash.new
 		@hash_column_array = Hash.new
 
