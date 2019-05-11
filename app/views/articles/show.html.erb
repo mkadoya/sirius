@@ -36,12 +36,12 @@
   </div>
 </header>
 <main>
-  <div class="container text-dark">
+  <div class="container text-dark bg-white">
     <div class="row">
       <div class="col-md-8">
-      <h1><%= @article.title %></h1>
+      <h1 class="mt-5 mb-5"><%= @article.title %></h1>
       <img class="img-fluid" src="<%= @article.image %>" alt="Responsive image">
-      <%= sanitize @article.content , tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div iframe), attributes:  %w(id class href src style width height) %>
+      <%= sanitize @article.content , tags: %w(h1 h2 h3 h4 h5 h6 ul ol li p a img table tr td em br strong div iframe u span), attributes:  %w(id class href src style width height) %>
       </div>
       <div class="col-md-4">
         <h2>最新の記事</h2>
