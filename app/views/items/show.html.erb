@@ -64,11 +64,11 @@
             <input id='c_3' name='c_3' type='hidden' value='サイズ'>
             <input id='c_4' name='c_4' type='hidden' value='重量'>
             <input id='c_5' name='c_5' type='hidden' value='バッテリー時間'>
-            <input id='c_v_1' name='c_v_1' type='hidden' value='<%= @hash_rec_star["price"]%>'>
-            <input id='c_v_2' name='c_v_2' type='hidden' value='<%= @hash_rec_star["cpu_score"]%>'>
-            <input id='c_v_3' name='c_v_3' type='hidden' value='<%= @hash_rec_star["inch"]%>'>
-            <input id='c_v_4' name='c_v_4' type='hidden' value='<%= @hash_rec_star["weight"]%>'>
-            <input id='c_v_5' name='c_v_5' type='hidden' value='<%= @hash_rec_star["uptime"]%>'>
+            <input id='c_v_1' name='c_v_1' type='hidden' value='<%= @hash_item_star["price"]%>'>
+            <input id='c_v_2' name='c_v_2' type='hidden' value='<%= @hash_item_star["cpu_score"]%>'>
+            <input id='c_v_3' name='c_v_3' type='hidden' value='<%= @hash_item_star["inch"]%>'>
+            <input id='c_v_4' name='c_v_4' type='hidden' value='<%= @hash_item_star["weight"]%>'>
+            <input id='c_v_5' name='c_v_5' type='hidden' value='<%= @hash_item_star["uptime"]%>'>
             <canvas id="itemChart"></canvas>
             <table class="table table-hover table-condensed specm-table">
                 <thead>
@@ -168,27 +168,27 @@
                     <tr>
                         <td><%= @hash_rec_star.keys[0] %></td>
                         <td><%= @hash_rec_avrg[@hash_rec_star.keys[0]] %></td>
-                        <td><%= @item.price %></td>
+                        <td><%= @item[@hash_rec_star.keys[0]] %></td>
                     </tr>
                     <tr>
                         <td><%= @hash_rec_star.keys[1] %></td>
                         <td><%= @hash_rec_avrg[@hash_rec_star.keys[1]] %></td>
-                        <td><%= @item.cpu_score %></td>
+                        <td><%= @item[@hash_rec_star.keys[1]] %></td>
                     </tr>
                     <tr>
                         <td><%= @hash_rec_star.keys[2] %></td>
                         <td><%= @hash_rec_avrg[@hash_rec_star.keys[2]] %></td>
-                        <td><%= @item.inch %></td>
+                        <td><%= @item[@hash_rec_star.keys[2]] %></td>
                     </tr>
                     <tr>
                         <td><%= @hash_rec_star.keys[3] %></td>
                         <td><%= @hash_rec_avrg[@hash_rec_star.keys[3]] %></td>
-                        <td><%= @item.weight %></td>
+                        <td><%= @item[@hash_rec_star.keys[3]] %></td>
                     </tr>
                     <tr>
                         <td><%= @hash_rec_star.keys[4] %></td>
                         <td><%= @hash_rec_avrg[@hash_rec_star.keys[4]] %></td>
-                        <td><%= @item.uptime %></td>
+                        <td><%= @item[@hash_rec_star.keys[4]] %></td>
                     </tr>
                 </tbody>
             </table>

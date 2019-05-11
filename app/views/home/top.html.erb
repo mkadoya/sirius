@@ -41,13 +41,8 @@
           <%= form_tag({:controller => "questions", :action => "index"}, {method: :get}) do %>
             <div class="form-group">
               <%= label_tag 'category', 'カテゴリー' ,{:class => 'form-label'} %>
-<<<<<<< HEAD
               <%= select_tag 'category', options_for_select([["パソコン","pc"],["トイレットペーパー","toiletpaper"]],:selected=>"pc"), {:class => "form-control"} %>
               <%# <%= select_tag 'category', options_for_select([["パソコン","laptop"]],:selected=>"laptop"), {:class => "form-control"} %>
-=======
-              <%# <%= select_tag 'category', options_for_select([["パソコン","laptop"],["トイレットペーパー","toiletpaper"]],:selected=>"laptop"), {:class => "form-control"} %>
-              <%= select_tag 'category', options_for_select([["パソコン","laptop"]],:selected=>"laptop"), {:class => "form-control"} %>
->>>>>>> a7ffca5b38ebfd9bf7423e32ec9a1fddbde0e3ff
             </div>
             <div class="form-group">
               <%= submit_tag "探す", :name => nil, :class => "btn-primary btn-lg form-button"%>
