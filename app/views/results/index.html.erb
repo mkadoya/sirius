@@ -104,14 +104,14 @@
                         <td>値段</td>
                         <td>
                         <% if @hash_rec_avrg["price"] %>
-                          <%= @hash_rec_avrg["price"].round(-3).to_i %>円
+                          <%= @hash_rec_avrg["price"] %>円
                         <% else %>
                           未回答
                         <% end %>
                         </td>
                         <td>
                         <% if @hash_all_avrg["price"] %>
-                          <%= @hash_all_avrg["price"].round(-3).to_i %>円
+                          <%= @hash_all_avrg["price"] %>円
                         <% else %>
                           未回答
                         <% end %>
@@ -121,14 +121,14 @@
                         <td>スペック(CPU)</td>
                         <td>
                         <% if @hash_rec_avrg["cpu_score"] %>
-                          <%= @hash_rec_avrg["cpu_score"].round(-2).to_i %>
+                          <%= @hash_rec_avrg["cpu_score"] %>
                         <% else %>
                           未回答
                         <% end %>
                         </td>
                         <td>
                         <% if @hash_all_avrg["cpu_score"] %>
-                          <%= @hash_all_avrg["cpu_score"].round(-2).to_i %>
+                          <%= @hash_all_avrg["cpu_score"] %>
                         <% else %>
                           未回答
                         <% end %>
@@ -138,14 +138,14 @@
                         <td>サイズ</td>
                         <td>
                         <% if @hash_rec_avrg["inch"] %>
-                          <%= @hash_rec_avrg["inch"].round(1) %> インチ
+                          <%= @hash_rec_avrg["inch"] %> インチ
                         <% else %>
                           未回答
                         <% end %>
                         </td>
                         <td>
                         <% if @hash_all_avrg["inch"] %>
-                          <%= @hash_all_avrg["inch"].round(1) %> インチ</td>
+                          <%= @hash_all_avrg["inch"] %> インチ</td>
                         <% else %>
                           未回答
                         <% end %>
@@ -154,14 +154,14 @@
                         <td>重量</td>
                         <td>
                         <% if @hash_rec_avrg["weight"] %>
-                          <%= @hash_rec_avrg["weight"].round(2) %> kg
+                          <%= @hash_rec_avrg["weight"] %> kg
                         <% else %>
                           未回答
                         <% end %>
                         </td>
                         <td>
                         <% if @hash_all_avrg["weight"] %>
-                          <%= @hash_all_avrg["weight"].round(2) %> kg
+                          <%= @hash_all_avrg["weight"] %> kg
                         <% else %>
                           未回答
                         <% end %>
@@ -171,14 +171,14 @@
                         <td>バッテリー時間</td>
                         <td>
                         <% if @hash_rec_avrg["uptime"] %>
-                          <%= @hash_rec_avrg["uptime"].round(1) %> 時間
+                          <%= @hash_rec_avrg["uptime"] %> 時間
                         <% else %>
                           未回答
                         <% end %>
                         </td>
                         <td>
                         <% if @hash_all_avrg["uptime"] %>
-                          <%= @hash_all_avrg["uptime"].round(1) %> 時間
+                          <%= @hash_all_avrg["uptime"] %> 時間
                         <% else %>
                           未回答
                         <% end %>
@@ -325,14 +325,6 @@
         </div>
       </div>
       <% end %>
-			<p>[Total-Time] ==> <%= @exec_time %> sec</p>
-			<p>[REC-Time] ==> <%= @exec_time_rec %> sec</p>
-			<p>[User-ID] ==> <%= @user_id %></p>
-			<p>[REC] ==> <%= @actrec_recommend_item.first(5) %></p>
-      <p>[Record] ==> <%= @array_debug %></p>
-      <p>[Recommend Avrg] ==> <%= @hash_rec_avrg %></p>
-      <p>[All Avrg] ==> <%= @hash_all_avrg %></p>
-      <p>[Record] ==> <%= @hash_rec_star %></p>
     </div>
   </div>
 </div>
