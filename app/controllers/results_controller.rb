@@ -1,31 +1,49 @@
 class ResultsController < ApplicationController
 	def index
+		# Debug用
+		# [要削除]実行時間測定
+		start_time = Time.now
+
 		# User-id, category, Question_finishをquestion_controllerから引き受ける
 		@user_id = cookies[:user_id]
 		@category = params[:category]
 		@question_finish = params[:question_finish]
 
-		# 実行時間測定
-		start_time = Time.now
-
 		# 記事のインポート
 		@articles = Article.all
 
-		# 人が定義しているParameterシリーズ
-		# アイテム数を取得する
-		# if @category == "pc"
-		# 	@item_display_num = Pc.distinct.count(:series)
+		# Star(評価)の最高値、最低値、標準偏差の補正値を定義
+		@hash_condition_star = {:"integer_star_max" => 10, :"integer_star_min" => 3, :"integer_std_mod" => 3}
+
+		# remove from 優先順位 star
+		# [要修正] Categoryが増えるたびに修正が必要なためイケていない.
+		@array_column_remove_star = ["emmc", "usb_c", "webcamera", "usb_a", "item_id", "windows", "ram_max", "gamingpc", "ram_all_slot", "updated_at", "created_at", "date_sale", "cluster_sub", "cluster_main", "id", "series", "sirial", "shop_num", "quote", "os"]
+
+		# 値が小さいほど良い項目List
+		# [要修正] Categoryが増えるたびに修正が必要なためイケていない.
+		@array_column_asc_good = ["price", "weight"]
+
+		# 各Category別にItem情報を全部入れる.
+		# [要修正] Categoryが増えるたびに修正が必要なためイケていない.
+		if @category == "pc"
+			@actrec_all_item = Pc.all
+		elsif @category == "laptop"
+			@actrec_all_item = Pc.where(category: @category)
+		elsif @category == "desktop"
+			@actrec_all_item = Pc.where(category: @category)
+		elsif @category == "toiletpaper"
+			@actrec_all_item = ToiletpaperItem.all
+		else
+			@actrec_all_item = Pc.all
+		end
+
+		#アイテムの表示数：偶数のみ可能
+		@item_display_num = @actrec_all_item.pluck(:series).uniq.count
 		# else
 		# 	@item_display_num = ToiletpaperItem.distinct.count(:series)
 		# end
-
 		#アイテムの表示数：偶数のみ可能
 		@item_display_num = 60
-		#アイテムの表示行数
-		@item_display_row_num = @item_display_num / 2 - 1
-
-		# Star(評価)の最高値、最低値、標準偏差の補正値を定義
-		@hash_condition_star = {:"integer_star_max" => 10, :"integer_star_min" => 3, :"integer_std_mod" => 3}
 
 		# Debug用
 		# [要削除] Production Releaseの際に、削除が必要
@@ -49,28 +67,6 @@ class ResultsController < ApplicationController
 		@hash_rec_star = Hash.new
 		@hash_item_star = Hash.new
 		@hash_column_array = Hash.new
-
-		# remove from 優先順位 star
-		# [要修正] Categoryが増えるたびに修正が必要なためイケていない.
-		@array_column_remove_star = ["emmc", "usb_c", "webcamera", "usb_a", "item_id", "windows", "ram_max", "gamingpc", "ram_all_slot", "updated_at", "created_at", "date_sale", "cluster_sub", "cluster_main", "id", "series", "sirial", "shop_num", "quote", "os"]
-
-		# 値が小さいほど良い項目List
-		# [要修正] Categoryが増えるたびに修正が必要なためイケていない.
-		@array_column_asc_good = ["price", "weight"]
-
-		# 各Category別にItem情報を全部入れる.
-		# [要修正] Categoryが増えるたびに修正が必要なためイケていない.
-		if @category == "pc"
-			@actrec_all_item = Pc.all
-		elsif @category == "laptop"
-			@actrec_all_item = Pc.where(category: @category)
-		elsif @category == "desktop"
-			@actrec_all_item = Pc.where(category: @category)
-		elsif @category == "toiletpaper"
-			@actrec_all_item = ToiletpaperItem.all
-		else
-			@actrec_all_item = Pc.all
-		end
 
 # ------ Recommendation 1st : Filter条件から出す -----------------------------------------------------------------------
 		# Userが選択した結果を元にoption_idを抽出
@@ -110,7 +106,7 @@ class ResultsController < ApplicationController
 		end
 
 		# Recommendation 1stのItem idの配列を作成
-		@array_item_id_1st = @actrec_recommend_item.pluck(:item_id).uniq.shuffle
+		@array_item_id_1st = @actrec_recommend_item.pluck(:item_id).uniq
 # ----------------------------------------------------------------------------------------------------------------
 
 
