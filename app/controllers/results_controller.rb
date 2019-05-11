@@ -38,12 +38,7 @@ class ResultsController < ApplicationController
 		end
 
 		#アイテムの表示数：偶数のみ可能
-		@item_display_num = @actrec_all_item.pluck(:series).uniq.count
-		# else
-		# 	@item_display_num = ToiletpaperItem.distinct.count(:series)
-		# end
-		#アイテムの表示数：偶数のみ可能
-		@item_display_num = 60
+		@item_display_num = @actrec_all_item.pluck(:series).uniq.count / 2
 
 		# Debug用
 		# [要削除] Production Releaseの際に、削除が必要
@@ -51,14 +46,8 @@ class ResultsController < ApplicationController
 
 		# 配列の初期化
 		@array_item = Array.new
-		@array_item_2nd = Array.new
-		@array_item_3rd = Array.new
-		@array_item_id_1st = Array.new
-		@array_item_id_2nd = Array.new
-		@array_item_id_3rd = Array.new
 		@array_item_series = Array.new
 		@array_match_condition = Array.new
-		@array_star = Array.new
 
 		# 辞書型の初期化
 		@hash_all_avrg = Hash.new
@@ -106,56 +95,48 @@ class ResultsController < ApplicationController
 		end
 
 		# Recommendation 1stのItem idの配列を作成
-		@array_item_id_1st = @actrec_recommend_item.pluck(:item_id).uniq
+		@array_sorted_item = @actrec_recommend_item.order(price: "ASC").pluck(:item_id).uniq
 # ----------------------------------------------------------------------------------------------------------------
 
-
-
-# ------ Recommendation 2nd : Recommendation 1stと同じcluster_subから出す -----------------------------------------------------------------------
-		# Recommendation 1stのitem_idの配列を全体から引いて、残りのitem_idの配列を作成
-		@array_item_id_remain = @actrec_all_item.pluck(:item_id) - @array_item_id_1st
-
-		# All itemからRecommendation 1stのitem_idを削除したActive Recordを取得
-		@actrec_remain_item = @actrec_all_item.where(item_id: @array_item_id_remain)
-
-		# Recommendation 1stのcluster_subを取得
-		@array_rec_cluster_sub = @actrec_recommend_item.pluck(:cluster_sub).uniq
-
-		# Recommendation 1stのcluster_subと同じclusterのitem_idを取得、.shuffleで順序をRandomに変える
-		@array_item_2nd = @actrec_remain_item.where(cluster_sub: @array_rec_cluster_sub).pluck(:item_id).shuffle
-# ----------------------------------------------------------------------------------------------------------------
+		# 実行時間測定
+		@exec_time_filter = Time.now - start_time
 
 
 
-# ------ Recommendation 3rd : Recommendation 1stと同じcluster_mainから出す -----------------------------------------------------------------------
-		# Recommendation 2ndのitem_idの配列を@array_item_id_remainから引いて、残りのitem_idの配列を作成
-		@array_item_id_remain = @array_item_id_remain - @array_item_2nd
+# ------ Recommendation by cluster : Recommendation 1stと同じclusterから出す -----------------------------------------------------------------------
+		# 対象のItemのclusterのcolumn数をカウント
+		@array_string_cluster_column = @actrec_all_item.column_names.grep(/cluster_.*/).reverse
 
-		# All itemからRecommendation 1stのitem_idを削除したActive Recordを取得
-		@actrec_remain_item = @actrec_all_item.where(item_id: @array_item_id_remain)
+		# clusterのcolumn数分だけ同一ClusterによるRecommend挿入を実施
+		@array_string_cluster_column.each do |cluster_column|
+			# array_sorted_itemのitem_idの配列を全体から引いて、残りのitem_idの配列を作成
+			@array_item_id_remain = @actrec_all_item.pluck(:item_id) - @array_sorted_item
+			# All itemからarray_sorted_itemのitem_idを削除したActive Recordを取得
+			@actrec_remain_item = @actrec_all_item.where(item_id: @array_item_id_remain)
+			# Recommendation 1stのclusterを取得
+			@array_rec_cluster_add = @actrec_recommend_item.pluck(:"#{cluster_column}").uniq
+			# Recommendation 1stのclusterと同じclusterのitem_idを取得、.shuffleで順序をRandomに変える
+			@array_item_add = @actrec_remain_item.where("#{cluster_column}": @array_rec_cluster_add).pluck(:item_id).shuffle
+			# Recommendation 1stのおすすめ品ListにClusterによるおすすめ品をくっつける
+			@array_sorted_item.concat(@array_item_add)
+		end
 
-		# Recommendation 1stのcluster_mainを取得
-		@array_rec_cluster_main = @actrec_recommend_item.pluck(:cluster_main).uniq
 
-		# Recommendation 1stのcluster_subと同じclusterのitem_idを取得、.shuffleで順序をRandomに変える
-		@array_item_3rd = @actrec_remain_item.where(cluster_main: @array_rec_cluster_main).pluck(:item_id).shuffle
-# ----------------------------------------------------------------------------------------------------------------
-
-
-
-# ------ Recommendation 残り : 残った商品をRandomで表示する -----------------------------------------------------------------------
-		# Recommendation 3rdのitem_idの配列を@array_item_id_remainから引いて、残りのitem_idの配列を作成
-		@array_item_id_remain = @array_item_id_remain - @array_item_3rd
+		# Recommendation 残り : 残った商品をRandomで表示する
+		# array_sorted_itemのitem_idの配列を@array_item_id_remainから引いて、残りのitem_idの配列を作成
+		@array_item_id_remain = @actrec_all_item.pluck(:item_id) - @array_sorted_item
 		# 残りのitem_idの配列をuniqにしてRandomにする
-		@array_item_id_remain = @array_item_id_remain.uniq.shuffle
+		@array_item_add = @array_item_id_remain.uniq.shuffle
+		# おすすめ順に並んだarray_itemを作る
+		@array_sorted_item.concat(@array_item_add)
 # ----------------------------------------------------------------------------------------------------------------
+
+# 実行時間測定
+@exec_time_check = Time.now - start_time
 
 
 
 # ------ Recommendation ALL : Recommendation Itemの配列を作る -----------------------------------------------------------------------
-		# おすすめ順に並んだarray_itemを作る. 足し算の順序が重要なため注意
-		@array_sorted_item = @array_item_id_1st + @array_item_2nd + @array_item_3rd + @array_item_id_remain
-
 		# おすすめ品の情報が全て記載されているArrayを作成
 		@array_sorted_item.each do |item_id|
 			if @array_item_series.exclude?(@actrec_all_item.find_by(item_id: item_id).series)
@@ -167,6 +148,9 @@ class ResultsController < ApplicationController
 		end
 # ----------------------------------------------------------------------------------------------------------------
 
+		# 実行時間測定
+		@exec_time_cluster = Time.now - start_time
+
 
 
 # ------ 全アイテムの平均値、Recommendation 1stの平均値算出 -----------------------------------------------------------------------
@@ -176,14 +160,16 @@ class ResultsController < ApplicationController
 		# 全アイテムの各カラムごとの平均、おすすめ品の各カラムごとの平均を算出する
 		@array_column_names.each do |column|
 			# 全アイテムの平均値、Recommendation 1stの平均値の各カラムの有効数字を、商品のものに合わせる
-			# 小数点が歩かないかチェック
+			# 小数点があるかチェック
 			if @actrec_recommend_item.first["#{column}"].to_s.include?(".")
+				# 小数点があるカラムである場合には、小数点の第何位まであるのかをeffective_decimalに入れる
 				effective_decimal = @actrec_recommend_item.first["#{column}"].to_s.split(".")[1].size
 				# 全アイテムの各カラムごとの平均
 				@hash_all_avrg.store(column, @actrec_all_item.average(:"#{column}").round(effective_decimal))
 				# Recommendation 1stの各カラムごとの平均
 				@hash_rec_avrg.store(column, @actrec_recommend_item.average(:"#{column}").round(effective_decimal))
 			else
+				# 小数点があるカラムである場合には、effective_decimalとして0を入れる
 				effective_decimal = 0
 				# 全アイテムの各カラムごとの平均
 				@hash_all_avrg.store(column, @actrec_all_item.average(:"#{column}").round(effective_decimal).to_i)
@@ -202,6 +188,8 @@ class ResultsController < ApplicationController
 		end
 # ----------------------------------------------------------------------------------------------------------------
 
+		# 実行時間測定
+		@exec_time_avrg = Time.now - start_time
 
 
 # ------ Star計算 -----------------------------------------------------------------------
@@ -214,7 +202,7 @@ class ResultsController < ApplicationController
 				# 基本項目での推奨値を偏差値計算して中央値を5に変更、ただし4-7に固まって楽しくないので、偏差値は@hash_condition_star["integer_std_mod"]倍の補正をしている
 				integer_star = (((@hash_rec_avrg["#{column}"] - @df_default.mean )/@df_default.std * 10 * @hash_condition_star[:integer_std_mod] + 50)/10).round
 				# 項目によっては（例えば値段）、小さい値の方が良いのでその項目は10から偏差値を引き算して評価
-				if @array_column_asc_good.include?(column) == true
+				if @array_column_asc_good.include?(column)
 					integer_star = @hash_condition_star[:integer_star_max] - integer_star
 				end
 				# 偏差値に@hash_condition_star["integer_std_mod"]分の補正を入れているので、over @hash_condition_star["integer_star_max"], under @hash_condition_star["integer_star_min"]になるものはlimitをかける
@@ -237,55 +225,6 @@ class ResultsController < ApplicationController
 		@hash_rec_star = Hash[@hash_rec_star.sort_by{ |_, v| -v }]
 # ----------------------------------------------------------------------------------------------------------------
 
-		# 実行時間測定
-		@exec_time_rec = Time.now - start_time
-
-
-# ------ Star計算 -----------------------------------------------------------------------
-		# Starのためのおすすめ品の偏差値を算出. 偏差値が大きいもの順にSort. index.html.erbにてそのTop項目を重要項目として表示
-		# item_idごとのstar計算
-		# @array_sorted_item.each do |item_id|
-		# 	# 各カラムごとにloop
-		# 	@array_column_names.each do |column|
-		# 		# 各カラムごとの全製品の値をDataframeに入れる
-		# 		@df_default = Daru::Vector[@hash_column_array[:"#{column}"]]
-		# 		integer_item = @actrec_all_item.find_by(item_id: item_id)["#{column}"]
-		# 		unless integer_item.nil? || @df_default.std == 0 || integer_item.class == String
-		# 			if integer_item = true
-		# 				integer_item = 1
-		# 			elsif integer_item = false
-		# 				integer_item = 0
-		# 			end
-		# 			# 基本項目での推奨値を偏差値計算して中央値を5に変更、ただし4-7に固まって楽しくないので、偏差値は@hash_condition_star["integer_std_mod"]倍の補正をしている
-		# 			integer_star = (((integer_item - @df_default.mean )/@df_default.std * 10 * @hash_condition_star[:integer_std_mod] + 50)/10).round
-		# 			# 項目によっては（例えば値段）、小さい値の方が良いのでその項目は10から偏差値を引き算して評価
-		# 			if @array_column_asc_good.include?(column) == true
-		# 				integer_star = @hash_condition_star[:integer_star_max] - integer_star
-		# 			end
-		# 			# 偏差値に@hash_condition_star["integer_std_mod"]分の補正を入れているので、over @hash_condition_star["integer_star_max"], under @hash_condition_star["integer_star_min"]になるものはlimitをかける
-		# 			if integer_star > @hash_condition_star[:integer_star_max]
-		# 				integer_star = @hash_condition_star[:integer_star_max]
-		# 			elsif integer_star < @hash_condition_star[:integer_star_min]
-		# 				integer_star = @hash_condition_star[:integer_star_min]
-		# 			end
-		# 			# 各カラムごとの結果をHashに入れ込む
-		# 			@hash_item_star.store(column, integer_star)
-		# 		end
-		# 	end
-		# 	# 各item_idごとの結果をHashに入れ込む
-		# 	@hash_all_star.store(item_id, @hash_item_star)
-		# end
-# ----------------------------------------------------------------------------------------------------------------
-
-		@item_counter = 0
-
-		# @items_array = Array.new
-		# @array_item.each do |item|
-		# 	@series_items = @actrec_all_item.where(series: item.series).all
-		# 	@series_items.each do |s_item|
-		# 		@items_array.push(s_item)
-		# 	end
-		# end
 
 		# 実行時間測定
 		@exec_time = Time.now - start_time
