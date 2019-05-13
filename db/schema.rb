@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_05_12_102340) do
+=======
+ActiveRecord::Schema.define(version: 2019_05_11_200327) do
+>>>>>>> 6deb743a2ba70c3efd9643be4c048b3f11dc853b
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -45,30 +49,6 @@ ActiveRecord::Schema.define(version: 2019_05_12_102340) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "preview"
-  end
-
-  create_table "characteristics", force: :cascade do |t|
-    t.string "category"
-    t.integer "pattern_id"
-    t.string "title"
-    t.text "body"
-    t.text "chara_1_str"
-    t.integer "chara_1_val"
-    t.text "chara_2_str"
-    t.integer "chara_2_val"
-    t.text "chara_3_str"
-    t.integer "chara_3_val"
-    t.text "chara_4_str"
-    t.integer "chara_4_val"
-    t.text "chara_5_str"
-    t.integer "chara_5_val"
-    t.integer "item_1"
-    t.integer "item_2"
-    t.integer "item_3"
-    t.integer "item_4"
-    t.integer "item_5"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "images", force: :cascade do |t|
@@ -159,6 +139,7 @@ ActiveRecord::Schema.define(version: 2019_05_12_102340) do
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
   create_table "option_results", force: :cascade do |t|
     t.integer "user_id"
     t.string "category"
@@ -169,6 +150,8 @@ ActiveRecord::Schema.define(version: 2019_05_12_102340) do
     t.integer "option_id"
   end
 
+=======
+>>>>>>> 6deb743a2ba70c3efd9643be4c048b3f11dc853b
   create_table "options", force: :cascade do |t|
     t.integer "option_id"
     t.string "category"
@@ -177,25 +160,6 @@ ActiveRecord::Schema.define(version: 2019_05_12_102340) do
     t.datetime "updated_at", null: false
     t.text "content"
     t.integer "next_question_id"
-  end
-
-  create_table "patterns", force: :cascade do |t|
-    t.string "category"
-    t.integer "pattern_id"
-    t.boolean "answer_1"
-    t.boolean "answer_2"
-    t.boolean "answer_3"
-    t.boolean "answer_4"
-    t.boolean "answer_5"
-    t.boolean "answer_6"
-    t.boolean "answer_7"
-    t.boolean "answer_8"
-    t.boolean "answer_9"
-    t.boolean "answer_10"
-    t.boolean "answer_11"
-    t.boolean "answer_12"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "pcs", force: :cascade do |t|
@@ -278,8 +242,8 @@ ActiveRecord::Schema.define(version: 2019_05_12_102340) do
     t.datetime "updated_at", null: false
     t.boolean "ex_gpu"
     t.boolean "microsoftoffice"
-    t.integer "cluster_main"
-    t.integer "cluster_sub"
+    t.integer "cluster_1"
+    t.integer "cluster_2"
   end
 
   create_table "questions", force: :cascade do |t|
