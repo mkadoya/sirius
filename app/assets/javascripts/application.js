@@ -207,8 +207,107 @@ jQuery(function ($) {
         $('html, body').animate({ scrollTop: h2 }, 1000, 'swing');
     });
 
+    // Question
 
 
+    let questionNum = 1;
+    let displayQuestion = ".question" + $("#startQuestion").val();
+    let optionArray = [];
+    let beforeQuestions = [];
+    $(displayQuestion).show();
+    $("#questionReturn").hide();
+    $("#questionNum").text(questionNum + "問目");
+
+    $(".questions").click(function () {
+        questionNum += 1;
+        optionArray.push($(this).attr('name'));
+        beforeQuestions.push($(this).attr('data-before'));
+        $(displayQuestion).hide();
+        displayQuestion = '.question' + $(this).val();
+        $(displayQuestion).fadeIn();
+        $("h3" + displayQuestion).hide();
+        $("#questionNum").text(questionNum + "問目");
+        // Debug
+        $("#optionslist").text(optionArray);
+        $("#selectedOptions").val(optionArray);
+        $("#beforeQuestionID").text(beforeQuestions);
+        $("#questionForm").show();
+        $("#questionSubmit").val("質問を中断して結果を見る");
+        if ($(this).val() == 0) {
+            $("#questionSubmit").val("結果を見る");
+        }
+        $("#questionReturn").show();
+    });
+
+    $("#questionReturn").click(function () {
+        questionNum -= 1;
+        optionArray.pop();
+        $(displayQuestion).hide();
+        displayQuestion = '.question' + beforeQuestions[beforeQuestions.length - 1];
+        beforeQuestions.pop();
+        $(displayQuestion).fadeIn();
+        $("#questionNum").text(questionNum + "問目");
+        $("h3.question0").show();
+        // Debug
+        $("#optionslist").text(optionArray);
+        $("#selectedOptions").val(optionArray);
+        $("#beforeQuestionID").text(beforeQuestions);
+        if (questionNum == 1) {
+            $("#questionReturn").hide();
+            $("#questionForm").hide();
+        } else {
+            $("#questionForm").show();
+            $("#questionSubmit").val("質問を中断して結果を見る");
+        }
+    });
+
+    $("#questionSubmit").click(function () {
+        $(".questions").hide();
+        $(".question0").hide();
+        $("#questionReturn").hide();
+        $(this).hide();
+    });
+
+    // Question Chart
+    if (document.getElementById("qChart") != null) {
+        var ctx_qchart = document.getElementById("qChart");
+        var r_question_num = $('#r_question_num').val();
+        var myPieQChart = new Chart(ctx_qchart, {
+            //グラフの種類
+            type: 'doughnut',
+            //データの設定
+            data: {
+                //データ項目のラベル
+                labels: ["済", "未"],
+                //データセット
+                datasets: [{
+                    //背景色
+                    backgroundColor: [
+                        "#ffcc66",
+                        "#F2F2F2"
+                    ],
+                    //背景色(ホバーしたとき)
+                    hoverBackgroundColor: [
+                        "#ffcc66",
+                        "#F2F2F2"
+                    ],
+                    borderWidth: 0,
+                    //グラフのデータ
+                    data: [questionNum, r_question_num]
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                animation: {
+                    animateRotate: true,
+                    duration: 2000,
+                    render: false,
+                },
+            }
+        });
+    }
     // もっと見るボタンクリックイベント
     const defaultDispCnt = 6; // 初期表示件数
     const addDispCnt = 6;     // 追加表示件数

@@ -1,0 +1,94 @@
+<header>
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+          <nav class="navbar navbar-dark navbar-expand-md bg-darkblue border-bottom">
+            <div class="navbar-inner">
+                <button class="navbar-toggler" type="button"
+                  data-toggle="collapse"
+                  data-target="#navmenu1"
+                  aria-controls="navmenu1"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navmenu1">
+                  <ul class="navbar-nav" style="font-weight:bold">
+                    <li  class="nav-item" style="margin-left:50px;"><a class="nav-item nav-link active" href="/">ホーム</a></li>
+                    <% if @result_displayed %>
+                      <li  class="nav-item" style="margin-left:50px;">
+                      <%= link_to "結果",
+                      {
+                        :controller => "results",
+                        :action => "index",
+                        :category => "laptop",
+                      },
+                    :class => "nav-item nav-link active"%>
+                    </li>
+                    <% end %>
+                    <li  class="nav-item" style="margin-left:50px;"><a class="nav-item nav-link active" href="/articles/">記事</a></li>
+                  </ul>
+                </div>
+            </div>
+          </nav>
+        </div>
+    </div>
+  </div>
+</header>
+<main>
+<div class="container bg-white">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="mt-5 mb-5">質問に答えてあなたに一番のアイテムを探しましょう。</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+        <input id='startQuestion' type='hidden' value='<%= @start_question_id %>'>
+        <h2>パソコンの質問</h2>
+        <h3 class="question0" id="questionNum"></h3>
+        <canvas id="qChart"></canvas>
+        <% @questions.each do |question| %>
+            <p class="questions question<%= question.question_id %>"><%= question.question_id %>：<%= question.content %></p>
+        <% end %>
+        <br>
+        <% @options.each do |option| %>
+            <button
+            class="btn btn-primary questions question<%=option.question_id%>"
+            name="<%=option.option_id%>"
+            value="<%=option.next_question_id%>"
+            data-before="<%=option.question_id%>"
+            ><%= option.content %></button>
+        <% end %>
+        <br><br>
+        <button class="btn btn-secondary" id="questionReturn">戻る</button>
+        <br><br>
+        <%= form_tag("/results/new", method: "post", :class => "questions question0", :id => "questionForm") do %>
+          <%= text_field_tag(:selectedOptions) %>
+          <%= text_field_tag(:category, @category ) %>
+          <%= text_field_tag(:user_id, @user_id) %>
+          <%= submit_tag("結果を見る", :class => "btn btn-primary", :id => "questionSubmit") %>
+        <% end %>
+    </div>
+    <div class="col-md-4">
+      <h2>記事一覧</h2>
+        <% @articles.each do |article| %>
+        <div class="row row-1">
+            <div class="col-md-4">
+                <img class="img-fluid" src="<%= article.image %>"  alt="Responsive image">
+            </div>
+            <div class="col-md-8">
+            <p class="font-weight-bold" style="font-size:18px;"><%= link_to article.title, article %></p>
+            <p><%= article.preview %></p>
+            </div>
+        </div>
+        <% end %>
+    </div>
+    </div>
+  </div>
+
+
+
+  </div>
+</div>
+</main>

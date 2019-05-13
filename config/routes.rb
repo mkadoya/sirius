@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :images
   get 'items/show/:item_id' => "items#show"
   get 'results/index'
+  post 'results/new' => "results#new"
   get 'questions/index' => "questions#index"
+  get 'questions/category/pc' => "questions#pc"
   get "/" => "home#top"
 end

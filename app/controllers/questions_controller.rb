@@ -119,4 +119,36 @@ class QuestionsController < ApplicationController
       end
     end
   end
+
+  def pc
+    # 各パラメーターの導入
+    @category         = "pc"
+    @user_id          = cookies[:user_id].presence || 0
+    @start_question_id = Question.find_by(category: @category).question_id
+    @result_displayed = false
+
+    # 記事のインポート
+    @articles = Article.all
+
+    # Cookie情報がない場合、新規ユーザーを作成する。
+    if @user_id == 0
+			# 最初のユーザの場合には、@new_user_idとして1を設定
+      if TempUser.first.nil? == true
+        @user_id = 1
+			# 2番以降のUserは、既存のUser-idの一番大きい数図に１プラスしたIDにする
+      else
+        @user_id = TempUser.order(user_id: "DESC").first.user_id + 1
+      end
+      @user = TempUser.create(user_id: @user_id, name: "Guest")
+      @user.save
+      cookies.permanent[:user_id] = { :value => @user_id }
+    end
+
+    # Questioをインポート
+    @questions = Question.where(category: @category).all
+
+    # Optionをインポート
+    @options = Option.where(category: @category).all
+
+  end
 end
