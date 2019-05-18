@@ -224,32 +224,37 @@ class ItemsController < ApplicationController
 
 
 # ------ 全アイテムの平均値、Recommendation 1stの平均値算出 -----------------------------------------------------------------------
-		# 全アイテムの各カラムごとの平均、おすすめ品の各カラムごとの平均を算出する
-		@array_column_names.each do |column|
-			# 小数点が歩かないかチェック
-			if @item["#{column}"].to_s.include?(".")
-				effective_decimal = @item["#{column}"].to_s.split(".")[1].size
-				# 全アイテムの各カラムごとの平均
-				@hash_all_avrg.store(column, @actrec_all_item.average(:"#{column}").round(effective_decimal))
-				# Recommendation 1stの各カラムごとの平均
-				@hash_rec_avrg.store(column, @actrec_recommend_item.average(:"#{column}").round(effective_decimal))
-			else
-				effective_decimal = 0
-				# 全アイテムの各カラムごとの平均
-				@hash_all_avrg.store(column, @actrec_all_item.average(:"#{column}").round(effective_decimal).to_i)
-				# Recommendation 1stの各カラムごとの平均
-				@hash_rec_avrg.store(column, @actrec_recommend_item.average(:"#{column}").round(effective_decimal).to_i)
+			# 全アイテムの各カラムごとの平均、おすすめ品の各カラムごとの平均を算出する
+			@array_column_names.each do |column|
+				# 全アイテムの平均値、Recommendation 1stの平均値の各カラムの有効数字を、商品のものに合わせる
+				# nil check
+				if @actrec_recommend_item.average(:"#{column}").nil? == false
+					# 小数点があるかチェック
+					if @actrec_recommend_item.first["#{column}"].to_s.include?(".")
+						# 小数点があるカラムである場合には、小数点の第何位まであるのかをeffective_decimalに入れる
+						effective_decimal = @actrec_recommend_item.first["#{column}"].to_s.split(".")[1].size
+						# 全アイテムの各カラムごとの平均
+						@hash_all_avrg.store(column, @actrec_all_item.average(:"#{column}").round(effective_decimal))
+						# Recommendation 1stの各カラムごとの平均
+						@hash_rec_avrg.store(column, @actrec_recommend_item.average(:"#{column}").round(effective_decimal))
+					else
+						# 小数点があるカラムである場合には、effective_decimalとして0を入れる
+						effective_decimal = 0
+						# 全アイテムの各カラムごとの平均
+						@hash_all_avrg.store(column, @actrec_all_item.average(:"#{column}").round(effective_decimal).to_i)
+						# Recommendation 1stの各カラムごとの平均
+						@hash_rec_avrg.store(column, @actrec_recommend_item.average(:"#{column}").round(effective_decimal).to_i)
+					end
+				end
+				# Daru:Vectoryに入れるために、各カラムごとの前処理. 1:True, Falseを0, 1に変換. 2:nil削除.
+				if @actrec_all_item.pluck(:"#{column}").compact.first.is_a?(Numeric) == false
+					array_column_value = @actrec_all_item.pluck(:"#{column}").join(" ").gsub("false", "0").gsub("true", "1").split(" ").map(&:to_i).compact
+				else
+					array_column_value = @actrec_all_item.pluck(:"#{column}").compact
+				end
+				# Hashに入れる
+				@hash_column_array.store("#{column}", array_column_value)
 			end
-
-			# Daru:Vectoryに入れるために、各カラムごとの前処理. 1:True, Falseを0, 1に変換. 2:nil削除.
-			if @actrec_all_item.pluck(:"#{column}").compact.first.is_a?(Numeric) == false
-				array_column_value = @actrec_all_item.pluck(:"#{column}").join(" ").gsub("false", "0").gsub("true", "1").split(" ").map(&:to_i).compact
-			else
-				array_column_value = @actrec_all_item.pluck(:"#{column}").compact
-			end
-			# Hashに入れる
-			@hash_column_array.store("#{column}", array_column_value)
-		end
 # ----------------------------------------------------------------------------------------------------------------
 
 
