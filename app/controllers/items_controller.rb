@@ -12,10 +12,6 @@ class ItemsController < ApplicationController
       @result_displayed = true
     end
 
-		# 結果の表示判定
-		if (Result.where(user_id: @user_id).count > 0)
-			@result_displayed = true
-		end
 
 		# アイテムを特定
 		# [要修正] Categoryが増えるたびに修正が必要なためイケていない.
@@ -175,7 +171,7 @@ class ItemsController < ApplicationController
 			end
 		end
 
-		# ------ Star計算 -----------------------------------------------------------------------
+# ------ Star計算 -----------------------------------------------------------------------
 		# Starのためのおすすめ品の偏差値を算出. 偏差値が大きいもの順にSort. index.html.erbにてそのTop項目を重要項目として表示
 		# 各カラムごとにloop
 		@array_column_names.each do |column|
