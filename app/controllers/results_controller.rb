@@ -18,6 +18,9 @@ class ResultsController < ApplicationController
 		# filterで引っかからなかった時に、clusterごとに評価する、その時recoomend 1stとして表示させる上位clusterのParcentage
 		@num_recommend_percentage = 20
 
+		# あなたにとって重要な項目数
+		@num_recommend = 5
+
 		# remove from 優先順位 star
 		# [要修正] Categoryが増えるたびに修正が必要なためイケていない.
 		# @array_column_remove_star = ["emmc", "usb_c", "webcamera", "usb_a", "item_id", "windows", "ram_max", "gamingpc", "ram_all_slot", "updated_at", "created_at", "date_sale", "cluster_sub", "cluster_main", "id", "series", "sirial", "shop_num", "quote", "os"]
@@ -70,6 +73,8 @@ class ResultsController < ApplicationController
 # ------ Viewのための前準備 -----------------------------------------------------------------------
 		# 各Categoryにおける基本項目を取得
 		@array_fundamental = Column.where(category: @category).where(fundamental: true).pluck(:column_name)
+		# 各Categoryにおける基本項目数を取得
+		@num_fundamental = @array_fundamental.count
 		# Recommendに含めるためのアイテムのカラム情報をActive Recordで取得
 		@actrec_column_info = Column.where(category: @category).where(remove: false)
 		# Recommendに含めるためのアイテムのカラムを配列に入れる
@@ -80,6 +85,9 @@ class ResultsController < ApplicationController
 		@actrec_column_info.each do |column|
 			@hash_column.store(column.column_name, {"frendly_name"=>column.frendly_name, "unit"=>column.unit})
 		end
+
+		# あり、なし項目のカラム一覧
+		@array_na_column = Column.where(category: @category).where(available: true).pluck(:column_name)
 # ----------------------------------------------------------------------------------------------------------------
 
 

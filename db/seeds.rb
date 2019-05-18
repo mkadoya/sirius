@@ -52,7 +52,8 @@ CSV.foreach('db/Columns.csv', headers: true) do |row|
      :available => row[4],
      :dsc_better => row[5],
 		 :fundamental => row[6],
-     :remove => row[7]
+     :remove => row[7],
+		 :item_info => row[8]
 )
 end
 
