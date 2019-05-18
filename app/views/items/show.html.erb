@@ -64,11 +64,11 @@
             <input id='c_3' name='c_3' type='hidden' value='サイズ'>
             <input id='c_4' name='c_4' type='hidden' value='重量'>
             <input id='c_5' name='c_5' type='hidden' value='バッテリー時間'>
-            <input id='c_v_1' name='c_v_1' type='hidden' value='<%= @hash_item_star["price"]%>'>
-            <input id='c_v_2' name='c_v_2' type='hidden' value='<%= @hash_item_star["cpu_score"]%>'>
-            <input id='c_v_3' name='c_v_3' type='hidden' value='<%= @hash_item_star["inch"]%>'>
-            <input id='c_v_4' name='c_v_4' type='hidden' value='<%= @hash_item_star["weight"]%>'>
-            <input id='c_v_5' name='c_v_5' type='hidden' value='<%= @hash_item_star["uptime"]%>'>
+            <input id='c_v_1' name='c_v_1' type='hidden' value='<%= @hash_item_star[@array_fundamental[0]]%>'>
+            <input id='c_v_2' name='c_v_2' type='hidden' value='<%= @hash_item_star[@array_fundamental[1]]%>'>
+            <input id='c_v_3' name='c_v_3' type='hidden' value='<%= @hash_item_star[@array_fundamental[2]]%>'>
+            <input id='c_v_4' name='c_v_4' type='hidden' value='<%= @hash_item_star[@array_fundamental[3]]%>'>
+            <input id='c_v_5' name='c_v_5' type='hidden' value='<%= @hash_item_star[@array_fundamental[4]]%>'>
 						<canvas id="itemChart"></canvas>
             <table class="table table-hover table-condensed specm-table">
                 <thead>

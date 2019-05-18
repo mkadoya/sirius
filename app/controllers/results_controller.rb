@@ -20,11 +20,7 @@ class ResultsController < ApplicationController
 
 		# remove from 優先順位 star
 		# [要修正] Categoryが増えるたびに修正が必要なためイケていない.
-		@array_column_remove_star = ["emmc", "usb_c", "webcamera", "usb_a", "item_id", "windows", "ram_max", "gamingpc", "ram_all_slot", "updated_at", "created_at", "date_sale", "cluster_sub", "cluster_main", "id", "series", "sirial", "shop_num", "quote", "os"]
-
-		# 値が小さいほど良い項目List
-		# [要修正] Categoryが増えるたびに修正が必要なためイケていない.
-		@array_column_asc_good = ["price", "weight"]
+		# @array_column_remove_star = ["emmc", "usb_c", "webcamera", "usb_a", "item_id", "windows", "ram_max", "gamingpc", "ram_all_slot", "updated_at", "created_at", "date_sale", "cluster_sub", "cluster_main", "id", "series", "sirial", "shop_num", "quote", "os"]
 
 		# 各Category別にItem情報を全部入れる.
 		# [要修正] Categoryが増えるたびに修正が必要なためイケていない.
@@ -43,10 +39,8 @@ class ResultsController < ApplicationController
 		#アイテムの表示数：偶数のみ可能
 		@item_display_num = @actrec_all_item.pluck(:series).uniq.count / 2
 
-		# Debug用
-		# [要削除] Production Releaseの際に、削除が必要
-		@array_debug = Array.new
 
+# ------ 今後使う配列、辞書型を初期化 -----------------------------------------------------------------------
 		# 配列の初期化
 		@array_item = Array.new
 		@array_item_series = Array.new
@@ -64,6 +58,29 @@ class ResultsController < ApplicationController
 		@hash_cluster_score = Hash.new
 		@hash_tmp_avrg = Hash.new
 		@hash_score = Hash.new
+		@hash_column = Hash.new
+
+		# Debug用
+		# [要削除] Production Releaseの際に、削除が必要
+		@array_debug = Array.new
+# ----------------------------------------------------------------------------------------------------------------
+
+
+
+# ------ Viewのための前準備 -----------------------------------------------------------------------
+		# 各Categoryにおける基本項目を取得
+		@array_fundamental = Column.where(category: @category).where(fundamental: true).pluck(:column_name)
+		# Recommendに含めるためのアイテムのカラム情報をActive Recordで取得
+		@actrec_column_info = Column.where(category: @category).where(remove: false)
+		# Recommendに含めるためのアイテムのカラムを配列に入れる
+		@array_column_names = @actrec_column_info.pluck(:column_name)
+		# 値が小さいほど良い項目List
+		@array_column_asc_good = Column.where(category: @category).where(dsc_better: true).pluck(:column_name)
+		# User Frendlyな表示のためのカラム取得
+		@actrec_column_info.each do |column|
+			@hash_column.store(column.column_name, {"frendly_name"=>column.frendly_name, "unit"=>column.unit})
+		end
+# ----------------------------------------------------------------------------------------------------------------
 
 
 # ------ Recommendation 1st : Filter条件から出す -----------------------------------------------------------------------
@@ -226,9 +243,6 @@ class ResultsController < ApplicationController
 		@exec_time_cluster = Time.now - start_time
 
 # ------ 全アイテムの平均値、Recommendation 1stの平均値算出 -----------------------------------------------------------------------
-		# アイテムのカラムを配列に入れる
-		# @array_column_names = @actrec_all_item.column_names
-		@array_column_names = ["price", "ssd", "cpu_score", "ram", "weight", "uptime", "gpu_score", "item_id", "windows", "inch"]
 		# 全アイテムの各カラムごとの平均、おすすめ品の各カラムごとの平均を算出する
 		@array_column_names.each do |column|
 			# 全アイテムの平均値、Recommendation 1stの平均値の各カラムの有効数字を、商品のものに合わせる
@@ -291,9 +305,10 @@ class ResultsController < ApplicationController
 		end
 
 		# 特殊項目の削除
-		@array_column_remove_star.each do |column|
-			@hash_rec_star.delete(column)
-		end
+		# [要修正] Debug用
+		# @array_column_remove_star.each do |column|
+		# 	@hash_rec_star.delete(column)
+		# end
 
 		# 順位が小さい順にSort
 		@hash_rec_star = Hash[@hash_rec_star.sort_by{ |_, v| -v }]

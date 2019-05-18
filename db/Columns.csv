@@ -19,14 +19,14 @@ laptop,case,ケース,,FALSE,FALSE,FALSE,TRUE
 laptop,cpu_name,CPU名,,FALSE,FALSE,FALSE,TRUE
 laptop,cpu_clockspeed,CPUクロックスピード,,FALSE,FALSE,FALSE,TRUE
 laptop,cpu_core,CPUコア数,,FALSE,FALSE,FALSE,TRUE
-laptop,cpu_score,CPUスコア,,FALSE,FALSE,TRUE,TRUE
+laptop,cpu_score,CPUスコア,,FALSE,FALSE,TRUE,FALSE
 laptop,hdd,HDD容量,GB,FALSE,FALSE,FALSE,FALSE
 laptop,hdd_speed,HDD スピード,rpm,FALSE,FALSE,FALSE,TRUE
 laptop,ssd,SSD容量,GB,FALSE,FALSE,FALSE,FALSE
 laptop,emmc,emmc容量,GB,FALSE,FALSE,FALSE,TRUE
 laptop,optane,Optance容量,GB,FALSE,FALSE,FALSE,TRUE
 laptop,ram,メモリ,GB,FALSE,FALSE,FALSE,FALSE
-laptop,volume,全容量,GB,FALSE,FALSE,FALSE,FALSE
+laptop,volume,容量,GB,FALSE,FALSE,FALSE,FALSE
 laptop,ram_max,メモリ最大数,GB,FALSE,FALSE,FALSE,TRUE
 laptop,ram_type,メモリタイプ,,FALSE,FALSE,FALSE,TRUE
 laptop,ram_all_slot,メモリスロット数,,FALSE,FALSE,FALSE,TRUE
@@ -101,14 +101,14 @@ desktop,case,ケース,,FALSE,FALSE,FALSE,TRUE
 desktop,cpu_name,CPU名,,FALSE,FALSE,FALSE,TRUE
 desktop,cpu_clockspeed,CPUクロックスピード,,FALSE,FALSE,FALSE,TRUE
 desktop,cpu_core,CPUコア数,,FALSE,FALSE,FALSE,TRUE
-desktop,cpu_score,CPUスコア,,FALSE,FALSE,TRUE,TRUE
+desktop,cpu_score,CPUスコア,,FALSE,FALSE,TRUE,FALSE
 desktop,hdd,HDD容量,GB,FALSE,FALSE,FALSE,FALSE
 desktop,hdd_speed,HDD スピード,rpm,FALSE,FALSE,FALSE,TRUE
 desktop,ssd,SSD容量,GB,FALSE,FALSE,FALSE,FALSE
 desktop,emmc,emmc容量,GB,FALSE,FALSE,FALSE,TRUE
 desktop,optane,Optance容量,GB,FALSE,FALSE,FALSE,TRUE
 desktop,ram,メモリ,GB,FALSE,FALSE,TRUE,FALSE
-desktop,volume,全容量,GB,FALSE,FALSE,TRUE,FALSE
+desktop,volume,容量,GB,FALSE,FALSE,TRUE,FALSE
 desktop,ram_max,メモリ最大数,GB,FALSE,FALSE,FALSE,TRUE
 desktop,ram_type,メモリタイプ,,FALSE,FALSE,FALSE,TRUE
 desktop,ram_all_slot,メモリスロット数,,FALSE,FALSE,FALSE,TRUE
@@ -163,3 +163,85 @@ desktop,ex_gpu,外部GPU,,TRUE,FALSE,FALSE,FALSE
 desktop,microsoftoffice,Microsoft Office,,TRUE,FALSE,FALSE,FALSE
 desktop,cluster_1,メインクラスタ,,FALSE,FALSE,FALSE,TRUE
 desktop,cluster_2,サブクラスタ,,FALSE,FALSE,FALSE,TRUE
+pc,id,ID,,FALSE,FALSE,FALSE,TRUE
+pc,item_id,アイテム番号,,FALSE,FALSE,FALSE,TRUE
+pc,category,カテゴリー,,FALSE,FALSE,FALSE,TRUE
+pc,maker,メーカー,,FALSE,FALSE,FALSE,TRUE
+pc,name,製品名,,FALSE,FALSE,FALSE,TRUE
+pc,price,値段,円,FALSE,TRUE,TRUE,FALSE
+pc,shop_num,ショップ数,,FALSE,FALSE,FALSE,TRUE
+pc,rank,順位,位,FALSE,TRUE,FALSE,TRUE
+pc,satisfaction,満足度,,FALSE,FALSE,FALSE,TRUE
+pc,quote,投票数,,FALSE,FALSE,FALSE,TRUE
+pc,revier,レビュー数,,FALSE,FALSE,FALSE,TRUE
+pc,inch,サイズ,インチ,FALSE,FALSE,FALSE,FALSE
+pc,resolution,解像度,,FALSE,FALSE,FALSE,TRUE
+pc,wide,ワイド,,TRUE,FALSE,FALSE,TRUE
+pc,touchpannel,タッチパネル,,TRUE,FALSE,FALSE,TRUE
+pc,twoinone,2in1,,TRUE,FALSE,FALSE,TRUE
+pc,case,ケース,,FALSE,FALSE,FALSE,TRUE
+pc,cpu_name,CPU名,,FALSE,FALSE,FALSE,TRUE
+pc,cpu_clockspeed,CPUクロックスピード,,FALSE,FALSE,FALSE,TRUE
+pc,cpu_core,CPUコア数,,FALSE,FALSE,FALSE,TRUE
+pc,cpu_score,CPUスコア,,FALSE,FALSE,TRUE,FALSE
+pc,hdd,HDD容量,GB,FALSE,FALSE,FALSE,FALSE
+pc,hdd_speed,HDD スピード,rpm,FALSE,FALSE,FALSE,TRUE
+pc,ssd,SSD容量,GB,FALSE,FALSE,FALSE,FALSE
+pc,emmc,emmc容量,GB,FALSE,FALSE,FALSE,TRUE
+pc,optane,Optance容量,GB,FALSE,FALSE,FALSE,TRUE
+pc,ram,メモリ,GB,FALSE,FALSE,TRUE,FALSE
+pc,volume,容量,GB,FALSE,FALSE,TRUE,FALSE
+pc,ram_max,メモリ最大数,GB,FALSE,FALSE,FALSE,TRUE
+pc,ram_type,メモリタイプ,,FALSE,FALSE,FALSE,TRUE
+pc,ram_all_slot,メモリスロット数,,FALSE,FALSE,FALSE,TRUE
+pc,ram_empty_clot,メモリ空きスロット数,,FALSE,FALSE,FALSE,TRUE
+pc,gpu_name,GPU名,,FALSE,FALSE,FALSE,TRUE
+pc,gpu_ram,GPUメモリ,GB,FALSE,FALSE,FALSE,TRUE
+pc,gpu_score,GPUスコア,,FALSE,FALSE,TRUE,FALSE
+pc,drive,ドライブ,,TRUE,FALSE,FALSE,FALSE
+pc,dvd,DVDドライブ,,TRUE,FALSE,FALSE,TRUE
+pc,blueray,Blurayドライブ,,TRUE,FALSE,FALSE,TRUE
+pc,wireless,Wifi,,TRUE,FALSE,FALSE,TRUE
+pc,lan,Lan,,TRUE,FALSE,FALSE,TRUE
+pc,cellular,Cellular,,TRUE,FALSE,FALSE,TRUE
+pc,wifi_direct,Wifi Direct,,TRUE,FALSE,FALSE,TRUE
+pc,nfc,NFC,,TRUE,FALSE,FALSE,TRUE
+pc,faceprint,顔認証,,TRUE,FALSE,FALSE,TRUE
+pc,fingerprint,指紋認証,,TRUE,FALSE,FALSE,TRUE
+pc,webcamera,Webカメラ,,TRUE,FALSE,FALSE,TRUE
+pc,bluetooth,Bluetooth,,TRUE,FALSE,FALSE,TRUE
+pc,tenkey,テンキー,,TRUE,FALSE,FALSE,TRUE
+pc,touchpen,タッチパネル,,TRUE,FALSE,FALSE,TRUE
+pc,gamingpc,ゲーミングPC,,TRUE,FALSE,FALSE,TRUE
+pc,fanless,ファンレス,,TRUE,FALSE,FALSE,TRUE
+pc,output_4k,4K出力,,TRUE,FALSE,FALSE,TRUE
+pc,watercool,水冷,,TRUE,FALSE,FALSE,TRUE
+pc,tv_tuner,TVチューナー,,TRUE,FALSE,FALSE,FALSE
+pc,tv_tuner_4k,4K TVチューナー,,TRUE,FALSE,FALSE,TRUE
+pc,hdmi,HDMI,,FALSE,FALSE,FALSE,TRUE
+pc,minihdmi,miniHDMI,,FALSE,FALSE,FALSE,TRUE
+pc,minidisplay,MiniDisplay,,FALSE,FALSE,FALSE,TRUE
+pc,vga,VGA,,FALSE,FALSE,FALSE,TRUE
+pc,usb_a,USB Type-Aスロット,,FALSE,FALSE,FALSE,TRUE
+pc,usb_c,USB Type-Cスロット,,FALSE,FALSE,FALSE,TRUE
+pc,sd,SDカードスロット,,TRUE,FALSE,FALSE,FALSE
+pc,microsd,Micro SDカードスロット,,TRUE,FALSE,FALSE,TRUE
+pc,os,OS,,FALSE,FALSE,FALSE,TRUE
+pc,windows,Windows,,TRUE,FALSE,FALSE,TRUE
+pc,mac,Mac,,TRUE,FALSE,FALSE,FALSE
+pc,chrome,Chrome OS,,TRUE,FALSE,FALSE,TRUE
+pc,office,Officeソフト,,FALSE,FALSE,FALSE,FALSE
+pc,uptime,バッテリー,時間,FALSE,FALSE,FALSE,TRUE
+pc,weight,重量,kg,FALSE,TRUE,FALSE,TRUE
+pc,color,色,,FALSE,FALSE,FALSE,TRUE
+pc,date_sale,販売日,,FALSE,FALSE,FALSE,TRUE
+pc,series,シリーズ,,FALSE,FALSE,FALSE,TRUE
+pc,sirial,シリアル,,FALSE,FALSE,FALSE,TRUE
+pc,affiliate,アフィリエイト,,FALSE,FALSE,FALSE,TRUE
+pc,image,イメージ,,FALSE,FALSE,FALSE,TRUE
+pc,created_at,,,FALSE,FALSE,FALSE,TRUE
+pc,updated_at,,,FALSE,FALSE,FALSE,TRUE
+pc,ex_gpu,外部GPU,,TRUE,FALSE,FALSE,FALSE
+pc,microsoftoffice,Microsoft Office,,TRUE,FALSE,FALSE,FALSE
+pc,cluster_1,メインクラスタ,,FALSE,FALSE,FALSE,TRUE
+pc,cluster_2,サブクラスタ,,FALSE,FALSE,FALSE,TRUE
