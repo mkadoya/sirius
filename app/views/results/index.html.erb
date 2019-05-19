@@ -39,10 +39,17 @@
 <div class="container">
   <div class="row row-1">
     <div class="col-md-12">
-      <h1>あなたの特徴とおすすめの商品を紹介します</h1>
+      <h1 class="mt-4">あなたの特徴とおすすめの商品を紹介します</h1>
+      <% if @before_question_id_array != 0 %>
+      <h2 class="mt-4">最後まで回答に答える</h2>
+      <p>質問が途中で終わっております。</p>
+      <p>以下のリンクより再回答することができます。</p>
+      <p>最後まで回答することで、正確な結果を得ることができます。</p>
+      <a href="/questions/category/<%= @category %>" class="btn btn-primary text-d-none mt-3">再回答する</a>
+      <% end %>
     </div>
   </div>
- 
+
   <div class="row result-contents">
     <div class="col-md-12">
       <h2>あなたの特徴と重要な観点</h2>

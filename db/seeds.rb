@@ -137,7 +137,7 @@ end
 # end
 
 # 以下はOptionを呼び出すパターン
-   CSV.foreach('db/Options.csv', headers: true) do |row|
+CSV.foreach('db/Options.csv', headers: true) do |row|
    Option.create(
        :option_id => row[0],
        :category => row[1],
@@ -147,17 +147,17 @@ end
    )
  end
 
-# 以下はMatchを呼び出すパターン
- CSV.foreach('db/Matchs.csv', headers: true) do |row|
- Match.create(
-     :match_id => row[0],
-     :category => row[1],
-     :option_id => row[2],
-     :item_clmn => row[3],
-     :min => row[4],
-     :max => row[5]
- )
- end
+# # 以下はMatchを呼び出すパターン
+#  CSV.foreach('db/Matchs.csv', headers: true) do |row|
+#  Match.create(
+#      :match_id => row[0],
+#      :category => row[1],
+#      :option_id => row[2],
+#      :item_clmn => row[3],
+#      :min => row[4],
+#      :max => row[5]
+#  )
+#  end
 
 # 以下はOptionResultを呼び出すパターン
 #  CSV.foreach('db/OptionResults.csv', headers: true) do |row|
@@ -273,8 +273,8 @@ Pc.create(
     :sirial => row[74],
     :affiliate => row[75],
     :image => row[76],
-    :cluster_main => row[77],
-    :cluster_sub => row[78],
+    :cluster_1 => row[77],
+    :cluster_2 => row[78],
       )
 end
 

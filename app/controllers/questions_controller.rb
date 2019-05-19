@@ -120,15 +120,25 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def pc
+  def category
     # 各パラメーターの導入
-    @category         = "pc"
+    @category         = params[:category].presence || "laptop"
     @user_id          = cookies[:user_id].presence || 0
     @start_question_id = Question.find_by(category: @category).question_id
     @result_displayed = false
 
     # 記事のインポート
     @articles = Article.all
+
+    # 各種配列
+    @question_id_array = Array.new
+    @question_content_array = Array.new
+    @question_remain_array = Array.new
+    @option_id_array = Array.new
+    @option_question_id_array = Array.new
+    @option_next_question_id_array = Array.new
+    @option_content_array = Array.new
+    @before_question_id_array = Array.new
 
     # Cookie情報がない場合、新規ユーザーを作成する。
     if @user_id == 0
@@ -146,9 +156,44 @@ class QuestionsController < ApplicationController
 
     # Questioをインポート
     @questions = Question.where(category: @category).all
+    @questions.each do |question|
+      @question_id_array.push(question.question_id)
+      @question_content_array.push(question.content)
+      @question_remain_array.push(question.remain_question_num)
+    end
+
+    @question_id_array = @question_id_array.to_json.html_safe
+    @question_content_array = @question_content_array.to_json.html_safe
+    @question_remain_array = @question_remain_array.to_json.html_safe
+
 
     # Optionをインポート
     @options = Option.where(category: @category).all
+    @options.each do |option|
+      @option_id_array.push(option.option_id)
+      @option_question_id_array.push(option.question_id)
+      @option_next_question_id_array.push(option.next_question_id)
+      @option_content_array.push(option.content)
+    end
+
+    @option_id_array = @option_id_array.to_json.html_safe
+    @option_question_id_array = @option_question_id_array.to_json.html_safe
+    @option_next_question_id_array = @option_next_question_id_array.to_json.html_safe
+    @option_content_array = @option_content_array.to_json.html_safe
+
+    # Before Questionsをインポート
+    unless cookies[:before_questions].nil?
+      @before_question_id_array = cookies[:before_questions].split(",")
+      index = @before_question_id_array.length - 1
+      this_category = @before_question_id_array[index]
+      @before_question_id_array.delete(this_category)
+      if this_category != @category
+        @before_question_id_array = []
+      end
+    end
+    @before_question_id_array = @before_question_id_array.to_json.html_safe
 
   end
+
+
 end

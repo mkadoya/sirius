@@ -7,6 +7,8 @@ class ResultsController < ApplicationController
 		# User-id, category, Question_finishをquestion_controllerから引き受ける
 		@user_id = cookies[:user_id]
 		@category = params[:category]
+		@before_question_id_array = cookies[:before_questions].presence || 0
+
 		# @question_finish = params[:question_finish]
 
 		# 記事のインポート
@@ -234,27 +236,30 @@ class ResultsController < ApplicationController
 		@user_id = params[:user_id]
 		@category = params[:category]
 		@selectedOptions = params[:selectedOptions].split(",")
-		@times = 1
-		if( Result.where(user_id: @user_id ).all.count != 0)
-			@times = Result.where(user_id: @user_id ).order(times: "DESC").first.times + 1
+		beforeQuestions = params[:beforeQuestions]
+		if beforeQuestions.length > 0
+			beforeQuestions = params[:beforeQuestions] + "," + @category
 		end
-		@options = Option.where(category: @category).all
-
-		@options.each do |option|
-			result = Result.create(
-            user_id: @user_id,
-            option_id: option.option_id,
-            category: @category,
-            question_id: option.question_id,
-			result: false,
-			times: @times,
-			)
-			result.save
+		cookies.permanent[:before_questions] = { :value => beforeQuestions }
+		@times = 1
+		if (Result.where(user_id: @user_id ).all.count != 0)
+			@times = Result.where(user_id: @user_id ).order(times: "DESC").first.times + 1
 		end
 
 		@selectedOptions.each do |option|
-			result = Result.find_by(option_id: option, times: @times)
-			result.result = true
+			result = Result.where(option_id:option).where(times:(@times-1)).first
+			unless result.nil?
+				result.destroy
+				result.save
+			end
+			result = Result.create(
+            user_id: @user_id,
+            option_id: option,
+            category: @category,
+            question_id: Option.find_by(option_id: option).question_id,
+			result: true,
+			times: @times,
+			)
 			result.save
 		end
 

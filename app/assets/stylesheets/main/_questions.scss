@@ -109,6 +109,29 @@
     }
 }
 
+#questionReturn {
+  position: absolute;
+  top:50%;
+  left:4%;
+  -webkit-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  display: none;
+  text-decoration: none;
+  color: #FFF;
+  background: #ffcc66;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 50%;
+  font-size: 30px;
+  font-weight: 900;
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+  cursor: pointer;
+}
+
 .question-card-content{
     text-align: center;
     width: 80%;
@@ -175,7 +198,28 @@
   }
 }
 
-// 新規作成（PC）
-.questions{
+.options{
+  display: none;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  text-align: center;
+  width:350px;
+  background: #f7f7f7;
+  border-left: solid 6px #4285F4;/*左線*/
+  color: #4285F4;/*文字色*/
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+  cursor: pointer;
+}
+
+.options:active {
+  box-shadow: inset 0 0 2px rgba(128, 128, 128, 0.1);
+  transform: translateY(2px);
+}
+
+.options:focus{
+  outline: 0;
+}
+
+#questionForm{
   display: none;
 }

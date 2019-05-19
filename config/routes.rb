@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   get 'results/index'
   post 'results/new' => "results#new"
   get 'questions/index' => "questions#index"
-  get 'questions/category/pc' => "questions#pc"
+  get 'questions/category/:category' => "questions#category"
   get "/" => "home#top"
 end

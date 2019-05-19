@@ -208,106 +208,285 @@ jQuery(function ($) {
     });
 
     // Question
+    if ($("#question_id_array").val() != null){
+        const question_id_array = JSON.parse($("#question_id_array").val());
+        const question_content_array = JSON.parse($("#question_content_array").val());
+        const question_remain_array = JSON.parse($("#question_remain_array").val());
+        const option_id_array = JSON.parse($("#option_id_array").val());
+        const option_question_id_array = JSON.parse($("#option_question_id_array").val());
+        const option_next_question_id_array = JSON.parse($("#option_next_question_id_array").val());
+        const option_content_array = JSON.parse($("#option_content_array").val());
+        const before_question_id_array = JSON.parse($("#before_question_id_array").val());
 
+        let questionNum = 1;
+        let optionArray = [];
+        let beforeQuestions = [];
+        let startQuestion = Number($("#startQuestion").val());
 
-    let questionNum = 1;
-    let displayQuestion = ".question" + $("#startQuestion").val();
-    let optionArray = [];
-    let beforeQuestions = [];
-    $(displayQuestion).show();
-    $("#questionReturn").hide();
-    $("#questionNum").text(questionNum + "問目");
-
-    $(".questions").click(function () {
-        questionNum += 1;
-        optionArray.push($(this).attr('name'));
-        beforeQuestions.push($(this).attr('data-before'));
-        $(displayQuestion).hide();
-        displayQuestion = '.question' + $(this).val();
-        $(displayQuestion).fadeIn();
-        $("h3" + displayQuestion).hide();
-        $("#questionNum").text(questionNum + "問目");
-        // Debug
-        $("#optionslist").text(optionArray);
-        $("#selectedOptions").val(optionArray);
-        $("#beforeQuestionID").text(beforeQuestions);
-        $("#questionForm").show();
-        $("#questionSubmit").val("質問を中断して結果を見る");
-        if ($(this).val() == 0) {
-            $("#questionSubmit").val("結果を見る");
-        }
-        $("#questionReturn").show();
-    });
-
-    $("#questionReturn").click(function () {
-        questionNum -= 1;
-        optionArray.pop();
-        $(displayQuestion).hide();
-        displayQuestion = '.question' + beforeQuestions[beforeQuestions.length - 1];
-        beforeQuestions.pop();
-        $(displayQuestion).fadeIn();
-        $("#questionNum").text(questionNum + "問目");
-        $("h3.question0").show();
-        // Debug
-        $("#optionslist").text(optionArray);
-        $("#selectedOptions").val(optionArray);
-        $("#beforeQuestionID").text(beforeQuestions);
-        if (questionNum == 1) {
-            $("#questionReturn").hide();
-            $("#questionForm").hide();
-        } else {
-            $("#questionForm").show();
-            $("#questionSubmit").val("質問を中断して結果を見る");
-        }
-    });
-
-    $("#questionSubmit").click(function () {
-        $(".questions").hide();
-        $(".question0").hide();
         $("#questionReturn").hide();
-        $(this).hide();
-    });
 
-    // Question Chart
-    if (document.getElementById("qChart") != null) {
-        var ctx_qchart = document.getElementById("qChart");
-        var r_question_num = $('#r_question_num').val();
-        var myPieQChart = new Chart(ctx_qchart, {
-            //グラフの種類
-            type: 'doughnut',
-            //データの設定
-            data: {
-                //データ項目のラベル
-                labels: ["済", "未"],
-                //データセット
-                datasets: [{
-                    //背景色
-                    backgroundColor: [
-                        "#ffcc66",
-                        "#F2F2F2"
-                    ],
-                    //背景色(ホバーしたとき)
-                    hoverBackgroundColor: [
-                        "#ffcc66",
-                        "#F2F2F2"
-                    ],
-                    borderWidth: 0,
-                    //グラフのデータ
-                    data: [questionNum, r_question_num]
-                }]
-            },
-            options: {
-                legend: {
-                    display: false
+        if (before_question_id_array.length > 0) {
+            var index = before_question_id_array.length - 1;
+            startQuestion = Number(before_question_id_array[index]);
+            beforeQuestions = before_question_id_array;
+            questionNum = before_question_id_array.length;
+            $("#selectedOptions").hide();
+            $('#beforeQuestions').hide();
+            $("#category").hide();
+            $("#user_id").hide();
+            $("#questionSubmit").val("質問を中断して結果を見る");
+            $("#questionSubmit").show();
+            $("#questionForm").show();
+            $("#questionReturn").show();
+            beforeQuestions.pop();
+        }
+
+        let question_index = question_id_array.indexOf(startQuestion);
+        let remain_question_number = question_remain_array[question_index] + 1;
+        var question_parcent = changeQuestionPercent(questionNum-1, remain_question_number);
+        $("#question-parcent").text(question_parcent + "%");
+        $("#questionNum").hide();
+        $("#questionNum").text(questionNum + "問目");
+        $("#questionNum").fadeIn(1000);
+        $("#question_content").hide();
+        $("#question_content").text(question_content_array[question_index]);
+        $("#question_content").fadeIn(1000);
+
+
+
+        var option_contents = [];
+        var option_ids = [];
+        var option_next_question_ids = [];
+        var option_question_ids = [];
+        for (var i = 0; i < option_question_id_array.length; i++){
+            if (option_question_id_array[i] == startQuestion ) {
+                option_contents.push(option_content_array[i]);
+                option_ids.push(option_id_array[i]);
+                option_next_question_ids.push(option_next_question_id_array[i]);
+                option_question_ids.push(option_question_id_array[i]);
+            }
+        }
+
+        for (var i = 0; i < option_ids.length; i++){
+            var id = "#option" + i;
+            $(id).text(option_contents[i]);
+            $(id).attr('name',option_ids[i]);
+            $(id).attr('data-next', option_next_question_ids[i]);
+            $(id).attr('data-before', option_question_ids[i]);
+            $(id).fadeIn(1000);
+            $(id).css('display', 'inline-block');
+        }
+
+        // Question Chart
+        if (document.getElementById("qChart") != null) {
+            var ctx_qchart = document.getElementById("qChart");
+            var myPieQChart = new Chart(ctx_qchart, {
+                //グラフの種類
+                type: 'doughnut',
+                //データの設定
+                data: {
+                    //データ項目のラベル
+                    labels: ["済", "未"],
+                    //データセット
+                    datasets: [{
+                        //背景色
+                        backgroundColor: [
+                            "#ffcc66",
+                            "#F2F2F2"
+                        ],
+                        //背景色(ホバーしたとき)
+                        hoverBackgroundColor: [
+                            "#ffcc66",
+                            "#F2F2F2"
+                        ],
+                        borderWidth: 0,
+                        //グラフのデータ
+                        data: [questionNum-1, remain_question_number]
+                    }]
                 },
-                animation: {
-                    animateRotate: true,
-                    duration: 2000,
-                    render: false,
-                },
+                options: {
+                    legend: {
+                        display: false
+                    },
+                    animation: {
+                        animateRotate: true,
+                        duration: 2000,
+                        render: false,
+                    },
+                }
+            });
+        }
+
+        $(".options").click(function () {
+
+            questionNum += 1;
+            var option_id = Number($(this).attr('name'));
+            optionArray.push(option_id);
+            beforeQuestions.push($(this).attr('data-before'));
+            var option_index = option_id_array.indexOf(option_id);
+            var next_question_id = option_next_question_id_array[option_index];
+            question_index = question_id_array.indexOf(next_question_id);
+            remain_question_number = question_remain_array[question_index] + 1;
+            var question_parcent = changeQuestionPercent(questionNum-1, remain_question_number);
+            changeQChart();
+            $("#questionNum").hide();
+            $("#questionNum").text(questionNum + "問目");
+            $("#questionNum").show();
+            $("#question_content").hide();
+            $("#question_content").text(question_content_array[question_index]);
+            $("#question_content").show();
+            $("#question-parcent").text(question_parcent + "%");
+
+            var option_contents = [];
+            var option_ids = [];
+            var option_next_question_ids = [];
+            var option_question_ids = [];
+            for (var i = 0; i < 10; i++) {
+                var id = "#option" + i;
+                $(id).hide();
+            }
+            for (var i = 0; i < option_question_id_array.length; i++) {
+                if (option_question_id_array[i] == next_question_id) {
+                    option_contents.push(option_content_array[i]);
+                    option_ids.push(option_id_array[i]);
+                    option_next_question_ids.push(option_next_question_id_array[i]);
+                    option_question_ids.push(option_question_id_array[i]);
+                }
+            }
+            for (var i = 0; i < option_ids.length; i++) {
+                var id = "#option" + i;
+                $(id).text(option_contents[i]);
+                $(id).attr('name', option_ids[i]);
+                $(id).attr('data-next', option_next_question_ids[i]);
+                $(id).attr('data-before', option_question_ids[i]);
+                $(id).fadeIn(1000);
+                $(id).css('display', 'inline-block');
+            }
+
+            $("#selectedOptions").val(optionArray);
+            $("#selectedOptions").hide();
+            $('#beforeQuestions').val(beforeQuestions);
+            $('#beforeQuestions').hide();
+            $("#category").hide();
+            $("#user_id").hide();
+            $("#questionSubmit").val("質問を中断して結果を見る");
+            if (next_question_id == 0) {
+                $("#questionSubmit").val("結果を見る");
+                $("#question_content").hide();
+                $("#questionNum").hide();
+            }
+            $("#questionSubmit").show();
+            $("#questionForm").show();
+            $("#questionReturn").show();
+
+        });
+
+        $("#questionReturn").click(function () {
+            questionNum -= 1;
+            question_index = question_id_array.indexOf(Number(beforeQuestions[beforeQuestions.length - 1]));
+            remain_question_number = question_remain_array[question_index] + 1;
+            var question_parcent = changeQuestionPercent(questionNum-1, remain_question_number);
+            changeQChart();
+            $("#questionNum").hide();
+            $("#questionNum").text(questionNum + "問目");
+            $("#questionNum").show();
+            $("#question_content").hide();
+            $("#question_content").text(question_content_array[question_index]);
+            $("#question_content").show();
+            $("#question-parcent").text(question_parcent + "%");
+            optionArray.pop();
+            var option_contents = [];
+            var option_ids = [];
+            var option_next_question_ids = [];
+            var option_question_ids = [];
+
+            for (var i = 0; i < 10; i++) {
+                var id = "#option" + i;
+                $(id).hide();
+            }
+
+            for (var i = 0; i < option_question_id_array.length; i++) {
+                if (option_question_id_array[i] == question_id_array[question_index]) {
+                    option_contents.push(option_content_array[i]);
+                    option_ids.push(option_id_array[i]);
+                    option_next_question_ids.push(option_next_question_id_array[i]);
+                    option_question_ids.push(option_question_id_array[i]);
+                }
+            }
+
+            for (var i = 0; i < option_ids.length; i++) {
+                var id = "#option" + i;
+                $(id).text(option_contents[i]);
+                $(id).attr('name', option_ids[i]);
+                $(id).attr('data-next', option_next_question_ids[i]);
+                $(id).attr('data-before', option_question_ids[i]);
+                $(id).fadeIn(1000);
+                $(id).css('display', 'inline-block');
+            }
+
+            beforeQuestions.pop();
+            $("#selectedOptions").val(optionArray);
+            $("#selectedOptions").hide();
+            $('#beforeQuestions').val(beforeQuestions);
+            $('#beforeQuestions').hide();
+            $("#category").hide();
+            $("#user_id").hide();
+
+            if (questionNum == 1) {
+                $("#questionReturn").hide();
+                $("#questionSubmit").hide();
+            } else {
+                $("#questionSubmit").show();
+                $("#questionForm").show();
+                $("#questionSubmit").val("質問を中断して結果を見る");
             }
         });
-    }
+
+        $("#questionSubmit").click(function () {
+            if ($(this).val() == "結果を見る" ) {
+                beforeQuestions = [];
+            } else {
+                beforeQuestions.push(question_id_array[question_index]);
+            }
+            $('#beforeQuestions').val(beforeQuestions);
+            $("#question-parcent").text("終了");
+            $(this).hide();
+            $("#question_content").hide();
+            $(".options").hide();
+            $("#questionReturn").hide();
+            $("#questionNum").hide();
+        });
+
+
+        function changeQChart() {
+            myPieQChart.data.labels.pop();
+            myPieQChart.data.labels.pop();
+
+            myPieQChart.data.datasets.forEach((dataset) => {
+                dataset.data.pop();
+            });
+            myPieQChart.data.datasets.forEach((dataset) => {
+                dataset.data.pop();
+            });
+
+            myPieQChart.data.labels.push("済", "未");
+
+            myPieQChart.data.datasets.forEach((dataset) => {
+                dataset.data.push(questionNum-1, remain_question_number);
+            });
+            myPieQChart.update();
+        }
+
+        function changeQuestionPercent(q, r) {
+            if (r > 0) {
+                return Math.floor(q / (q + r) * 100)
+            } else {
+                return 100;
+            }
+
+        }
+    } // Question
+
     // もっと見るボタンクリックイベント
     const defaultDispCnt = 6; // 初期表示件数
     const addDispCnt = 6;     // 追加表示件数
