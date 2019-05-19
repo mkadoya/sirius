@@ -108,7 +108,8 @@ class ResultsController < ApplicationController
 		end
 
 		# Userが選択した結果を元にoption_idを抽出
-		@array_option_id = Result.where(user_id: @user_id).where(category: @category).where(result: true).pluck(:option_id)
+		@times = @array_option_id = Result.where(user_id: @user_id).where(category: @category).order(times: "DESC").first.times
+		@array_option_id = Result.where(user_id: @user_id).where(category: @category).where(times: @times).where(result: true).pluck(:option_id)
 
 		# Userが選択した結果のoption_idを元にMatch条件を抽出
 		@array_match_condition = Match.where(category: @category).where(option_id: @array_option_id)

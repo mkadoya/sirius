@@ -122,7 +122,7 @@ class QuestionsController < ApplicationController
 
   def category
     # 各パラメーターの導入
-    @category         = params[:category].presence || "laptop"
+    @category         = params[:category] ? params[:category] : "laptop"
     @user_id          = cookies[:user_id].presence || 0
     @start_question_id = Question.find_by(category: @category).question_id
     @result_displayed = false
