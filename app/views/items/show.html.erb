@@ -59,16 +59,16 @@
             <div class="row row-1 ml-2">
                 <div class="orange-box"></div><p>商品のスペック</p>
             </div>
-            <input id='c_1' name='c_1' type='hidden' value='値段'>
-            <input id='c_2' name='c_2' type='hidden' value='スペック'>
-            <input id='c_3' name='c_3' type='hidden' value='サイズ'>
-            <input id='c_4' name='c_4' type='hidden' value='重量'>
-            <input id='c_5' name='c_5' type='hidden' value='バッテリー時間'>
-            <input id='c_v_1' name='c_v_1' type='hidden' value='<%= @hash_item_star["price"]%>'>
-            <input id='c_v_2' name='c_v_2' type='hidden' value='<%= @hash_item_star["cpu_score"]%>'>
-            <input id='c_v_3' name='c_v_3' type='hidden' value='<%= @hash_item_star["inch"]%>'>
-            <input id='c_v_4' name='c_v_4' type='hidden' value='<%= @hash_item_star["weight"]%>'>
-            <input id='c_v_5' name='c_v_5' type='hidden' value='<%= @hash_item_star["uptime"]%>'>
+						<input id='c_1' name='c_1' type='hidden' value='<%= @hash_column[@array_fundamental[0]]["frendly_name"]%>'>
+	          <input id='c_2' name='c_2' type='hidden' value='<%= @hash_column[@array_fundamental[1]]["frendly_name"]%>'>
+	          <input id='c_3' name='c_3' type='hidden' value='<%= @hash_column[@array_fundamental[2]]["frendly_name"]%>'>
+	          <input id='c_4' name='c_4' type='hidden' value='<%= @hash_column[@array_fundamental[3]]["frendly_name"]%>'>
+	          <input id='c_5' name='c_5' type='hidden' value='<%= @hash_column[@array_fundamental[4]]["frendly_name"]%>'>
+	          <input id='c_v_1' name='c_v_1' type='hidden' value='<%= @hash_item_star[@array_fundamental[0]]%>'>
+	          <input id='c_v_2' name='c_v_2' type='hidden' value='<%= @hash_item_star[@array_fundamental[1]]%>'>
+	          <input id='c_v_3' name='c_v_3' type='hidden' value='<%= @hash_item_star[@array_fundamental[2]]%>'>
+	          <input id='c_v_4' name='c_v_4' type='hidden' value='<%= @hash_item_star[@array_fundamental[3]]%>'>
+	          <input id='c_v_5' name='c_v_5' type='hidden' value='<%= @hash_item_star[@array_fundamental[4]]%>'>
 						<canvas id="itemChart"></canvas>
             <table class="table table-hover table-condensed specm-table">
                 <thead>
@@ -79,61 +79,34 @@
                     </tr>
                 </thead>
                 <tbody>
+									<% for num in 0..(@num_fundamental - 1) do %>
                     <tr>
-                        <td>値段</td>
-                        <td>
-                        <% if @hash_rec_avrg["price"] %>
-                          <%= @hash_rec_avrg["price"] %>円
-                        <% else %>
-                          未回答
-                        <% end %>
-                        </td>
-                        <td><%= @item.price %>円</td>
+												<td><%=@hash_column[@array_fundamental[num]]["frendly_name"]%></td>
+
+												<% if @array_na_column.include?(@array_fundamental[num]) == true %>
+													<% if @hash_rec_avrg[@array_fundamental[num]].round >= 0.5 %>
+														<td>あり</td>
+													<% else %>
+														<td>なし</td>
+													<% end %>
+												<% elsif @array_na_column.include?(@array_fundamental[num]) == false %>
+													<td><%= @hash_rec_avrg[@array_fundamental[num]] %> <%=@hash_column[@array_fundamental[num]]["unit"]%></td>
+												<% else %>
+													<td>-</td>
+												<% end %>
+
+												<% if @item[@array_fundamental[num]] == true %>
+													<td>あり</td>
+												<% elsif @item[@array_fundamental[num]] == false %>
+													<td>なし</td>
+												<% elsif @item[@array_fundamental[num]] %>
+													<td><%= @item[@array_fundamental[num]] %> <%=@hash_column[@array_fundamental[num]]["unit"]%></td>
+												<% else %>
+													<td>-</td>
+												<% end %>
+
                     </tr>
-                    <tr>
-                        <td>スペック(CPU)</td>
-                        <td>
-                        <% if @hash_rec_avrg["cpu_score"] %>
-                          <%= @hash_rec_avrg["cpu_score"] %>
-                        <% else %>
-                          未回答
-                        <% end %>
-                        </td>
-                        <td><%= @item.cpu_score %></td>
-                    </tr>
-                    <tr>
-                        <td>サイズ</td>
-                        <td>
-                        <% if @hash_rec_avrg["inch"] %>
-                          <%= @hash_rec_avrg["inch"] %> インチ
-                        <% else %>
-                          未回答
-                        <% end %>
-                        </td>
-                        <td><%= @item.inch %> インチ</td>
-                    </tr>
-                    <tr>
-                        <td>重量</td>
-                        <td>
-                        <% if @hash_rec_avrg["weight"] %>
-                          <%= @hash_rec_avrg["weight"] %> kg
-                        <% else %>
-                          未回答
-                        <% end %>
-                        </td>
-                        <td><%= @item.weight %> kg</td>
-                    </tr>
-                    <tr>
-                        <td>バッテリー時間</td>
-                        <td>
-                        <% if @hash_rec_avrg["uptime"] %>
-                          <%= @hash_rec_avrg["uptime"] %> 時間
-                        <% else %>
-                          未回答
-                        <% end %>
-                        </td>
-                        <td><%= @item.uptime %> 時間</td>
-                    </tr>
+										<% end %>
                 </tbody>
             </table>
             <p><strong>カラー</strong></p>
@@ -161,35 +134,37 @@
                     <tr>
                         <th>重要項目</th>
                         <th>おすすめ</th>
-                        <th>商品性能</th>
+                        <th>商品</th>
                     </tr>
                 </thead>
                 <tbody>
+								<% for num in 0..(@num_recommend - 1) do %>
                     <tr>
-                        <td><%= @hash_rec_star.keys[0] %></td>
-                        <td><%= @hash_rec_avrg[@hash_rec_star.keys[0]] %></td>
-                        <td><%= @item[@hash_rec_star.keys[0]] %></td>
+                        <td><%= @hash_column[@hash_rec_star.keys[num]]["frendly_name"] %></td>
+
+												<% if @array_na_column.include?(@hash_rec_star.keys[num]) == true %>
+													<% if @hash_rec_avrg[@hash_rec_star.keys[num]].round >= 0.5 %>
+														<td>あり</td>
+													<% else %>
+														<td>なし</td>
+													<% end %>
+												<% elsif @array_na_column.include?(@hash_rec_star.keys[num]) == false %>
+													<td><%= @hash_rec_avrg[@hash_rec_star.keys[num]] %> <%=@hash_column[@hash_rec_star.keys[num]]["unit"]%></td>
+												<% else %>
+													<td>-</td>
+												<% end %>
+
+												<% if @item[@hash_rec_star.keys[num]] == true %>
+													<td>あり</td>
+												<% elsif @item[@hash_rec_star.keys[num]] == false %>
+													<td>なし</td>
+												<% elsif @item[@hash_rec_star.keys[num]] %>
+													<td><%= @item[@hash_rec_star.keys[num]] %> <%=@hash_column[@hash_rec_star.keys[num]]["unit"]%></td>
+												<% else %>
+													<td>-</td>
+												<% end %>
                     </tr>
-                    <tr>
-                        <td><%= @hash_rec_star.keys[1] %></td>
-                        <td><%= @hash_rec_avrg[@hash_rec_star.keys[1]] %></td>
-                        <td><%= @item[@hash_rec_star.keys[1]] %></td>
-                    </tr>
-                    <tr>
-                        <td><%= @hash_rec_star.keys[2] %></td>
-                        <td><%= @hash_rec_avrg[@hash_rec_star.keys[2]] %></td>
-                        <td><%= @item[@hash_rec_star.keys[2]] %></td>
-                    </tr>
-                    <tr>
-                        <td><%= @hash_rec_star.keys[3] %></td>
-                        <td><%= @hash_rec_avrg[@hash_rec_star.keys[3]] %></td>
-                        <td><%= @item[@hash_rec_star.keys[3]] %></td>
-                    </tr>
-                    <tr>
-                        <td><%= @hash_rec_star.keys[4] %></td>
-                        <td><%= @hash_rec_avrg[@hash_rec_star.keys[4]] %></td>
-                        <td><%= @item[@hash_rec_star.keys[4]] %></td>
-                    </tr>
+									<% end %>
                 </tbody>
             </table>
         </div>
@@ -203,60 +178,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>メーカー</td>
-                        <td><%= @item.maker %></td>
-                    </tr>
-                    <tr>
-                        <td>商品重量</td>
-                        <td><%= @item.weight %>kg</td>
-                    </tr>
-                    <tr>
-                        <td>カラー</td>
-                        <td><%= @item.color %></td>
-                    </tr>
-                    <tr>
-                        <td>サイズ</td>
-                        <td><%= @item.inch %> インチ</td>
-                    </tr>
-                    <tr>
-                        <td>CPU タイプ</td>
-                        <td><%= @item.cpu_name %></td>
-                    </tr>
-                    <tr>
-                        <td>CPU コア数</td>
-                        <td><%= @item.cpu_core %> コア</td>
-                    </tr>
-                    <tr>
-                        <td>RAM</td>
-                        <td><%= @item.ram %> GB</td>
-                    </tr>
-                    <% if @item.ssd != 0 && @item.ssd.nil? == false%>
-                    <tr>
-                        <td>SSD</td>
-                        <td><%= @item.ssd %> GB</td>
-                    </tr>
-                    <% end %>
-                    <% if @item.hdd != 0 && @item.hdd.nil? == false %>
-                    <tr>
-                        <td>HDD</td>
-                        <td><%= @item.hdd %> GB</td>
-                    </tr>
-                    <% end %>
-                    <% if @item.emmc != 0  && @item.emmc.nil? == false%>
-                    <tr>
-                        <td>EMMC</td>
-                        <td><%= @item.emmc %> GB</td>
-                    </tr>
-                    <% end %>
-                    <tr>
-                        <td>バッテリー時間</td>
-                        <td><%= @item.uptime %> 時間</td>
-                    </tr>
-                    <tr>
-                        <td>OS</td>
-                        <td><%= @item.os %></td>
-                    </tr>
+									<% for num in 0..(@integer_item_info_count - 1) do %>
+										<tr>
+												<td><%= @hash_column[@array_item_info[num]]["frendly_name"] %></td>
+												<% if @item[@array_item_info[num]] == true %>
+													<td>あり</td>
+												<% elsif @item[@array_item_info[num]] == false %>
+													<td>なし</td>
+												<% elsif @item[@array_item_info[num]] %>
+													<td><%= @item[@array_item_info[num]] %> <%= @hash_column[@array_item_info[num]]["unit"] %></td>
+												<% else %>
+													<td>-</td>
+												<% end %>
+										</tr>
+									<% end %>
                 </tbody>
             </table>
         </div>

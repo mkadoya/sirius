@@ -19,6 +19,129 @@ CSV.foreach('db/Questions.csv', headers: true) do |row|
     )
 end
 
+# 以下はOptionを呼び出すパターン
+# CSV.foreach('db/Options.csv', headers: true) do |row|
+#     Option.create(
+#        :option_id => row[0],
+#        :category => row[1],
+#        :question_id => row[2],
+#        :content => row[3],
+#        :next_question_id => row[4],
+#    )
+# end
+
+# 以下はMatchを呼び出すパターン
+# CSV.foreach('db/Matchs.csv', headers: true) do |row|
+#   Match.create(
+#      :match_id => row[0],
+#      :category => row[1],
+#      :option_id => row[2],
+#      :item_clmn => row[3],
+#      :min => row[4],
+#      :max => row[5]
+# )
+# end
+
+# 以下はColumnを呼び出すパターン
+CSV.foreach('db/Columns.csv', headers: true) do |row|
+  Column.create(
+     :category => row[0],
+     :column_name => row[1],
+     :frendly_name => row[2],
+     :unit => row[3],
+     :available => row[4],
+     :dsc_better => row[5],
+		 :fundamental => row[6],
+     :remove => row[7],
+		 :item_info => row[8]
+)
+end
+
+#以下はPcsを呼び出すパターン
+# CSV.foreach('db/Pcs.csv', headers: true) do |row|
+# Pc.create(
+# 	:item_id => row[0],
+# 	:category => row[1],
+# 	:maker => row[2],
+# 	:name => row[3],
+# 	:price => row[4],
+# 	:shop_num => row[5],
+# 	:rank => row[6],
+# 	:satisfaction => row[7],
+# 	:quote => row[8],
+# 	:revier => row[9],
+# 	:inch => row[10],
+# 	:resolution => row[11],
+# 	:wide => row[12],
+# 	:touchpannel => row[13],
+# 	:twoinone => row[14],
+# 	:case => row[15],
+# 	:cpu_name => row[16],
+# 	:cpu_clockspeed => row[17],
+# 	:cpu_core => row[18],
+# 	:cpu_score => row[19],
+# 	:hdd => row[20],
+# 	:hdd_speed => row[21],
+# 	:ssd => row[22],
+# 	:emmc => row[23],
+# 	:optane => row[24],
+# 	:ram => row[25],
+# 	:volume => row[26],
+# 	:ram_max => row[27],
+# 	:ram_type => row[28],
+# 	:ram_all_slot => row[29],
+# 	:ram_empty_clot => row[30],
+# 	:gpu_name => row[31],
+# 	:ex_gpu =>  row[32],
+# 	:gpu_ram => row[33],
+# 	:gpu_score => row[34],
+# 	:drive => row[35],
+# 	:dvd => row[36],
+# 	:blueray => row[37],
+# 	:wireless => row[38],
+# 	:lan => row[39],
+# 	:cellular => row[40],
+# 	:wifi_direct => row[41],
+# 	:nfc => row[42],
+# 	:faceprint => row[43],
+# 	:fingerprint => row[44],
+# 	:webcamera => row[45],
+# 	:bluetooth => row[46],
+# 	:tenkey => row[47],
+# 	:touchpen => row[48],
+# 	:gamingpc => row[49],
+# 	:fanless => row[50],
+# 	:output_4k => row[51],
+# 	:watercool => row[52],
+# 	:tv_tuner => row[53],
+# 	:tv_tuner_4k => row[54],
+# 	:hdmi => row[55],
+# 	:minihdmi => row[56],
+# 	:minidisplay => row[57],
+# 	:vga => row[58],
+# 	:usb_a => row[59],
+# 	:usb_c => row[60],
+# 	:sd => row[61],
+# 	:microsd => row[62],
+# 	:os => row[63],
+# 	:windows => row[64],
+# 	:mac => row[65],
+# 	:chrome => row[66],
+# 	:office => row[67],
+# 	:microsoftoffice => row[68],
+# 	:uptime => row[69],
+# 	:weight => row[70],
+# 	:color => row[71],
+# 	:date_sale => row[72],
+# 	:series => row[73],
+# 	:sirial => row[74],
+# 	:affiliate => row[75],
+# 	:image => row[76],
+# 	:cluster_1 => row[77],
+# 	:cluster_2 => row[78],
+# 		)
+# end
+
 #以下はItemsを呼び出すパターン
 # CSV.foreach('db/Items.csv', headers: true) do |row|
 # Item.create(
@@ -90,85 +213,6 @@ end
 #     :image => row[65],
 #     )
 # end
-
-# 以下はPatternsを呼び出すパターン
-# CSV.foreach('db/Patterns.csv', headers: true) do |row|
-# Pattern.create(
-#     :category => row['category'],
-#     :pattern_id => row['pattern_id'],
-#     :answer_1 => row['answer_1'],
-#     :answer_2 => row['answer_2'],
-#     :answer_3 => row['answer_3'],
-#     :answer_4 => row['answer_4'],
-#     :answer_5 => row['answer_5'],
-#     :answer_6 => row['answer_6'],
-#     :answer_7 => row['answer_7'],
-#     :answer_8 => row['answer_8'],
-#     :answer_9 => row['answer_9'],
-#     :answer_10 => row['answer_10'],
-#     :answer_11 => row['answer_11'],
-#     :answer_12 => row['answer_12']
-#     )
-# end
-
-# 以下はPatternsを呼び出すパターン
-# CSV.foreach('db/Characteristics.csv', headers: true) do |row|
-# Characteristic.create(
-#     :category => row[0],
-#     :pattern_id => row[1],
-#     :title => row[2],
-#     :body => row[3],
-#     :chara_1_str => row[4],
-#     :chara_1_val => row[5],
-#     :chara_2_str => row[6],
-#     :chara_2_val => row[7],
-#     :chara_3_str => row[8],
-#     :chara_3_val => row[9],
-#     :chara_4_str => row[10],
-#     :chara_4_val => row[11],
-#     :chara_5_str => row[12],
-#     :chara_5_val => row[13],
-#     :item_1 => row[14],
-#     :item_2 => row[15],
-#     :item_3 => row[16],
-#     :item_4 => row[17],
-#     :item_5 => row[18],
-# )
-# end
-
-# 以下はOptionを呼び出すパターン
-CSV.foreach('db/Options.csv', headers: true) do |row|
-   Option.create(
-       :option_id => row[0],
-       :category => row[1],
-       :question_id => row[2],
-       :content => row[3],
-       :next_question_id => row[4],
-   )
- end
-
-# # 以下はMatchを呼び出すパターン
-#  CSV.foreach('db/Matchs.csv', headers: true) do |row|
-#  Match.create(
-#      :match_id => row[0],
-#      :category => row[1],
-#      :option_id => row[2],
-#      :item_clmn => row[3],
-#      :min => row[4],
-#      :max => row[5]
-#  )
-#  end
-
-# 以下はOptionResultを呼び出すパターン
-#  CSV.foreach('db/OptionResults.csv', headers: true) do |row|
-#  OptionResult.create(
-#      :user_id => row[0],
-#      :category => row[1],
-#      :question_id => row[2],
-#      :option_id => row[3],
-#      :result => row[4],
-#  )
-#  end
 
 #以下はToiletPaperを呼び出すパターン
 # CSV.foreach('db/Toiletpaper_items.csv', headers: true) do |row|
