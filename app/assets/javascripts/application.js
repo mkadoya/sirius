@@ -222,61 +222,63 @@ jQuery(function ($) {
         let optionArray = [];
         let beforeQuestions = [];
         let startQuestion = Number($("#startQuestion").val());
+        let question_index;
+        let remain_question_number;
 
-        $("#questionReturn").hide();
+        if (questionNum == 1) {
+            $("#questionReturn").hide();
 
-        if (before_question_id_array.length > 0) {
-            var index = before_question_id_array.length - 1;
-            startQuestion = Number(before_question_id_array[index]);
-            beforeQuestions = before_question_id_array;
-            questionNum = before_question_id_array.length;
-            $("#selectedOptions").hide();
-            $('#beforeQuestions').hide();
-            $("#category").hide();
-            $("#user_id").hide();
-            $("#questionSubmit").val("質問を中断して結果を見る");
-            $("#questionSubmit").show();
-            $("#questionForm").show();
-            $("#questionReturn").show();
-            beforeQuestions.pop();
-        }
+            if (before_question_id_array.length > 0) {
+                var index = before_question_id_array.length - 1;
+                startQuestion = Number(before_question_id_array[index]);
+                beforeQuestions = before_question_id_array;
+                questionNum = before_question_id_array.length;
+                $("#selectedOptions").hide();
+                $('#beforeQuestions').hide();
+                $("#category").hide();
+                $("#user_id").hide();
+                $("#questionSubmit").val("質問を中断して結果を見る");
+                $("#questionSubmit").show();
+                $("#questionForm").show();
+                $("#questionReturn").show();
+                beforeQuestions.pop();
+            }
 
-        let question_index = question_id_array.indexOf(startQuestion);
-        let remain_question_number = question_remain_array[question_index] + 1;
-        var question_parcent = changeQuestionPercent(questionNum-1, remain_question_number);
-        $("#question-parcent").text(question_parcent + "%");
-        $("#questionNum").hide();
-        $("#questionNum").text(questionNum + "問目");
-        $("#questionNum").fadeIn(1000);
-        $("#question_content").hide();
-        $("#question_content").text(question_content_array[question_index]);
-        $("#question_content").fadeIn(1000);
+            question_index = question_id_array.indexOf(startQuestion);
+            remain_question_number = question_remain_array[question_index] + 1;
+            var question_parcent = changeQuestionPercent(questionNum - 1, remain_question_number);
+            $("#question-parcent").text(question_parcent + "%");
+            $("#questionNum").hide();
+            $("#questionNum").text(questionNum + "問目");
+            $("#questionNum").fadeIn(1000);
+            $("#question_content").hide();
+            $("#question_content").text(question_content_array[question_index]);
+            $("#question_content").fadeIn(1000);
 
+            var option_contents = [];
+            var option_ids = [];
+            var option_next_question_ids = [];
+            var option_question_ids = [];
+            for (var i = 0; i < option_question_id_array.length; i++) {
+                if (option_question_id_array[i] == startQuestion) {
+                    option_contents.push(option_content_array[i]);
+                    option_ids.push(option_id_array[i]);
+                    option_next_question_ids.push(option_next_question_id_array[i]);
+                    option_question_ids.push(option_question_id_array[i]);
+                }
+            }
 
-
-        var option_contents = [];
-        var option_ids = [];
-        var option_next_question_ids = [];
-        var option_question_ids = [];
-        for (var i = 0; i < option_question_id_array.length; i++){
-            if (option_question_id_array[i] == startQuestion ) {
-                option_contents.push(option_content_array[i]);
-                option_ids.push(option_id_array[i]);
-                option_next_question_ids.push(option_next_question_id_array[i]);
-                option_question_ids.push(option_question_id_array[i]);
+            for (var i = 0; i < option_ids.length; i++) {
+                var id = "#option" + i;
+                $(id).text(option_contents[i]);
+                $(id).attr('name', option_ids[i]);
+                $(id).attr('data-next', option_next_question_ids[i]);
+                $(id).attr('data-before', option_question_ids[i]);
+                $(id).fadeIn(1000);
+                $(id).css('display', 'inline-block');
             }
         }
-
-        for (var i = 0; i < option_ids.length; i++){
-            var id = "#option" + i;
-            $(id).text(option_contents[i]);
-            $(id).attr('name',option_ids[i]);
-            $(id).attr('data-next', option_next_question_ids[i]);
-            $(id).attr('data-before', option_question_ids[i]);
-            $(id).fadeIn(1000);
-            $(id).css('display', 'inline-block');
-        }
-
+        
         // Question Chart
         if (document.getElementById("qChart") != null) {
             var ctx_qchart = document.getElementById("qChart");
