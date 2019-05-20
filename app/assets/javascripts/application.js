@@ -268,6 +268,10 @@ jQuery(function ($) {
                 }
             }
 
+            option_ids = option_ids.filter(function (v, i, s) {
+                return s.indexOf(v) === i;
+            });
+
             for (var i = 0; i < option_ids.length; i++) {
                 var id = "#option" + i;
                 $(id).text(option_contents[i]);
@@ -358,6 +362,11 @@ jQuery(function ($) {
                     option_question_ids.push(option_question_id_array[i]);
                 }
             }
+
+            option_ids = option_ids.filter(function (v, i, s) {
+                return s.indexOf(v) === i;
+            });
+
             for (var i = 0; i < option_ids.length; i++) {
                 var id = "#option" + i;
                 $(id).text(option_contents[i]);
@@ -368,7 +377,6 @@ jQuery(function ($) {
                 $(id).css('display', 'inline-block');
             }
 
-            $("#test").text(option_ids);
 
             $("#selectedOptions").val(optionArray);
             $("#selectedOptions").hide();
@@ -421,6 +429,10 @@ jQuery(function ($) {
                 }
             }
 
+            option_ids = option_ids.filter(function (v, i, s) {
+                return s.indexOf(v) === i;
+            });
+            
             for (var i = 0; i < option_ids.length; i++) {
                 var id = "#option" + i;
                 $(id).text(option_contents[i]);
