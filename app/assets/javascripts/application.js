@@ -278,7 +278,7 @@ jQuery(function ($) {
                 $(id).css('display', 'inline-block');
             }
         }
-        
+
         // Question Chart
         if (document.getElementById("qChart") != null) {
             var ctx_qchart = document.getElementById("qChart");
@@ -343,6 +343,9 @@ jQuery(function ($) {
             var option_ids = [];
             var option_next_question_ids = [];
             var option_question_ids = [];
+
+
+
             for (var i = 0; i < 10; i++) {
                 var id = "#option" + i;
                 $(id).hide();
@@ -364,6 +367,8 @@ jQuery(function ($) {
                 $(id).fadeIn(1000);
                 $(id).css('display', 'inline-block');
             }
+
+            $("#test").text(option_ids);
 
             $("#selectedOptions").val(optionArray);
             $("#selectedOptions").hide();
