@@ -15,15 +15,22 @@
                 <div class="collapse navbar-collapse" id="navmenu1">
                   <ul class="navbar-nav" style="font-weight:bold">
                     <li  class="nav-item" style="margin-left:50px;"><a class="nav-item nav-link active" href="/">ホーム</a></li>
-                    <% if @user_id %>
-                      <li  class="nav-item" style="margin-left:50px;">
-                      <%= link_to "結果",
-                      {
-                        :controller => "results",
-                        :action => "index",
-                        :category => "laptop",
-                      },
-                    :class => "nav-item nav-link active"%>
+                    <% if @result_displayed %>
+                      <li  class="nav-item dropdown" style="margin-left:50px;">
+                      <a href="#" class="text-white nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        結果
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <% @categories.each do |category,name| %>
+                          <%= link_to name,
+                            {
+                            :controller => "results",
+                            :action => "index",
+                            :category => category,
+                            }, :class=> "dropdown-item"
+                          %>
+                        <% end %>
+                      </div>
                     </li>
                     <% end %>
                     <li  class="nav-item" style="margin-left:50px;"><a class="nav-item nav-link active" href="/articles/">記事</a></li>
@@ -39,7 +46,18 @@
 <div class="container">
   <div class="row row-1">
     <div class="col-md-12">
+<<<<<<< HEAD
       <h1>あなたの特徴とおすすめの商品を紹介します</h1>
+=======
+      <h1 class="mt-4">あなたの特徴とおすすめの商品を紹介します</h1>
+      <% if @continue_displayed %>
+      <h2 class="mt-4">最後まで回答に答える</h2>
+      <p>質問が途中で終わっております。</p>
+      <p>以下のリンクより再回答することができます。</p>
+      <p>最後まで回答することで、正確な結果を得ることができます。</p>
+      <a href="/questions/category/<%= @category %>" class="btn btn-primary text-d-none mt-3">再回答する</a>
+      <% end %>
+>>>>>>> cbc79ae54ccc1f3fd0d94f2c527cf07247547a12
     </div>
   </div>
   <% if @question_finish == "false" %>

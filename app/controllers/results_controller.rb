@@ -8,6 +8,29 @@ class ResultsController < ApplicationController
 		@user_id = cookies[:user_id]
 		@category = params[:category]
 		@before_question_id_array = cookies[:before_questions].presence || 0
+		@result_displayed = false
+		@continue_displayed = false
+		@categories = {}
+
+		# 結果の表示判定
+		if (Result.where(user_id: @user_id).count > 0)
+			@result_displayed = true
+			category_array = Result.where(user_id:@user_id).pluck(:category).uniq
+			category_array.each do |category|
+				name = Category.find_by(category: category).name
+				@categories[category] = name
+			end
+		end
+
+		# 質問を続けるの表示判定
+		if @before_question_id_array != 0
+			@before_question_id_array = @before_question_id_array.split(",")
+			index = @before_question_id_array.length - 1
+			this_category = @before_question_id_array[index]
+			if this_category == @category
+				@continue_displayed = true
+			end
+		end
 
 		# @question_finish = params[:question_finish]
 
@@ -104,9 +127,10 @@ class ResultsController < ApplicationController
 		end
 
 		# Userが選択した結果を元にoption_idを抽出
-		@times = @array_option_id = Result.where(user_id: @user_id).where(category: @category).order(times: "DESC").first.times
-		@array_option_id = Result.where(user_id: @user_id).where(category: @category).where(times: @times).where(result: true).pluck(:option_id)
-
+		if Result.where(user_id: @user_id).where(category: @category).all.count > 0
+			@times = Result.where(user_id: @user_id).where(category: @category).order(times: "DESC").first.times
+			@array_option_id = Result.where(user_id: @user_id).where(category: @category).where(times: @times).where(result: true).pluck(:option_id)
+		end
 		# Userが選択した結果のoption_idを元にMatch条件を抽出
 		@array_match_condition = Match.where(category: @category).where(option_id: @array_option_id)
 

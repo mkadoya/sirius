@@ -9,9 +9,16 @@ class ArticlesController < ApplicationController
     @articles = Article.order(id: :desc).all
     @result_displayed = false
     @article_howtouse = Article.find_by(id:1)
+    @categories = {}
+
     # 結果の表示判定
     if (Result.where(user_id: @user_id).count > 0)
       @result_displayed = true
+      category_array = Result.where(user_id:@user_id).pluck(:category).uniq
+      category_array.each do |category|
+        name = Category.find_by(category: category).name
+        @categories[category] = name
+      end
     end
   end
 
@@ -20,9 +27,16 @@ class ArticlesController < ApplicationController
   def show
     @user_id = cookies[:user_id].presence || 0
     @articles = Article.order(id: :desc).first(10)
+    @result_displayed = false
+    @categories = {}
     # 結果の表示判定
     if (Result.where(user_id: @user_id).count > 0)
       @result_displayed = true
+      category_array = Result.where(user_id:@user_id).pluck(:category).uniq
+      category_array.each do |category|
+        name = Category.find_by(category: category).name
+        @categories[category] = name
+      end
     end
   end
 

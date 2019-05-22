@@ -16,15 +16,22 @@
                   <ul class="navbar-nav" style="font-weight:bold">
                     <li  class="nav-item" style="margin-left:50px;"><a class="nav-item nav-link active" href="/">ホーム</a></li>
                     <% if @result_displayed %>
-                      <li  class="nav-item" style="margin-left:50px;">
-                      <%= link_to "結果",
-                      {
-                        :controller => "results",
-                        :action => "index",
-                        :category => "laptop",
-                      },
-                    :class => "nav-item nav-link active"%>
-                    </li>
+                      <li  class="nav-item dropdown" style="margin-left:50px;">
+                        <a href="#" class="text-white nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        結果
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <% @categories.each do |category,name| %>
+                            <%= link_to name,
+                              {
+                              :controller => "results",
+                              :action => "index",
+                              :category => category,
+                              }, :class=> "dropdown-item"
+                            %>
+                          <% end %>
+                        </div>
+                      </li>
                     <% end %>
                     <li  class="nav-item" style="margin-left:50px;"><a class="nav-item nav-link active" href="/articles/">記事</a></li>
                   </ul>
