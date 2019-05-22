@@ -130,12 +130,12 @@ ActiveRecord::Schema.define(version: 2019_05_18_162533) do
     t.text "sirial"
     t.text "affiliate"
     t.text "image"
-    t.string "category"
     t.integer "volume"
     t.integer "gpu_score"
     t.boolean "windows"
     t.boolean "mac"
     t.boolean "chrome"
+    t.string "category"
   end
 
   create_table "matches", force: :cascade do |t|
