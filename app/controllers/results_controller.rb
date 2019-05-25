@@ -241,7 +241,7 @@ class ResultsController < ApplicationController
 			# Recommendation 1stのclusterを取得
 			@array_rec_cluster_add = @actrec_recommend_item.pluck(:"#{cluster_column}").uniq
 			# Recommendation 1stのclusterと同じclusterのitem_idを取得、.shuffleで順序をRandomに変える
-			@array_item_add = @actrec_remain_item.where("#{cluster_column}": @array_rec_cluster_add).pluck(:item_id).shuffle
+			@array_item_add = @actrec_remain_item.where("#{cluster_column}": @array_rec_cluster_add).order(price: "ASC").pluck(:item_id)
 			# Recommendation 1stのおすすめ品ListにClusterによるおすすめ品をくっつける
 			@array_sorted_item.concat(@array_item_add)
 		end
@@ -251,7 +251,7 @@ class ResultsController < ApplicationController
 		# array_sorted_itemのitem_idの配列を@array_item_id_remainから引いて、残りのitem_idの配列を作成
 		@array_item_id_remain = @actrec_all_item.pluck(:item_id) - @array_sorted_item
 		# 残りのitem_idの配列をuniqにしてRandomにする
-		@array_item_add = @array_item_id_remain.uniq.shuffle
+		@array_item_add = @array_item_id_remain.uniq
 		# おすすめ順に並んだarray_itemを作る
 		@array_sorted_item.concat(@array_item_add)
 # ----------------------------------------------------------------------------------------------------------------

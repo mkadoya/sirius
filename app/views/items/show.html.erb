@@ -61,10 +61,10 @@
             <small style="font-size:0.6em;">※未回答の結果は表示されません。</small>
             </h3>
             <div class="row row-1 ml-2">
-                <div class="blue-box"></div><p>おすすめのスペック</p>
+                <div class="blue-box"></div><p>商品のスペック</p>
             </div>
             <div class="row row-1 ml-2">
-                <div class="orange-box"></div><p>商品のスペック</p>
+                <div class="orange-box"></div><p>おすすめのスペック</p>
             </div>
 						<input id='c_1' name='c_1' type='hidden' value='<%= @hash_column[@array_fundamental[0]]["frendly_name"]%>'>
 	          <input id='c_2' name='c_2' type='hidden' value='<%= @hash_column[@array_fundamental[1]]["frendly_name"]%>'>
@@ -76,19 +76,34 @@
 	          <input id='c_v_3' name='c_v_3' type='hidden' value='<%= @hash_item_star[@array_fundamental[2]]%>'>
 	          <input id='c_v_4' name='c_v_4' type='hidden' value='<%= @hash_item_star[@array_fundamental[3]]%>'>
 	          <input id='c_v_5' name='c_v_5' type='hidden' value='<%= @hash_item_star[@array_fundamental[4]]%>'>
+						<input id='c_v_6' name='c_v_6' type='hidden' value='<%= @hash_rec_star[@array_fundamental[0]]%>'>
+	          <input id='c_v_7' name='c_v_7' type='hidden' value='<%= @hash_rec_star[@array_fundamental[1]]%>'>
+	          <input id='c_v_8' name='c_v_8' type='hidden' value='<%= @hash_rec_star[@array_fundamental[2]]%>'>
+	          <input id='c_v_9' name='c_v_9' type='hidden' value='<%= @hash_rec_star[@array_fundamental[3]]%>'>
+	          <input id='c_v_10' name='c_v_10' type='hidden' value='<%= @hash_rec_star[@array_fundamental[4]]%>'>
 						<canvas id="itemChart"></canvas>
             <table class="table table-hover table-condensed specm-table">
                 <thead>
                     <tr>
                         <th>項目</th>
-                        <th>おすすめ</th>
                         <th>商品</th>
+                        <th>おすすめの値</th>
                     </tr>
                 </thead>
                 <tbody>
 									<% for num in 0..(@num_fundamental - 1) do %>
                     <tr>
 												<td><%=@hash_column[@array_fundamental[num]]["frendly_name"]%></td>
+
+												<% if @item[@array_fundamental[num]] == true %>
+													<td>あり</td>
+												<% elsif @item[@array_fundamental[num]] == false %>
+													<td>なし</td>
+												<% elsif @item[@array_fundamental[num]] %>
+													<td><%= @item[@array_fundamental[num]] %> <%=@hash_column[@array_fundamental[num]]["unit"]%></td>
+												<% else %>
+													<td>-</td>
+												<% end %>
 
 												<% if @array_na_column.include?(@array_fundamental[num]) == true %>
 													<% if @hash_rec_avrg[@array_fundamental[num]].round >= 0.5 %>
@@ -98,16 +113,6 @@
 													<% end %>
 												<% elsif @array_na_column.include?(@array_fundamental[num]) == false %>
 													<td><%= @hash_rec_avrg[@array_fundamental[num]] %> <%=@hash_column[@array_fundamental[num]]["unit"]%></td>
-												<% else %>
-													<td>-</td>
-												<% end %>
-
-												<% if @item[@array_fundamental[num]] == true %>
-													<td>あり</td>
-												<% elsif @item[@array_fundamental[num]] == false %>
-													<td>なし</td>
-												<% elsif @item[@array_fundamental[num]] %>
-													<td><%= @item[@array_fundamental[num]] %> <%=@hash_column[@array_fundamental[num]]["unit"]%></td>
 												<% else %>
 													<td>-</td>
 												<% end %>
@@ -211,5 +216,55 @@
             </div>
         </div>
     </div>
-</div>
+		<h3>あなたへのおすすめ</h3>
+		<div class="row">
+	    <% for num in 0..(@item_display_num-1) do %>
+	      <div class="col-lg-2 col-md-4 col-sm-6 bg-white col-0 border row-1 items">
+	        <div class="item-ranking bg-darkorange">
+	          <%= "#" + "#{num+1}" %>
+	        </div>
+	        <div class="item-image">
+	          <%= link_to image_tag("#{@array_item[num].image}", class: "img-fluid"),
+	          {
+	            :controller => "items",
+	            :action => "show",
+	            :item_id => @array_item[num].item_id,
+	            :category => @category,
+	            :series => @array_item[num].series,
+	          } %>
+	        </div>
+	        <div class="item-explain">
+	          <p><span>￥<%= @array_item[num].price %></span></p>
+	          <p>
+						<% for num_rec in 0..(@num_recommend - 1) do %>
+								<% if @array_item[num][@hash_rec_star.keys[num_rec]] == true %>
+									<%= @hash_column[@hash_rec_star.keys[num_rec]]["frendly_name"] %>:あり
+								<% elsif @array_item[num][@hash_rec_star.keys[num_rec]] == false %>
+									<%= @hash_column[@hash_rec_star.keys[num_rec]]["frendly_name"] %>:なし
+								<% elsif @array_item[num][@hash_rec_star.keys[num_rec]] %>
+									<%= @hash_column[@hash_rec_star.keys[num_rec]]["frendly_name"] %>:<%= @array_item[num][@hash_rec_star.keys[num_rec]] %><%=@hash_column[@hash_rec_star.keys[num_rec]]["unit"]%>
+								<% else %>
+									<%= @hash_column[@hash_rec_star.keys[num_rec]]["frendly_name"] %>:-
+								<% end %>
+							<% end %>
+						<br>
+	          <%= link_to "詳細を見る",
+	            {
+	              :controller => "items",
+	              :action => "show",
+	              :item_id => @array_item[num].item_id,
+	              :category => @category,
+	              :series => @array_item[num].series,
+	            }
+	          %>
+	        </div>
+	      </div>
+	    <% end %>
+	  </div>
+		<div class="row">
+			<div class="col-md-12">
+					<pre><p class="readMoreBtn w-75 text-center text-dark mx-auto"><i class="fas fa-sort-down" aria-hidden="true"></i>　もっと見る</p></pre>
+			</div>
+		</div>
+	</div>
 </main>

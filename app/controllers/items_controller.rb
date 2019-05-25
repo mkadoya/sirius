@@ -1,5 +1,9 @@
 class ItemsController < ApplicationController
 	def show
+		# Debug用
+		# [要削除]実行時間測定
+		start_time = Time.now
+
 		# User-id, category, Question_finishをquestion_controllerから引き受ける
 		@user_id = cookies[:user_id].presence || 0
 		@category = params[:category]
@@ -10,12 +14,12 @@ class ItemsController < ApplicationController
 
 		# 結果の表示判定
 		if (Result.where(user_id: @user_id).count > 0)
-		@result_displayed = true
-		category_array = Result.where(user_id:@user_id).pluck(:category).uniq
-		category_array.each do |category|
-			name = Category.find_by(category: category).name
-			@categories[category] = name
-		end
+			@result_displayed = true
+			category_array = Result.where(user_id:@user_id).pluck(:category).uniq
+			category_array.each do |category|
+				name = Category.find_by(category: category).name
+				@categories[category] = name
+			end
 		end
 
 
@@ -69,11 +73,16 @@ class ItemsController < ApplicationController
 			@actrec_all_item = Pc.all
 		end
 
+		#アイテムの表示数：偶数のみ可能
+		@item_display_num = @actrec_all_item.pluck(:series).uniq.count / 2
 
 # ------ 今後使う配列、辞書型を初期化 -----------------------------------------------------------------------
 		# 配列の初期化
 		@array_match_condition = Array.new
 		@array_string_cluster_column_sort = Array.new
+		@array_item = Array.new
+		@array_item_series = Array.new
+		@array_filter_column = Array.new
 
 		# 辞書型の初期化
 		@hash_all_avrg = Hash.new
@@ -130,12 +139,18 @@ class ItemsController < ApplicationController
 		end
 
 		# 各clusterの分類数が多い順にclusterのcolumn name arrayを作る
-		@hash_string_cluster_column.sort{|(k1, v1), (k2, v2)| v2 <=> v1}.to_h.each_key do |key|
+		@hash_string_cluster_column.sort{|(key1, value1), (key2, value2)| value2 <=> value1}.to_h.each_key do |key|
 			@array_string_cluster_column_sort << key
 		end
 
+		# User-idなしパターン解消 (回答を一回もしていないUserが、Homeや記事から商品に飛んだ時用..どのUser-id入れよう。。。とりあえず一番直近に答えたuser-id？
+		# 本来的には、表示のhtmlの側を変えないといけないな。。
+		if Result.where(user_id: @user_id).empty?
+			@user_id = Result.pluck(:user_id).last
+		end
+
 		# Userが選択した結果を元にoption_idを抽出
-		@times = @array_option_id = Result.where(user_id: @user_id).where(category: @category).order(times: "DESC").first.times
+		@times = Result.where(user_id: @user_id).where(category: @category).order(times: "DESC").first.times
 		@array_option_id = Result.where(user_id: @user_id).where(category: @category).where(times: @times).where(result: true).pluck(:option_id)
 
 		# Userが選択した結果のoption_idを元にMatch条件を抽出
@@ -155,7 +170,6 @@ class ItemsController < ApplicationController
 			# Recommendation 1stのActive Recordを作成
 			@actrec_recommend_item = @actrec_recommend_item.where("#{record_match.item_clmn} >= ?", record_match.min).where("#{record_match.item_clmn} <= ?", record_match.max)
 		end
-
 # ----------------------------------------------------------------------------------------------------------------
 
 
@@ -228,6 +242,89 @@ class ItemsController < ApplicationController
 			@actrec_recommend_item = @actrec_all_item.where("#{@array_string_cluster_column_sort.first}": @hash_score.keys.first(@num_recommend_cluster))
 		end
 # ----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ------ Recommendation 1stを価格順にSort -----------------------------------------------------------------------
+		# Recommendation 1stのItem idの配列を作成
+		@array_sorted_item = @actrec_recommend_item.order(price: "ASC").pluck(:item_id).uniq
+# ----------------------------------------------------------------------------------------------------------------
+
+# ------ Recommendation by cluster : Recommendation 1stと同じclusterから出す -----------------------------------------------------------------------
+		# clusterのcolumn数分だけ同一ClusterによるRecommend挿入を実施
+		@array_string_cluster_column_sort.each do |cluster_column|
+			# array_sorted_itemのitem_idの配列を全体から引いて、残りのitem_idの配列を作成
+			@array_item_id_remain = @actrec_all_item.pluck(:item_id) - @array_sorted_item
+			# All itemからarray_sorted_itemのitem_idを削除したActive Recordを取得
+			@actrec_remain_item = @actrec_all_item.where(item_id: @array_item_id_remain)
+			# Recommendation 1stのclusterを取得
+			@array_rec_cluster_add = @actrec_recommend_item.pluck(:"#{cluster_column}").uniq
+			# Recommendation 1stのclusterと同じclusterのitem_idを取得、.shuffleで順序をRandomに変える
+			@array_item_add = @actrec_remain_item.where("#{cluster_column}": @array_rec_cluster_add).order(price: "ASC").pluck(:item_id)
+			# Recommendation 1stのおすすめ品ListにClusterによるおすすめ品をくっつける
+			@array_sorted_item.concat(@array_item_add)
+		end
+
+
+		# Recommendation 残り : 残った商品をRandomで表示する
+		# array_sorted_itemのitem_idの配列を@array_item_id_remainから引いて、残りのitem_idの配列を作成
+		@array_item_id_remain = @actrec_all_item.pluck(:item_id) - @array_sorted_item
+		# 残りのitem_idの配列をuniqにしてRandomにする
+		@array_item_add = @array_item_id_remain.uniq
+		# おすすめ順に並んだarray_itemを作る
+		@array_sorted_item.concat(@array_item_add)
+# ----------------------------------------------------------------------------------------------------------------
+
+
+# ------ Recommendation ALL : Recommendation Itemの配列を作る -----------------------------------------------------------------------
+		# おすすめ品の情報が全て記載されているArrayを作成
+		@array_sorted_item.each do |item_id|
+			if @array_item_series.exclude?(@actrec_all_item.find_by(item_id: item_id).series)
+				# おすすめ品情報をおすすめ順に@array_itemに格納する
+				@array_item << @actrec_all_item.find_by(item_id: item_id)
+				# @array_itemに加えたitemのseries情報を@array_item_seriesに格納
+				@array_item_series << @actrec_all_item.find_by(item_id: item_id).series
+			end
+		end
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+
+
+
 
 
 # ------ 全アイテムの平均値、Recommendation 1stの平均値算出 -----------------------------------------------------------------------
@@ -321,16 +418,13 @@ class ItemsController < ApplicationController
 		end
 # ----------------------------------------------------------------------------------------------------------------
 
-		# 特殊項目の削除
-		# @array_column_remove_star.each do |column|
-		# 	@hash_rec_star.delete(column)
-		# 	@hash_item_star.delete(column)
-		# end
-
 		# 順位が小さい順にSort
 		@hash_rec_star = Hash[@hash_rec_star.sort_by{ |_, v| -v }]
 		@hash_item_star = Hash[@hash_item_star.sort_by{ |_, v| -v }]
 # ----------------------------------------------------------------------------------------------------------------
+
+		# 実行時間測定
+		@exec_time = Time.now - start_time
 
 	end
 end
