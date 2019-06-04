@@ -323,13 +323,19 @@ require 'csv'
 # end
 
 # 以下はCategoryを呼び出すパターン
-CSV.foreach('db/Category.csv', headers: true) do |row|
-  Category.create(
-     :category_id => row[0],
-     :category => row[1],
-     :name => row[2],
-)
-end
+# CSV.foreach('db/Category.csv', headers: true) do |row|
+#   Category.create(
+#      :category_id => row[0],
+#      :category => row[1],
+#      :name => row[2],
+# )
+# end
 
 #以下はActive Admin用
 # AdminUser.create!(email: 'mkadoya111@gmail.com', password: 'pa55w0rd!', password_confirmation: 'pa55w0rd!') if Rails.env.development?
+
+#以下はAdmin用
+User.find_or_create_by(id: 1) do |user|
+  user.email = 'admin@sirius-best.com'
+  user.password = 'pa55w0rd!'
+end

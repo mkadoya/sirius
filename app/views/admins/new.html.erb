@@ -1,0 +1,66 @@
+<div class="container-fluid">
+
+    <h1>新規作成 (<%=@category%>)</h1>
+    <%= form_tag({
+        :controller => 'admins',
+        :action => 'create',
+    }, {:method => :post,:class => "question-group"}) do %>
+
+    <div class="row">
+        <div class="col-md-10">
+        <h2>質問</h2>
+        <div class="input-group">
+            <div class="input-group-prepend"><div class="input-group-text">内容</div></div>
+            <input name="question_id" type="hidden" value="">
+            <%= text_field_tag :question_content,"", {class: "form-control"} %>
+        </div>
+        <div class="input-group">
+            <div class="input-group-prepend"><div class="input-group-text">残り質問数</div></div>
+            <%= text_field_tag :remain_question_num,"", {class: "form-control"} %>
+        </div>
+        <h2>選択肢とマッチ</h2>
+        <input name="new_option_id" id="new_option_id" type="hidden" value="<%= @new_option_id %>">
+        <input name="new_question" id="new_question" type="hidden" value="1">
+        <input name="category" class="category" type="hidden" value="<%= @category %>">
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input name="option_id[]" class="option_id" type="hidden" value="<%= @new_option_id %>">
+                    <div class="input-group-prepend"><div class="input-group-text">内容</div></div>
+                    <%= text_field_tag "option_content[]","",{class: "form-control"} %>
+                    <div class="input-group-prepend"><div class="input-group-text">Next</div></div>
+                    <%= text_field_tag "next_question_id[]","", {class: "form-control"} %>
+                    <div class="input-group-append"><div class="input-group-text btn btn-danger delete-option">ー</div></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input name="match_option_id[]" class="match_option_id" type="hidden" value="<%= @new_option_id %>">
+                    <div class="input-group-prepend"><div class="input-group-text">Column</div></div>
+                    <%= text_field_tag "match_column[]", "",{class: "form-control"} %>
+                    <div class="input-group-prepend"><div class="input-group-text">Max</div></div>
+                    <%= text_field_tag "match_max[]", "",{class: "form-control"} %>
+                    <div class="input-group-prepend"><div class="input-group-text">Min</div></div>
+                    <%= text_field_tag "match_min[]","",{class: "form-control"} %>
+                    <div class="input-group-append"><div class="input-group-text btn btn-danger delete-match">ー</div></div>
+                </div>
+                <div class="row"><button type="button" class=" mx-auto btn btn-outline-secondary rounded-circle p-0 mt-2 add-match" style="width:2rem;height:2rem;">＋</button></div>
+            </div>
+        </div>
+        <div class="row"><button type="button" class=" mx-auto btn btn-primary rounded-circle p-0 mt-2 add-option" style="width:2.5rem;height:2.5rem;font-size:20px;">＋</button></div>
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <%= submit_tag "Submit", {:class => "btn btn-primary"} %>
+            </div>
+        </div>
+        <% end %>
+        </div>
+        <div class="col-md-2">
+        <ul>
+            <% @columns.each do |column| %>
+                <li><%= column.column_name %> : <%= column.frendly_name %></li>
+            <% end %>
+            </ul>
+        </div>
+    </div>
+</div>

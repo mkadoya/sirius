@@ -27,6 +27,12 @@
   </head>
 
   <body>
+    <% if notice %>
+      <p class="notice"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert"><%= alert %></p>
+    <% end %>
     <%= yield %>
     <footer>
       <div class="container-fluid bg-lightblue text-light">

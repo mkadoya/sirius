@@ -432,7 +432,7 @@ jQuery(function ($) {
             option_ids = option_ids.filter(function (v, i, s) {
                 return s.indexOf(v) === i;
             });
-            
+
             for (var i = 0; i < option_ids.length; i++) {
                 var id = "#option" + i;
                 $(id).text(option_contents[i]);
@@ -627,4 +627,89 @@ jQuery(function ($) {
             id: 'my_editor'
         }
     });
+
+    if ($("#new_option_id").val() != null) {
+        let new_option_id = Number($("#new_option_id").val());
+
+        $(document).on("click", ".question-group-top", function () {
+            $(this).next('.question-group-content').slideToggle();
+            $('.question-group-content').not($(this).next('.question-group-content')).slideUp();
+        });
+
+        $('form').submit(function () {
+            return confirm("本当に実行しますか？");
+        });
+
+        $(document).on("click", ".delete-match", function () {
+            $(this).parent().parent().remove();
+        });
+
+        $(document).on("click",".delete-option", function () {
+            $(this).parent().parent().parent().parent().remove();
+        });
+
+        $(document).on("click", ".add-match", function () {
+            option_id = $(this).parent().prev().children(".match_option_id").val();
+            $(this).parent().prev().append(
+                '<div class="input-group">' +
+                '<input name="match_option_id[]" class="match_option_id" type="hidden" value="' +
+                option_id +
+                '">' +
+                '<input name="match_id[]" class="match_id" type="hidden" value="0">' +
+                '<div class="input-group-prepend"><div class="input-group-text">Column</div></div>' +
+                '<input type="text" name="match_column[]" id="option_column_" value="" class="form-control" />' +
+                '<div class="input-group-prepend"><div class="input-group-text">Max</div></div>' +
+                '<input type="text" name="match_max[]" id="option_max_" value="" class="form-control" />' +
+                '<div class="input-group-prepend"><div class="input-group-text">Min</div></div>' +
+                '<input type="text" name="match_min[]" id="option_min_" value="" class="form-control" />' +
+                '<div class="input-group-append"><div class="input-group-text btn btn-danger delete-match">ー</div></div>' +
+                '</div>'
+            );
+        });
+
+
+        $(document).on("click", ".add-option", function () {
+            if ($("#new_question").val() == 1) {
+                new_option_id += 1;
+            }
+            $(this).parent().prev().append(
+                '<div class="row mt-3">' +
+                    '<div class="col-md-6">' +
+                        '<div class="input-group">' +
+                            '<input name="option_id[]" class="option_id" type="hidden" value="' +
+                            new_option_id +
+                            '">' +
+                            '<div class="input-group-prepend"><div class="input-group-text">' +
+                            new_option_id +
+                            '</div></div>' +
+                            '<input type="text" name="option_content[]" id="option_content_" value="" class="form-control" />' +
+                            '<div class="input-group-prepend"><div class="input-group-text">Next</div></div>' +
+                            '<input type="text" name="next_question_id[]" id="next_question_id_" value="" class="form-control" />' +
+                            '<div class="input-group-append"><div class="input-group-text btn btn-danger delete-option">ー</div></div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="col-md-6">' +
+                        '<div class="input-group">' +
+                            '<input name="match_option_id[]" class="match_option_id" type="hidden" value="' +
+                            new_option_id +
+                            '">' +
+                            '<input name="match_id[]" class="match_id" type="hidden" value="0">' +
+                            '<div class="input-group-prepend"><div class="input-group-text">Column</div></div>' +
+                            '<input type="text" name="match_column[]" id="option_column_" value="" class="form-control" />' +
+                            '<div class="input-group-prepend"><div class="input-group-text">Max</div></div>' +
+                            '<input type="text" name="match_max[]" id="option_max_" value="" class="form-control" />' +
+                            '<div class="input-group-prepend"><div class="input-group-text">Min</div></div>' +
+                            '<input type="text" name="match_min[]" id="option_min_" value="" class="form-control" />' +
+                            '<div class="input-group-append"><div class="input-group-text btn btn-danger delete-match">ー</div></div>' +
+                        '</div>' +
+                        '<div class="row"><button type="button" class=" mx-auto btn btn-outline-secondary rounded-circle p-0 mt-2 add-match" style="width:2rem;height:2rem;">＋</button></div>' +
+                    '</div>' +
+                '</div>'
+            );
+            new_option_id += 1;
+            if ($("#new_question").val() == 1) {
+                new_option_id -= 1;
+            }
+        });
+    }
 });
