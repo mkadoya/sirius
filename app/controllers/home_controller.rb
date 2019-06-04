@@ -30,4 +30,8 @@ class HomeController < ApplicationController
 
 
   end
+
+  def movie
+    
+  end
 end
