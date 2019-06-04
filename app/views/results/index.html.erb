@@ -56,7 +56,16 @@
       <% end %>
     </div>
   </div>
-
+  <% if @question_finish == "false" %>
+  <div class="row row-1">
+    <div class="col-md-12">
+      <h2>質問に答えよう</h2>
+      <p>質問の結果に応じて、あなたに最適なアイテムを紹介します</p>
+      <p>ぜひ最後まで答えてみてください</p>
+      <%= link_to "質問に戻る", :back, :class => "btn btn-primary" %>
+    </div>
+  </div>
+  <% end %>
   <div class="row result-contents">
     <div class="col-md-12">
       <h2>あなたの特徴と重要な観点</h2>
@@ -84,12 +93,12 @@
         <div class="container-fluid">
           <div class="row row-1">
             <div class="col-lg-8 offset-lg-2 ">
-              <div class="blue-box"></div><p class="text-left">平均値</p>
+              <div class="blue-box"></div><p class="text-left">あなたのおすすめ</p>
             </div>
           </div>
           <div class="row row-1">
               <div class="col-lg-8 offset-lg-2 ">
-                <div class="orange-box"></div><p class="text-left">あなたのおすすめ</p>
+                <div class="orange-box"></div><p class="text-left">平均値</p>
               </div>
           </div>
           <div class="row">

@@ -110,15 +110,15 @@ jQuery(function ($) {
                 datasets: [{
                     label: 'Average',
                     data: [5, 5, 5, 5, 5],
-                    borderColor: 'RGBA(66, 133, 244, 1)',
+                    borderColor: 'RGBA(255, 204, 102, 1)',
                     borderWidth: 1,
-                    backgroundColor: 'RGBA(66, 133, 244, 0)',
+                    backgroundColor: 'RGBA(255, 204, 102, 0)',
                 }, {
                     label: 'Guestさん',
                     data: [c_v_1, c_v_2, c_v_3, c_v_4, c_v_5],
-                    borderColor: 'RGBA(255, 136, 51, 1)',
-                    borderWidth: 3,
-                    backgroundColor: 'RGBA(255, 136, 51, 0.4)',
+                    borderColor: 'RGBA(66, 133, 244, 1)',
+                    borderWidth: 2,
+                    backgroundColor: 'RGBA(66, 133, 244, 0.3)',
                 }]
             },
             options: {
@@ -155,23 +155,29 @@ jQuery(function ($) {
         var c_v_3 = $('#c_v_3').val();
         var c_v_4 = $('#c_v_4').val();
         var c_v_5 = $('#c_v_5').val();
+				var c_v_6 = $('#c_v_6').val();
+        var c_v_7 = $('#c_v_7').val();
+        var c_v_8 = $('#c_v_8').val();
+        var c_v_9 = $('#c_v_9').val();
+        var c_v_10 = $('#c_v_10').val();
         var ctx_ichart = document.getElementById("itemChart");
         var myRadarIChart = new Chart(ctx_ichart, {
             type: 'radar',
             data: {
                 labels: [c_1, c_2, c_3, c_4, c_5],
                 datasets: [{
-                    label: 'Average',
-                    data: [5, 5, 5, 5, 5],
-                    borderColor: 'RGBA(66, 133, 244, 1)',
-                    borderWidth: 1,
-                    backgroundColor: 'RGBA(66, 133, 244, 0)',
-                }, {
-                    label: 'Guestさん',
-                    data: [c_v_1, c_v_2, c_v_3, c_v_4, c_v_5],
-                    borderColor: 'RGBA(255, 136, 51, 1)',
-                    borderWidth: 3,
-                    backgroundColor: 'RGBA(255, 136, 51, 0.4)',
+                  data: [c_v_6, c_v_7, c_v_8, c_v_9, c_v_10],
+                  borderColor: 'RGBA(255, 204, 102, 1)',
+                  borderWidth: 1,
+                  backgroundColor: 'RGBA(255, 204, 102, 0)',
+                },
+                {
+                  label: 'Average',
+                  data: [c_v_1, c_v_2, c_v_3, c_v_4, c_v_5],
+                  borderColor: 'RGBA(66, 133, 244, 1)',
+                  borderWidth: 2,
+                  backgroundColor: 'rgba(66, 133, 244, 0.3)',
+                  label: 'Guestさん',
                 }]
             },
             options: {

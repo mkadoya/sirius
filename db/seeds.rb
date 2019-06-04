@@ -43,19 +43,19 @@ require 'csv'
 # end
 
 # 以下はColumnを呼び出すパターン
-# CSV.foreach('db/Columns.csv', headers: true) do |row|
-#   Column.create(
-#      :category => row[0],
-#      :column_name => row[1],
-#      :frendly_name => row[2],
-#      :unit => row[3],
-#      :available => row[4],
-#      :dsc_better => row[5],
-#      :fundamental => row[6],
-#      :remove => row[7],
-#      :item_info => row[8]
-# )
-# end
+CSV.foreach('db/Columns.csv', headers: true) do |row|
+  Column.create(
+     :category => row[0],
+     :column_name => row[1],
+     :frendly_name => row[2],
+     :unit => row[3],
+     :available => row[4],
+     :dsc_better => row[5],
+     :fundamental => row[6],
+     :remove => row[7],
+     :item_info => row[8]
+)
+end
 
 #以下はPcsを呼び出すパターン
 # CSV.foreach('db/Pcs.csv', headers: true) do |row|

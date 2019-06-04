@@ -46,10 +46,6 @@ class ResultsController < ApplicationController
 		# あなたにとって重要な項目数
 		@num_recommend = 5
 
-		# remove from 優先順位 star
-		# [要修正] Categoryが増えるたびに修正が必要なためイケていない.
-		# @array_column_remove_star = ["emmc", "usb_c", "webcamera", "usb_a", "item_id", "windows", "ram_max", "gamingpc", "ram_all_slot", "updated_at", "created_at", "date_sale", "cluster_sub", "cluster_main", "id", "series", "sirial", "shop_num", "quote", "os"]
-
 		# 各Category別にItem情報を全部入れる.
 		# [要修正] Categoryが増えるたびに修正が必要なためイケていない.
 		if @category == "pc"
@@ -126,7 +122,7 @@ class ResultsController < ApplicationController
 		end
 
 		# 各clusterの分類数が多い順にclusterのcolumn name arrayを作る
-		@hash_string_cluster_column.sort{|(k1, v1), (k2, v2)| v2 <=> v1}.to_h.each_key do |key|
+		@hash_string_cluster_column.sort{|(key1, value1), (key2, value2)| value2 <=> value1}.to_h.each_key do |key|
 			@array_string_cluster_column_sort << key
 		end
 
@@ -162,6 +158,7 @@ class ResultsController < ApplicationController
 
 			# 一番細分化されたClusterのID数を取得
 			@integer_cluster_count = @actrec_all_item.pluck(:"#{@array_string_cluster_column_sort.first}").uniq.count
+
 			# 採点用のScoreを作成. FibocacciでScoreをつける
 			# 通常、Fibocacci数列は、[0, 1, 1, 2, 3, 5, 8, 13 ,...]だけど、1, 1と連続させたくないので、削除するために1, 2からにしている
 			# @array_fibonacci = [1, 2]
@@ -170,6 +167,7 @@ class ResultsController < ApplicationController
 			# 	@array_fibonacci << tmp
 			# end
 
+			# Rank順に得点を加算
 			@array_fibonacci = [*1..@integer_cluster_count]
 
 			# 値が大きい順にSort
@@ -243,7 +241,7 @@ class ResultsController < ApplicationController
 			# Recommendation 1stのclusterを取得
 			@array_rec_cluster_add = @actrec_recommend_item.pluck(:"#{cluster_column}").uniq
 			# Recommendation 1stのclusterと同じclusterのitem_idを取得、.shuffleで順序をRandomに変える
-			@array_item_add = @actrec_remain_item.where("#{cluster_column}": @array_rec_cluster_add).pluck(:item_id).shuffle
+			@array_item_add = @actrec_remain_item.where("#{cluster_column}": @array_rec_cluster_add).order(price: "ASC").pluck(:item_id)
 			# Recommendation 1stのおすすめ品ListにClusterによるおすすめ品をくっつける
 			@array_sorted_item.concat(@array_item_add)
 		end
@@ -253,7 +251,7 @@ class ResultsController < ApplicationController
 		# array_sorted_itemのitem_idの配列を@array_item_id_remainから引いて、残りのitem_idの配列を作成
 		@array_item_id_remain = @actrec_all_item.pluck(:item_id) - @array_sorted_item
 		# 残りのitem_idの配列をuniqにしてRandomにする
-		@array_item_add = @array_item_id_remain.uniq.shuffle
+		@array_item_add = @array_item_id_remain.uniq
 		# おすすめ順に並んだarray_itemを作る
 		@array_sorted_item.concat(@array_item_add)
 # ----------------------------------------------------------------------------------------------------------------
@@ -339,12 +337,6 @@ class ResultsController < ApplicationController
 			end
 		end
 
-		# 特殊項目の削除
-		# [要修正] Debug用
-		# @array_column_remove_star.each do |column|
-		# 	@hash_rec_star.delete(column)
-		# end
-
 		# 順位が小さい順にSort
 		@hash_rec_star = Hash[@hash_rec_star.sort_by{ |_, v| -v }]
 # ----------------------------------------------------------------------------------------------------------------
@@ -363,7 +355,7 @@ class ResultsController < ApplicationController
 		end
 		cookies.permanent[:before_questions] = { :value => beforeQuestions }
 		@times = 1
-		if (Result.where(user_id: @user_id ).all.count != 0)
+		if (Result.where(user_id: @user_id ).all.count != 0) && (Result.where(user_id: @user_id ).pluck(:times).uniq.max.nil? == false)
 			@times = Result.where(user_id: @user_id ).order(times: "DESC").first.times + 1
 		end
 
