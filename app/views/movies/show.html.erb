@@ -68,6 +68,16 @@
 <p>
   <%= @movie.movie %>
 </p>
+<br>
+
+<p>
+  <strong>タグ</strong>
+</p>
+<ul>
+  <% Tag.where(item_id: @movie.item_id).all.each do |tag| %>
+    <li><%= link_to tag.name, tag %></li>
+  <% end %>
+</ul>
 
 <br>
 <%= link_to 'Edit', edit_movie_path(@movie) %> |

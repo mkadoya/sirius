@@ -6,22 +6,27 @@
   <strong>Name:</strong>
   <%= @tag.name %>
 </p>
-
-<p>
-  <strong>Item ID:</strong>
-  <%= @tag.item_id %>
-</p>
-
+<br>
 <p>
   <strong>Movie:</strong>
-  <%= Movie.find_by(item_id: @tag.item_id).title %>
 </p>
-
+<p>
+  <%= Movie.find_by(item_id: @tag.item_id).title %>(item_id:<%= @tag.item_id %>)
+</p>
+<br>
 <p>
   <strong>Value:</strong>
   <%= @tag.value %>
 </p>
 <br>
+<p>
+  <strong>このタグがついている映画</strong>
+</p>
+<ul>
+  <% Movie.where(item_id: @tag.item_id).all.each do |movie| %>
+    <li><%= link_to movie.title, movie %></li>
+  <% end %>
+</ul>
 <%= link_to 'Edit', edit_tag_path(@tag) %> |
 <%= link_to 'Back', tags_path %>
 <br><br>
