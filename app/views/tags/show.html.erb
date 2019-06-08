@@ -1,19 +1,28 @@
+<div class="container">
 <p id="notice"><%= notice %></p>
 
+<h1>詳細</h1>
 <p>
   <strong>Name:</strong>
   <%= @tag.name %>
 </p>
 
 <p>
-  <strong>Item:</strong>
+  <strong>Item ID:</strong>
   <%= @tag.item_id %>
+</p>
+
+<p>
+  <strong>Movie:</strong>
+  <%= Movie.find_by(item_id: @tag.item_id).title %>
 </p>
 
 <p>
   <strong>Value:</strong>
   <%= @tag.value %>
 </p>
-
+<br>
 <%= link_to 'Edit', edit_tag_path(@tag) %> |
 <%= link_to 'Back', tags_path %>
+<br><br>
+</div>

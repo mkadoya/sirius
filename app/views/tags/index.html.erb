@@ -1,31 +1,34 @@
+<div class="container">
 <p id="notice"><%= notice %></p>
 
 <h1>Tags</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Item</th>
-      <th>Value</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @tags.each do |tag| %>
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed  table-sm">
+    <thead class="thead-light">
       <tr>
-        <td><%= tag.name %></td>
-        <td><%= tag.item_id %></td>
-        <td><%= tag.value %></td>
-        <td><%= link_to 'Show', tag %></td>
-        <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
-        <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Item</th>
+        <th>Value</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
+    <tbody>
+      <% @tags.each do |tag| %>
+        <tr>
+          <td><%= tag.name %></td>
+          <td><%= Movie.find_by(item_id: tag.item_id).title %></td>
+          <td><%= tag.value %></td>
+          <td><%= link_to 'Show', tag %></td>
+          <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
+          <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <br>
 
-<%= link_to 'New Tag', new_tag_path %>
+<%= link_to 'New Tag', new_tag_path,:class => "btn btn-primary" %>
+</div>

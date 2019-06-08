@@ -17,6 +17,7 @@
 //= require popper
 //= require Chart.min
 //= require ./slick/slick.min.js
+//= require ./select2/select2.min.js
 //= require froala_editor.min.js
 //= require plugins/align.min.js
 //= require plugins/char_counter.min.js
@@ -718,4 +719,8 @@ jQuery(function ($) {
             }
         });
     }
+
+    $(document).ready(function () {
+        $('.select2').select2();
+    });
 });

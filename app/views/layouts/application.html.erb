@@ -28,12 +28,6 @@
   </head>
 
   <body class="<%= content_for?(:background_color) ? yield(:background_color) : "bg-light"%>">
-    <% if notice %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert"><%= alert %></p>
-    <% end %>
     <%= yield %>
     <%# <footer>
       <div class="container-fluid bg-lightblue text-light">

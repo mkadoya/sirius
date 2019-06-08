@@ -11,52 +11,58 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <div class="form-group">
+    <%= form.label :item_id, "一意のID" %>
+    <%= form.text_field :item_id, :class => "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :outline %>
-    <%= form.text_area :outline %>
+  <div class="form-group">
+    <%= form.label :title, "タイトル" %>
+    <%= form.text_field :title, :class => "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :director %>
-    <%= form.text_field :director %>
+  <div class="form-group">
+    <%= form.label :outline, "あらすじ" %>
+    <%= form.text_area :outline, :class => "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :performer %>
-    <%= form.text_area :performer %>
+  <div class="form-group">
+    <%= form.label :director, "監督" %>
+    <%= form.text_field :director, :class => "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :year %>
-    <%= form.number_field :year %>
+  <div class="form-group">
+    <%= form.label :performer, "出演者 ( ' , ' 区切り)" %>
+    <%= form.text_area :performer, :class => "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :preview %>
-    <%= form.text_field :preview %>
+  <div class="form-group">
+    <%= form.label :year, "公開年" %>
+    <%= form.number_field :year, :class => "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.text_field :image %>
+  <div class="form-group">
+    <%= form.label :preview, "予告ムービーのURL" %>
+    <%= form.text_field :preview, :class => "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :article %>
-    <%= form.text_field :article %>
+  <div class="form-group">
+    <%= form.label :image, "サムネイル画像" %>
+    <%= form.file_field :image, :class => "form-control-file" %>
+    <%= form.hidden_field :image_cache %>
   </div>
 
-  <div class="field">
-    <%= form.label :movie %>
-    <%= form.text_field :movie %>
+  <div class="form-group">
+    <%= form.label :article, "記事" %>
+    <%= form.text_field :article, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :movie, "作成した動画" %>
+    <%= form.text_field :movie, :class => "form-control" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit :class => "btn btn-primary" %>
   </div>
 <% end %>

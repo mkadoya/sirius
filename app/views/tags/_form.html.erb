@@ -11,22 +11,22 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="form-group">
+    <%= form.label :name, "タグ名" %>
+    <%= form.text_field :name, :class => "form-control"  %>
   </div>
 
-  <div class="field">
-    <%= form.label :item_id %>
-    <%= form.number_field :item_id %>
+  <div class="form-group">
+    <%= form.label :item_id, "映画タイトル" %><br>
+    <%= form.collection_select(:item_id, Movie.all, :item_id, :title, {prompt: true}, {:class => "form-control select2"} ) %>
   </div>
 
-  <div class="field">
-    <%= form.label :value %>
-    <%= form.number_field :value %>
+  <div class="form-group">
+    <%= form.label :value, "値" %>
+    <%= form.number_field :value, :class => "form-control"  %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit :class => "btn btn-primary" %>
   </div>
 <% end %>
