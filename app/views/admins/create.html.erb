@@ -1,0 +1,27 @@
+<div class="container">
+<h1>変更履歴</h1>
+<% @logs.each do |log| %>
+<p><%= log %></p>
+<% end %>
+<%= link_to "一覧に戻る",{:controller => 'admins', :action => 'index', :category => @cateogry }, :class => "btn btn-primary mt-3 mb-3"%>
+<h1>Debug</h1>
+<h2>Question</h2>
+<p>Category : <%= @category %></p>
+<p>Question ID : <%= @question_id %></p>
+<p>Question Content : <%= @question_content %></p>
+<p>Remain Question : <%= @remain_question_num %></p>
+<h2>Option</h2>
+<p>Option Id : <%= @option_id %></p>
+<p>Option Content : <%= @option_content %></p>
+<p>Next Question ID : <%= @next_question_id %></p>
+<h2>Match</h2>
+<p>Option ID : <%= @match_option_id %></p>
+<p>Match ID : <%= @match_id %></p>
+<p>Column : <%= @match_column %></p>
+<p>Max : <%= @match_max %></p>
+<p>Min : <%= @match_min %></p>
+
+
+
+<div class="mb-10">
+</div>

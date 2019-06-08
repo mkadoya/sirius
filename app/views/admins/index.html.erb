@@ -1,0 +1,99 @@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <% if @logs %>
+            <h2>結果</h2>
+            <% @logs.each do |log| %>
+            <p><%= log %></p>
+            <% end %>
+            <% end %>
+            <h2>カテゴリー</h2>
+            <ul>
+            <% @categories.each do |category| %>
+                <li><%= link_to category.name,{:controller => 'admins', :action => 'index', :category => category.category }%></li>
+            <% end %>
+            </ul>
+            <h3>選択されたカテゴリー</h3>
+            <p><strong><%= @category %></strong></p>
+            <%= link_to "ホームに戻る", {:controller => 'home', :action => 'top'}, :class => "btn btn-primary mt-3 mb-3"%>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-10">
+            <div class="col-md-12">
+                <h2>質問の編集</h2>
+            </div>
+            <%= link_to "新規作成",{:controller => 'admins', :action => 'new', :category => @category }, :class => "btn btn-primary mb-3" %>
+            <% @question_groups.each do |question_group| %>
+                <%= form_tag({
+                    :controller => 'admins',
+                    :action => 'update',
+                }, {:method => :post,:class => "question-group"}) do %>
+
+                <div class="question-group">
+                    <p class="question-group-top">
+                        <%= question_group.getQuestionId %> : <%= question_group.getQuestionContent %>
+                    </p>
+                    <div class="question-group-content">
+                        <div class="input-group">
+                            <div class="input-group-prepend"><div class="input-group-text"><%= question_group.getQuestionId %></div></div>
+                            <input name="question_id" type="hidden" value="<%= question_group.getQuestionId %>">
+                            <%= text_field_tag :question_content, question_group.getQuestionContent,{class: "form-control"} %>
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><div class="input-group-text">残り質問数</div></div>
+                            <%= text_field_tag :remain_question_num, question_group.getQuestionRemain,{class: "form-control"} %>
+                        </div>
+                        <input name="new_option_id" id="new_option_id" type="hidden" value="<%= @new_option_id %>">
+                        <% question_group.getOptionGroups.each do |option_group| %>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <input name="option_id[]" class="option_id" type="hidden" value="<%= option_group.getOption.option_id %>">
+                                    <div class="input-group-prepend"><div class="input-group-text"><%= option_group.getOption.option_id %></div></div>
+                                    <%= text_field_tag "option_content[]", option_group.getOption.content,{class: "form-control"} %>
+                                    <div class="input-group-prepend"><div class="input-group-text">Next</div></div>
+                                    <%= text_field_tag "next_question_id[]", option_group.getOption.next_question_id,{class: "form-control"} %>
+                                    <div class="input-group-append"><div class="input-group-text btn btn-danger delete-option">ー</div></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <% option_group.getMatches.each do |match| %>
+                                <div class="input-group">
+                                    <input name="match_option_id[]" class="match_option_id" type="hidden" value="<%= option_group.getOption.option_id %>">
+                                    <input name="match_id[]" class="match_id" type="hidden" value="<%= match.match_id %>">
+                                    <div class="input-group-prepend"><div class="input-group-text">Column</div></div>
+                                    <%= text_field_tag "match_column[]", match.item_clmn ,{class: "form-control"} %>
+                                    <div class="input-group-prepend"><div class="input-group-text">Max</div></div>
+                                    <%= text_field_tag "match_max[]", match.max ,{class: "form-control"} %>
+                                    <div class="input-group-prepend"><div class="input-group-text">Min</div></div>
+                                    <%= text_field_tag "match_min[]", match.min ,{class: "form-control"} %>
+                                    <div class="input-group-append"><div class="input-group-text btn btn-danger delete-match">ー</div></div>
+                                </div>
+                                <% end %>
+                                <div class="row"><button type="button" class=" mx-auto btn btn-outline-secondary rounded-circle p-0 mt-2 add-match" style="width:2rem;height:2rem;">＋</button></div>
+                            </div>
+                        </div>
+                        <% end %>
+                        <div class="row"><button type="button" class=" mx-auto btn btn-primary rounded-circle p-0 mt-2 add-option" style="width:2.5rem;height:2.5rem;font-size:20px;">＋</button></div>
+                        <div class="row mt-3 mb-3">
+                            <div class="col-md-12">
+                                <%= submit_tag "Submit", {:class => "btn btn-primary"} %>
+                                <%= submit_tag "Delete",{:name => "all_delete", :class => "btn btn-danger" } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% end %>
+            <% end %>
+        </div>
+        <div class="col-md-2">
+        <ul>
+            <% @columns.each do |column| %>
+                <li><%= column.column_name %> : <%= column.frendly_name %></li>
+            <% end %>
+            </ul>
+        </div>
+    </div>
+</div>

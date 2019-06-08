@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-    <title>Sirius ～あなたが望む最高のアイテムを探します～</title>
+    <title><%= content_for?(:title) ? yield(:title) : "Sirius ～あなたが望む最高のアイテムを探します～"%></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="パソコン・スマホ・家電製品を中心に、本当にあなたが欲しいアイテムを10段階評価でおすすめします。あなたに特化したオリジナルの診断結果とアイテムを素早く知ることができます。">
+    <%= yield :header %>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "本当にあなたが欲しいアイテムを10段階評価でおすすめします。あなたに特化したオリジナルの診断結果とアイテムを素早く知ることができます。"%>">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
@@ -26,9 +27,15 @@
 
   </head>
 
-  <body>
+  <body class="<%= content_for?(:background_color) ? yield(:background_color) : "bg-light"%>">
+    <% if notice %>
+      <p class="notice"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert"><%= alert %></p>
+    <% end %>
     <%= yield %>
-    <footer>
+    <%# <footer>
       <div class="container-fluid bg-lightblue text-light">
         <div class="row">
           <div class="col-md-12">
@@ -45,7 +52,7 @@
           </div>
         </div>
       </div>
-    </footer>
+    </footer> %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>

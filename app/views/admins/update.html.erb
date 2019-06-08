@@ -1,0 +1,34 @@
+<div class="container">
+<h1>変更履歴</h1>
+<% @logs.each do |log| %>
+<p><%= log %></p>
+<% end %>
+<h1>Debug</h1>
+<h2>Question</h2>
+<p>Question ID : <%= @question_id %></p>
+<p>Question Content : <%= @question_content %></p>
+<p>Remain Question : <%= @remain_question_num %></p>
+<h2>Option</h2>
+<p>Option Id : <%= @option_id %></p>
+<p>Option Content : <%= @option_content %></p>
+<p>Next Question ID : <%= @next_question_id %></p>
+<h2>Match</h2>
+<p>Match Option Id : <%= @match_option_id %></p>
+<p>Match ID : <%= @match_id %></p>
+<p>Column : <%= @match_column %></p>
+<p>Max : <%= @match_max %></p>
+<p>Min : <%= @match_min %></p>
+<h2>削除</h2>
+<p>Options : <%= @remove_options %></p>
+<p>Matches : <%= @remove_matches %></p>
+<h2>追加</h2>
+<p>Option Id : <%= @add_option_id %></p>
+<p>Option : <%= @add_options %></p>
+<p>Matches : <%= @add_matches %></p>
+<p>Matches : <%= @new_match_id %></p>
+<h2>変更</h2>
+<p>Option Id : <%= @change_option_id %></p>
+
+
+<div class="mb-10">
+</div>

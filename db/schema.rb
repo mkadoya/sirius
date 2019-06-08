@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_21_143822) do
+ActiveRecord::Schema.define(version: 2019_06_04_121552) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -138,12 +138,12 @@ ActiveRecord::Schema.define(version: 2019_05_21_143822) do
     t.text "sirial"
     t.text "affiliate"
     t.text "image"
+    t.string "category"
     t.integer "volume"
     t.integer "gpu_score"
     t.boolean "windows"
     t.boolean "mac"
     t.boolean "chrome"
-    t.string "category"
   end
 
   create_table "matches", force: :cascade do |t|
@@ -155,6 +155,21 @@ ActiveRecord::Schema.define(version: 2019_05_21_143822) do
     t.float "max"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.string "title"
+    t.text "outline"
+    t.string "director"
+    t.text "performer"
+    t.integer "year"
+    t.string "preview"
+    t.string "image"
+    t.string "article"
+    t.string "movie"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "item_id"
   end
 
   create_table "options", force: :cascade do |t|
@@ -269,6 +284,14 @@ ActiveRecord::Schema.define(version: 2019_05_21_143822) do
     t.boolean "result"
     t.integer "option_id"
     t.integer "times"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.integer "item_id"
+    t.integer "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "temp_users", force: :cascade do |t|
