@@ -4,6 +4,8 @@
 <h1>詳細</h1>
 <p>
   <strong>Name:</strong>
+</p>
+<p>
   <%= @tag.name %>
 </p>
 <br>
@@ -11,11 +13,13 @@
   <strong>Movie:</strong>
 </p>
 <p>
-  <%= Movie.find_by(item_id: @tag.item_id).title %>(item_id:<%= @tag.item_id %>)
+  <%= Movie.find_by(id: @tag.movie_id).title %>
 </p>
 <br>
 <p>
   <strong>Value:</strong>
+</p>
+<p>
   <%= @tag.value %>
 </p>
 <br>
@@ -23,7 +27,7 @@
   <strong>このタグがついている映画</strong>
 </p>
 <ul>
-  <% Movie.where(item_id: @tag.item_id).all.each do |movie| %>
+  <% Movie.where(id: @tag.movie_id).all.each do |movie| %>
     <li><%= link_to movie.title, movie %></li>
   <% end %>
 </ul>

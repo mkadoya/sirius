@@ -2,7 +2,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>
-  <%= @movie.title %>(ID:<%= @movie.item_id %>)
+  <%= @movie.title %>
 </h1>
 
 <img src="<%= @movie.image %>" class="image-fluid">
@@ -74,7 +74,7 @@
   <strong>タグ</strong>
 </p>
 <ul>
-  <% Tag.where(item_id: @movie.item_id).all.each do |tag| %>
+  <% Tag.where(movie_id: @movie.id).all.each do |tag| %>
     <li><%= link_to tag.name, tag %></li>
   <% end %>
 </ul>

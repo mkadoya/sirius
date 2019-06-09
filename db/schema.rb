@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_04_121552) do
+ActiveRecord::Schema.define(version: 2019_06_09_062802) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -169,7 +169,6 @@ ActiveRecord::Schema.define(version: 2019_06_04_121552) do
     t.string "movie"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "item_id"
   end
 
   create_table "options", force: :cascade do |t|
@@ -288,10 +287,11 @@ ActiveRecord::Schema.define(version: 2019_06_04_121552) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
-    t.integer "item_id"
     t.integer "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "movie_id"
+    t.index ["movie_id"], name: "index_tags_on_movie_id"
   end
 
   create_table "temp_users", force: :cascade do |t|

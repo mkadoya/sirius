@@ -8,7 +8,7 @@
     <thead class="thead-light">
       <tr>
         <th>Name</th>
-        <th>Item</th>
+        <th>Movie</th>
         <th>Value</th>
         <th colspan="3"></th>
       </tr>
@@ -18,7 +18,7 @@
       <% @tags.each do |tag| %>
         <tr>
           <td><%= tag.name %></td>
-          <td><%= Movie.find_by(item_id: tag.item_id).title %></td>
+          <td><%= Movie.find_by(id: tag.movie_id).title %></td>
           <td><%= tag.value %></td>
           <td><%= link_to 'Show', tag %></td>
           <td><%= link_to 'Edit', edit_tag_path(tag) %></td>

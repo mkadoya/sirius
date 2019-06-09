@@ -1,6 +1,6 @@
 class Movie < ApplicationRecord
     mount_uploader :image, ImageUploader
-    validates :item_id, presence: true, numericality: true
+    has_many :tags, dependent: :destroy
     validates :title, presence: true
     validates :outline, presence: true
     validates :director, presence: true

@@ -8,7 +8,7 @@ class MoviesController < InheritedResources::Base
 
   private
     def movie_params
-      params.require(:movie).permit(:item_id, :title, :outline, :director, :performer, :year, :preview, :image, :image_cache, :article, :movie)
+      params.require(:movie).permit(:title, :outline, :director, :performer, :year, :preview, :image, :image_cache, :article, :movie)
     end
 
 end

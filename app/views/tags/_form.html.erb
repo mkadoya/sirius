@@ -17,8 +17,8 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :item_id, "映画タイトル" %><br>
-    <%= form.collection_select(:item_id, Movie.all, :item_id, :title, {prompt: true}, {:class => "form-control select2"} ) %>
+    <%= form.label :movie_id, "映画タイトル" %><br>
+    <%= form.collection_select(:movie_id, Movie.all, :id, :title, {prompt: true}, {:class => "form-control select2"} ) %>
   </div>
 
   <div class="form-group">
