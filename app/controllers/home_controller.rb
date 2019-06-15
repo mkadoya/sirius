@@ -32,6 +32,12 @@ class HomeController < ApplicationController
   end
 
   def movie
-    
+    @tags = Tag.all
+    @movies = Movie.all
+  end
+
+  def show
+    @movie = Movie.find_by(id: params[:id])
+    render json: @movie
   end
 end

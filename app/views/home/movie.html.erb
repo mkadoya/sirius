@@ -1,3 +1,5 @@
+
+
 <% content_for :title do %>
 Sirius | 映画
 <% end %>
@@ -11,7 +13,24 @@ bg-darkgrey text-light
 <% end %>
 
 <div class="container">
-    <div class="col-md-12">
-        <p>内容<p>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="movie_tags mt-5">
+                <ul>
+                    <% @tags.each do |tag| %>
+                        <li><a href="#"><%= tag.name %></a></li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <% @movies.each do |movie| %>
+        <div class="col-md-3">
+            <img class="img-fluid" src="<%= movie.image%>">
+        </div>
+        <% end %>
     </div>
 </div>
+
+<%= javascript_pack_tag 'test' %>

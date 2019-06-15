@@ -99,3 +99,6 @@ gem 'chart-js-rails'
 # Bootstrap
 gem 'bootstrap'
 gem 'mini_racer'
+
+# Webpacker
+gem 'webpacker', github: 'rails/webpacker'

@@ -22,5 +22,6 @@ Rails.application.routes.draw do
   get 'questions/category/:category' => "questions#category"
   get 'questions/category' => "questions#category"
   get "home/movie" => "home#movie"
+  get "home/movie/:id" => "home#show"
   get "/" => "home#top"
 end
