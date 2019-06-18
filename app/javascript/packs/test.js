@@ -1,13 +1,19 @@
 import Vue from 'vue/dist/vue.esm'
+import axios from 'axios'
 
 const app = new Vue({
+
     el: '#app',
     data: {
-        message: 'hello world'
+        movieInfo: {},
     },
     methods: {
-        changeMsg: function () {
-            this.message = 'change message testing'
+        setMovieInfo(id) {
+            axios.get(`movie/${id}`)
+                .then(res => {
+                    console.log(res.data);
+                    this.movieInfo = res.data;
+                });
         }
     }
 })
