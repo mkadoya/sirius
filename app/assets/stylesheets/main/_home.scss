@@ -87,23 +87,17 @@
   padding:0;
 }
 
-.movie_tags ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+
+.movie_tags input{
+  display: none;
 }
 
-.movie_tags ul li {
-  display: inline-block;
-  margin: 0 .3em .3em 0;
-  padding: 0;
-}
-
-.movie_tags ul li a {
+.movie_tags label{
   display: inline-block;
   max-width: 200px;
   height: 28px;
   line-height: 28px;
+  margin: 0 .3em .3em 0;
   padding: 0 1em;
   background-color: #fff;
   border: 1px solid #aaa;
@@ -116,16 +110,22 @@
   text-decoration: none;
   -webkit-transition: .2s;
   transition: .2s;
+  cursor: pointer;
 }
 
-.movie_tags ul li a:hover {
+.movie_tags label:hover{
+  // background-color: #4285F4;
+  background-color: #6ec6ff;
+  // border: 1px solid #4285F4;
+  border: 1px solid #6ec6ff;
+  color: #fff;
+}
+
+.movie_tags input:checked + label{
   background-color: #4285F4;
   border: 1px solid #4285F4;
   color: #fff;
 }
-
-
-
 
 
 // .top-main {

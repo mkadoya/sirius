@@ -55,16 +55,26 @@ bg-darkgrey text-light
     </div>
     <div class="row">
         <div class="col-md-12">
+            <p>{{checkedTags}}</p>
             <div class="movie_tags mt-5">
-                <ul>
-                    <% @tags.each do |tag| %>
-                        <li><a href="#"><%= tag.name %></a></li>
-                    <% end %>
-                </ul>
+            <% @tags.each do |tag| %>
+                <input type="checkbox" id="<%= tag %>" value="<%= tag %>" v-model="checkedTags" />
+                <label for="<%= tag %>"><%= tag %></label>
+            <% end %>
             </div>
+            <h3>Movie result</h3>
+            <ul>
+                <li v-for="movie in movieList">{{ movie.title }}</li>
+            </ul>
+            <h3>Tag result</h3>
+            <ul>
+                <li v-for="tag in tagList">{{ tag }}</li>
+            </ul>
         </div>
     </div>
+    <h2>テスト</h2>
     <div class="row mt-5">
+
         <% @movies.each do |movie| %>
         <div class="col-md-2">
             <img class="img-fluid" src="<%= movie.image%>" v-on:click="setMovieInfo(<%= movie.id %>)">

@@ -23,5 +23,7 @@ Rails.application.routes.draw do
   get 'questions/category' => "questions#category"
   get "home/movie" => "home#movie"
   get "home/movie/:id" => "home#show"
+  get "home/movie/tag/:name" => "home#tag"
+  get "home/movie/movie_tag/:ids" => "home#movieToTag"
   get "/" => "home#top"
 end

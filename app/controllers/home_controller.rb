@@ -32,7 +32,7 @@ class HomeController < ApplicationController
   end
 
   def movie
-    @tags = Tag.all
+    @tags = Tag.all.pluck(:name).uniq
     @movies = Movie.all
   end
 
@@ -40,4 +40,64 @@ class HomeController < ApplicationController
     @movie = Movie.find_by(id: params[:id])
     render json: @movie
   end
+
+  def tag
+    @tag_names = params[:name].split(",")
+    @movies = Array.new
+    isFirst = true
+    @tag_names.each do |name|
+      tags = Tag.where(name: name).all
+      unless tags.nil?
+        if isFirst
+          tags.each do |tag|
+            movie = Movie.find_by(id: tag.movie_id)
+            @movies.push(movie)
+          end
+          isFirst = false
+        else
+          new_movies = Array.new
+          tags.each do |tag|
+            movie = Movie.find_by(id: tag.movie_id)
+            new_movies.push(movie)
+          end
+          @movies = @movies & new_movies
+        end
+      end
+    end
+    render json: @movies
+  end
+
+  def movieToTag
+    @movie_ids = params[:ids].split(",")
+    if params[:ids] == "0"
+      @tags = Tag.all.pluck(:name).uniq
+    else
+      @tags = Array.new
+      isFirst = true
+      @movie_ids.each do |movie_id|
+        if isFirst
+          first_tags = Tag.where(movie_id: movie_id).all
+          first_tags.each do |tag|
+            @tags.push(tag.name)
+          end
+          isFirst = false
+        else
+          temp_tags = Tag.where(movie_id: movie_id).all
+          temp_tags.each do |temp_tag|
+            pushFlag = true
+            @tags.each do |tag|
+              if tag == temp_tag.name
+                pushFlag = false
+              end
+            end
+            if pushFlag
+              @tags.push(temp_tag.name)
+            end
+          end
+        end
+      end
+    end
+    render json: @tags
+  end
+
 end
