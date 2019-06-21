@@ -55,21 +55,34 @@ bg-darkgrey text-light
     </div>
     <div class="row">
         <div class="col-md-12">
+            <p>CheckedTags</p>
             <p>{{checkedTags}}</p>
-            <div class="movie_tags mt-5">
-            <% @tags.each do |tag| %>
-                <input type="checkbox" id="<%= tag %>" value="<%= tag %>" v-model="checkedTags" />
-                <label for="<%= tag %>"><%= tag %></label>
-            <% end %>
+            <p>PushedTags</p>
+            <p>{{pushedTags}}</p>
+            <h3>Tag result</h3>
+            <div class="movie_tags">
+                <ul>
+                    <li v-for="tag in tagList" v-on:click="setPushedTag(tag)"  v-bind:class="{active: isActive}">{{ tag }}</li>
+                </ul>
             </div>
+            <% if false%>
+                <div class="movie_tags mt-5">
+                <% @tags.each do |tag| %>
+                    <input type="checkbox" id="<%= tag %>" value="<%= tag %>" v-model="checkedTags" />
+                    <label for="<%= tag %>"><%= tag %></label>
+                <% end %>
+                </div>
+            <% end %>
+
             <h3>Movie result</h3>
             <ul>
                 <li v-for="movie in movieList">{{ movie.title }}</li>
             </ul>
-            <h3>Tag result</h3>
-            <ul>
-                <li v-for="tag in tagList">{{ tag }}</li>
-            </ul>
+
+            <%# <div class="movie_tags mt-5">
+                <input type="checkbox" v-bind:id="tag.id" v-bind:value="tag.name" v-for="tag in tagList" v-model="checkedTags" >
+                <label v-bind:for="tag.id" v-for="tag in tagList" >{{tag.name}}</label>
+            </div> %>
         </div>
     </div>
     <h2>テスト</h2>
