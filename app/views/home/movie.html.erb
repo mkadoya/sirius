@@ -53,48 +53,33 @@ bg-darkgrey text-light
             </nav>
         </div>
     </div>
-    <div class="row">
+    <div class="row mt-3">
+        <h1 class="mb-4">気になる映画を探しましょう</h1>
         <div class="col-md-12">
-            <p>CheckedTags</p>
-            <p>{{checkedTags}}</p>
-            <p>PushedTags</p>
-            <p>{{pushedTags}}</p>
-            <h3>Tag result</h3>
             <div class="movie_tags">
                 <ul>
-                    <li v-for="tag in tagList" v-on:click="setPushedTag(tag)"  v-bind:class="{active: isActive}">{{ tag }}</li>
+                    <li v-for="tag in tagList" v-on:click="setPushedTag(tag)">{{ tag }}</li>
                 </ul>
             </div>
-            <% if false%>
-                <div class="movie_tags mt-5">
-                <% @tags.each do |tag| %>
-                    <input type="checkbox" id="<%= tag %>" value="<%= tag %>" v-model="checkedTags" />
-                    <label for="<%= tag %>"><%= tag %></label>
-                <% end %>
-                </div>
-            <% end %>
-
-            <h3>Movie result</h3>
-            <ul>
-                <li v-for="movie in movieList">{{ movie.title }}</li>
-            </ul>
-
-            <%# <div class="movie_tags mt-5">
-                <input type="checkbox" v-bind:id="tag.id" v-bind:value="tag.name" v-for="tag in tagList" v-model="checkedTags" >
-                <label v-bind:for="tag.id" v-for="tag in tagList" >{{tag.name}}</label>
-            </div> %>
+            <div class="pushed_movie_tags">
+                <ul>
+                    <li v-for="ptag in pushedTags" v-on:click="setUnpushedTag(ptag)">{{ ptag }}</li>
+                </ul>
+            </div>
+            <div class="row ">
+                <button class="btn btn-outline-light btn-block mt-3 w-25 mx-auto" v-on:click="resetTag()">RESET</button>
+            </div>
         </div>
     </div>
-    <h2>テスト</h2>
+    <h2>おすすめの映画</h2>
     <div class="row mt-5">
-
-        <% @movies.each do |movie| %>
-        <div class="col-md-2">
-            <img class="img-fluid" src="<%= movie.image%>" v-on:click="setMovieInfo(<%= movie.id %>)">
+        <div class="col-md-2" v-for="movie in movieList">
+            <div class="movie-image">
+                <img class="img-fluid" v-bind:src="movie.image.url" v-on:click="setMovieInfo(movie.id)">
+            </div>
         </div>
-        <% end %>
     </div>
-    <div class="row mt-5 mb-5">
+    <div class="row mt-5 mb-5" v-show="isShow">
         <div class="col-md-12">
             <h3 class="mb-0 pb-0">{{movieInfo.title}}</h3>
             <p>{{movieInfo.year}}</p>

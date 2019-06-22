@@ -45,25 +45,30 @@ class HomeController < ApplicationController
     @tag_names = params[:name].split(",")
     @movies = Array.new
     isFirst = true
-    @tag_names.each do |name|
-      tags = Tag.where(name: name).all
-      unless tags.nil?
-        if isFirst
-          tags.each do |tag|
-            movie = Movie.find_by(id: tag.movie_id)
-            @movies.push(movie)
+    if params[:name] == "0"
+      @movies = Movie.all
+    else
+      @tag_names.each do |name|
+        tags = Tag.where(name: name).all
+        unless tags.nil?
+          if isFirst
+            tags.each do |tag|
+              movie = Movie.find_by(id: tag.movie_id)
+              @movies.push(movie)
+            end
+            isFirst = false
+          else
+            new_movies = Array.new
+            tags.each do |tag|
+              movie = Movie.find_by(id: tag.movie_id)
+              new_movies.push(movie)
+            end
+            @movies = @movies & new_movies
           end
-          isFirst = false
-        else
-          new_movies = Array.new
-          tags.each do |tag|
-            movie = Movie.find_by(id: tag.movie_id)
-            new_movies.push(movie)
-          end
-          @movies = @movies & new_movies
         end
       end
     end
+
     render json: @movies
   end
 

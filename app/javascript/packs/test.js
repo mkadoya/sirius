@@ -6,17 +6,21 @@ const app = new Vue({
     el: '#app',
     data: {
         movieInfo: {},
-        checkedTags: [],
         pushedTags: [],
         movieList: [],
         tagList: [],
-        isActive: true,
+        isShow: false,
     },
     mounted() {
         axios.get(`movie/movie_tag/0`)
             .then(res => {
                 console.log(res.data);
                 this.tagList = res.data;
+            });
+        axios.get(`movie/tag/0`)
+            .then(res => {
+                console.log(res.data);
+                this.movieList = res.data;
             });
     },
     methods: {
@@ -26,35 +30,23 @@ const app = new Vue({
                     console.log(res.data);
                     this.movieInfo = res.data;
                 });
+            this.isShow = true;
         },
-        setPushedTag(name) {
-            var flag = true;
+        setPushedTag(tag) {
+            this.pushedTags.push(tag);
+        },
+        setUnpushedTag(tag) {
             for (let i = 0; i < this.pushedTags.length; i++) {
-                if (this.pushedTags[i] == name) {
-                    flag = false;
+                if (this.pushedTags[i] == tag) {
                     this.pushedTags.splice(i, 1);
                 }
             }
-            if (flag) {
-                this.pushedTags.push(name);
-            }
         },
+        resetTag() {
+            this.pushedTags = [];
+        }
     },
     watch: {
-        checkedTags: function (val) {
-            axios.get(`movie/tag/${val}`)
-                .then(res => {
-                    console.log(res.data);
-                    this.movieList = res.data;
-                });
-            if (val == '') {
-                axios.get(`movie/movie_tag/0`)
-                    .then(res => {
-                        console.log(res.data);
-                        this.tagList = res.data;
-                    });
-            }
-        },
         pushedTags: function (val) {
             axios.get(`movie/tag/${val}`)
                 .then(res => {
@@ -66,6 +58,11 @@ const app = new Vue({
                     .then(res => {
                         console.log(res.data);
                         this.tagList = res.data;
+                    });
+                axios.get(`movie/tag/0`)
+                    .then(res => {
+                        console.log(res.data);
+                        this.movieList = res.data;
                     });
             }
         },
@@ -80,6 +77,13 @@ const app = new Vue({
                     this.tagList = res.data;
                 });
         },
+        tagList: function (val) {
+            for (let i = 0; i < this.tagList.length; i++) {
+                if (this.pushedTags.indexOf(this.tagList[i]) >= 0) {
+                    this.tagList.splice(i, 1);
+                }
+            }
+        }
     },
 
  })
