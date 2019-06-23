@@ -106,7 +106,8 @@
   -webkit-transition: .2s;
   transition: .2s;
   cursor: pointer;
-  user-select:none
+  user-select:none;
+  font-weight: bold;
 }
 
 .movie_tags ul li:hover, .pushed_movie_tags ul li:hover{

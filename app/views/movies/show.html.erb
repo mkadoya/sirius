@@ -53,7 +53,7 @@
 
 <br>
 <p>
-  <strong>関連記事</strong>
+  <strong>記事</strong>
 </p>
 
 <p>
@@ -62,7 +62,7 @@
 
 <br>
 <p>
-  <strong>関連動画</strong>
+  <strong>動画</strong>
 </p>
 
 <p>
@@ -78,6 +78,49 @@
     <li><%= link_to tag.name, tag %></li>
   <% end %>
 </ul>
+
+<p>
+  <strong>各種リンク</strong>
+</p>
+
+<ul>
+  <li>
+    <% if @movie.youtube != "" %>
+      <%= link_to "Youtube", @movie.youtube %>
+    <% else %>
+      Youtube
+    <% end %>
+  </li>
+  <li>
+    <% if @movie.netflix != "" %>
+      <%= link_to "Netflix", @movie.netflix %>
+    <% else %>
+      Netflix
+    <% end %>
+  </li>
+  <li>
+    <% if @movie.amazonprime != "" %>
+      <%= link_to "Amazon Prime", @movie.amazonprime %>
+    <% else %>
+      Amazon Prime
+    <% end %>
+  </li>
+  <li>
+    <% if @movie.hulu != "" %>
+      <%= link_to "Hulu", @movie.hulu %>
+    <% else %>
+      Hulu
+    <% end %>
+  </li>
+  <li>
+    <% if @movie.filmarks != "" %>
+      <%= link_to "Filmarks", @movie.filmarks %>
+    <% else %>
+      Filmarks
+    <% end %>
+  </li>
+</ul>
+<br>
 
 <br>
 <%= link_to 'Edit', edit_movie_path(@movie) %> |
