@@ -17,17 +17,17 @@ bg-darkgrey text-light
     <div class="row">
         <div class="col-md-12">
             <nav class="navbar navbar-expand-lg navbar-dark bg-none mt-3">
-                <a class="navbar-brand font-weight-bold" href="#">Sirius</a>
+                <a class="navbar-brand font-weight-bold " href="#" style="font-size:28px; color:#ba000d;">Sirius</a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="Navber">
                     <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">ホーム <span class="sr-only">(現位置)</span></a>
+                    <li class="nav-item active ml-5">
+                        <a class="nav-link" href="#">映画 <span class="sr-only">(現位置)</span></a>
                     </li>
-                    <li class="nav-item">
+                    <%# <li class="nav-item">
                         <a class="nav-link" href="#">リンク</a>
                     </li>
                     <li class="nav-item dropdown">
@@ -43,7 +43,7 @@ bg-darkgrey text-light
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">無効</a>
-                    </li>
+                    </li> %>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
                     <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索...">
@@ -56,6 +56,7 @@ bg-darkgrey text-light
     <div class="row mt-3">
         <h1 class="mb-4">気になる映画を探しましょう</h1>
         <div class="col-md-12">
+            <%# <p>pushed tag list : {{ pushedTags}}</p> %>
             <div class="movie_tags">
                 <ul>
                     <li v-for="tag in tagList" v-on:click="setPushedTag(tag)">{{ tag }}</li>
@@ -73,9 +74,11 @@ bg-darkgrey text-light
     </div>
     <h2>おすすめの映画</h2>
     <div class="row mt-5">
+        <%# <p>{{movieList}}</p> %>
+        <%# <p>{{allMovieList}}</p> %>
         <div class="col-md-2" v-for="movie in movieList">
             <div class="movie-image">
-                <img class="img-fluid" v-bind:src="movie.image.url" v-on:click="setMovieInfo(movie.id)">
+                <img class="img-fluid" v-bind:src="movie.image" v-on:click="setMovieInfo(movie.id)">
             </div>
         </div>
     </div>
@@ -91,7 +94,25 @@ bg-darkgrey text-light
             <p>出演: {{movieInfo.performer}} </p>
         </div>
     </div>
-
+    <div  v-for="tag in allTagList">
+        <h2 class=" mt-5 mb-2">{{tag}}</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="movie_tags">
+                    <ul>
+                        <li v-for="ctag in tagTagsList(tag)" v-on:click="sortAllTagList(ctag)">{{ ctag }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2" v-for="movie in tagsMovieList(tag)">
+                <div class="movie-image">
+                    <img class="img-fluid" v-bind:src="movie.image" v-on:click="setMovieInfo(movie.id)">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </div>
 
