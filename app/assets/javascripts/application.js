@@ -718,4 +718,33 @@ jQuery(function ($) {
             }
         });
     }
+
+
+		$(function(){
+		 $('#btntag1').on('click', function(){
+			var val = $(this).text();
+		  $(this).toggleClass("on");
+		  if($(this).hasClass("on")){
+			 $(this).css("background-color","skyblue");
+
+			 $.ajax({
+			                 type: 'GET',
+			                 url: '/home/movie',
+			                 data: {
+			                     id: val
+			                 },
+			                 dataType: 'json'  //json形式指定
+			             })
+
+			         });
+
+
+		  }else{
+			 $(this).css("background-color","pink");
+		  }
+		  return false;
+		 });
+		})
+
+
 });

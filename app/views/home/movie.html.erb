@@ -15,3 +15,18 @@ bg-darkgrey text-light
         <p>内容<p>
     </div>
 </div>
+
+<button id="btntag1">test1</button>
+<button id="btntag2">test2</button>
+
+
+<p><%= @hash_score %></p>
+
+<p> --------------------------------------- </p>
+
+<%= @hash_score.each do |movie, value| %>
+	<%= @array_movie_columns.each do |column| %>
+		<p><%= movie[column] %></p>
+	<% end %>
+	<p> --------------------------------------- </p>
+<% end %>
