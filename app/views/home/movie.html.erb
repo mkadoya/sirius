@@ -1,3 +1,5 @@
+
+
 <% content_for :title do %>
 Sirius | 映画
 <% end %>
@@ -10,11 +12,109 @@ Sirius | 映画
 bg-darkgrey text-light
 <% end %>
 
+<div id="app">
 <div class="container">
-    <div class="col-md-12">
-        <p>内容<p>
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-none mt-3">
+                <a class="navbar-brand font-weight-bold " href="#" style="font-size:28px; color:#ba000d;">Sirius</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="Navber">
+                    <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active ml-5">
+                        <a class="nav-link" href="#">映画 <span class="sr-only">(現位置)</span></a>
+                    </li>
+                    <%# <li class="nav-item">
+                        <a class="nav-link" href="#">リンク</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ドロップダウン
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">メニュー1</a>
+                        <a class="dropdown-item" href="#">メニュー2</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">その他</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">無効</a>
+                    </li> %>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                    <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索...">
+                    <button type="submit" class="btn btn-outline-light my-2 my-sm-0">検索</button>
+                    </form>
+                </div><!-- /.navbar-collapse -->
+            </nav>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <h1 class="mb-4">気になる映画を探しましょう</h1>
+        <div class="col-md-12">
+            <%# <p>pushed tag list : {{ pushedTags}}</p> %>
+            <div class="movie_tags">
+                <ul>
+                    <li v-for="tag in tagList" v-on:click="setPushedTag(tag)">{{ tag }}</li>
+                </ul>
+            </div>
+            <div class="pushed_movie_tags">
+                <ul>
+                    <li v-for="ptag in pushedTags" v-on:click="setUnpushedTag(ptag)">{{ ptag }}</li>
+                </ul>
+            </div>
+            <div class="row ">
+                <button class="btn btn-outline-light btn-block mt-3 w-25 mx-auto" v-on:click="resetTag()">RESET</button>
+            </div>
+        </div>
+    </div>
+    <h2>おすすめの映画</h2>
+    <div class="row mt-5">
+        <%# <p>{{movieList}}</p> %>
+        <%# <p>{{allMovieList}}</p> %>
+        <div class="col-md-2" v-for="movie in movieList">
+            <div class="movie-image">
+                <img class="img-fluid" v-bind:src="movie.image" v-on:click="setMovieInfo(movie.id)">
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5 mb-5" v-show="isShow">
+        <div class="col-md-12">
+            <h3 class="mb-0 pb-0">{{movieInfo.title}}</h3>
+            <p>{{movieInfo.year}}</p>
+            <iframe width="560" height="315" :src="movieInfo.preview" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+            <p>{{movieInfo.outline}} </p>
+            <br>
+            <p>監督: {{movieInfo.director}} </p>
+            <p>出演: {{movieInfo.performer}} </p>
+        </div>
+    </div>
+    <div  v-for="tag in allTagList">
+        <h2 class=" mt-5 mb-2">{{tag}}</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="movie_tags">
+                    <ul>
+                        <li v-for="ctag in tagTagsList(tag)" v-on:click="sortAllTagList(ctag)">{{ ctag }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2" v-for="movie in tagsMovieList(tag)">
+                <div class="movie-image">
+                    <img class="img-fluid" v-bind:src="movie.image" v-on:click="setMovieInfo(movie.id)">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<<<<<<< HEAD
 
 <button id="btntag1">test1</button>
 <button id="btntag2">test2</button>
@@ -30,3 +130,8 @@ bg-darkgrey text-light
 	<% end %>
 	<p> --------------------------------------- </p>
 <% end %>
+=======
+</div>
+
+<%= javascript_pack_tag 'test' %>
+>>>>>>> 7763d4e8a7c26eefe5c842cd58802bec7db8a0d1

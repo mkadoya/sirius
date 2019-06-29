@@ -1,49 +1,131 @@
+<div class="container">
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
+<h1>
   <%= @movie.title %>
+</h1>
+
+<img src="<%= @movie.image %>" class="image-fluid">
+
+<br>
+<br>
+<p>
+  <strong>あらすじ</strong>
 </p>
 
 <p>
-  <strong>Outline:</strong>
   <%= @movie.outline %>
 </p>
 
+<br>
 <p>
-  <strong>Director:</strong>
+  <strong>監督</strong>
+</p>
+
+<p>
   <%= @movie.director %>
 </p>
 
+<br>
 <p>
-  <strong>Performer:</strong>
+  <strong>出演者</strong>
+</p>
+
+<p>
   <%= @movie.performer %>
 </p>
 
+<br>
 <p>
-  <strong>Year:</strong>
+  <strong>公開年: </strong>
   <%= @movie.year %>
 </p>
 
+<br>
 <p>
-  <strong>Preview:</strong>
-  <%= @movie.preview %>
+  <strong>予告動画</strong>
 </p>
 
 <p>
-  <strong>Image:</strong>
-  <%= @movie.image %>
+  <iframe width="560" height="315" src="<%= @movie.preview %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+
+<br>
+<p>
+  <strong>記事</strong>
 </p>
 
 <p>
-  <strong>Article:</strong>
   <%= @movie.article %>
 </p>
 
+<br>
 <p>
-  <strong>Movie:</strong>
-  <%= @movie.movie %>
+  <strong>動画</strong>
 </p>
 
+<p>
+  <%= @movie.movie %>
+</p>
+<br>
+
+<p>
+  <strong>タグ</strong>
+</p>
+<ul>
+  <% Tag.where(movie_id: @movie.id).all.each do |tag| %>
+    <li><%= link_to tag.name, tag %></li>
+  <% end %>
+</ul>
+
+<p>
+  <strong>各種リンク</strong>
+</p>
+
+<ul>
+  <li>
+    <% if @movie.youtube != "" %>
+      <%= link_to "Youtube", @movie.youtube %>
+    <% else %>
+      Youtube
+    <% end %>
+  </li>
+  <li>
+    <% if @movie.netflix != "" %>
+      <%= link_to "Netflix", @movie.netflix %>
+    <% else %>
+      Netflix
+    <% end %>
+  </li>
+  <li>
+    <% if @movie.amazonprime != "" %>
+      <%= link_to "Amazon Prime", @movie.amazonprime %>
+    <% else %>
+      Amazon Prime
+    <% end %>
+  </li>
+  <li>
+    <% if @movie.hulu != "" %>
+      <%= link_to "Hulu", @movie.hulu %>
+    <% else %>
+      Hulu
+    <% end %>
+  </li>
+  <li>
+    <% if @movie.filmarks != "" %>
+      <%= link_to "Filmarks", @movie.filmarks %>
+    <% else %>
+      Filmarks
+    <% end %>
+  </li>
+</ul>
+<br>
+
+<br>
 <%= link_to 'Edit', edit_movie_path(@movie) %> |
+<%= link_to 'New', new_movie_path %> |
 <%= link_to 'Back', movies_path %>
+
+<br>
+<br>
+</div>

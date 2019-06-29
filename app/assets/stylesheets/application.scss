@@ -24,6 +24,7 @@
 @import "./main/scaffolds";
 @import "./main/slick-theme";
 @import "./main/slick";
+@import "./select2/select2.min";
 
 body{
    font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic';
@@ -42,7 +43,7 @@ h2{
   padding: 0.5em 0.5em;
   margin: 0.5em 0 0.5em 0;
   background: transparent;
-  border-left: solid 5px #4285F4;
+  border-left: solid 5px #ba000d;
 }
 
 h3{
@@ -115,6 +116,14 @@ p {
 
 .bg-darkgrey{
   background-color: #212121
+}
+
+.bg-none{
+  background-color: rgba(255,255,255,0);
+}
+
+.text-turquoise{
+  color:#009DBF;
 }
 
 .bottom-50px{

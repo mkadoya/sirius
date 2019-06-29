@@ -1,19 +1,38 @@
+<div class="container">
 <p id="notice"><%= notice %></p>
 
+<h1>詳細</h1>
 <p>
   <strong>Name:</strong>
+</p>
+<p>
   <%= @tag.name %>
 </p>
-
+<br>
 <p>
-  <strong>Item:</strong>
-  <%= @tag.item_id %>
+  <strong>Movie:</strong>
 </p>
-
+<p>
+  <%= Movie.find_by(id: @tag.movie_id).title %>
+</p>
+<br>
 <p>
   <strong>Value:</strong>
+</p>
+<p>
   <%= @tag.value %>
 </p>
-
+<br>
+<p>
+  <strong>このタグがついている映画</strong>
+</p>
+<ul>
+  <% Movie.where(id: @tag.movie_id).all.each do |movie| %>
+    <li><%= link_to movie.title, movie %></li>
+  <% end %>
+</ul>
 <%= link_to 'Edit', edit_tag_path(@tag) %> |
+<%= link_to 'New', new_tag_path %> |
 <%= link_to 'Back', tags_path %>
+<br><br>
+</div>
