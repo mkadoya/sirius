@@ -76,7 +76,7 @@ const app = new Vue({
                     movies = this.allMovieList.filter(function (item, index) {
                         if (item.tag == t) return true;
                     })[0].movies;
-                    alert(movies);
+                    // alert(movies);
                 } else {
                     // movies.concat(this.allMovieList.filter(function (item, index) {
                     //     if (item.tag == t) return true;
@@ -84,7 +84,7 @@ const app = new Vue({
                     var temp = this.allMovieList.filter(function (item, index) {
                         if (item.tag == t) return true;
                     })[0].movies;
-                    alert(movies);
+                    // alert(movies);
                 }
 
             }
