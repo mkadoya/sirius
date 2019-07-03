@@ -56,11 +56,38 @@ const app = new Vue({
                 }
             }
         },
-        sortAllTagList(tag) {
-            var topTags = this.allTagTagsList.filter(function (item, index) {
-                if (item.tag == tag) return true;
-            })[0].tags
+        changeAllTagList(tag, ctag) {
+            var index = 0;
+            for (let i = 0; i < this.allTagList.length; i++) {
+                if (this.allTagList[i] == tag) {
+                    index = i;
+                }
+            }
+            this.allTagList.splice(index, 0, tag + "+" + ctag);
+            if (this.allTagList[index + 1].indexOf('+') != -1) {
+                this.allTagList.splice(index + 1, 1);
+            }
+            var tags = tag.split("+");
+            tags.push(ctag);
+            var isfirst = true;
+            var movies = [];
+            for (let t of tags) {
+                if (movies.length == 0) {
+                    movies = this.allMovieList.filter(function (item, index) {
+                        if (item.tag == t) return true;
+                    })[0].movies;
+                    alert(movies);
+                } else {
+                    // movies.concat(this.allMovieList.filter(function (item, index) {
+                    //     if (item.tag == t) return true;
+                    // })[0].movies);
+                    var temp = this.allMovieList.filter(function (item, index) {
+                        if (item.tag == t) return true;
+                    })[0].movies;
+                    alert(movies);
+                }
 
+            }
         },
         resetTag() {
             this.pushedTags = [];
@@ -101,17 +128,32 @@ const app = new Vue({
     computed: {
         tagsMovieList: function () {
             return function (tag) {
-                return this.allMovieList.filter(function (item, index) {
-                    if (item.tag == tag) return true;
-                })[0].movies
+                var tagArray = tag.split("+");
+                if (tagArray.length == 1) {
+                    return this.allMovieList.filter(function (item, index) {
+                        if (item.tag == tag) return true;
+                    })[0].movies
+                } else {
+                    // alert(tag);
+                    return "SF";
+                    // return this.allMovieList.filter(function (item, index) {
+                    //     if (item.tag == tag) return true;
+                    // })[0].movies
+                }
+
             }
         },
-        
+
         tagTagsList: function () {
             return function (tag) {
-                return this.allTagTagsList.filter(function (item, index) {
-                    if (item.tag == tag) return true;
-                })[0].tags
+                var tagArray = tag.split("+");
+                if (tagArray.length == 1) {
+                    return this.allTagTagsList.filter(function (item, index) {
+                        if (item.tag == tag) return true;
+                    })[0].tags
+                } else {
+                    return tagArray;
+                }
             }
         },
     },

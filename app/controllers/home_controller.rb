@@ -61,6 +61,7 @@ class HomeController < ApplicationController
             end
           end
         end
+        tags.delete(tag.name)
         hash = {tag: tag.name, tags: tags}
         @tagArray.push(hash)
       end
@@ -80,6 +81,7 @@ class HomeController < ApplicationController
           end
         end
       end
+      tags.delete(params[:tag])
       hash = {tag: params[:tag], tags: tags}
       @tagArray.push(hash)
     end

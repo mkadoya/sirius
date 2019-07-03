@@ -100,7 +100,7 @@ bg-darkgrey text-light
             <div class="col-md-12">
                 <div class="movie_tags">
                     <ul>
-                        <li v-for="ctag in tagTagsList(tag)" v-on:click="sortAllTagList(ctag)">{{ ctag }}</li>
+                        <li v-for="ctag in tagTagsList(tag)" v-on:click="changeAllTagList(tag,ctag)">{{ ctag }}</li>
                     </ul>
                 </div>
             </div>
@@ -108,6 +108,7 @@ bg-darkgrey text-light
         <div class="row">
             <div class="col-md-2" v-for="movie in tagsMovieList(tag)">
                 <div class="movie-image">
+
                     <img class="img-fluid" v-bind:src="movie.image" v-on:click="setMovieInfo(movie.id)">
                 </div>
             </div>
