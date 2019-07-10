@@ -32,39 +32,8 @@ class HomeController < ApplicationController
   end
 
   def movie
-<<<<<<< HEAD
-		# [変更必要] タグ情報から、Userが選んだタグをselectする
-		@array_choice_tag = ['しっとり', '感動']
-		# tagを全てGetする
-		@array_all_tag = Tag.all
-		# tag nameを全てGetする
-		@array_all_tag_name = Tag.pluck(:name).uniq
-		# Movieのカラム情報を全て取得. htmlの簡素化のために
-		@array_movie_columns = Movie.column_names
-		@array_movie_columns << 'tag'
-		# Userが選んだタグについての得点を合算してScoreが高い順にSortする. key=item_id, value=ユーザが選んだタグの合算
-		@hash_score = Hash.new
-
-		# Userが選んだタグごとにLoop処理
-		@array_choice_tag.each do |tag|
-			# 選んだTagがある映画のitem_idを取得. そのあと、さらにTag合致するため、tag情報を全て取得
-			@array_all_tag =  @array_all_tag.where(item_id: @array_all_tag.where(name: tag).pluck(:item_id))
-		end
-
-		# 合致したitem_idごとにloop処理
-		@array_all_tag.pluck(:item_id).uniq.each do |item_id|
-			# 各種item_idと、@array_choice_tagのvalueを合算する
-			@item_info = Movie.where(item_id: item_id).first.attributes
-			@item_info.store("tag", Tag.where(item_id: item_id).pluck(:name))
-			@hash_score.store(@item_info, Tag.where(item_id: item_id).where(name: @array_choice_tag).pluck(:value).sum)
-		end
-		# hashを昇順にSortする
-		@hash_score = @hash_score.sort_by{ | k, v | v }.reverse
-
-=======
     @tags = Tag.all.pluck(:name).uniq
     @movies = Movie.all
->>>>>>> 7763d4e8a7c26eefe5c842cd58802bec7db8a0d1
   end
 
   def show
