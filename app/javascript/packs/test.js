@@ -11,7 +11,9 @@ const app = new Vue({
         tagList: [],
         allTagList: [],
         allTagTagsList: [],
+        allMovieTagList: [],
         allMovieList: [],
+        pushedTagList:[],
         isShow: false,
     },
     mounted() {
@@ -20,6 +22,11 @@ const app = new Vue({
                 console.log(res.data);
                 this.tagList = res.data;
                 this.allTagList = res.data;
+            });
+        axios.get(`movie/movie_tag/all`)
+            .then(res => {
+                console.log(res.data);
+                this.allMovieTagList = res.data;
             });
         axios.get(`movie/tag/0`)
             .then(res => {
@@ -36,6 +43,7 @@ const app = new Vue({
                 console.log(res.data);
                 this.allTagTagsList = res.data;
             });
+
     },
     methods: {
         setMovieInfo(id) {
@@ -67,27 +75,106 @@ const app = new Vue({
             if (this.allTagList[index + 1].indexOf('+') != -1) {
                 this.allTagList.splice(index + 1, 1);
             }
-            var tags = tag.split("+");
-            tags.push(ctag);
+
             var isfirst = true;
-            var movies = [];
-            for (let t of tags) {
-                if (movies.length == 0) {
-                    movies = this.allMovieList.filter(function (item, index) {
-                        if (item.tag == t) return true;
-                    })[0].movies;
-                    // alert(movies);
-                } else {
-                    // movies.concat(this.allMovieList.filter(function (item, index) {
-                    //     if (item.tag == t) return true;
-                    // })[0].movies);
-                    var temp = this.allMovieList.filter(function (item, index) {
-                        if (item.tag == t) return true;
-                    })[0].movies;
-                    // alert(movies);
+            var hash = {};
+
+            for (let i = 0; i < this.pushedTagList.length; i++) {
+                // console.log(this.pushedTagList[i].tag == tag);
+                console.log("list : " + this.pushedTagList[i].tag);
+                console.log("tag : " + tag);
+
+                if (this.pushedTagList[i].tag == tag) {
+                    var pushedlist = this.pushedTagList[i].pushed;
+                    var p = [];
+                    for (let i = 0; i < pushedlist.length; i++){
+                        p.push(pushedlist[i]);
+                    }
+                    p.push(ctag);
+                    console.log("pushedlist:  " + p);
+                    hash = { tag: (tag + "+" + ctag), pushed: p }
+                    this.pushedTagList.push(hash);
+                    isfirst = false;
+                    break;
+                }
+            }
+            if (isfirst) {
+                hash = { tag: (tag + "+" + ctag), pushed: [ctag] };
+                var ispush = true;
+                for (let i = 0; i < this.pushedTagList.length; i++) {
+                    if (this.pushedTagList[i].tag == hash.tag) {
+                        ispush = false;
+                    }
+                }
+                if (ispush) {
+                    this.pushedTagList.push(hash);
                 }
 
+                console.log("isfirst tag: " + hash.tag + " pushed: " + hash.pushed);
+            } else {
+
+                console.log("Not firsttag: " + hash.tag + " pushed: " + hash.pushed);
             }
+            for (let i = 0; i < this.pushedTagList.length; i++){
+                console.log( i + " : " + this.pushedTagList[i].tag);
+                console.log( i + " : " + this.pushedTagList[i].pushed);
+            }
+        },
+        unpushedTag(tag, ptag) {
+            var nextTags = tag.split("+");
+            nextTags.forEach((item, index) => {
+                if (item === ptag) {
+                    nextTags.splice(index, 1);
+                }
+            });
+            var nextTag = "";
+            nextTags.forEach((item, index) => {
+                if (index == 0) {
+                    nextTag = item;
+                } else {
+                    nextTag = nextTag + "+" + item;
+                }
+            });
+            console.log("NEXT : "  + nextTag);
+            this.allTagList.forEach((item, index) => {
+                // console.log(item);
+                if (item == tag) {
+                    console.log("Choosed : " + tag);
+                    this.allTagList.splice(index, 1);
+                    this.allTagList.splice(index, 0, nextTag);
+                    // this.allTagList[index] = nextTag;
+                    console.log("Result : " + this.allTagList[index]);
+                }
+            });
+            this.allTagList = this.allTagList.filter(function (x, i, self) {
+                return self.indexOf(x) === i;
+            });
+
+            this.allTagList.forEach((item, index) => {
+                console.log("allTagList[" + index + "] : " + item);
+            });
+            var changePushedTag = true;
+
+            if (nextTags.length == 1) {
+                changePushedTag = false;
+            }
+            this.pushedTagList.forEach((item, index) => {
+                console.log("pushed Tag List :" + item.tag)
+                if (item.tag == nextTag) {
+                    changePushedTag = false;
+                }
+            });
+            if (changePushedTag) {
+                var pushedtags = [];
+                this.pushedTagList.forEach((item, index) => {
+                    if (item.tag == tag) {
+                        pushedtags = item.pushed;
+                    }
+                });
+                var hash = { tag: nextTag, pushed: pushedtags }
+                this.pushedTagList.push(hash);
+            }
+            console.log("change Pushed Tag : " + changePushedTag);
         },
         resetTag() {
             this.pushedTags = [];
@@ -135,12 +222,30 @@ const app = new Vue({
                     })[0].movies
                 } else {
                     // alert(tag);
-                    return "SF";
-                    // return this.allMovieList.filter(function (item, index) {
-                    //     if (item.tag == tag) return true;
-                    // })[0].movies
-                }
+                    var movies = [];
+                    for (let t of tagArray) {
+                        var temps = [];
+                        if (movies.length == 0) {
+                            movies = this.allMovieList.filter(function (item, index) {
+                                if (item.tag == t) return true;
+                            })[0].movies;
 
+                        } else {
+                            var tempArray = this.allMovieList.filter(function (item, index) {
+                                if (item.tag == t) return true;
+                            })[0].movies;
+                            for (let temp of tempArray) {
+                                for (let movie of movies) {
+                                    if (movie.id == temp.id) {
+                                        temps.push(temp);
+                                    }
+                                }
+                            }
+                            movies = temps;
+                        }
+                    }
+                    return movies;
+                }
             }
         },
 
@@ -152,8 +257,66 @@ const app = new Vue({
                         if (item.tag == tag) return true;
                     })[0].tags
                 } else {
-                    return tagArray;
+                    var movies = [];
+                    var tags = [];
+                    for (let t of tagArray) {
+                        var temps = [];
+                        if (movies.length == 0) {
+                            movies = this.allMovieList.filter(function (item, index) {
+                                if (item.tag == t) return true;
+                            })[0].movies;
+                        } else {
+                            var tempArray = this.allMovieList.filter(function (item, index) {
+                                if (item.tag == t) return true;
+                            })[0].movies;
+                            for (let temp of tempArray) {
+                                for (let movie of movies) {
+                                    if (movie.id == temp.id) {
+                                        temps.push(temp);
+                                    }
+                                }
+                            }
+                            movies = temps;
+                        }
+                    }
+                    for (let movie of movies) {
+                        // alert(tags.length);
+                        if (tags.length == 0) {
+                            tags = this.allMovieTagList.filter(function (item, index) {
+                                if (item.movie_id == movie.id) return true;
+                            })[0].tags;
+                        } else {
+                            var tempArray = this.allMovieTagList.filter(function (item, index) {
+                                if (item.movie_id == movie.id) return true;
+                            })[0].tags;
+                            for (let i = 0; i < tempArray.length; i++) {
+                                if (tags.indexOf(tempArray[i]) == -1) {
+                                    tags.push(tempArray[i]);
+                                }
+                            }
+                        }
+                    }
+                    for (let i = 0; i < tagArray.length; i++) {
+                        tags = tags.filter(function (t) {
+                            return t != tagArray[i];
+                        });
+                    }
+                    return tags;
                 }
+            }
+        },
+
+        pushedTagsList: function () {
+            return function (tag) {
+                var tags = []
+                if (tag.indexOf('+') != -1) {
+                    tags = this.pushedTagList.filter(function (item, index) {
+                        if (item.tag == tag) return true;
+                    })[0].pushed;
+                } else {
+                    tags = [];
+                }
+                return tags
             }
         },
     },

@@ -2,7 +2,11 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Movies</h1>
-
+<%= link_to 'New Movie', new_movie_path, :class => "btn btn-primary mb-2" %>
+<%= link_to 'Update ItemMaster', 'movies/updateItemMaster' ,:class => "btn btn-info mb-2" %>
+<br><br>
+<%= link_to 'タグを編集する', "/tags" %>
+<br><br>
 <div class="table-responsive">
   <table class="table table-bordered table-condensed  table-sm">
     <thead class="thead-light">
@@ -27,8 +31,5 @@
 
 <br>
 
-<%= link_to 'New Movie', new_movie_path, :class => "btn btn-primary" %>
-<br><br>
-<%= link_to 'タグを編集する', "/tags" %>
-<br><br>
+
 </div>

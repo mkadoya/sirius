@@ -1,0 +1,2 @@
+class ItemMaster < ApplicationRecord
+end

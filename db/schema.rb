@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_23_000243) do
+ActiveRecord::Schema.define(version: 2019_07_07_053819) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2019_06_23_000243) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "categories"
   end
 
   create_table "columns", force: :cascade do |t|
@@ -74,6 +75,16 @@ ActiveRecord::Schema.define(version: 2019_06_23_000243) do
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "item_masters", force: :cascade do |t|
+    t.string "category"
+    t.integer "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "image"
+    t.string "tags"
   end
 
   create_table "items", force: :cascade do |t|
@@ -288,6 +299,13 @@ ActiveRecord::Schema.define(version: 2019_06_23_000243) do
     t.boolean "result"
     t.integer "option_id"
     t.integer "times"
+  end
+
+  create_table "tag_masters", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "categories"
   end
 
   create_table "tags", force: :cascade do |t|
