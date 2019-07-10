@@ -23,7 +23,7 @@ class MoviesController < InheritedResources::Base
             taglist = taglist + "," + tag
           end
         end
-        newItem = ItemMaster.new(category: category, movie_id: movie.id, name: movie.title,image: movie.image.url, tags: taglist)
+        newItem = ItemMaster.new(category: category, item_id: movie.id, name: movie.title,image: movie.image.url, tags: taglist)
         newItem.save
       else
         tags = Tag.where(movie_id: movie.id).all.pluck(:name).uniq

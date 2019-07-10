@@ -2,6 +2,8 @@ import Vue from 'vue/dist/vue.esm'
 import VueSimpleSuggest from 'vue-simple-suggest'
 import 'vue-simple-suggest/dist/styles.css'
 import axios from 'axios'
+import VueCarousel from 'vue-carousel';
+Vue.use(VueCarousel);
 
 const app = new Vue({
 
@@ -16,6 +18,7 @@ const app = new Vue({
         defaultTagItemList: [],
         allTagItemList: [],
         allItemList: [],
+        itemInfo:[],
         newId: 0,
         tag_keyword: "",
     },
@@ -475,6 +478,23 @@ const app = new Vue({
             tagItem.tags = tags;
             tagItem.push = pushtags;
         },
+        showItem(id, item_id) {
+            console.log("id : " + id);
+            for (let i = 0; i < this.allTagItemList.length; i++) {
+                if (this.allTagItemList[i].id == id) {
+                    console.log(this.allTagItemList[i]);
+                    this.allTagItemList[i].show = true;
+                } else {
+                    this.allTagItemList[i].show = false;
+                }
+            }
+            axios.get(`movie/${item_id}`)
+                .then(res => {
+                    console.log(res.data);
+                    this.itemInfo = res.data;
+                });
+
+        },
     },
     watch: {
         tag_keyword: function (val) {
@@ -493,7 +513,6 @@ const app = new Vue({
         },
     },
     computed: {
-
         getImage: function () {
             return function (item) {
                 var image = "";
@@ -517,7 +536,16 @@ const app = new Vue({
                 }
                 return tag;
             }
-        }
+        },
+        getItemTags: function () {
+            return function (item_id) {
+                for (let it = 0; it < this.allItemList.length; it++) {
+                    if (this.allItemList[it].id == item_id) {
+                        return this.allItemList[it].tags;
+                    }
+                }
+            }
+        },
     },
 
  })

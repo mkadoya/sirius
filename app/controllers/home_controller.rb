@@ -233,7 +233,7 @@ class HomeController < ApplicationController
         end
         tags.delete(tagMaster.name)
       end
-      hash = {id: id, tag: [tagMaster.name], items: items, tags: tags, push:[]}
+      hash = {id: id, tag: [tagMaster.name], items: items, tags: tags, push:[], show: false}
       result.push(hash)
       id += 1
     end
