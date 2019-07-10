@@ -72,6 +72,10 @@ bg-darkgrey text-light
             </div>
         </div>
     </div>
+
+
+
+
     <div class="row mt-3 mb-5">
         <div class="col-md-2" v-for="item in defaultTagItemList.items">
             <div class="movie-image">
@@ -79,6 +83,35 @@ bg-darkgrey text-light
             </div>
         </div>
     </div>
+
+
+		<div class="row mt-5">
+      <div class="col-md-12">
+          <carousel
+              :pagination-color="'#FFFFFF'"
+              :pagination-active-color="'#BA000D'"
+              :per-page="6"
+              :loop="true"
+              :speed="400"
+              :navigation-enabled="true"
+              navigation-next-label="<i class='material-icons arrow'>keyboard_arrow_right</i>"
+              navigation-prev-label="<i class='material-icons arrow'>keyboard_arrow_left</i>">
+              <slide v-for="item in defaultTagItemList.items" v-bind:key="item">
+                  <span>
+                      <img class="img-fluid" v-bind:src="getImage(item)">
+                  </span>
+              </slide>
+          </carousel>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
 
 
     <div  v-for="tagItem in allTagItemList">

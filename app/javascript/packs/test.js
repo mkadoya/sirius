@@ -22,8 +22,6 @@ const app = new Vue({
     mounted() {
         axios.get("movie/tag/0")
             .then(res => {
-<<<<<<< HEAD
-=======
                 console.log(res.data);
                 this.tagList = res.data;
                 this.allTagList = res.data;
@@ -36,7 +34,6 @@ const app = new Vue({
         axios.get(`movie/tag/0`)
             .then(res => {
                 console.log(res.data);
->>>>>>> cda98fedeadd54c3660e577cac9a5fb0492cf749
                 // this.movieList = res.data[0]['movies'];
                 this.allMovieList = res.request.response;
                 this.movieList = res.data.filter(function (item, index) {
@@ -54,22 +51,7 @@ const app = new Vue({
                 console.log(res.data);
                 console.log('===========================================');
             });
-<<<<<<< HEAD
-        axios.get("movie/movie_tag/0")
-            .then(res => {
-                this.tagList = res.data;
-                this.allTagList = res.data;
-                for(let tag of res.data) {
-                    this.isShow2[tag] = false;
-                }
-                console.log('========= mounted 1 : movie/movie_tag/0 GET ===================');
-                console.log(res.data);
-                console.log(this.isShow2);
-                console.log('===========================================');
-              });
-=======
 
->>>>>>> cda98fedeadd54c3660e577cac9a5fb0492cf749
     },
     methods: {
         setMovieInfo(id) {
