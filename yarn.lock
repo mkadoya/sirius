@@ -2345,6 +2345,7 @@ dom-walk@^0.1.0:
   resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.1.tgz#672226dc74c8f799ad35307df936aba11acd6018"
   integrity sha1-ZyIm3HTI95mtNTB9+TaroRrNYBg=
 
+<<<<<<< HEAD
 dom7@^2.1.3:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/dom7/-/dom7-2.1.3.tgz#a736f9c3bfbc4ca039a81cd095f97d1d7f3de19c"
@@ -2352,6 +2353,8 @@ dom7@^2.1.3:
   dependencies:
     ssr-window "^1.0.1"
 
+=======
+>>>>>>> 1e9c99f12cddc0d0b02bdf3578d061aec0784dff
 domain-browser@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.2.0.tgz#3d31f50191a6749dd1375a7f522e823d42e54eda"
@@ -6964,6 +6967,7 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+<<<<<<< HEAD
 vue-awesome-swiper@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/vue-awesome-swiper/-/vue-awesome-swiper-3.1.3.tgz#05500b501ffb3fec9bf7eb9985bcf4ae8360ed9e"
@@ -6972,6 +6976,8 @@ vue-awesome-swiper@^3.1.3:
     object-assign "^4.1.1"
     swiper "^4.0.7"
 
+=======
+>>>>>>> 1e9c99f12cddc0d0b02bdf3578d061aec0784dff
 vue-carousel@^0.18.0:
   version "0.18.0"
   resolved "https://registry.yarnpkg.com/vue-carousel/-/vue-carousel-0.18.0.tgz#478dfcad3abe2ee44c227020b6e60fb8484dc9f1"

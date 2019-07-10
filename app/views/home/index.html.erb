@@ -1,5 +1,6 @@
 
 
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <% content_for :title do %>
 Sirius | 映画
 <% end %>
@@ -77,11 +78,29 @@ bg-darkgrey text-light
 
 
     <div class="row mt-3 mb-5">
-        <div class="col-md-2" v-for="item in defaultTagItemList.items">
+        <div class="col-md-12">
+        <carousel
+              :pagination-color="'#FFFFFF'"
+              :pagination-active-color="'#BA000D'"
+              :per-page="6"
+              :loop="true"
+              :speed="400"
+              :navigation-enabled="true"
+              navigation-next-label="<i class='material-icons arrow'>keyboard_arrow_right</i>"
+              navigation-prev-label="<i class='material-icons arrow'>keyboard_arrow_left</i>">
+              <slide v-for="item in defaultTagItemList.items" v-bind:key="item">
+                  <span>
+                      <img class="img-fluid" v-bind:src="getImage(item)">
+                  </span>
+              </slide>
+        </carousel>
+        </div>
+
+        <%# <div class="col-md-2" v-for="item in defaultTagItemList.items">
             <div class="movie-image">
                 <img class="img-fluid" v-bind:src="getImage(item)" >
             </div>
-        </div>
+        </div> %>
     </div>
 
 
@@ -133,7 +152,22 @@ bg-darkgrey text-light
         <div class="row">
             <div class="col-md-2" v-for="item in tagItem.items">
                 <div class="movie-image">
-                    <img class="img-fluid" v-bind:src="getImage(item)">
+                    <img class="img-fluid" v-bind:src="getImage(item)" v-on:click="showItem(tagItem.id,item)">
+                </div>
+            </div>
+        </div>
+        <div v-if="tagItem.show">
+            <h3>{{itemInfo.title}}</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <iframe width="560" height="315" :src="itemInfo.preview" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="col-md-6">
+                    <div class="movie_tags">
+                        <ul>
+                            <li v-for="itag in getItemTags(itemInfo.id)" >{{ itag }}</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
