@@ -61,26 +61,37 @@ class HomeController < ApplicationController
             end
           end
         end
+        tags.delete(tag.name)
         hash = {tag: tag.name, tags: tags}
         @tagArray.push(hash)
       end
     else
-      tags_movie = Tag.where(name: params[:tag]).pluck(:movie_id).uniq
+      result_tags = Array.new
+      @tagsArray = params[:tag].split(",")
       isFirst = true
-      tags = Array.new
-      tags_movie.each do |movie|
-        temp_tags = Tag.where(movie_id: movie).pluck(:name).uniq
-        if isFirst
-          tags = temp_tags
-          isFirst = false
-        end
-        temp_tags.each do |temp_tag|
-          unless tags.include?(temp_tag)
-            tags.push(temp_tag)
+      @tagsArray.each do |tag|
+        tags = Array.new
+        tags_movie = Tag.where(name: tag).pluck(:movie_id).uniq
+        tags_movie.each do |movie|
+          temp_tags = Tag.where(movie_id: movie).pluck(:name).uniq
+          if isFirst
+            tags = temp_tags
+            isFirst = false
+          end
+          temp_tags.each do |temp_tag|
+            unless tags.include?(temp_tag)
+              tags.push(temp_tag)
+            end
           end
         end
+        tags.delete(tag)
+        if(result_tags.length == 0)
+          result_tags = tags
+        else
+          result_tags = result_tags & tags
+        end
       end
-      hash = {tag: params[:tag], tags: tags}
+      hash = {tag: params[:tag], tags: result_tags}
       @tagArray.push(hash)
     end
     render json: @tagArray
@@ -147,6 +158,14 @@ class HomeController < ApplicationController
     @movie_ids = params[:ids].split(",")
     if params[:ids] == "0"
       @tags = Tag.all.pluck(:name).uniq
+    elsif params[:ids] == "all"
+      @tags = Array.new
+      movie_ids = Movie.all.pluck(:id).uniq
+      movie_ids.each do |id|
+        movie_tags = Tag.where(movie_id:id).all.pluck(:name).uniq
+        hash = {movie_id: id, tags: movie_tags}
+        @tags.push(hash)
+      end
     else
       @tags = Array.new
       isFirst = true
@@ -189,6 +208,87 @@ class HomeController < ApplicationController
       end
     end
     render json: @result
+  end
+
+  def allTagItemList
+    result = Array.new
+    category = params[:category].presence || "movie"
+    tagMasters = TagMaster.all
+    id = 0
+
+    tagMasters.each do |tagMaster|
+      tag_ids = Tag.where(name: tagMaster.name).all.pluck(:movie_id).uniq
+
+      items =  Array.new
+      tags = Array.new
+      tag_ids.each do |tag_id|
+        item = ItemMaster.find_by(category:category,item_id: tag_id)
+        items.push(item.item_id)
+
+        item_tags = item.tags.split(",")
+        item_tags.each do |item_tag|
+          unless tags.include?(item_tag)
+            tags.push(item_tag)
+          end
+        end
+        tags.delete(tagMaster.name)
+      end
+      hash = {id: id, tag: [tagMaster.name], items: items, tags: tags, push:[]}
+      result.push(hash)
+      id += 1
+    end
+
+    # Item数に応じてソート
+    result.sort_by! {|hash| hash[:items].length}.reverse!
+
+    render json: result
+  end
+
+  def allItemList
+    result = Array.new
+    category = params[:category].presence || "movie"
+    itemMasters = ItemMaster.where(category: category).all
+    itemMasters.each do |itemMaster|
+      tags = itemMaster.tags.split(",")
+      hash = {id: itemMaster.item_id, tags: tags, image:itemMaster.image}
+      result.push(hash)
+    end
+    render json: result
+  end
+
+  def defaultTagItemList
+    category = params[:category].presence || "movie"
+    itemMasters = ItemMaster.where(category: category).all
+    items = itemMasters.pluck(:item_id).uniq
+    tags = Array.new
+    hashtags = Array.new
+
+    itemMasters.each do |itemMaster|
+      item_tags = itemMaster.tags.split(",")
+      item_tags.each do |item_tag|
+        unless tags.include?(item_tag)
+          tags.push(item_tag)
+          hash = {tag: item_tag, count: 1 }
+          hashtags.push(hash)
+        else
+          hashtags.each do |hash|
+            if hash[:tag] == item_tag
+              hash[:count] = hash[:count] + 1
+            end
+          end
+        end
+      end
+    end
+
+
+    tags.clear
+    hashtags.sort_by! {|hash| hash[:count]}.reverse!
+    hashtags.each do |hash|
+      tags.push(hash[:tag])
+    end
+    render json: {items: items, tags: tags, push: []}
+    # render json: hashtags
+
   end
 
 end
