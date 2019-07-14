@@ -160,30 +160,27 @@ bg-darkgrey text-light
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 mt-3 mb-3">
+                <div class="col-md-12 mt-3">
                     <h2 class="mt-3">リンク</h2>
-                    <p class="text-gray ml-3">動画サイトのロゴが表示されている場合は、ロゴをクリックすることでこの動画を閲覧することができます。</p>
                     <div class="row" v-show="isEmptyText(getDefaultItem.filmarks)">
-                        <div class="col-md-12 mt-1 mb-1">
+                        <div class="col-md-12 mt-1">
                             <ul>
-                                <li class="text-gray">
+                                <li class="text-gray" v-show="isEmptyText(getDefaultItem.netflix)">
+                                    <a :href="getDefaultItem.netflix" target="_blank" class="text-gray link-white">Netflixで見る</a>
+                                </li>
+                                <li class="text-gray" v-show="isEmptyText(getDefaultItem.hulu)">
+                                    <a :href="getDefaultItem.hulu" target="_blank" class="text-gray link-white">Huluで見る</a>
+                                </li>
+                                <li class="text-gray" v-show="isEmptyText(getDefaultItem.youtube)">
+                                    <a :href="getDefaultItem.youtube" target="_blank" class="text-gray link-white">Youtubeで見る</a>
+                                </li>
+                                <li class="text-gray" v-show="isEmptyText(getDefaultItem.amazonprime)">
+                                    <a :href="getDefaultItem.amazonprime" target="_blank"  class="text-gray link-white">Amazon Primeで見る</a>
+                                </li>
+                                <li class="text-gray" v-show="isEmptyText(getDefaultItem.filmarks)">
                                     <a :href="getDefaultItem.filmarks" target="_blank" class="text-gray link-white">Filmarksのレビューを見る</a>
                                 </li>
                             </ul>
-                        </div>
-                    </div>
-                    <div class="row mt-32">
-                        <div class="col-md-2 movie-image">
-                            <a v-show="isEmptyText(getDefaultItem.netflix)" :href="getDefaultItem.netflix" target="_blank"><img src="/images/logo/logo_netflix.png" class="img-fluid"></a>
-                        </div>
-                        <div class="col-md-2 movie-image">
-                            <a v-show="isEmptyText(getDefaultItem.hulu)" :href="getDefaultItem.hulu" target="_blank"><img src="/images/logo/logo_hulu.png" class="img-fluid"></a>
-                        </div>
-                        <div class="col-md-2 movie-image">
-                            <a v-show="isEmptyText(getDefaultItem.youtube)" :href="getDefaultItem.youtube" target="_blank"><img src="/images/logo/logo_youtube.png" class="img-fluid"></a>
-                        </div>
-                        <div class="col-md-2 movie-image">
-                            <a v-show="isEmptyText(getDefaultItem.amazonprime)" :href="getDefaultItem.amazonprime" target="_blank"><img src="/images/logo/logo_amazonprime.png" class="img-fluid"></a>
                         </div>
                     </div>
                 </div>
@@ -325,30 +322,27 @@ bg-darkgrey text-light
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 mt-3 mb-3">
+                    <div class="col-md-12 mt-3">
                         <h2 class="mt-3">リンク</h2>
-                        <p class="text-gray ml-3">動画サイトのロゴが表示されている場合は、ロゴをクリックすることでこの動画を閲覧することができます。</p>
                         <div class="row" v-show="isEmptyText(itemInfo.filmarks)">
                             <div class="col-md-12 mt-1 mb-1">
                                 <ul>
                                     <li class="text-gray">
                                         <a :href="itemInfo.filmarks" target="_blank" class="text-gray link-white">Filmarksのレビューを見る</a>
                                     </li>
+                                    <li class="text-gray" v-show="isEmptyText(getDefaultItem.hulu)">
+                                        <a :href="getDefaultItem.hulu" target="_blank" class="text-gray link-white">Huluで見る</a>
+                                    </li>
+                                    <li class="text-gray" v-show="isEmptyText(getDefaultItem.youtube)">
+                                        <a :href="getDefaultItem.youtube" target="_blank" class="text-gray link-white">Youtubeで見る</a>
+                                    </li>
+                                    <li class="text-gray" v-show="isEmptyText(getDefaultItem.amazonprime)">
+                                        <a :href="getDefaultItem.amazonprime" target="_blank"  class="text-gray link-white">Amazon Primeで見る</a>
+                                    </li>
+                                    <li class="text-gray" v-show="isEmptyText(getDefaultItem.filmarks)">
+                                        <a :href="getDefaultItem.filmarks" target="_blank" class="text-gray link-white">Filmarksのレビューを見る</a>
+                                    </li>
                                 </ul>
-                            </div>
-                        </div>
-                        <div class="row mt-32">
-                            <div class="col-md-2 movie-image">
-                                <a v-show="isEmptyText(itemInfo.netflix)" :href="itemInfo.netflix" target="_blank"><img src="/images/logo/logo_netflix.png" class="img-fluid"></a>
-                            </div>
-                            <div class="col-md-2 movie-image">
-                                <a v-show="isEmptyText(itemInfo.hulu)" :href="itemInfo.hulu" target="_blank"><img src="/images/logo/logo_hulu.png" class="img-fluid"></a>
-                            </div>
-                            <div class="col-md-2 movie-image">
-                                <a v-show="isEmptyText(itemInfo.youtube)" :href="itemInfo.youtube" target="_blank"><img src="/images/logo/logo_youtube.png" class="img-fluid"></a>
-                            </div>
-                            <div class="col-md-2 movie-image">
-                                <a v-show="isEmptyText(itemInfo.amazonprime)" :href="itemInfo.amazonprime" target="_blank"><img src="/images/logo/logo_amazonprime.png" class="img-fluid"></a>
                             </div>
                         </div>
                     </div>
