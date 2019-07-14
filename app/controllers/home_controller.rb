@@ -250,8 +250,22 @@ class HomeController < ApplicationController
     itemMasters = ItemMaster.where(category: category).all
     itemMasters.each do |itemMaster|
       tags = itemMaster.tags.split(",")
-      hash = {id: itemMaster.item_id, tags: tags, image:itemMaster.image}
+      tags_hash = Array.new
+      tags.each do |tag|
+        value = Tag.find_by(name:tag,movie_id:itemMaster.item_id).value
+        hash = {tag: tag, value: value, push: false}
+        tags_hash.push(hash);
+      end
+      hash = {id: itemMaster.item_id, tags: tags_hash, image:itemMaster.image}
       result.push(hash)
+    end
+    render json: result
+  end
+
+  def allItemInfoList
+    category = params[:category].presence || "movie"
+    if category == "movie"
+      result = Movie.all
     end
     render json: result
   end
