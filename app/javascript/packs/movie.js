@@ -76,7 +76,7 @@ const app = new Vue({
                     )
                 }
             }
-            this.defaultTagItemList.items = items;
+
 
             var tags = [];
             for (let i = 0; i < items.length; i++) {
@@ -106,6 +106,8 @@ const app = new Vue({
                 }
             }
             this.defaultTagItemList.tags = tags;
+            this.defaultTagItemList.items = items;
+            console.log(this.defaultTagItemList.items);
         },
 
         unpushDefaultTag(tag) {
