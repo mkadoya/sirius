@@ -240,11 +240,30 @@ bg-darkgrey text-light
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2" v-for="item in tagItem.items">
+            <div class="col-md-12">
+            <carousel
+                :pagination-color="'#FFFFFF'"
+                :pagination-active-color="'#BA000D'"
+                :per-page="6"
+                :loop="true"
+                :speed="400"
+                :navigation-enabled="true"
+                navigation-next-label="<i class='material-icons arrow'>keyboard_arrow_right</i>"
+                navigation-prev-label="<i class='material-icons arrow'>keyboard_arrow_left</i>">
+                <slide v-for="item in tagItem.items" v-bind:key="item">
+                    <span>
+                        <div class="movie-image">
+                            <img :key="item" class="img-fluid" v-bind:src="getImage(item)" v-on:click="showItem(tagItem.id,item)">
+                        </div>
+                    </span>
+                </slide>
+            </carousel>
+            </div>
+            <%# <div class="col-md-2" v-for="item in tagItem.items">
                 <div class="movie-image">
                     <img class="img-fluid" v-bind:src="getImage(item)" v-on:click="showItem(tagItem.id,item)">
                 </div>
-            </div>
+            </div> %>
         </div>
     </div>
     <div class="container-fluid bg-darkblack mt-3"  v-if="tagItem.show">
