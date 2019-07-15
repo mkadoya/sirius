@@ -11,61 +11,68 @@ Sirius | 映画
 bg-darkgrey text-light
 <% end %>
 
+<div id="muteYouTubeVideoPlayer"></div>
+
+<script async src="https://www.youtube.com/iframe_api"></script>
+<script>
+ function onYouTubeIframeAPIReady() {
+  var player;
+  player = new YT.Player('muteYouTubeVideoPlayer', {
+    videoId: 'UByojZ9eMkw', // YouTube Video ID
+    width: 560,               // Player width (in px)
+    height: 316,              // Player height (in px)
+    playerVars: {
+      autoplay: 1,        // Auto-play the video on load
+      controls: 1,        // Show pause/play buttons in player
+      showinfo: 0,        // Hide the video title
+      modestbranding: 1,  // Hide the Youtube Logo
+      loop: 1,            // Run the video in a loop
+      fs: 0,              // Hide the full screen button
+      cc_load_policy: 0, // Hide closed captions
+      iv_load_policy: 3,  // Hide the Video Annotations
+      autohide: 0         // Hide video controls when playing
+    },
+    events: {
+      onReady: function(e) {
+        e.target.mute();
+      }
+    }
+  });
+ }
+
+ // Written by @labnol
+</script>
+
+
 <div id="newapp">
-	<div>
-	  <hooper :infinite-Scroll="true"
-	          :items-To-Show="3.4">
-	    <slide>
-	      slide 1
-	    </slide>
-	    <slide>
-	      slide 2
-	    </slide>
-	    <slide>
-	      slide 3
-	    </slide>
-	    <slide>
-	      slide 4
-	    </slide>
-	    <slide>
-	      slide 5
-	    </slide>
-	    <slide>
-	      slide 6
-	    </slide>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-none mt-3">
+                <a class="navbar-brand font-weight-bold " href="#" style="font-size:28px; color:#ba000d;">Sirius</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-	    <pagination slot="hooper-addons"></pagination>
-	    <navigation slot="hooper-addons"></navigation>
-	  </hooper>
-	</div>
-
-<<<<<<< HEAD
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-none mt-3">
-                    <a class="navbar-brand font-weight-bold " href="#" style="font-size:28px; color:#ba000d;">Sirius</a>
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="Navber">
-                        <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active ml-5">
-                            <a class="nav-link" href="#">映画 <span class="sr-only">(現位置)</span></a>
-                        </li>
-                        </ul>
-                    </div><!-- /.navbar-collapse -->
-                </nav>
-            </div>
+                <div class="collapse navbar-collapse" id="Navber">
+                    <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active ml-5">
+                        <a class="nav-link" href="#">映画 <span class="sr-only">(現位置)</span></a>
+                    </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </nav>
         </div>
-        <h1 class="mb-4">気になる映画を探しましょう</h1>
-        <div v-show="isLoading" class="fadeLayer">
-            <div class="fadeLayerText loader-inner ball-pulse">
-                <div></div>
-                <div></div>
-                <div></div>
-=======
+    </div>
+    <h1 class="mb-4">気になる映画を探しましょう</h1>
+    <div v-show="isLoading" class="fadeLayer">
+        <div class="fadeLayerText loader-inner ball-pulse">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
     <div class="row mt-3">
         <div class="col-md-12 ">
             <ul>
@@ -95,37 +102,20 @@ bg-darkgrey text-light
                     </transition-group>
                 </ul>
                 </template>
->>>>>>> ebdfa275716c403408b4fb4904eaf6bdef8c884a
             </div>
-        </div>
-
-        <div class="row mt-3">
-            <div class="col-md-12 ">
+            <div class="pushed_movie_tags">
                 <ul>
-                <form class="form-inline my-2 my-lg-0 text-dark">
-                    <template>
-                        <vue-simple-suggest
-                        v-model="tag_keyword"
-                        :list="defaultTags"
-                        :filter-by-query="true">
-                        <input type="search" class="form-control mr-sm-2" placeholder="タグを検索..." aria-label="検索...">
-                        </vue-simple-suggest>
-                    </template>
-                    <button class="btn btn-outline-light ml-3" v-on:click="resetDefaultTag()">Reset</button>
-                </form>
+                    <li v-for="ptag in defaultTagItemList.push" v-on:click="unpushDefaultTag(ptag)" >{{ ptag }}</li>
                 </ul>
             </div>
         </div>
-<<<<<<< HEAD
-        <div class="row mt-3">
-=======
     </div>
-    <div class="row mt-3 mb-5">
+    <div class="row ml-4 mr-4 mt-3 mb-5">
         <div class="col-md-12">
         <carousel
               :pagination-color="'#FFFFFF'"
               :pagination-active-color="'#BA000D'"
-              :per-page="6"
+              :per-page="6.3"
               :loop="true"
               :speed="400"
               :navigation-enabled="true"
@@ -257,94 +247,29 @@ bg-darkgrey text-light
     <div  class="container">
         <h2 class=" mt-5 mb-2">{{getTag(tagItem.tag)}}</h2>
         <div class="row">
->>>>>>> ebdfa275716c403408b4fb4904eaf6bdef8c884a
             <div class="col-md-12">
                 <div class="movie_tags">
                     <template>
                     <ul>
-<<<<<<< HEAD
-                        <li  v-for="tag in defaultTagItemList.tags" v-on:click="pushDefaultTag(tag)" >{{ tag }}</li>
-=======
                     <transition-group name="flip">
                         <template v-for="ctag in tagItem.tags">
                             <%# <li v-for="ctag in tagItem.tags"  v-on:click="pushAllTagItem(tagItem.id,ctag)">{{ ctag }}</li> %>
                             <li :key="ctag" v-on:click="pushAllTagItem(tagItem.id,ctag)">{{ ctag }}</li>
                         </template>
                     </transition-group >
->>>>>>> ebdfa275716c403408b4fb4904eaf6bdef8c884a
                     </ul>
                     </template>
                 </div>
                 <div class="pushed_movie_tags">
                     <ul>
-                        <li v-for="ptag in defaultTagItemList.push" v-on:click="unpushDefaultTag(ptag)" >{{ ptag }}</li>
+                        <li v-for="ptag in tagItem.push" v-on:click="unpushAllTagItem(tagItem.id,ptag)">{{ ptag }}</li>
                     </ul>
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
 
-        <div class="row mt-3 mb-5">
-            <div class="col-md-12">
-                <carousel
-                      :pagination-color="'#FFFFFF'"
-                      :pagination-active-color="'#BA000D'"
-                      :per-page="6"
-                      :loop="true"
-                      :speed="400"
-                      :navigation-enabled="true"
-                      navigation-next-label="<i class='material-icons arrow'>keyboard_arrow_right</i>"
-                      navigation-prev-label="<i class='material-icons arrow'>keyboard_arrow_left</i>">
-                      <slide v-for="item in defaultTagItemList.items" v-bind:key="item">
-                          <span>
-                              <img class="img-fluid" v-bind:src="getImage(item)">
-                          </span>
-                      </slide>
-                </carousel>
-            </div>
-        </div>
-
-
-        <div  v-for="tagItem in allTagItemList">
-            <h2 class=" mt-5 mb-2">{{getTag(tagItem.tag)}}</h2>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="movie_tags">
-                        <ul>
-                            <li v-for="ctag in tagItem.tags"  v-on:click="pushAllTagItem(tagItem.id,ctag)">{{ ctag }}</li>
-                        </ul>
-                    </div>
-                    <div class="pushed_movie_tags">
-                        <ul>
-                            <li v-for="ptag in tagItem.push" v-on:click="unpushAllTagItem(tagItem.id,ptag)">{{ ptag }}</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2" v-for="item in tagItem.items">
-                    <div class="movie-image">
-                        <img class="img-fluid" v-bind:src="getImage(item)" v-on:click="showItem(tagItem.id,item)">
-                    </div>
-                </div>
-            </div>
-            <div v-if="tagItem.show">
-                <h3>{{itemInfo.title}}</h3>
-                <div class="row">
-                    <div class="col-md-6">
-                        <iframe width="560" height="315" :src="itemInfo.preview" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="movie_tags">
-                            <ul>
-                                <li v-for="itag in getItemTags(itemInfo.id)" >{{ itag }}</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-=======
-        <div class="row">
+        <div class="row ml-4 mr-4 mt-3 mb-5">
+        <!-- <div class="row"> -->
             <div class="col-md-12">
             <carousel
                 :pagination-color="'#FFFFFF'"
@@ -382,7 +307,8 @@ bg-darkgrey text-light
                 <div class="row">
                     <div class="col-md-6">
                         <div class="youtube-preview">
-                            <iframe width="560" height="315" :src="getYoutubeUrl(itemInfo.preview)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe width="560" height="315" :src="getYoutubeUrl(itemInfo.preview) + '?autoplay=1&mute=1'" frameborder="0"  allowfullscreen></iframe>
+                            <!-- <iframe width="560" height="315" :src="getYoutubeUrl(itemInfo.preview) + '?autoplay=1&mute=1'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen volume="0"></iframe> -->
                         </div>
                         <div v-show="isEmptyText(itemInfo.article)">
                             <h4 class="text-red mt-3">見どころ</h4>
@@ -477,18 +403,13 @@ bg-darkgrey text-light
             </transition>
             </template>
         </div>
->>>>>>> ebdfa275716c403408b4fb4904eaf6bdef8c884a
         </div>
-        <br><br><br><br>
     </div>
-<<<<<<< HEAD
-=======
 </div>
 </template>
 </transition-group >
 </template>
 
->>>>>>> ebdfa275716c403408b4fb4904eaf6bdef8c884a
 </div>
 
 <%= javascript_pack_tag 'movie' %>
