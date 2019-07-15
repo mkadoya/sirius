@@ -1,11 +1,17 @@
 import Vue from 'vue/dist/vue.esm'
 import axios from 'axios'
-import VueCarousel from 'vue-carousel';
-Vue.use(VueCarousel);
+// import VueCarousel from 'vue-carousel';
+// Vue.use(VueCarousel);
+
 
 const app = new Vue({
-
     el: '#app',
+		components: {
+	      Hooper: window.Hooper.Hooper,
+	      Slide: window.Hooper.Slide,
+				Pagination: window.Hooper.Pagination,
+	      Navigation: window.Hooper.Navigation,
+	  },
     data: {
         movieInfo: {},
         pushedTags: [],
