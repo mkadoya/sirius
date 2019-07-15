@@ -5,6 +5,10 @@
 
 /* top ================================ */
 
+.navbar-inner {
+  background-color:transparent;
+}
+
 .fadeLayer {
   position:absolute;
   top:0px;
@@ -31,16 +35,177 @@
 }
 
 
+.movie_tags ul li, .movie_tags p, .pushed_movie_tags ul li, .pushed_movie_tags p, .movie_links a{
+  display: inline-block;
+  // max-width: 200px;
+  height: 28px;
+  line-height: 28px;
+  margin: 0 .3em .3em 0;
+  padding: 0 1em;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #333;
+  font-size: 13px;
+  text-decoration: none;
+  -webkit-transition: .2s;
+  transition: .2s;
+  cursor: pointer;
+  user-select:none;
+  font-weight: bold;
+}
+
+.movie_tags ul li:hover, .movie_tags p:hover, .pushed_movie_tags ul li:hover, .pushed_movie_tags p:hover{
+  // background-color: #4285F4;
+  background-color: #6ec6ff;
+  // border: 1px solid #4285F4;
+  border: 1px solid #6ec6ff;
+  color: #fff;
+}
+
+
+.movie_tags ul li:active, .movie_tags p:active, .pushed_movie_tags ul li, .pushed_movie_tags p{
+  background-color: #4285F4;
+  border: 1px solid #4285F4;
+  color: #fff;
+}
+
+.movie-image {
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.movie-image img{
+  -moz-transition: -moz-transform 0.2s linear;
+  -webkit-transition: -webkit-transform 0.2s linear;
+  -o-transition: -o-transform 0.2s linear;
+  -ms-transition: -ms-transform 0.2s linear;
+  transition: transform 0.2s linear;
+}
+
+.movie-image img:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+
+.movie_links a:hover{
+  background-color: #f44336;
+  border: 1px solid #f44336;
+  color: #fff;
+}
+
+.youtube-preview{
+  position:relative;
+  width:100%;
+  height:0;
+  padding-top:75%;
+}
+
+.youtube-preview iframe{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+
+.movie_outline::first-letter {
+  color: #aaa;
+  padding-right: 0.2em;
+  font-weight: bold;
+	font-size: 150%;
+}
+
+.movie_related_tags ul li{
+  display: inline-block;
+  max-width: 200px;
+  height: 28px;
+  line-height: 28px;
+  margin: 0 .3em .3em 0;
+  padding: 0 1em;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #333;
+  font-size: 13px;
+  text-decoration: none;
+  -webkit-transition: .2s;
+  transition: .2s;
+  cursor: pointer;
+  user-select:none;
+  font-weight: bold;
+}
+
+.movie_related_tags ul li:hover{
+  background-color: #087f23;
+  border: 1px solid #087f23;
+  color: #fff;
+}
+
+.fade-enter-active, .fade-leave-active {
+  will-change: opacity;
+  transition: opacity 1000ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0
+}
+
+.flip {
+  // 要素が移動するときのアニメーション設定（基本的にはtransitionにtransformを設定していればいい）
+  &-move {
+    // transition: transform 0.5s;
+    transition: transform 0.5s;
+  }
+
+  // 要素が入るときのアニメーション
+  &-enter {
+    // アニメーションの初期設定（初期値とtransitionを設定する）
+    &-active {
+      opacity: 0;
+      transform: translate3d(0, -30px, 0);
+      // transition: opacity 0.5s, transform 0.5s;
+      transition: opacity 0.7s, transform 0.7s;
+    }
+    // アニメーション開始（目標のプロパティ値を設定する）
+    &-to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  // 要素が消える時のアニメーション
+  &-leave {
+    // アニメーションの初期設定
+    &-active {
+      // 要素が消える場合はabsoluteにする（重要！）
+      position: absolute;
+      // transition: opacity 0.5s, transform 0.5s;
+      transition: opacity 0.0s, transform 0.0s;
+    }
+    // アニメーション開始
+    &-to {
+      opacity: 0;
+      transform: translate3d(0, -30px, 0);
+    }
+  }
+}
+
 
 .top{
   color: white;
   width: 100vw;
   height: 100vh;
   background-image: url("/top.jpg");
-}
-
-.navbar-inner {
-  background-color:transparent;
 }
 
 .search {
@@ -112,63 +277,4 @@
   transform: translate(-50%,-50%);
   margin:0;
   padding:0;
-}
-
-.movie_tags ul li,.pushed_movie_tags ul li{
-  display: inline-block;
-  max-width: 200px;
-  height: 28px;
-  line-height: 28px;
-  margin: 0 .3em .3em 0;
-  padding: 0 1em;
-  background-color: #fff;
-  border: 1px solid #aaa;
-  border-radius: 3px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  color: #333;
-  font-size: 13px;
-  text-decoration: none;
-  -webkit-transition: .2s;
-  transition: .2s;
-  cursor: pointer;
-  user-select:none;
-  font-weight: bold;
-}
-
-.movie_tags ul li:hover, .pushed_movie_tags ul li:hover{
-  // background-color: #4285F4;
-  background-color: #6ec6ff;
-  // border: 1px solid #4285F4;
-  border: 1px solid #6ec6ff;
-  color: #fff;
-}
-
-
-.movie_tags ul li:active, .pushed_movie_tags ul li{
-  background-color: #4285F4;
-  border: 1px solid #4285F4;
-  color: #fff;
-}
-
-.movie-image {
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.movie-image img{
-  -moz-transition: -moz-transform 0.2s linear;
-  -webkit-transition: -webkit-transform 0.2s linear;
-  -o-transition: -o-transform 0.2s linear;
-  -ms-transition: -ms-transform 0.2s linear;
-  transition: transform 0.2s linear;
-}
-
-.movie-image img:hover {
-  -webkit-transform: scale(1.1);
-  -moz-transform: scale(1.1);
-  -o-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  transform: scale(1.1);
 }

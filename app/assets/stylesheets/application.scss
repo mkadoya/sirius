@@ -119,12 +119,66 @@ p {
   background-color: #212121
 }
 
+.bg-darkblack{
+  background-color: #111111;
+}
+
+.bg-black{
+  background-color: black;
+}
+
 .bg-none{
   background-color: rgba(255,255,255,0);
 }
 
+.text-white{
+  color:white;
+}
+
 .text-turquoise{
   color:#009DBF;
+}
+
+.text-lightgray{
+  color: #B2B2B2;
+}
+
+.text-gray{
+  color: gray;
+}
+
+.text-green{
+  color: #4caf50;
+}
+
+.text-darkgreen{
+  color: #087f23;
+}
+
+.text-lightred{
+  color: #ff7961;
+}
+
+.text-red{
+  color: #f44336;
+}
+
+.text-darkred{
+  color: #ba000d;
+}
+
+.text-lightblue{
+  color:#6ec6ff;
+}
+
+.text-blue{
+  color: #4285F4;
+}
+
+.link-white:hover{
+  color:white;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .bottom-50px{

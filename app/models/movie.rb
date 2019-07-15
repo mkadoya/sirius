@@ -8,4 +8,5 @@ class Movie < ApplicationRecord
     validates :year, presence: true, numericality: true
     validates :preview, presence: true
     validates :image, presence: true
+    validates :article, length: { maximum: 140 }
 end

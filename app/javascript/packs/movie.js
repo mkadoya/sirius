@@ -16,32 +16,40 @@ const app = new Vue({
         defaultTags: [],
         defaultItems: [],
         defaultTagItemList: [],
+        defaultItemInfo: [],
+        isShowDefaultItem: false,
         allTagItemList: [],
         allItemList: [],
+        allItemInfoList: [],
         itemInfo:[],
         newId: 0,
         tag_keyword: "",
     },
     mounted() {
-        axios.get(`defaultTagItemList`)
+        axios.get(`home/defaultTagItemList`)
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 this.defaultTagItemList = res.data;
                 this.defaultTags = res.data.tags;;
                 this.defaultItems = res.data.items
             });
-        axios.get(`allTagItemList`)
+        axios.get(`home/allTagItemList`)
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 this.allTagItemList = res.data;
                 this.newId = this.allTagItemList.length;
-                console.log("newID : " + this.newId);
-                this.isLoading = false;
+                // console.log("newID : " + this.newId);
             });
-        axios.get(`allItemList`)
+        axios.get(`home/allItemList`)
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 this.allItemList = res.data;
+            });
+        axios.get(`home/allItemInfoList`)
+            .then(res => {
+                // console.log(res.data);
+                this.allItemInfoList = res.data;
+                this.isLoading = false;
             });
     },
     methods: {
@@ -68,7 +76,7 @@ const app = new Vue({
                     )
                 }
             }
-            this.defaultTagItemList.items = items;
+
 
             var tags = [];
             for (let i = 0; i < items.length; i++) {
@@ -76,7 +84,7 @@ const app = new Vue({
                     for (let it = 0; it < this.allItemList.length; it++){
                         if (this.allItemList[it].id == items[i]) {
                             for (let t = 0; t < this.allItemList[it].tags.length; t++){
-                                tags.push(this.allItemList[it].tags[t]);
+                                tags.push(this.allItemList[it].tags[t].tag);
                             }
                         }
                     }
@@ -84,8 +92,8 @@ const app = new Vue({
                     for (let it = 0; it < this.allItemList.length; it++) {
                         if (this.allItemList[it].id == items[i]) {
                             for (let t = 0; t < this.allItemList[it].tags.length; t++) {
-                                if (tags.indexOf(this.allItemList[it].tags[t]) == -1) {
-                                    tags.push(this.allItemList[it].tags[t]);
+                                if (tags.indexOf(this.allItemList[it].tags[t].tag) == -1) {
+                                    tags.push(this.allItemList[it].tags[t].tag);
                                 }
                             }
                         }
@@ -98,6 +106,8 @@ const app = new Vue({
                 }
             }
             this.defaultTagItemList.tags = tags;
+            this.defaultTagItemList.items = items;
+            console.log(this.defaultTagItemList.items);
         },
 
         unpushDefaultTag(tag) {
@@ -147,7 +157,7 @@ const app = new Vue({
                         for (let it = 0; it < this.allItemList.length; it++) {
                             if (this.allItemList[it].id == items[i]) {
                                 for (let t = 0; t < this.allItemList[it].tags.length; t++) {
-                                    tags.push(this.allItemList[it].tags[t]);
+                                    tags.push(this.allItemList[it].tags[t].tag);
                                 }
                             }
                         }
@@ -155,8 +165,8 @@ const app = new Vue({
                         for (let it = 0; it < this.allItemList.length; it++) {
                             if (this.allItemList[it].id == items[i]) {
                                 for (let t = 0; t < this.allItemList[it].tags.length; t++) {
-                                    if (tags.indexOf(this.allItemList[it].tags[t]) == -1) {
-                                        tags.push(this.allItemList[it].tags[t]);
+                                    if (tags.indexOf(this.allItemList[it].tags[t].tag) == -1) {
+                                        tags.push(this.allItemList[it].tags[t].tag);
                                     }
                                 }
                             }
@@ -199,7 +209,6 @@ const app = new Vue({
             }
             pushtags.push(ptag);
             pushtags.push(tagItem.tag);
-            console.log(pushtags);
 
 
             // itemsを更新
@@ -237,7 +246,7 @@ const app = new Vue({
                     for (let it = 0; it < this.allItemList.length; it++) {
                         if (this.allItemList[it].id == items[i]) {
                             for (let t = 0; t < this.allItemList[it].tags.length; t++) {
-                                tags.push(this.allItemList[it].tags[t]);
+                                tags.push(this.allItemList[it].tags[t].tag);
                             }
                         }
                     }
@@ -245,8 +254,8 @@ const app = new Vue({
                     for (let it = 0; it < this.allItemList.length; it++) {
                         if (this.allItemList[it].id == items[i]) {
                             for (let t = 0; t < this.allItemList[it].tags.length; t++) {
-                                if (tags.indexOf(this.allItemList[it].tags[t]) == -1) {
-                                    tags.push(this.allItemList[it].tags[t]);
+                                if (tags.indexOf(this.allItemList[it].tags[t].tag) == -1) {
+                                    tags.push(this.allItemList[it].tags[t].tag);
                                 }
                             }
                         }
@@ -306,7 +315,7 @@ const app = new Vue({
                         for (let i = 0; i < this.allTagItemList[ti].tags.length; i++) {
                             temp_tags.push(this.allTagItemList[ti].tags[i]);
                         }
-                        var hash = { id: this.newId, tag: temp_tag, items: temp_items, tags: temp_tags, push: [] };
+                        var hash = { id: this.newId, tag: temp_tag, items: temp_items, tags: temp_tags, push: [], show: false };
                         this.allTagItemList.splice(tagItemIndex + 1, 0, hash);
 
                         for (let ti2 = tagItemIndex + 2; ti2 < this.allTagItemList.length; ti2++){
@@ -340,7 +349,7 @@ const app = new Vue({
                         for (let i = 0; i < this.allTagItemList[ti].tags.length; i++) {
                             temp_tags.push(this.allTagItemList[ti].tags[i]);
                         }
-                        var hash = { id: this.newId, tag: temp_tag, items: temp_items, tags: temp_tags, push: [] };
+                        var hash = { id: this.newId, tag: temp_tag, items: temp_items, tags: temp_tags, push: [], show: false };
                         this.allTagItemList.splice(tagItemIndex + 1, 0, hash);
                         // console.log(hash);
                         this.newId += 1;
@@ -388,7 +397,6 @@ const app = new Vue({
                 pushtags.push(tagItem.push[t]);
             }
             pushtags = pushtags.filter(p => p !== ptag);
-            console.log("pushtags : " + pushtags);
 
             // tagを更新
             var tag = [];
@@ -396,7 +404,6 @@ const app = new Vue({
                 tag.push(tagItem.tag[t]);
             }
             tag = tag.filter(p => p !== ptag);
-            console.log("tags : " + tag);
 
             // itemsを更新
             var items = [];
@@ -425,7 +432,6 @@ const app = new Vue({
                     }
                 }
             }
-            console.log("items : " + items);
 
             // tagsを更新
             var tags = [];
@@ -434,7 +440,8 @@ const app = new Vue({
                     for (let it = 0; it < this.allItemList.length; it++) {
                         if (this.allItemList[it].id == items[i]) {
                             for (let t = 0; t < this.allItemList[it].tags.length; t++) {
-                                tags.push(this.allItemList[it].tags[t]);
+                                // tags.push(this.allItemList[it].tags[t]);
+                                tags.push(this.allItemList[it].tags[t].tag);
                             }
                         }
                     }
@@ -442,8 +449,9 @@ const app = new Vue({
                     for (let it = 0; it < this.allItemList.length; it++) {
                         if (this.allItemList[it].id == items[i]) {
                             for (let t = 0; t < this.allItemList[it].tags.length; t++) {
-                                if (tags.indexOf(this.allItemList[it].tags[t]) == -1) {
-                                    tags.push(this.allItemList[it].tags[t]);
+                                if (tags.indexOf(this.allItemList[it].tags[t].tag) == -1) {
+                                    // tags.push(this.allItemList[it].tags[t]);
+                                    tags.push(this.allItemList[it].tags[t].tag);
                                 }
                             }
                         }
@@ -455,7 +463,6 @@ const app = new Vue({
                     tags.splice(tags.indexOf(tag[p]), 1);
                 }
             }
-            console.log("tags : " + tags );
 
             // targetのtagと被る他のtagを削除する。
             for (let ti = tagItemIndex + 1; ti < this.allTagItemList.length; ti++) {
@@ -466,8 +473,8 @@ const app = new Vue({
                     }
                 }
                 if (delete_flag && tagItem.id != this.allTagItemList[ti].id) {
-                    console.log("target : " + tagItem.id + " : " + tagItem.tag);
-                    console.log("delete : " + this.allTagItemList[ti].id + " : " + this.allTagItemList[ti].tag);
+                    // console.log("target : " + tagItem.id + " : " + tagItem.tag);
+                    // console.log("delete : " + this.allTagItemList[ti].id + " : " + this.allTagItemList[ti].tag);
                     this.allTagItemList.splice(ti, 1);
                 }
             }
@@ -478,23 +485,124 @@ const app = new Vue({
             tagItem.tags = tags;
             tagItem.push = pushtags;
         },
-        showItem(id, item_id) {
-            console.log("id : " + id);
-            for (let i = 0; i < this.allTagItemList.length; i++) {
-                if (this.allTagItemList[i].id == id) {
-                    console.log(this.allTagItemList[i]);
-                    this.allTagItemList[i].show = true;
-                } else {
-                    this.allTagItemList[i].show = false;
+        showDefaultItem(item_id) {
+            this.isShowDefaultItem = true;
+            this.isShowDefaultItemDetails = true;
+            for (let i = 0; i < this.allItemInfoList.length; i++) {
+                if (this.allItemInfoList[i].id == item_id) {
+                    this.defaultItemInfo = this.allItemInfoList[i];
                 }
             }
-            axios.get(`movie/${item_id}`)
-                .then(res => {
-                    console.log(res.data);
-                    this.itemInfo = res.data;
-                });
-
         },
+        showItem(id, item_id) {
+            // console.log("id : " + id);
+            for (let i = 0; i < this.allTagItemList.length; i++) {
+                if (this.allTagItemList[i].id == id) {
+                    // console.log(this.allTagItemList[i]);
+                    this.allTagItemList[i].show = true;
+                }
+                // console.log("each tag : " + this.allTagItemList[i].id + " : " + this.allTagItemList[i].show + " : " + this.allTagItemList[i].tag)
+            }
+            for (let i = 0; i < this.allItemInfoList.length; i++){
+                if (this.allItemInfoList[i].id == item_id) {
+                    this.itemInfo = this.allItemInfoList[i];
+                }
+            }
+        },
+        pushThumbs(item_tag) {
+            item_tag.push = !item_tag.push;
+            if (item_tag.push) {
+                item_tag.value += 1;
+            } else {
+                item_tag.value -= 1;
+            }
+        },
+        defaultSearchAllTagItemList(tag){
+            for (let ti = 0; ti < this.allTagItemList.length; ti++) {
+                if (this.allTagItemList[ti].tag == tag) {
+                    this.allTagItemList.splice(0, 0, this.allTagItemList[ti]);
+                    this.allTagItemList.splice(ti + 1, 1);
+                }
+            }
+        },
+        pushShowDefaultItem() {
+            this.isShowDefaultItem = !this.isShowDefaultItem;
+        },
+        pushShowItem(tagItem) {
+            tagItem.show = !tagItem.show;
+        },
+        searchAllTagItem(id, tag) {
+            var tagItemIndex = 0;
+            for (let ti = 0; ti < this.allTagItemList.length; ti++) {
+                if (this.allTagItemList[ti].id == id) {
+                    tagItemIndex = ti;
+                }
+            }
+            // console.log("index : " + tagItemIndex);
+            // console.log("tag : " + tag);
+            for (let ti = 0; ti < this.allTagItemList.length; ti++) {
+                if (this.allTagItemList[ti].tag == tag && tagItemIndex < ti) {
+                    this.allTagItemList.splice(tagItemIndex + 1, 0, this.allTagItemList[ti]);
+                    console.log(" oku : " + this.allTagItemList[tagItemIndex + 1].tag);
+                    this.allTagItemList.splice(ti + 1, 1);
+                    break;
+                } else if (this.allTagItemList[ti].tag == tag && tagItemIndex > ti) {
+                    console.log(" temae : " + this.allTagItemList[ti].tag);
+                    var temp_tag = [];
+                    var temp_items = [];
+                    var temp_tags = [];
+
+                    for (let i = 0; i < this.allTagItemList[ti].tag.length; i++) {
+                        temp_tag.push(this.allTagItemList[ti].tag[i]);
+                    }
+                    for (let i = 0; i < this.allTagItemList[ti].items.length; i++) {
+                        temp_items.push(this.allTagItemList[ti].items[i]);
+                    }
+                    for (let i = 0; i < this.allTagItemList[ti].tags.length; i++) {
+                        temp_tags.push(this.allTagItemList[ti].tags[i]);
+                    }
+                    var hash = { id: this.newId, tag: temp_tag, items: temp_items, tags: temp_tags, push: [], show: false };
+                    this.allTagItemList.splice(tagItemIndex + 1, 0, hash);
+
+                    for (let ti2 = tagItemIndex + 2; ti2 < this.allTagItemList.length; ti2++) {
+                        var delete_flag = true;
+                        for (let i = 0; i < this.allTagItemList[ti2].tag.length; i++) {
+                            if (this.allTagItemList[ti2].tag[i] !== temp_tag[i]) {
+                                delete_flag = false;
+                            }
+                        }
+                        if (delete_flag) {
+                            // console.log("delete this tag id : " + this.allTagItemList[ti2].id + " : " + this.allTagItemList[ti2].tag);
+                            // console.log("delete this temp tag : " + temp_tag);
+                            this.allTagItemList.splice(ti2, 1);
+                        }
+                    }
+                    // console.log(hash);
+                    // console.log(this.allTagItemList[ti]);
+                    this.newId += 1;
+                    break;
+                } else if (this.allTagItemList[ti].tag == tag && tagItemIndex == ti) {
+                    // console.log(" onaji : " + this.allTagItemList[ti].tag);
+                    var temp_tag = [];
+                    var temp_items = [];
+                    var temp_tags = [];
+                    for (let i = 0; i < this.allTagItemList[ti].tag.length; i++) {
+                        temp_tag.push(this.allTagItemList[ti].tag[i]);
+                    }
+                    for (let i = 0; i < this.allTagItemList[ti].items.length; i++) {
+                        temp_items.push(this.allTagItemList[ti].items[i]);
+                    }
+                    for (let i = 0; i < this.allTagItemList[ti].tags.length; i++) {
+                        temp_tags.push(this.allTagItemList[ti].tags[i]);
+                    }
+                    var hash = { id: this.newId, tag: temp_tag, items: temp_items, tags: temp_tags, push: [], show: false };
+                    this.allTagItemList.splice(tagItemIndex + 1, 0, hash);
+                    // console.log(hash);
+                    this.newId += 1;
+                    break;
+                }
+            }
+        }
     },
     watch: {
         tag_keyword: function (val) {
@@ -539,10 +647,31 @@ const app = new Vue({
         },
         getItemTags: function () {
             return function (item_id) {
+                var tags = [];
                 for (let it = 0; it < this.allItemList.length; it++) {
                     if (this.allItemList[it].id == item_id) {
-                        return this.allItemList[it].tags;
+                        for (let t = 0; t < this.allItemList[it].tags.length; t++){
+                            tags.push(this.allItemList[it].tags[t]);
+                        }
                     }
+                }
+                return tags;
+            }
+        },
+        getDefaultItem: function () {
+            return this.defaultItemInfo;
+        },
+        getYoutubeUrl: function () {
+            return function (url) {
+                return url + "?rel=0&controls=0&autoplay=0&showinfo=0&modestbranding=1&wmode=transparent";
+            }
+        },
+        isEmptyText: function () {
+            return function (text) {
+                if (!text) {
+                    return false;
+                } else {
+                    return true;
                 }
             }
         },
