@@ -11,41 +11,8 @@ Sirius | 映画
 bg-darkgrey text-light
 <% end %>
 
-<div id="muteYouTubeVideoPlayer"></div>
-
-<script async src="https://www.youtube.com/iframe_api"></script>
-<script>
- function onYouTubeIframeAPIReady() {
-  var player;
-  player = new YT.Player('muteYouTubeVideoPlayer', {
-    videoId: 'UByojZ9eMkw', // YouTube Video ID
-    width: 560,               // Player width (in px)
-    height: 316,              // Player height (in px)
-    playerVars: {
-      autoplay: 1,        // Auto-play the video on load
-      controls: 1,        // Show pause/play buttons in player
-      showinfo: 0,        // Hide the video title
-      modestbranding: 1,  // Hide the Youtube Logo
-      loop: 1,            // Run the video in a loop
-      fs: 0,              // Hide the full screen button
-      cc_load_policy: 0, // Hide closed captions
-      iv_load_policy: 3,  // Hide the Video Annotations
-      autohide: 0         // Hide video controls when playing
-    },
-    events: {
-      onReady: function(e) {
-        e.target.mute();
-      }
-    }
-  });
- }
-
- // Written by @labnol
-</script>
-
-
 <div id="newapp">
-<div class="container">
+<div class="container-fluid ml-4">
     <div class="row">
         <div class="col-md-12">
             <nav class="navbar navbar-expand-lg navbar-dark bg-none mt-3">
@@ -110,12 +77,12 @@ bg-darkgrey text-light
             </div>
         </div>
     </div>
-    <div class="row ml-4 mr-4 mt-3 mb-5">
+    <div class="row ml-5 mr-5 mt-3 mb-5">
         <div class="col-md-12">
         <carousel
               :pagination-color="'#FFFFFF'"
               :pagination-active-color="'#BA000D'"
-              :per-page="6.3"
+              :per-page-custom=[[480,2.1],[630,3.1],[780,4.25],[1080,5.25],[1380,6.25]]
               :loop="true"
               :speed="400"
               :navigation-enabled="true"
@@ -133,7 +100,7 @@ bg-darkgrey text-light
     </div>
 </div>
 <div class="container-fluid bg-darkblack">
-    <div class="container">
+  <div class="container-fluid ml-4">
     <div class="row">
         <template>
         <transition name="flip">
@@ -244,7 +211,7 @@ bg-darkgrey text-light
 <transition-group name="flip">
 <template v-for="tagItem in allTagItemList">
 <div :key="tagItem.id">
-    <div  class="container">
+  <div class="container-fluid ml-4">
         <h2 class=" mt-5 mb-2">{{getTag(tagItem.tag)}}</h2>
         <div class="row">
             <div class="col-md-12">
@@ -274,7 +241,7 @@ bg-darkgrey text-light
             <carousel
                 :pagination-color="'#FFFFFF'"
                 :pagination-active-color="'#BA000D'"
-                :per-page="6"
+                :per-page-custom=[[480,2.1],[630,3.1],[780,4.25],[1080,5.25],[1380,6.25]]
                 :loop="true"
                 :speed="400"
                 :navigation-enabled="true"
@@ -297,7 +264,7 @@ bg-darkgrey text-light
         </div>
     </div>
     <div class="container-fluid bg-darkblack mt-3"  v-if="tagItem.show">
-        <div class="container">
+      <div class="container-fluid ml-4">
         <div class="row">
             <template>
             <transition name="flip">
