@@ -1,4 +1,4 @@
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <% content_for :title do %>
 Sirius | 映画
@@ -13,14 +13,14 @@ bg-darkgrey text-light
 <% end %>
 
 <div id="app">
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-none mt-3">
-                <a class="navbar-brand font-weight-bold " href="#" style="font-size:28px; color:#ba000d;">Sirius</a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-none mt-3">
+                    <a class="navbar-brand font-weight-bold " href="#" style="font-size:28px; color:#ba000d;">Sirius</a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
                 <div class="collapse navbar-collapse" id="Navber">
                     <ul class="navbar-nav mr-auto">
@@ -78,6 +78,7 @@ bg-darkgrey text-light
         <h2 class=" mt-5 mb-2">{{tag}}</h2>
         <div class="row">
             <div class="col-md-12">
+                <%# <p>pushed tag list : {{ pushedTags}}</p> %>
                 <div class="movie_tags">
                     <ul>
                         <li v-for="ctag in tagTagsList(tag)" v-on:click="changeAllTagList(tag,ctag)">{{ ctag }}</li>
@@ -87,6 +88,9 @@ bg-darkgrey text-light
                     <ul>
                         <li v-for="ptag in pushedTagsList(tag)" v-on:click="unpushedTag(tag,ptag)">{{ ptag }}</li>
                     </ul>
+                </div>
+                <div class="row ">
+                    <button class="btn btn-outline-light btn-block mt-3 w-25 mx-auto" v-on:click="resetTag()">RESET</button>
                 </div>
             </div>
         </div>
@@ -99,7 +103,6 @@ bg-darkgrey text-light
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <%= javascript_pack_tag 'test' %>

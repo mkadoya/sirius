@@ -9,6 +9,31 @@
 #csvファイルを扱うためのgemを読み込む
 require 'csv'
 
+# 以下はTagsを呼び出すパターン
+# CSV.foreach('db/Tags.csv', headers: true) do |row|
+#   Tag.create(
+#      :name => row[0],
+#      :item_id => row[1],
+#      :value => row[2]
+# )
+# end
+
+# 以下はTagsを呼び出すパターン
+CSV.foreach('db/Movies.csv', headers: true) do |row|
+  Movie.create(
+     :title => row[0],
+     :outline => row[1],
+     :director => row[2],
+     :performer => row[3],
+     :year => row[4],
+     :preview => row[5],
+     :image => row[6],
+     :article => row[7],
+     :movie => row[8],
+     :item_id => row[9]
+)
+end
+
 #以下はQuestionsを呼び出すパターン
 # CSV.foreach('db/Questions.csv', headers: true) do |row|
 #     Question.create(

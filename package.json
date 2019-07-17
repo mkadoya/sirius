@@ -4,6 +4,7 @@
   "dependencies": {
     "@rails/webpacker": "^4.0.7",
     "axios": "^0.19.0",
+    "hooper": "^0.3.1",
     "vue": "^2.6.10",
     "vue-carousel": "^0.18.0",
     "vue-loader": "^15.7.0",
@@ -11,6 +12,28 @@
     "vue-template-compiler": "^2.6.10"
   },
   "devDependencies": {
+    "css-loader": "^2",
+    "ts-pnp": "^1.1.2",
     "webpack-dev-server": "^3.7.1"
-  }
+  },
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "version": "1.0.0",
+  "main": "babel.config.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkadoya/sirius.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mkadoya/sirius/issues"
+  },
+  "homepage": "https://github.com/mkadoya/sirius#readme"
 }
