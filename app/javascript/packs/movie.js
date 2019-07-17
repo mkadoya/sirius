@@ -1,6 +1,6 @@
 import Vue from 'vue/dist/vue.esm'
 import VueSimpleSuggest from 'vue-simple-suggest'
-import 'vue-simple-suggest/dist/styles.css'
+// import 'vue-simple-suggest/dist/styles.css'
 import axios from 'axios'
 import VueCarousel from 'vue-carousel';
 Vue.use(VueCarousel);
@@ -76,7 +76,6 @@ const app = new Vue({
                     )
                 }
             }
-
 
             var tags = [];
             for (let i = 0; i < items.length; i++) {
